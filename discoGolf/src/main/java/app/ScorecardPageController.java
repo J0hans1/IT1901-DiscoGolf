@@ -18,30 +18,32 @@ public class ScorecardPageController {
 
     @FXML
     Label displayNameOfPlayer;
-
+    
     public void getPreviousControllerInfo(String nameOfPlayer, int numberOfHoles, Course selectedCourse) {
         scorecard = new Scorecard(nameOfPlayer, numberOfHoles); //Create new scorecard
         
         displayNameOfPlayer.setText("Name: " + scorecard.getNameOfPlayer()); //Update name of player label
-
+        
         this.currentCourse = selectedCourse; //Set current course
         currentCourseLabel.setText("Course: " + currentCourse.getCourseName()); //Update course label
-
+        
         updateInfoDisplay(); //Update all other labels
     }
-
+    
     // private void updateInfoDisplay() {
-    //     displayNameOfPlayer.setText(scorecard.getNameOfPlayer());
-    // }
+        //     displayNameOfPlayer.setText(scorecard.getNameOfPlayer());
+        // }
+        
+        
 
+    @FXML
+    Label totalScoreLabel;
 
     @FXML
     Button previousHoleButton;
 
     @FXML
     Button nextHoleButton;
-
-
 
     private void updateInfoDisplay() { //Update all labels
 
@@ -57,6 +59,7 @@ public class ScorecardPageController {
         nextHoleButton.setText("Next Hole: " + Integer.toString(scorecard.getCurrentHole() + 1));
         currentHole.setText("Current Hole: " + Integer.toString(scorecard.getCurrentHole()));
         currentScore.setText(Integer.toString(scorecard.getCurrentHoleScore()));
+        totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getTotalScore()));
         System.out.println(scorecard.getNameOfPlayer());
 
         printCurrent();
