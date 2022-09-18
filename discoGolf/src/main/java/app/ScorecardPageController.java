@@ -11,22 +11,37 @@ public class ScorecardPageController {
 
     private Scorecard scorecard;
 
-    public void getPreviousControllerInfo(String nameOfPlayer, int numberOfHoles) {
-        scorecard = new Scorecard(nameOfPlayer, 18); //Create new scorecard
-        
-        displayNameOfPlayer.setText("Name: " + scorecard.getNameOfPlayer()); //Update name of player label
+    private Course currentCourse;
 
-        //TODO: update name of course label
-        
-        updateInfoDisplay(); //Update all other labels
-    }
+    @FXML
+    Label currentCourseLabel;
 
     @FXML
     Label displayNameOfPlayer;
 
+    public void getPreviousControllerInfo(String nameOfPlayer, int numberOfHoles, Course selectedCourse) {
+        scorecard = new Scorecard(nameOfPlayer, numberOfHoles); //Create new scorecard
+        
+        displayNameOfPlayer.setText("Name: " + scorecard.getNameOfPlayer()); //Update name of player label
+
+        this.currentCourse = selectedCourse; //Set current course
+        currentCourseLabel.setText("Course: " + currentCourse.getCourseName()); //Update course label
+
+        updateInfoDisplay(); //Update all other labels
+    }
+
     // private void updateInfoDisplay() {
     //     displayNameOfPlayer.setText(scorecard.getNameOfPlayer());
     // }
+
+
+    @FXML
+    Button previousHoleButton;
+
+    @FXML
+    Button nextHoleButton;
+
+
 
     private void updateInfoDisplay() { //Update all labels
 
@@ -36,9 +51,12 @@ public class ScorecardPageController {
         - current par
         - next hole
         - previous hole
-
         */
+
+        previousHoleButton.setText("Prev Hole: " + Integer.toString(scorecard.getCurrentHole() - 1));
+        nextHoleButton.setText("Next Hole: " + Integer.toString(scorecard.getCurrentHole() + 1));
         currentHole.setText("Current Hole: " + Integer.toString(scorecard.getCurrentHole()));
+        currentScore.setText(Integer.toString(scorecard.getCurrentHoleScore()));
         System.out.println(scorecard.getNameOfPlayer());
 
         printCurrent();
@@ -46,39 +64,32 @@ public class ScorecardPageController {
 
     public void addThrow() { 
         scorecard.addThrow();
-        currentScore.setText(Integer.toString(scorecard.getCurrentHoleScore()));
+        updateInfoDisplay();
         printCurrent();
     }
 
     public void removeThrow() {
         scorecard.removeThrow();
-        currentScore.setText(Integer.toString(scorecard.getCurrentHoleScore()));
+        updateInfoDisplay();
         printCurrent();
     }
-    
-    
+
     @FXML
     Label currentHole;
 
     public void nextHole() {
         scorecard.nextHole();
-        currentScore.setText(Integer.toString(scorecard.getCurrentHoleScore()));
+        updateInfoDisplay();
         printCurrent();
-
-        currentHole.setText(Integer.toString(scorecard.getCurrentHole())); //update current hole label
+         //update current hole label
     }
 
     public void previousHole() {
         scorecard.previousHole();
-        currentScore.setText(Integer.toString(scorecard.getCurrentHoleScore()));
+        updateInfoDisplay();
         printCurrent();
-
-        currentHole.setText(Integer.toString(scorecard.getCurrentHole())); //update current hole label
+        //update current hole label
     }
-
-
-
-
 
     public void printCurrent() {
         System.out.println("Current hole: " + scorecard.getCurrentHole());

@@ -7,7 +7,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="843.0" style="-fx-background-color: #3D3D3D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ScorecardPageController">
     <children>
-        <Button layoutX="675.0" layoutY="228.0" mnemonicParsing="false" onAction="#nextHole" prefHeight="35.0" prefWidth="131.0" style="-fx-background-color: #0A84FF;" text="Next hole (3)" textFill="WHITE">
+        <Button fx:id="nextHoleButton" layoutX="675.0" layoutY="228.0" mnemonicParsing="false" onAction="#nextHole" prefHeight="35.0" prefWidth="131.0" style="-fx-background-color: #0A84FF;" text="Next hole (3)" textFill="WHITE">
             <font>
                 <Font size="16.0" />
             </font>
@@ -31,12 +31,12 @@
             </Label>
             <Label fx:id="currentHole" layoutX="17.0" layoutY="14.0" prefHeight="17.0" prefWidth="99.0" />
             <Label layoutX="147.0" layoutY="16.0" text="par: 3" />
-            <Label layoutX="308.0" layoutY="16.0" text="Course: Lade" />
+            <Label fx:id="currentCourseLabel" layoutX="308.0" layoutY="16.0" />
             <Label fx:id="displayNameOfPlayer" layoutX="228.0" layoutY="16.0" />
             <Label layoutX="199.0" layoutY="145.0" text="Throws" />
          </children>
       </Pane>
-      <Button layoutX="29.0" layoutY="228.0" mnemonicParsing="false" onAction="#previousHole" prefHeight="35.0" prefWidth="124.0" style="-fx-background-color: #0A84FF;" text="prev hole (1)" textFill="WHITE">
+      <Button fx:id="previousHoleButton" layoutX="29.0" layoutY="228.0" mnemonicParsing="false" onAction="#previousHole" prefHeight="35.0" prefWidth="124.0" style="-fx-background-color: #0A84FF;" text="prev hole (1)" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>

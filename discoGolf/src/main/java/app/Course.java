@@ -1,6 +1,5 @@
 package app;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Course {
@@ -30,5 +29,11 @@ public class Course {
     }
     
     public int getNumberOfHoles() {
-        return numberOfHoles;}
+        return numberOfHoles;
+    }
+
+    @Override
+    public String toString() {
+        return getCourseName() + ": " + getNumberOfHoles() + " holes";
+    }
 }

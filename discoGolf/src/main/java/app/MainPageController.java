@@ -42,19 +42,33 @@ public class MainPageController {
         pickCourseMenu.getItems().add(course);
     }
 
+    private List<Course> availableCourses = new ArrayList<>();
+
     public void initialize() {
         Course Lade = new Course(9, "Lade");
         for (int hole = 1; hole <= Lade.getNumberOfHoles(); hole++) {
             Lade.setParForHole(hole, 3);
         }
+        availableCourses.add(Lade);
 
         Course Dragvoll = new Course(18, "Dragvoll");
         for (int hole = 1; hole <= Dragvoll.getNumberOfHoles(); hole++) {
             Dragvoll.setParForHole(hole, 3);
         }
+        availableCourses.add(Dragvoll);
 
-        pickCourseMenu.getItems().add(Lade.getCourseName() + ": " + Lade.getNumberOfHoles() + " holes");
-        pickCourseMenu.getItems().add(Dragvoll.getCourseName() + ": " + Dragvoll.getNumberOfHoles() + " holes");
+        pickCourseMenu.getItems().add(Lade.toString());
+        pickCourseMenu.getItems().add(Dragvoll.toString());
+    }
+
+    public Course findSelectedCourse() {
+        String selectedCourse = pickCourseMenu.getValue();
+        for (Course course : availableCourses) {
+            if (course.toString().equals(selectedCourse)) {
+                return course;
+            }
+        }
+        return null;
     }
 
 
@@ -70,7 +84,7 @@ public class MainPageController {
             root = fxmlLoader.load();
 
             ScorecardPageController nextController = fxmlLoader.getController();
-            nextController.getPreviousControllerInfo(nameOfPlayer, 18);
+            nextController.getPreviousControllerInfo(nameOfPlayer, findSelectedCourse().getNumberOfHoles(), findSelectedCourse()); //Need to add selectedCourse
 
             stage = (Stage)((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
