@@ -30,7 +30,6 @@ public class MainPageController {
 
     private String nameOfPlayer;
 
-    @FXML
     public void setNameOfPlayer() {
         this.nameOfPlayer = fxmlNameOfPlayer.getText();
         addCourseToList(nameOfPlayer);
@@ -64,9 +63,14 @@ public class MainPageController {
     @FXML private Stage stage;
 
     public void changeSceneToScorecard(ActionEvent event) {
+        setNameOfPlayer();
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("Scorecard.fxml"));
             root = fxmlLoader.load();
+
+            ScorecardPageController nextController = fxmlLoader.getController();
+            nextController.getPreviousControllerInfo(nameOfPlayer, 18);
 
             stage = (Stage)((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
