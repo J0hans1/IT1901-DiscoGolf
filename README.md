@@ -16,7 +16,7 @@ here is a provided link to the figma page for the GUI.
 ## GUI Usage example
 ```
 "5% pleasure, 50% pain and a 100% reason to remember the name"
-- Confucius
+- Confucius 1778
 ```
 
 ### Project status
