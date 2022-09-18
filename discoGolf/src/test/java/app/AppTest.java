@@ -24,7 +24,7 @@ import org.testfx.matcher.control.LabeledMatchers;
  */
 public class AppTest extends ApplicationTest {
 
-    private CalcController controller;
+    private MainPageController controller;
     private Parent root;
 
     @Override
