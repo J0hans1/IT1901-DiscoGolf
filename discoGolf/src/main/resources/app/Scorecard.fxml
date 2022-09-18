@@ -7,19 +7,19 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="843.0" style="-fx-background-color: #3D3D3D;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Button layoutX="693.0" layoutY="228.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" style="-fx-background-color: #0A84FF;" text="2" textFill="WHITE">
+        <Button layoutX="675.0" layoutY="228.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="131.0" style="-fx-background-color: #0A84FF;" text="Next hole (3)" textFill="WHITE">
             <font>
                 <Font size="16.0" />
             </font>
         </Button>
-      <Pane layoutX="203.0" layoutY="113.0" prefHeight="264.0" prefWidth="438.0" style="-fx-background-color: #ffffff;">
+      <Pane layoutX="203.0" layoutY="113.0" prefHeight="264.0" prefWidth="438.0" style="-fx-background-color: #ffffff; -fx-background-radius: 30;">
          <children>
-            <Button layoutX="37.0" layoutY="181.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" style="-fx-background-color: #FF360A;" text="-" textFill="WHITE">
+            <Button layoutX="113.0" layoutY="181.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="68.0" style="-fx-background-color: #FF360A; -fx-background-radius: 180;" text="-" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="32.0" />
                </font>
             </Button>
-            <Button layoutX="296.0" layoutY="181.0" mnemonicParsing="false" prefHeight="15.0" prefWidth="92.0" style="-fx-background-color: #00D315;" text="+" textFill="WHITE">
+            <Button layoutX="255.0" layoutY="181.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="68.0" style="-fx-background-color: #00D315; -fx-background-radius: 180;" text="+" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="32.0" />
                </font>
@@ -29,7 +29,7 @@
                   <Font size="33.0" />
                </font>
             </Label>
-            <Label layoutX="17.0" layoutY="14.0" prefHeight="17.0" prefWidth="99.0" text="basket: 1" />
+            <Label layoutX="17.0" layoutY="14.0" prefHeight="17.0" prefWidth="99.0" text="basket: 2" />
             <Label layoutX="83.0" layoutY="14.0" text="par: 3" />
             <Label layoutX="129.0" layoutY="14.0" text="distance: 134 m" />
             <Label layoutX="308.0" layoutY="16.0" text="Course: Lade" />
@@ -37,7 +37,7 @@
             <Label layoutX="199.0" layoutY="145.0" text="Throws" />
          </children>
       </Pane>
-      <Button layoutX="62.0" layoutY="228.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="92.0" style="-fx-background-color: #0A84FF;" text="1" textFill="WHITE">
+      <Button layoutX="29.0" layoutY="228.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="124.0" style="-fx-background-color: #0A84FF;" text="prev hole (1)" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
