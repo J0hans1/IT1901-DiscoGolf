@@ -15,14 +15,24 @@ public class DatabaseHandler {
 
     }
 
-    public void writeToDatabse(String element) throws FileNotFoundException, URISyntaxException{
+    public void writeToDatabse(String name, String score, String frisbeeCourse){
+        try {
+            this.write(name, score, frisbeeCourse);
+            this.readDatabase();
+        } catch (FileNotFoundException | URISyntaxException e) {
+            System.out.println("ERROR saving to database");
+            e.printStackTrace();
+        }
+    }
+
+    private void write(String name, String score, String frisbeeCourse) throws FileNotFoundException, URISyntaxException{
         File file = new File(DatabaseHandler.class.getResource("database/database.txt").toURI());
-        
         try {
             FileWriter fw = new FileWriter(file,true);
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.append("\n" + "Yeet");
+            bw.append("\n" + name + " " + score + " " + frisbeeCourse);
             bw.close();
+            fw.close();
         } catch (IOException e) {
             System.out.println("write to database ERROR");
             e.printStackTrace();
@@ -41,14 +51,7 @@ public class DatabaseHandler {
 
     public static void main(String[] args) {
         DatabaseHandler x = new DatabaseHandler();
-        try {
-            x.writeToDatabse("test");
-            x.readDatabase();
-        } catch (FileNotFoundException | URISyntaxException e) {
-            // TODO Auto-generated catch block
-            System.out.println("ERR");
-            e.printStackTrace();
-        }
+        x.writeToDatabse("Ulrik", "25", "Lade");
 
         System.out.println("Done");
     }
