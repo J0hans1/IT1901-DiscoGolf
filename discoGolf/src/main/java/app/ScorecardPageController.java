@@ -12,23 +12,38 @@ public class ScorecardPageController {
 
     //*FXML components
     @FXML
-    public Label currentCourseLabel, displayNameOfPlayer, currentHole, currentScore;
+    public Label currentCourseLabel, displayNameOfPlayer, currentHole, currentScore, totalScoreLabel;
     @FXML
     public Button previousHoleButton, nextHoleButton;
 
+<<<<<<< discoGolf/src/main/java/app/ScorecardPageController.java
+    
+=======
     /*
     ?Hva gjør denne?
     */
+>>>>>>> discoGolf/src/main/java/app/ScorecardPageController.java
     public void getPreviousControllerInfo(String nameOfPlayer, int numberOfHoles, Course selectedCourse) {
-        scorecard = new Scorecard(nameOfPlayer, numberOfHoles); //Create new scorecard
+        scorecard = new Scorecard(selectedCourse, nameOfPlayer, numberOfHoles); //Create new scorecard
         
         displayNameOfPlayer.setText("Name: " + scorecard.getNameOfPlayer()); //Update name of player label
-
+        
         this.currentCourse = selectedCourse; //Set current course
         currentCourseLabel.setText("Course: " + currentCourse.getCourseName()); //Update course label
-
+        
         updateInfoDisplay(); //Update all other labels
     }
+<<<<<<< discoGolf/src/main/java/app/ScorecardPageController.java
+    
+    // private void updateInfoDisplay() {
+        //     displayNameOfPlayer.setText(scorecard.getNameOfPlayer());
+        // }
+        
+        
+        
+        
+ 
+=======
 
     //? private void updateInfoDisplay() {
     //     displayNameOfPlayer.setText(scorecard.getNameOfPlayer());
@@ -40,15 +55,22 @@ public class ScorecardPageController {
     - dele opp i mindre funksjoner type update 
     */
     private void updateInfoDisplay() { //Update all labels
+>>>>>>> discoGolf/src/main/java/app/ScorecardPageController.java
 
-        /* Needs to be updated often:
-        - current hole
+        @FXML
+        Label currentHoleParLabel;
+        
+        private void updateInfoDisplay() { //Update all labels
+            
+            /* Needs to be updated often:
+            - current hole
         - current score
         - current par
         - next hole
         - previous hole
         */
 
+        currentHoleParLabel.setText("Par: " + Integer.toString(scorecard.getCurrentHolePar()));
         previousHoleButton.setText("Prev Hole: " + Integer.toString(scorecard.getCurrentHole() - 1));
         nextHoleButton.setText("Next Hole: " + Integer.toString(scorecard.getCurrentHole() + 1));
         currentHole.setText("Current Hole: " + Integer.toString(scorecard.getCurrentHole()));
@@ -97,6 +119,7 @@ public class ScorecardPageController {
         scorecard.nextHole();
         updateInfoDisplay();
         printCurrent();
+        totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getTotalScore()));
          //update current hole label
     }
 
@@ -111,6 +134,7 @@ public class ScorecardPageController {
         scorecard.previousHole();
         updateInfoDisplay();
         printCurrent();
+        totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getTotalScore()));
         //update current hole label
     }
 

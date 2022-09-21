@@ -2,6 +2,8 @@ package app;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.BinaryOperator;
 import java.util.function.UnaryOperator;
@@ -32,7 +34,6 @@ public class MainPageController {
 
     public void setNameOfPlayer() {
         this.nameOfPlayer = fxmlNameOfPlayer.getText();
-        addCourseToList(nameOfPlayer);
     }
 
     @FXML
@@ -47,16 +48,16 @@ public class MainPageController {
 
     //!MYE LOGIKK
     public void initialize() {
-        Course Lade = new Course(9, "Lade");
-        for (int hole = 1; hole <= Lade.getNumberOfHoles(); hole++) {
-            Lade.setParForHole(hole, 3);
-        }
+        Course Lade = new Course(9, "Lade", new ArrayList<>(Arrays.asList(3,4,3,4,3,4,3,4,3)));
+        // for (int hole = 1; hole <= Lade.getNumberOfHoles(); hole++) {
+        //     Lade.setParForHole(hole, 3);
+        // }
         availableCourses.add(Lade);
 
-        Course Dragvoll = new Course(18, "Dragvoll");
-        for (int hole = 1; hole <= Dragvoll.getNumberOfHoles(); hole++) {
-            Dragvoll.setParForHole(hole, 3);
-        }
+        Course Dragvoll = new Course(18, "Dragvoll", new ArrayList<>(Arrays.asList(3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4)));
+        // for (int hole = 1; hole <= Dragvoll.getNumberOfHoles(); hole++) {
+        //     Dragvoll.setParForHole(hole, 3);
+        // }
         availableCourses.add(Dragvoll);
 
         pickCourseMenu.getItems().add(Lade.toString());
