@@ -3,11 +3,7 @@ package app;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
-import java.util.function.BinaryOperator;
-import java.util.function.UnaryOperator;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,54 +11,54 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Labeled;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
 public class MainPageController {
 
-    @FXML
-    Button playButton;
-
-    @FXML
-    TextField fxmlNameOfPlayer;
-
+    private List<Course> availableCourses = new ArrayList<>();
     private String nameOfPlayer;
+    
+    @FXML 
+    private Parent root;
+    @FXML 
+    private Scene scene;
+    @FXML 
+    private Stage stage;
+    @FXML
+    public Button playButton;
+    @FXML
+    public TextField fxmlNameOfPlayer;
+    @FXML
+    public ComboBox<String> pickCourseMenu;
+
 
     public void setNameOfPlayer() {
         this.nameOfPlayer = fxmlNameOfPlayer.getText();
     }
 
-    @FXML
-    ComboBox<String> pickCourseMenu;
 
     public void addCourseToList(String course) {
         pickCourseMenu.getItems().add(course);
     }
 
-    private List<Course> availableCourses = new ArrayList<>();
 
-
-    //!MYE LOGIKK
+    /*
+    ? availableCourses hva gjør den?
+    * initializes template courses (lade and Dragvoll) to be available as a course for the player to choose
+     */
     public void initialize() {
         Course Lade = new Course(9, "Lade", new ArrayList<>(Arrays.asList(3,4,3,4,3,4,3,4,3)));
-        // for (int hole = 1; hole <= Lade.getNumberOfHoles(); hole++) {
-        //     Lade.setParForHole(hole, 3);
-        // }
-        availableCourses.add(Lade);
-
         Course Dragvoll = new Course(18, "Dragvoll", new ArrayList<>(Arrays.asList(3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4)));
-        // for (int hole = 1; hole <= Dragvoll.getNumberOfHoles(); hole++) {
-        //     Dragvoll.setParForHole(hole, 3);
-        // }
+
+        availableCourses.add(Lade);
         availableCourses.add(Dragvoll);
 
         pickCourseMenu.getItems().add(Lade.toString());
         pickCourseMenu.getItems().add(Dragvoll.toString());
     }
+
 
     public Course findSelectedCourse() {
         String selectedCourse = pickCourseMenu.getValue();
@@ -74,10 +70,6 @@ public class MainPageController {
         return null;
     }
 
-
-    @FXML private Parent root;
-    @FXML private Scene scene;
-    @FXML private Stage stage;
 
     public void changeSceneToScorecard(ActionEvent event) {
         setNameOfPlayer();
@@ -98,6 +90,5 @@ public class MainPageController {
             System.out.println("Failed to create new Window." + e);
         }
     }
-    
 }
 

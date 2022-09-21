@@ -13,125 +13,105 @@ public class ScorecardPageController {
     //*FXML components
     @FXML
     public Label currentCourseLabel, displayNameOfPlayer, currentHole, currentScore, totalScoreLabel, currentHoleParLabel;
-
     @FXML
     public Button previousHoleButton, nextHoleButton, submitBtn;
 
     /*
-    Hva gjør denne?
+    ?  what does this function do?
     */
-    
     public void getPreviousControllerInfo(String nameOfPlayer, int numberOfHoles, Course selectedCourse) {
         scorecard = new Scorecard(selectedCourse, nameOfPlayer, numberOfHoles); //Create new scorecard
-        
-        displayNameOfPlayer.setText("Name: " + scorecard.getNameOfPlayer()); //Update name of player label
-        
-        this.currentCourse = selectedCourse; //Set current course
+        displayNameOfPlayer.setText("Name: " + scorecard.getNameOfPlayer());    //Update name of player label
+        this.currentCourse = selectedCourse;                                    //Set current course
         currentCourseLabel.setText("Course: " + currentCourse.getCourseName()); //Update course label
-        
-        updateInfoDisplay(); //Update all other labels
+        updateInfoDisplay();                                                    //Update all other labels
     }
     
 
-    private void updateInfoDisplay() { //Update all labels
-
-        /*
-        Needs to be updated often:
-        - current hole
-        - current score
-        - current par
-        - next hole
-        - previous hole
-        */
+    /*
+    - updates all labels at display
+    */
+    private void updateLabels(){
+        updateInfoDisplay();
+        handleBtnVisibilty();
+    }
 
 
-        previousHoleButton.setVisible(scorecard.getCurrentHole() != 1); //check if previous hole button should be hidden
-        nextHoleButton.setVisible(scorecard.getCurrentHole() != scorecard.getCourseSize()); //check if next hole button should be hidden
-        submitBtn.setVisible(scorecard.getCurrentHole() == scorecard.getCourseSize()); //check if submit button should be hidden
+    /*
+    - updates button labels at the previous and next hole display
+    */
+    private void handleBtnVisibilty(){
+        previousHoleButton.setVisible(scorecard.getCurrentHole() != 1);                     
+        nextHoleButton.setVisible(scorecard.getCurrentHole() != scorecard.getCourseSize()); 
+        submitBtn.setVisible(scorecard.getCurrentHole() == scorecard.getCourseSize());
+    }
 
+
+    /*
+    - updates labels at the Hole display (hole number, score, par)
+    */
+    private void updateInfoDisplay() {
         currentHoleParLabel.setText("Par: " + Integer.toString(scorecard.getCurrentHolePar()));
         previousHoleButton.setText("Prev Hole: " + Integer.toString(scorecard.getCurrentHole() - 1));
         nextHoleButton.setText("Next Hole: " + Integer.toString(scorecard.getCurrentHole() + 1));
         currentHole.setText("Current Hole: " + Integer.toString(scorecard.getCurrentHole()));
         currentScore.setText(Integer.toString(scorecard.getCurrentHoleThrows()));
-        System.out.println(scorecard.getNameOfPlayer());
-
-        printCurrent();
     }
 
 
     /*
-     * show submit button
-     * 
-    */
-
-    /*
-    ! Updates the Total score label, after the the "next-hole button" has been clicked
-    */
-    public void handleTotalScore(){
-
-    }
-
-    /*
-    * add throws(attempts) at current hole
-    ! will be used in calculation of total score, when next hole is clicked
+    - add throws(attempts) at current hole
     */
     public void addThrow() { 
         scorecard.addThrow();
-        updateInfoDisplay();
+        updateLabels();
         printCurrent();
     }
 
+
     /*
-    * removes throws(attempts) at current hole
-    ! will be used in calculation of total score, when next hole is clicked
+    - removes throws(attempts) at current hole
     */
     public void removeThrow() {
         scorecard.removeThrow();
-        updateInfoDisplay();
+        updateLabels();
         printCurrent();
     }
 
 
     /*
-    * Moves one to the next hole
-    * must update hole number
-    ! must update total score
-    * must reset current throws label to zero for next hole
-    ! must be hidden if youre at the last hole, then show the submit button in its place.
+    - Moves to the next hole
+    - update hole number and button labels
+    - resets current throws label to the par for next hole
+    - updates total score
     */
     public void nextHole() {
         scorecard.nextHole();
-        updateInfoDisplay();
+        updateLabels();
         printCurrent();
         totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getTotalScore())); //Update total score only when switching between holes
          //update current hole label
     }
 
-    /*
-    * Moves one to the next hole
-    * must update hole number
-    ! must update total score
-    ! must reset current throws label to the number of throws made at previous hole. 
-    ! if hole number is 1, then this button must be hidden
-    */
 
+    /*
+    - Moves to the previous hole
+    - updates hole number and button labels
+    - resets current throws label to the number of throws made at previous hole. 
+    */
     public void previousHole() {
         scorecard.previousHole();
-        updateInfoDisplay();
+        updateLabels();
         printCurrent();
         totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getTotalScore())); //Update total score only when switching between holes
         //update current hole label
     }
 
+
     /*
-    ! Prints the current state of the scorecard:
-    ! total score
-    * current hole throws
-    * current hole
+    - prints current state of the scorecard
     */
-    public void printCurrent() {
-        System.out.println(scorecard.getCurrentHole() == scorecard.getCourseSize());
+    private void printCurrent() {
         System.out.println("Current hole: " + scorecard.getCurrentHole());
         System.out.println("Current Score: " + scorecard.getCurrentHoleThrows()); 
     }
