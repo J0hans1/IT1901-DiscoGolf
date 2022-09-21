@@ -6,11 +6,15 @@ import javafx.scene.control.Label;
 
 public class ScorecardPageController {
 
-    //*Global variables
+    /*
+     * 
+     */
     private Scorecard scorecard;
     private Course currentCourse;
 
-    //*FXML components
+    /*
+    FXML components
+    */
     @FXML
     public Label currentCourseLabel, displayNameOfPlayer, currentHole, currentScore, totalScoreLabel, currentHoleParLabel;
     @FXML
@@ -24,7 +28,7 @@ public class ScorecardPageController {
         displayNameOfPlayer.setText("Name: " + scorecard.getNameOfPlayer());    //Update name of player label
         this.currentCourse = selectedCourse;                                    //Set current course
         currentCourseLabel.setText("Course: " + currentCourse.getCourseName()); //Update course label
-        updateInfoDisplay();                                                    //Update all other labels
+        updateLabels();
     }
     
 
