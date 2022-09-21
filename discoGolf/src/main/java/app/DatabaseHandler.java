@@ -1,50 +1,61 @@
 package app;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class DatabaseHandler {
     
-    public DatabaseHandler(){
-
-    }
+    private List<String[]> databaseList;
 
     public void writeToDatabse(String name, String score, String frisbeeCourse) throws IOException{
         try {
-            File file = new File("gr2224/discoGolf/src/main/data/database.txt"); //Kan hede "gr2224" må fjernes
+            String path = getPath(); //file path
+            File file = new File(path); 
             FileWriter fw = new FileWriter(file, true);
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.append("\n" + name + " " + score + " " + frisbeeCourse);
+            bw.append("\n" + name + "," + score + "," + frisbeeCourse); //Write a line consisting of "name,score,frisbeeCourse" to the .txt file
             bw.close();
             fw.close();
         } catch (FileNotFoundException e) {
             System.out.println("ERROR saving to database");
             e.printStackTrace();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
         }
     }
-
-    private void write(String name, String score, String frisbeeCourse) throws URISyntaxException, IOException{
-        //File file = new File(DatabaseHandler.class.getResource("database/database.txt").toURI());
-        // try {
-        //     FileWriter fw = new FileWriter(file,true);
-        //     BufferedWriter bw = new BufferedWriter(fw);
-        //     bw.append("\n" + name + " " + score + " " + frisbeeCourse);
-        //     bw.close();
-        //     fw.close();
-        // } catch (IOException e) {
-        //     System.out.println("write to database ERROR");
-        //     e.printStackTrace();
-        // }
-    }
-
+    
     public void readDatabase() throws URISyntaxException, FileNotFoundException{
-        File file = new File(DatabaseHandler.class.getResource("database/database.txt").toURI());
+        String path = getPath();
+        
+        File file = new File(path);
+        
+        try {
+            BufferedReader reader = new BufferedReader(
+                new FileReader(file)
+            );
+            List<String[]> data = reader
+            .lines()
+            .parallel()
+            .map(scorecard -> scorecard.split(","))
+            .toList();
+
+            this.databaseList = data;
+            reader.close();
+        } catch (IOException e) {
+            System.out.println("Error in reading the database");
+            e.printStackTrace();
+        }
+        
         try (Scanner scanner = new Scanner(file)){
             while (scanner.hasNextLine()){
                 String line = scanner.nextLine();
@@ -53,12 +64,26 @@ public class DatabaseHandler {
         }
     }
 
-    public static void main(String[] args) {
+    public List<String[]> getDatabase(){
+        return this.databaseList;
+    }
+    
+    private String getPath() throws URISyntaxException{
+        String path = new File(getClass().getResource("").toURI())
+        .getAbsolutePath()
+        .split("target")[0]; //Obtain a absolute path to the "discoGolf" folder in a way that will work for every user
+        path = path + "src/main/data/database.txt"; //Add the final part of the path
+        return path;
+    }
+
+    public static void main(String[] args) throws URISyntaxException {
         DatabaseHandler x = new DatabaseHandler();
         try {
-            x.writeToDatabse("Ulrik", "25", "Lade");
+            //x.writeToDatabse("Ulrik", "28", "Dragvoll");
+            x.readDatabase();
+            System.out.println(x.getDatabase().size());
+            System.out.println(x.getDatabase().get(0)[0]);
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
 
