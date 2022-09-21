@@ -28,7 +28,7 @@ public class Scorecard {
         return currentHole + 1;
     }
 
-    public int getCurrentHoleScore() {
+    public int getCurrentHoleThrows() {
         return throwsList.get(currentHole);
     }
 
@@ -52,14 +52,13 @@ public class Scorecard {
         }
     }
 
-
     public void addThrow() {
-        throwsList.set(currentHole, getCurrentHoleScore() + 1);
+        throwsList.set(currentHole, getCurrentHoleThrows() + 1);
     }
 
     public void removeThrow() {
-        if (getCurrentHoleScore() > 0) {
-            throwsList.set(currentHole, getCurrentHoleScore() - 1);
+        if (getCurrentHoleThrows() > 0) {
+            throwsList.set(currentHole, getCurrentHoleThrows() - 1);
         }
     }
 
