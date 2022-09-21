@@ -13,16 +13,14 @@ public class ScorecardPageController {
     //*FXML components
     @FXML
     public Label currentCourseLabel, displayNameOfPlayer, currentHole, currentScore, totalScoreLabel;
+
     @FXML
     public Button previousHoleButton, nextHoleButton;
 
-<<<<<<< discoGolf/src/main/java/app/ScorecardPageController.java
-    
-=======
     /*
-    ?Hva gjør denne?
+    Hva gjør denne?
     */
->>>>>>> discoGolf/src/main/java/app/ScorecardPageController.java
+    
     public void getPreviousControllerInfo(String nameOfPlayer, int numberOfHoles, Course selectedCourse) {
         scorecard = new Scorecard(selectedCourse, nameOfPlayer, numberOfHoles); //Create new scorecard
         
@@ -33,37 +31,15 @@ public class ScorecardPageController {
         
         updateInfoDisplay(); //Update all other labels
     }
-<<<<<<< discoGolf/src/main/java/app/ScorecardPageController.java
     
-    // private void updateInfoDisplay() {
-        //     displayNameOfPlayer.setText(scorecard.getNameOfPlayer());
-        // }
-        
-        
-        
-        
- 
-=======
+    @FXML
+    Label currentHoleParLabel;
 
-    //? private void updateInfoDisplay() {
-    //     displayNameOfPlayer.setText(scorecard.getNameOfPlayer());
-    // }
-
-
-    /*
-    ?Hva gjør denne?
-    - dele opp i mindre funksjoner type update 
-    */
+    
     private void updateInfoDisplay() { //Update all labels
->>>>>>> discoGolf/src/main/java/app/ScorecardPageController.java
-
-        @FXML
-        Label currentHoleParLabel;
-        
-        private void updateInfoDisplay() { //Update all labels
             
-            /* Needs to be updated often:
-            - current hole
+        /* Needs to be updated often:
+        - current hole
         - current score
         - current par
         - next hole
@@ -119,7 +95,7 @@ public class ScorecardPageController {
         scorecard.nextHole();
         updateInfoDisplay();
         printCurrent();
-        totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getTotalScore()));
+        totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getTotalScore())); //Update total score only when switching between holes
          //update current hole label
     }
 
@@ -134,7 +110,7 @@ public class ScorecardPageController {
         scorecard.previousHole();
         updateInfoDisplay();
         printCurrent();
-        totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getTotalScore()));
+        totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getTotalScore())); //Update total score only when switching between holes
         //update current hole label
     }
 
