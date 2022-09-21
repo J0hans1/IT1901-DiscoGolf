@@ -18,9 +18,10 @@ public class ScorecardPageController {
 
     @FXML
     Label displayNameOfPlayer;
+
     
     public void getPreviousControllerInfo(String nameOfPlayer, int numberOfHoles, Course selectedCourse) {
-        scorecard = new Scorecard(nameOfPlayer, numberOfHoles); //Create new scorecard
+        scorecard = new Scorecard(selectedCourse, nameOfPlayer, numberOfHoles); //Create new scorecard
         
         displayNameOfPlayer.setText("Name: " + scorecard.getNameOfPlayer()); //Update name of player label
         
@@ -35,31 +36,34 @@ public class ScorecardPageController {
         // }
         
         
+        
+        @FXML
+        Label totalScoreLabel;
+        
+        @FXML
+        Button previousHoleButton;
+        
+        @FXML
+        Button nextHoleButton;
 
-    @FXML
-    Label totalScoreLabel;
-
-    @FXML
-    Button previousHoleButton;
-
-    @FXML
-    Button nextHoleButton;
-
-    private void updateInfoDisplay() { //Update all labels
-
-        /* Needs to be updated often:
-        - current hole
+        @FXML
+        Label currentHoleParLabel;
+        
+        private void updateInfoDisplay() { //Update all labels
+            
+            /* Needs to be updated often:
+            - current hole
         - current score
         - current par
         - next hole
         - previous hole
         */
 
+        currentHoleParLabel.setText("Par: " + Integer.toString(scorecard.getCurrentHolePar()));
         previousHoleButton.setText("Prev Hole: " + Integer.toString(scorecard.getCurrentHole() - 1));
         nextHoleButton.setText("Next Hole: " + Integer.toString(scorecard.getCurrentHole() + 1));
         currentHole.setText("Current Hole: " + Integer.toString(scorecard.getCurrentHole()));
         currentScore.setText(Integer.toString(scorecard.getCurrentHoleScore()));
-        totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getTotalScore()));
         System.out.println(scorecard.getNameOfPlayer());
 
         printCurrent();
@@ -84,6 +88,7 @@ public class ScorecardPageController {
         scorecard.nextHole();
         updateInfoDisplay();
         printCurrent();
+        totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getTotalScore()));
          //update current hole label
     }
 
@@ -91,6 +96,7 @@ public class ScorecardPageController {
         scorecard.previousHole();
         updateInfoDisplay();
         printCurrent();
+        totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getTotalScore()));
         //update current hole label
     }
 
