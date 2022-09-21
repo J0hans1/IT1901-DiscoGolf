@@ -8,7 +8,7 @@ public class Scorecard {
     private String nameOfPlayer;
     private Course currentCourse;
     
-    public Scorecard(Course course, String nameOfPlayer, int numberOfHoles) {
+    public Scorecard(Course course, String nameOfPlayer) {
         this.nameOfPlayer = nameOfPlayer;
         this.currentCourse = course;
         this.currentHole = 0;

@@ -17,8 +17,8 @@ public class ScorecardTest {
 
     @BeforeEach
     public void setUp() {
-        course = new Course(9, "Lade", new ArrayList<>(Arrays.asList(3, 4, 5, 3, 4, 5, 3, 4, 5)));
-        scorecard = new Scorecard(course, "Jakob", 9);
+        course = new Course("Lade", new ArrayList<>(Arrays.asList(3, 4, 5, 3, 4, 5, 3, 4, 5)));
+        scorecard = new Scorecard(course, "Jakob");
     }
     
     @Test
