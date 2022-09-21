@@ -32,7 +32,6 @@ public class MainPageController {
 
     public void setNameOfPlayer() {
         this.nameOfPlayer = fxmlNameOfPlayer.getText();
-        addCourseToList(nameOfPlayer);
     }
 
     @FXML
