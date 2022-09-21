@@ -12,33 +12,30 @@ public class ScorecardPageController {
 
     //*FXML components
     @FXML
-    public Label currentCourseLabel, displayNameOfPlayer, currentHole, currentScore;
+    public Label currentCourseLabel, displayNameOfPlayer, currentHole, currentScore, totalScoreLabel;
+
     @FXML
     public Button previousHoleButton, nextHoleButton, submitBtn;
 
     /*
-    ?Hva gjør denne?
+    Hva gjør denne?
     */
+    
     public void getPreviousControllerInfo(String nameOfPlayer, int numberOfHoles, Course selectedCourse) {
-        scorecard = new Scorecard(nameOfPlayer, numberOfHoles); //Create new scorecard
+        scorecard = new Scorecard(selectedCourse, nameOfPlayer, numberOfHoles); //Create new scorecard
         
         displayNameOfPlayer.setText("Name: " + scorecard.getNameOfPlayer()); //Update name of player label
-
+        
         this.currentCourse = selectedCourse; //Set current course
         currentCourseLabel.setText("Course: " + currentCourse.getCourseName()); //Update course label
-
+        
         updateInfoDisplay(); //Update all other labels
     }
+    
+    @FXML
+    Label currentHoleParLabel;
 
-    //? private void updateInfoDisplay() {
-    //     displayNameOfPlayer.setText(scorecard.getNameOfPlayer());
-    // }
-
-
-    /*
-    ?Hva gjør denne?
-    - dele opp i mindre funksjoner type update 
-    */
+    
     private void updateInfoDisplay() { //Update all labels
 
         /*
@@ -50,6 +47,11 @@ public class ScorecardPageController {
         - previous hole
         */
 
+
+        previousHoleButton.setVisible(scorecard.getCurrentHole() != 1); //check if previous hole button should be hidden
+        nextHoleButton.setVisible(scorecard.getCurrentHole() != scorecard.getCourseSize()); //check if next hole button should be hidden
+
+        currentHoleParLabel.setText("Par: " + Integer.toString(scorecard.getCurrentHolePar()));
         previousHoleButton.setText("Prev Hole: " + Integer.toString(scorecard.getCurrentHole() - 1));
         nextHoleButton.setText("Next Hole: " + Integer.toString(scorecard.getCurrentHole() + 1));
         currentHole.setText("Current Hole: " + Integer.toString(scorecard.getCurrentHole()));
@@ -104,6 +106,7 @@ public class ScorecardPageController {
         scorecard.nextHole();
         updateInfoDisplay();
         printCurrent();
+        totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getTotalScore())); //Update total score only when switching between holes
          //update current hole label
     }
 
@@ -114,10 +117,12 @@ public class ScorecardPageController {
     ! must reset current throws label to the number of throws made at previous hole. 
     ! if hole number is 1, then this button must be hidden
     */
+
     public void previousHole() {
         scorecard.previousHole();
         updateInfoDisplay();
         printCurrent();
+        totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getTotalScore())); //Update total score only when switching between holes
         //update current hole label
     }
 
