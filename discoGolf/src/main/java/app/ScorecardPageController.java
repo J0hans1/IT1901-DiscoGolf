@@ -6,19 +6,19 @@ import javafx.scene.control.Label;
 
 public class ScorecardPageController {
 
-    @FXML
-    Label currentScore;
-
+    //*Global variables
     private Scorecard scorecard;
-
     private Course currentCourse;
 
+    //*FXML components
     @FXML
-    Label currentCourseLabel;
-
+    public Label currentCourseLabel, displayNameOfPlayer, currentHole, currentScore;
     @FXML
-    Label displayNameOfPlayer;
+    public Button previousHoleButton, nextHoleButton;
 
+    /*
+    ?Hva gjør denne?
+    */
     public void getPreviousControllerInfo(String nameOfPlayer, int numberOfHoles, Course selectedCourse) {
         scorecard = new Scorecard(nameOfPlayer, numberOfHoles); //Create new scorecard
         
@@ -30,19 +30,15 @@ public class ScorecardPageController {
         updateInfoDisplay(); //Update all other labels
     }
 
-    // private void updateInfoDisplay() {
+    //? private void updateInfoDisplay() {
     //     displayNameOfPlayer.setText(scorecard.getNameOfPlayer());
     // }
 
 
-    @FXML
-    Button previousHoleButton;
-
-    @FXML
-    Button nextHoleButton;
-
-
-
+    /*
+    ?Hva gjør denne?
+    - dele opp i mindre funksjoner type update 
+    */
     private void updateInfoDisplay() { //Update all labels
 
         /* Needs to be updated often:
@@ -62,21 +58,41 @@ public class ScorecardPageController {
         printCurrent();
     }
 
+    /*
+    ! Updates the Total score label, after the the "next-hole button" has been clicked
+    */
+    public void handleTotalScore(){
+
+    }
+
+    /*
+    * add throws(attempts) at current hole
+    ! will be used in calculation of total score, when next hole is clicked
+    */
     public void addThrow() { 
         scorecard.addThrow();
         updateInfoDisplay();
         printCurrent();
     }
 
+    /*
+    * removes throws(attempts) at current hole
+    ! will be used in calculation of total score, when next hole is clicked
+    */
     public void removeThrow() {
         scorecard.removeThrow();
         updateInfoDisplay();
         printCurrent();
     }
 
-    @FXML
-    Label currentHole;
 
+    /*
+    * Moves one to the next hole
+    * must update hole number
+    ! must update total score
+    * must reset current throws label to zero for next hole
+    ! must be hidden if youre at the last hole, then show the submit button in its place.
+    */
     public void nextHole() {
         scorecard.nextHole();
         updateInfoDisplay();
@@ -84,6 +100,13 @@ public class ScorecardPageController {
          //update current hole label
     }
 
+    /*
+    * Moves one to the next hole
+    * must update hole number
+    ! must update total score
+    ! must reset current throws label to the number of throws made at previous hole. 
+    ! if hole number is 1, then this button must be hidden
+    */
     public void previousHole() {
         scorecard.previousHole();
         updateInfoDisplay();
@@ -91,12 +114,14 @@ public class ScorecardPageController {
         //update current hole label
     }
 
+    /*
+    ! Prints the current state of the scorecard:
+    ! total score
+    * current hole throws
+    * current hole
+    */
     public void printCurrent() {
         System.out.println("Current hole: " + scorecard.getCurrentHole());
         System.out.println("Current Score: " + scorecard.getCurrentHoleScore()); 
     }
-
-    
-
-
 }
