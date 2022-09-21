@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="843.0" style="-fx-background-color: #3D3D3D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ScorecardPageController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="843.0" style="-fx-background-color: #3D3D3D;" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.ScorecardPageController">
     <children>
         <Button fx:id="nextHoleButton" layoutX="675.0" layoutY="228.0" mnemonicParsing="false" onAction="#nextHole" prefHeight="35.0" prefWidth="131.0" style="-fx-background-color: #0A84FF;" text="Next hole (3)" textFill="WHITE">
             <font>
@@ -36,11 +36,16 @@
             <Label layoutX="199.0" layoutY="145.0" text="Throws" />
          </children>
       </Pane>
-      <Button fx:id="previousHoleButton" layoutX="29.0" layoutY="228.0" mnemonicParsing="false" onAction="#previousHole" prefHeight="35.0" prefWidth="124.0" style="-fx-background-color: #0A84FF;" text="prev hole (1)" textFill="WHITE">
+      <Button fx:id="previousHoleButton" layoutX="40.0" layoutY="228.0" mnemonicParsing="false" onAction="#previousHole" prefHeight="35.0" prefWidth="124.0" style="-fx-background-color: #0A84FF;" text="prev hole (1)" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
       </Button>
       <Label layoutX="384.0" layoutY="426.0" text="Total score: -1" textFill="WHITE" />
+      <Button fx:id="submitBtn" layoutX="675.0" layoutY="228.0" mnemonicParsing="false" onAction="#nextHole" prefHeight="35.0" prefWidth="131.0" style="-fx-background-color: #00D315; visibility: false;" text="Submit" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Button>
     </children>
 </Pane>
