@@ -36,6 +36,10 @@ public class Scorecard {
         return currentCourse.getParForHole(getCurrentHole());
     }
 
+    public int getCourseSize() {
+        return currentCourse.getPar().size();
+    }
+
     public void nextHole() {
         if (currentHole < throwsList.size() - 1) {
             currentHole++;

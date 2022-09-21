@@ -46,6 +46,10 @@ public class ScorecardPageController {
         - previous hole
         */
 
+
+        previousHoleButton.setVisible(scorecard.getCurrentHole() != 1); //check if previous hole button should be hidden
+        nextHoleButton.setVisible(scorecard.getCurrentHole() != scorecard.getCourseSize()); //check if next hole button should be hidden
+
         currentHoleParLabel.setText("Par: " + Integer.toString(scorecard.getCurrentHolePar()));
         previousHoleButton.setText("Prev Hole: " + Integer.toString(scorecard.getCurrentHole() - 1));
         nextHoleButton.setText("Next Hole: " + Integer.toString(scorecard.getCurrentHole() + 1));
@@ -106,6 +110,7 @@ public class ScorecardPageController {
     ! must reset current throws label to the number of throws made at previous hole. 
     ! if hole number is 1, then this button must be hidden
     */
+
     public void previousHole() {
         scorecard.previousHole();
         updateInfoDisplay();
