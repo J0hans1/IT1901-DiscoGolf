@@ -12,7 +12,7 @@ public class ScorecardPageController {
 
     //*FXML components
     @FXML
-    public Label currentCourseLabel, displayNameOfPlayer, currentHole, currentScore, totalScoreLabel;
+    public Label currentCourseLabel, displayNameOfPlayer, currentHole, currentScore, totalScoreLabel, currentHoleParLabel;
 
     @FXML
     public Button previousHoleButton, nextHoleButton, submitBtn;
@@ -32,10 +32,7 @@ public class ScorecardPageController {
         updateInfoDisplay(); //Update all other labels
     }
     
-    @FXML
-    Label currentHoleParLabel;
 
-    
     private void updateInfoDisplay() { //Update all labels
 
         /*
@@ -50,6 +47,7 @@ public class ScorecardPageController {
 
         previousHoleButton.setVisible(scorecard.getCurrentHole() != 1); //check if previous hole button should be hidden
         nextHoleButton.setVisible(scorecard.getCurrentHole() != scorecard.getCourseSize()); //check if next hole button should be hidden
+        submitBtn.setVisible(scorecard.getCurrentHole() == scorecard.getCourseSize());
 
         currentHoleParLabel.setText("Par: " + Integer.toString(scorecard.getCurrentHolePar()));
         previousHoleButton.setText("Prev Hole: " + Integer.toString(scorecard.getCurrentHole() - 1));
