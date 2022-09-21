@@ -59,7 +59,7 @@ public class ScorecardPageController {
         previousHoleButton.setText("Prev Hole: " + Integer.toString(scorecard.getCurrentHole() - 1));
         nextHoleButton.setText("Next Hole: " + Integer.toString(scorecard.getCurrentHole() + 1));
         currentHole.setText("Current Hole: " + Integer.toString(scorecard.getCurrentHole()));
-        currentScore.setText(Integer.toString(scorecard.getCurrentHoleScore()));
+        currentScore.setText(Integer.toString(scorecard.getCurrentHoleThrows()));
     }
 
 
@@ -117,6 +117,6 @@ public class ScorecardPageController {
     */
     private void printCurrent() {
         System.out.println("Current hole: " + scorecard.getCurrentHole());
-        System.out.println("Current Score: " + scorecard.getCurrentHoleScore()); 
+        System.out.println("Current Score: " + scorecard.getCurrentHoleThrows()); 
     }
 }
