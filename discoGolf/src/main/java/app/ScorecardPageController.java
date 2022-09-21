@@ -23,8 +23,8 @@ public class ScorecardPageController {
     /*
     ?  what does this function do?
     */
-    public void getPreviousControllerInfo(String nameOfPlayer, int numberOfHoles, Course selectedCourse) {
-        scorecard = new Scorecard(selectedCourse, nameOfPlayer, numberOfHoles); //Create new scorecard
+    public void getPreviousControllerInfo(String nameOfPlayer, Course selectedCourse) {
+        scorecard = new Scorecard(selectedCourse, nameOfPlayer); //Create new scorecard
         displayNameOfPlayer.setText("Name: " + scorecard.getNameOfPlayer());    //Update name of player label
         this.currentCourse = selectedCourse;                                    //Set current course
         currentCourseLabel.setText("Course: " + currentCourse.getCourseName()); //Update course label
