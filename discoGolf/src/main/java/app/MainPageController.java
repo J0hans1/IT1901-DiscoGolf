@@ -44,6 +44,8 @@ public class MainPageController {
 
     private List<Course> availableCourses = new ArrayList<>();
 
+
+    //!MYE LOGIKK
     public void initialize() {
         Course Lade = new Course(9, "Lade");
         for (int hole = 1; hole <= Lade.getNumberOfHoles(); hole++) {
