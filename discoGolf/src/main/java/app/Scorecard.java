@@ -40,6 +40,10 @@ public class Scorecard {
         return currentCourse.getPar().size();
     }
 
+    public String getCourseName() {
+        return currentCourse.getCourseName();
+    }
+
     public void nextHole() {
         if (currentHole < throwsList.size() - 1) {
             currentHole++;
