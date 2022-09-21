@@ -47,7 +47,7 @@ public class ScorecardPageController {
 
         previousHoleButton.setVisible(scorecard.getCurrentHole() != 1); //check if previous hole button should be hidden
         nextHoleButton.setVisible(scorecard.getCurrentHole() != scorecard.getCourseSize()); //check if next hole button should be hidden
-        submitBtn.setVisible(scorecard.getCurrentHole() == scorecard.getCourseSize());
+        submitBtn.setVisible(scorecard.getCurrentHole() == scorecard.getCourseSize()); //check if submit button should be hidden
 
         currentHoleParLabel.setText("Par: " + Integer.toString(scorecard.getCurrentHolePar()));
         previousHoleButton.setText("Prev Hole: " + Integer.toString(scorecard.getCurrentHole() - 1));
@@ -131,6 +131,7 @@ public class ScorecardPageController {
     * current hole
     */
     public void printCurrent() {
+        System.out.println(scorecard.getCurrentHole() == scorecard.getCourseSize());
         System.out.println("Current hole: " + scorecard.getCurrentHole());
         System.out.println("Current Score: " + scorecard.getCurrentHoleScore()); 
     }
