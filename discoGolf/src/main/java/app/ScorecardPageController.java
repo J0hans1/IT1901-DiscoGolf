@@ -14,7 +14,7 @@ public class ScorecardPageController {
     @FXML
     public Label currentCourseLabel, displayNameOfPlayer, currentHole, currentScore;
     @FXML
-    public Button previousHoleButton, nextHoleButton;
+    public Button previousHoleButton, nextHoleButton, submitBtn;
 
     /*
     ?Hva gjør denne?
@@ -41,7 +41,8 @@ public class ScorecardPageController {
     */
     private void updateInfoDisplay() { //Update all labels
 
-        /* Needs to be updated often:
+        /*
+        Needs to be updated often:
         - current hole
         - current score
         - current par
@@ -57,6 +58,12 @@ public class ScorecardPageController {
 
         printCurrent();
     }
+
+
+    /*
+     * show submit button
+     * 
+    */
 
     /*
     ! Updates the Total score label, after the the "next-hole button" has been clicked
