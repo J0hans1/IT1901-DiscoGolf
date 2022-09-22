@@ -1,0 +1,6 @@
+### Release 1
+When starting the project we first sat down writing the group contract, deciding the group rules and the time of our group meetings. Then we had a brainstorm session for deiciding the app idea, and we eventually found out that we wanted to create a disc golf app. 
+
+Before we started to write code, we first went into gitlab and created the first milestone of this project called "Demonstrerbar app til torsdag". We divided the things we had to do into smaller problems, and created relevant issues under this milestone. By assigning issues to one or more members of the group, the process became much easier. We also assigned some issues to two members, so they could work on an issue together. After this first release we have learned the importance of creating issues to keep control of the project and what people are currently doing. 
+
+When writing the code we decided to in release 1 create the scorecard page. Then the app have some logic, where you can play a disc golf course and get a calculated total score.
