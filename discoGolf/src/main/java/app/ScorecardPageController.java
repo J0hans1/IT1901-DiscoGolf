@@ -13,6 +13,7 @@ public class ScorecardPageController {
      */
     private Scorecard scorecard;
     private Course currentCourse;
+    private boolean hasBeenClicked = false;
 
     /*
     FXML components
@@ -46,14 +47,19 @@ public class ScorecardPageController {
      * Sends the scorecard data to a DatabaseHandler object
      */
     public void handleSubmit(){
-        DatabaseHandler database = new DatabaseHandler();
-        try {
-            database.writeToDatabse(scorecard.getNameOfPlayer(), Integer.toString(scorecard.getTotalScore()), scorecard.getCourseName());
-        } catch (IOException e) {
-            System.out.println("Error in writing to database");
-            e.printStackTrace();
+        if(!hasBeenClicked){
+            DatabaseHandler database = new DatabaseHandler();
+            try {
+                database.writeToDatabse(scorecard.getNameOfPlayer(), Integer.toString(scorecard.getTotalScore()), scorecard.getCourseName());
+            } catch (IOException e) {
+                System.out.println("Error in writing to database");
+                e.printStackTrace();
+            }
+            System.out.println("Data saved in database");
+        } else{
+            System.out.println("This scorecard has already been submitted!");
         }
-        System.out.println("Data saved in database");
+
     }
 
     /*
