@@ -49,7 +49,7 @@ public class MainPageController {
     * initializes template courses (lade and Dragvoll) to be available as a course for the player to choose
      */
     public void initialize() {
-        Course Lade = new Course("Lade", new ArrayList<>(Arrays.asList(3,4,3,4,3,4,3,4,3)));
+        Course Lade = new Course("Lade",new ArrayList<>(Arrays.asList(3,4,3,4,3,4,3,4,3)));
         Course Dragvoll = new Course("Dragvoll", new ArrayList<>(Arrays.asList(3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4)));
 
         availableCourses.add(Lade);

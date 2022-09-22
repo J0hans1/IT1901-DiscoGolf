@@ -18,8 +18,8 @@ public class Course {
     - courseName is the name of the course
     - parForHoles is an array of integers that represents the par value for the hole with number == to its array index
     */
-    public Course(int numberOfHoles, String courseName, ArrayList<Integer> parValues) {
-        this.numberOfHoles = numberOfHoles;
+    public Course(String courseName, ArrayList<Integer> parValues) {
+        this.numberOfHoles = parValues.size();
         this.courseName = courseName;
         this.parValues = parValues;
         this.parForHoles = new HashMap<>();

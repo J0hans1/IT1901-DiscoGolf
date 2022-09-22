@@ -39,15 +39,21 @@ public class Scorecard {
         return total;
     }
 
+    public String getCourseName() {
+        return currentCourse.getCourseName();
+    }
+
 
 
     public int getCurrentHole() {
         return currentHole + 1;
     }
+    
 
 
 
-    public int getCurrentHoleScore() {
+
+    public int getCurrentHoleThrows() {
         return throwsList.get(currentHole);
     }
 
