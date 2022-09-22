@@ -12,9 +12,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class DatabaseHandler {
-    
+
     private List<String[]> databaseList;
 
+    /*
+    - writes a scorecard to the database
+    */
     public void writeToDatabse(String name, String score, String frisbeeCourse) throws IOException{
         try {
             String path = getPath(); //file path
@@ -32,6 +35,10 @@ public class DatabaseHandler {
         }
     }
     
+
+    /*
+    - reads from the database
+    */
     public void readDatabase() throws URISyntaxException, FileNotFoundException{
         String path = getPath();
         
@@ -41,12 +48,8 @@ public class DatabaseHandler {
             BufferedReader reader = new BufferedReader(
                 new FileReader(file)
             );
-            List<String[]> data = reader
-            .lines()
-            .parallel()
-            .map(scorecard -> scorecard.split(","))
-            .toList();
-
+            List<String[]> data = reader.lines().parallel().map(scorecard -> scorecard.split(",")).toList();
+            
             this.databaseList = data;
             reader.close();
         } catch (IOException e) {
@@ -62,10 +65,17 @@ public class DatabaseHandler {
         }
     }
 
+    /*
+    - returns list of strings, where each string represents a scorecard in the database
+    */
     public List<String[]> getDatabase(){
         return this.databaseList;
     }
     
+    
+    /*
+    - get path of the database file
+    */
     private String getPath() throws URISyntaxException{
         String path = new File(getClass().getResource("").toURI())
         .getAbsolutePath()
