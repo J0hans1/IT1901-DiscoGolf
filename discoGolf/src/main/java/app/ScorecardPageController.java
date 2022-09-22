@@ -1,5 +1,7 @@
 package app;
 
+import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -44,8 +46,14 @@ public class ScorecardPageController {
      * Sends the scorecard data to a DatabaseHandler object
      */
     public void handleSubmit(){
-        //DatabaseHandler databse = new DatabaseHandler();
-        
+        DatabaseHandler database = new DatabaseHandler();
+        try {
+            database.writeToDatabse(scorecard.getNameOfPlayer(), Integer.toString(scorecard.getTotalScore()), scorecard.getCourseName());
+        } catch (IOException e) {
+            System.out.println("Error in writing to database");
+            e.printStackTrace();
+        }
+        System.out.println("Data saved in database");
     }
 
     /*
