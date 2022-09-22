@@ -56,6 +56,7 @@ public class ScorecardPageController {
                 e.printStackTrace();
             }
             System.out.println("Data saved in database");
+            hasBeenClicked = true;
         } else{
             System.out.println("This scorecard has already been submitted!");
         }
