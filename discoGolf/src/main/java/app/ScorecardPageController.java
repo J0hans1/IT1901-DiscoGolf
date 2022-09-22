@@ -115,8 +115,7 @@ public class ScorecardPageController {
         scorecard.nextHole();
         updateLabels();
         printCurrent();
-        totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getTotalScore())); //Update total score only when switching between holes
-         //update current hole label
+        totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getTotalScore())); 
     }
 
 
@@ -129,8 +128,7 @@ public class ScorecardPageController {
         scorecard.previousHole();
         updateLabels();
         printCurrent();
-        totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getTotalScore())); //Update total score only when switching between holes
-        //update current hole label
+        totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getTotalScore()));
     }
 
 
