@@ -76,18 +76,4 @@ public class DatabaseHandler {
         return path;
     }
 
-    public static void main(String[] args) throws URISyntaxException {
-        DatabaseHandler x = new DatabaseHandler();
-        try {
-            //x.writeToDatabse("Ulrik", "28", "Dragvoll");
-            x.readDatabase();
-            System.out.println(x.getDatabase().size());
-            System.out.println(x.getDatabase().get(0)[0]);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println("Done");
-    }
-
 }
