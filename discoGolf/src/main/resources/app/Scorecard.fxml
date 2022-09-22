@@ -42,7 +42,7 @@
          </font>
       </Button>
       <Label fx:id="totalScoreLabel" layoutX="384.0" layoutY="426.0" text="Total score: 0" textFill="WHITE" />
-      <Button fx:id="submitBtn" layoutX="675.0" layoutY="228.0" mnemonicParsing="false" onAction="#nextHole" prefHeight="35.0" prefWidth="131.0" style="-fx-background-color: #00D315;" text="Submit" textFill="WHITE">
+      <Button fx:id="submitBtn" layoutX="675.0" layoutY="228.0" mnemonicParsing="false" onAction="#handleSubmit" prefHeight="35.0" prefWidth="131.0" style="-fx-background-color: #00D315;" text="Submit" textFill="WHITE">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
