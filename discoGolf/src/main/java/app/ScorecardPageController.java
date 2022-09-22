@@ -40,6 +40,13 @@ public class ScorecardPageController {
         handleBtnVisibilty();
     }
 
+    /*
+     * Sends the scorecard data to a DatabaseHandler object
+     */
+    public void handleSubmit(){
+        //DatabaseHandler databse = new DatabaseHandler();
+        
+    }
 
     /*
     - updates button labels at the previous and next hole display
