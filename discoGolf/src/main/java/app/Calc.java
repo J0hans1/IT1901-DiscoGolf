@@ -1,5 +1,8 @@
 package app;
 
+import java.io.File;
+import java.lang.reflect.Array;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.BinaryOperator;
@@ -129,4 +132,11 @@ public class Calc {
         double duplicate = peekOperand();
         pushOperand(duplicate);
     }
+
+    public static void main(String[] args) throws URISyntaxException {
+        Calc cal = new Calc(1.0);
+        File directory = new File(cal.getClass().getResource("").toURI());
+        System.out.println(directory.getAbsolutePath());
+    }
+
 }
