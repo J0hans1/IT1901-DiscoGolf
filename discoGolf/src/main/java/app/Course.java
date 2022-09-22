@@ -10,8 +10,7 @@ public class Course {
     private HashMap<Integer, Integer> parForHoles;
     private ArrayList<Integer> parValues;
 
-
-
+    
     /*
     - Create a disc golf course
     - numberOfHoles decides the number of holes in the course
@@ -46,7 +45,7 @@ public class Course {
 
 
     /*
-    ? hva brukes denne til og hva er grunnen til at den heter get par?
+    return hole/par values
     */
     public HashMap<Integer, Integer> getPar() {
         return parForHoles;

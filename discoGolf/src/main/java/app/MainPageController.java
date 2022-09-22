@@ -34,18 +34,23 @@ public class MainPageController {
     public ComboBox<String> pickCourseMenu;
 
 
+    /*
+    - sets name of the player 
+    */
     public void setNameOfPlayer() {
         this.nameOfPlayer = fxmlNameOfPlayer.getText();
     }
 
 
+    /*
+    - 
+    */
     public void addCourseToList(String course) {
         pickCourseMenu.getItems().add(course);
     }
 
 
     /*
-    ? availableCourses hva gjør den?
     * initializes template courses (lade and Dragvoll) to be available as a course for the player to choose
      */
     public void initialize() {
@@ -60,6 +65,9 @@ public class MainPageController {
     }
 
 
+    /*
+    -
+    */
     public Course findSelectedCourse() {
         String selectedCourse = pickCourseMenu.getValue();
         for (Course course : availableCourses) {
@@ -71,6 +79,9 @@ public class MainPageController {
     }
 
 
+    /*
+    -
+    */
     public void changeSceneToScorecard(ActionEvent event) {
         setNameOfPlayer();
 
