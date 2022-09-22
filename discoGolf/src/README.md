@@ -5,9 +5,11 @@ The app will contain a HOME screen where you can either start a game, which lead
 
 The app designed in Figma:
 
-![My Image](figmaImg/figmaScreenshot.png)
+![My Image](readmeImg/figmaScreenshot.png)
 
 
 
 # User-history
+Here is a user history where a person uses the current main funcionality in the app, using the scoerecard to track the total score of a disc-golf round.
 
+![My Image](readmeImg/userHistory.png)

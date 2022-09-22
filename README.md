@@ -23,3 +23,7 @@ The application exists within the discogolf directory at path:
 and the application can be run from the DiscoGolfApp directory at path:
 
 ```gr2224/discogolf/src/main/java/app/DiscoGolfApp.java```
+
+The data is stored in a .txt file (database.txt) inside the data folder and exists within the path:
+
+```gr2224/discogolf/src/main/data/```
