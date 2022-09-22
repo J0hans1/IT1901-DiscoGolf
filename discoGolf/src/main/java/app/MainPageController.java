@@ -49,8 +49,8 @@ public class MainPageController {
     * initializes template courses (lade and Dragvoll) to be available as a course for the player to choose
      */
     public void initialize() {
-        Course Lade = new Course(9, "Lade", new ArrayList<>(Arrays.asList(3,4,3,4,3,4,3,4,3)));
-        Course Dragvoll = new Course(18, "Dragvoll", new ArrayList<>(Arrays.asList(3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4)));
+        Course Lade = new Course("Lade", new ArrayList<>(Arrays.asList(3,4,3,4,3,4,3,4,3)));
+        Course Dragvoll = new Course("Dragvoll", new ArrayList<>(Arrays.asList(3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4)));
 
         availableCourses.add(Lade);
         availableCourses.add(Dragvoll);
@@ -79,8 +79,7 @@ public class MainPageController {
             root = fxmlLoader.load();
 
             ScorecardPageController nextController = fxmlLoader.getController();
-            nextController.getPreviousControllerInfo(nameOfPlayer, findSelectedCourse().getNumberOfHoles(), findSelectedCourse()); //Need to add selectedCourse
-
+            nextController.getPreviousControllerInfo(nameOfPlayer, findSelectedCourse()); //Need to add selectedCourse
             stage = (Stage)((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
