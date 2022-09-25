@@ -9,7 +9,6 @@ public class Scorecard {
     private String nameOfPlayer;
     private Course currentCourse;
     
-
     /**
     - constructs a scorecard object that vil be saved in the database
      * @param course is the course the player picked at the main menu

@@ -49,7 +49,6 @@ public class Course {
     }
 
 
-    
     /** 
      * @return String courseName - containing the name of the course
      */
@@ -58,7 +57,6 @@ public class Course {
     }
 
 
-    
     /**
      * @return HashMap<Integer, Integer> parForHoles - contains key-value pairs for hole numbers and par values
      */
@@ -66,8 +64,6 @@ public class Course {
         return parForHoles;
     }
 
-
-    
     /** 
      * Links up the hole/par pair
      * @param hole - the hole number
