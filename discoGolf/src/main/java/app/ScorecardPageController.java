@@ -7,43 +7,44 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public class ScorecardPageController {
-
-    /*
-     * 
-     */
+    
     private Scorecard scorecard;
     private Course currentCourse;
     private boolean hasBeenClicked = false;
 
-    /*
-    FXML components
-    */
     @FXML
     public Label currentCourseLabel, displayNameOfPlayer, currentHole, currentScore, totalScoreLabel, currentHoleParLabel;
     @FXML
     public Button previousHoleButton, nextHoleButton, submitBtn;
 
-    /*
-    ?  what does this function do?
-    */
+    
+    /** 
+     * create a scorecard object for current play
+     * updates the name label to the name of the player
+     * set currentCourse?
+     * update course label to show name of current course
+     * refreshes all labels by running refreshDisplay()
+     * @param nameOfPlayer is a String containing the name of the player, declared at the main page
+     * @param selectedCourse is the course that we selected at the main page
+     */
     public void getPreviousControllerInfo(String nameOfPlayer, Course selectedCourse) {
-        scorecard = new Scorecard(selectedCourse, nameOfPlayer); //Create new scorecard
-        displayNameOfPlayer.setText("Name: " + scorecard.getNameOfPlayer());    //Update name of player label
-        this.currentCourse = selectedCourse;                                    //Set current course
-        currentCourseLabel.setText("Course: " + currentCourse.getCourseName()); //Update course label
-        updateLabels();
+        scorecard = new Scorecard(selectedCourse, nameOfPlayer);                
+        displayNameOfPlayer.setText("Name: " + scorecard.getNameOfPlayer());    
+        this.currentCourse = selectedCourse;                                    
+        currentCourseLabel.setText("Course: " + currentCourse.getCourseName());
+        refreshDisplay();
     }
     
 
-    /*
-    - updates all labels at display
-    */
-    private void updateLabels(){
+    /**
+     * refreshes the content of the display, by changing the labels content, button labels and button visibility
+     */
+    private void refreshDisplay(){
         updateInfoDisplay();
         handleBtnVisibilty();
     }
 
-    /*
+    /**
      * Sends the scorecard data to a DatabaseHandler object
      */
     public void handleSubmit(){
@@ -63,8 +64,8 @@ public class ScorecardPageController {
 
     }
 
-    /*
-    - updates button labels at the previous and next hole display
+    /**
+    * updates button labels at the previous and next hole display
     */
     private void handleBtnVisibilty(){
         previousHoleButton.setVisible(scorecard.getCurrentHole() != 1);                     
@@ -73,8 +74,8 @@ public class ScorecardPageController {
     }
 
 
-    /*
-    - updates labels at the Hole display (hole number, score, par)
+    /**
+    * updates labels at the Hole display (hole number, score, par)
     */
     private void updateInfoDisplay() {
         currentHoleParLabel.setText("Par: " + Integer.toString(scorecard.getCurrentHolePar()));
@@ -85,55 +86,53 @@ public class ScorecardPageController {
     }
 
 
-    /*
-    - add throws(attempts) at current hole
+    /**
+    * add throws/attempts at current hole
+    * refreshes the display
     */
     public void addThrow() { 
         scorecard.addThrow();
-        updateLabels();
-        printCurrent();
+        refreshDisplay();
     }
 
 
-    /*
-    - removes throws(attempts) at current hole
+    /**
+    * removes throws(attempts) at current hole
+    * refreshes the display
     */
     public void removeThrow() {
         scorecard.removeThrow();
-        updateLabels();
-        printCurrent();
+        refreshDisplay();
     }
 
 
-    /*
-    - Moves to the next hole
-    - update hole number and button labels
-    - resets current throws label to the par for next hole
-    - updates total score
+    /**
+    * Moves to the next hole
+    * update hole number and button labels
+    * resets current throws label to the par for next hole
+    * updates total score
     */
     public void nextHole() {
         scorecard.nextHole();
-        updateLabels();
-        printCurrent();
+        refreshDisplay();
         totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getTotalScore())); 
     }
 
 
-    /*
-    - Moves to the previous hole
-    - updates hole number and button labels
-    - resets current throws label to the number of throws made at previous hole. 
+    /**
+    * Moves to the previous hole
+    * updates hole number and button labels
+    * resets current throws label to the number of throws made at previous hole. 
     */
     public void previousHole() {
         scorecard.previousHole();
-        updateLabels();
-        printCurrent();
+        refreshDisplay();
         totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getTotalScore()));
     }
 
 
-    /*
-    - prints current state of the scorecard
+    /**
+    * prints current state of the scorecard
     */
     private void printCurrent() {
         System.out.println("Current hole: " + scorecard.getCurrentHole());
