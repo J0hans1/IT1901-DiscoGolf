@@ -15,8 +15,14 @@ public class DatabaseHandler {
 
     private List<String[]> databaseList;
 
-    /*
-    - writes a scorecard to the database
+    /**
+    Gets the path of the database.txt file and writes a line to it.
+    The line consists of the paramaters below, seperated by a comma.
+    Format: "name,score,frisbeeCourse"
+    @param name Name of the player who registers their scorecard to the database
+    @param score String representing the score of the player 
+    @param frisbeeCourse String name of the course that was played on
+    @return void 
     */
     public void writeToDatabse(String name, String score, String frisbeeCourse) throws IOException{
         try {
@@ -36,8 +42,8 @@ public class DatabaseHandler {
     }
     
 
-    /*
-    - reads from the database
+    /**
+    Reads the values of the database.txt file into a array of type List<String[]>
     */
     public void readDatabase() throws URISyntaxException, FileNotFoundException{
         String path = getPath();
@@ -65,16 +71,18 @@ public class DatabaseHandler {
         }
     }
 
-    /*
-    - returns list of strings, where each string represents a scorecard in the database
+    /**
+    Getter method for the data in the database.txt file
+    @return List<Stirng[]> containing the information stored in the database.txt file, where each List element is an array containing a name, a score and a course name
     */
     public List<String[]> getDatabase(){
         return this.databaseList;
     }
     
     
-    /*
-    - get path of the database file
+    /**
+    Getter for the file path of the database.txt file
+    @return String representation of the path
     */
     private String getPath() throws URISyntaxException{
         String path = new File(getClass().getResource("").toURI())

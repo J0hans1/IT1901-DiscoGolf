@@ -8,7 +8,7 @@ public class Scorecard {
     private int currentHole;
     private String nameOfPlayer;
     private Course currentCourse;
-    
+
 
     /**
     - constructs a scorecard object that vil be saved in the database
