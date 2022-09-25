@@ -9,7 +9,6 @@ public class Scorecard {
     private String nameOfPlayer;
     private Course currentCourse;
 
-
     /**
     - constructs a scorecard object that vil be saved in the database
      * @param course is the course the player picked at the main menu
@@ -18,11 +17,10 @@ public class Scorecard {
     public Scorecard(Course course, String nameOfPlayer) {
         this.nameOfPlayer = nameOfPlayer;
         this.currentCourse = course;
-        this.currentHole = 0;
+        this.currentHole = 1;
         throwsList = currentCourse.getPar().values().stream().collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
     }
     
-
     /**
      * @return the name of player which is a attrivute of the scorecard
     */
@@ -52,7 +50,7 @@ public class Scorecard {
     * @return the current hole number the player is playing on
     */
     public int getCurrentHole() {
-        return currentHole + 1;
+        return currentHole;
     }
     
 
@@ -60,7 +58,7 @@ public class Scorecard {
     * @return the current amount of throws the player has made on the current hole
     */
     public int getCurrentHoleThrows() {
-        return throwsList.get(currentHole);
+        return throwsList.get(getCurrentHole() - 1);
     }
 
 
@@ -84,9 +82,10 @@ public class Scorecard {
     * adds one to the current hole number if the player is not on the last hole
     */
     public void nextHole() {
-        if (currentHole < throwsList.size() - 1) {
-            currentHole++;
+        if (getCurrentHole() == throwsList.size()) {
+            throw new IllegalStateException("Can't go to nextHole because next hole doesn't excist");
         }
+        currentHole++;
     }
 
 
@@ -94,17 +93,17 @@ public class Scorecard {
     * removes one from the current hole number if the player is not on the first hole
     */
     public void previousHole() {
-        if (currentHole > 0) {
-            currentHole--;
+        if (getCurrentHole() == 1) {
+            throw new IllegalStateException("Cannot go to a negative hole number");
         }
+        currentHole--;      
     }
-
 
     /*
     * adds one to the current amount of throws the player has made on the current hole
     */
     public void addThrow() {
-        throwsList.set(currentHole, getCurrentHoleThrows() + 1);
+        throwsList.set(getCurrentHole() - 1, getCurrentHoleThrows() + 1);
     }
 
 
@@ -112,8 +111,9 @@ public class Scorecard {
     * removes one from the current amount of throws the player has made on the current hole
     */
     public void removeThrow() {
-        if (getCurrentHoleThrows() > 0) {
-            throwsList.set(currentHole, getCurrentHoleThrows() - 1);
+        if (getCurrentHoleThrows() == 1) {
+            throw new IllegalStateException("Cannot have 0 throws");
         }
+        throwsList.set(getCurrentHole() - 1, getCurrentHoleThrows() - 1);
     }
 }
