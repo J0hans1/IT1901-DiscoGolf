@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Course {
-
     private int numberOfHoles;
     private String courseName;
     private HashMap<Integer, Integer> parForHoles;
@@ -18,18 +17,34 @@ public class Course {
     - parForHoles is an array of integers that represents the par value for the hole with number == to its array index
     */
     public Course(String courseName, ArrayList<Integer> parValues) {
-        this.numberOfHoles = parValues.size();
         this.courseName = courseName;
-        this.parValues = parValues;
+        if (validateParValuesList(parValues)) {
+            this.parValues = parValues;
+        }
+        this.numberOfHoles = this.parValues.size();
         this.parForHoles = new HashMap<>();
         assignParsToHoles();
+    }
+
+    /**
+     * Validates the parValues list and throws IllegalArgumentExeption if not valid
+     * @param parValues a list of par values which should be between 2 and 7
+     * @return true if the input is valid
+     */
+    private boolean validateParValuesList(ArrayList<Integer> parValues) {
+        for (Integer par : parValues) {
+            if (par < 2 || par > 7) {
+                throw new IllegalArgumentException("Not a valid parValues list");
+            }
+        }
+        return true;
     }
 
 
     /*
     - assigns integers in the array of par values, to the hole with number == to its array index
     */
-    public void assignParsToHoles(){
+    private void assignParsToHoles(){
         for (int i = 0; i < numberOfHoles; i++) {
             setParForHole(i + 1 , parValues.get(i));
         }
