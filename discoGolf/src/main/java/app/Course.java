@@ -56,7 +56,7 @@ public class Course {
     - links up the hole/par pair
     */
     public void setParForHole(int hole, int par) {
-        if (hole < 1 || par < 3) {
+        if (hole < 1 || par < 2 || par > 7) {
             throw new IllegalArgumentException("Not a valid hole or par number");
         }
         parForHoles.put(hole, par);
