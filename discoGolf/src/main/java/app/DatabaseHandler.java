@@ -83,7 +83,7 @@ public class DatabaseHandler {
     /**
     Getter for the file path of the database.txt file
     @return String representation of the path
-    */
+:    */
     private String getPath() throws URISyntaxException{
         String path = new File(getClass().getResource("").toURI())
         .getAbsolutePath()
