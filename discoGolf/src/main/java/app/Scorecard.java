@@ -23,8 +23,8 @@ public class Scorecard {
     }
     
 
-    /*
-    -
+    /**
+     * @return the name of player which is a attrivute of the scorecard
     */
     public String getNameOfPlayer() {
         return nameOfPlayer;
@@ -32,7 +32,7 @@ public class Scorecard {
 
 
     /*
-    - 
+    * @return the total amount of throws minus the total of all the pars of each hole 
     */
     public int getTotalScore() {
         int total = (int) throwsList.stream().mapToInt(Integer::intValue).sum() - (int) currentCourse.getPar().values().stream().mapToInt(Integer::intValue).sum();
@@ -41,7 +41,7 @@ public class Scorecard {
 
 
     /*
-    -
+    * @return the name of course the player is playing on
     */
     public String getCourseName() {
         return currentCourse.getCourseName();
@@ -49,7 +49,7 @@ public class Scorecard {
 
 
     /*
-    -
+    * @return the current hole number the player is playing on
     */
     public int getCurrentHole() {
         return currentHole + 1;
@@ -57,7 +57,7 @@ public class Scorecard {
     
 
     /*
-    -
+    * @return the current amount of throws the player has made on the current hole
     */
     public int getCurrentHoleThrows() {
         return throwsList.get(currentHole);
@@ -65,15 +65,15 @@ public class Scorecard {
 
 
     /*
-    -
+    * @return the current par of the current hole
     */
     public int getCurrentHolePar() {
         return currentCourse.getParForHole(getCurrentHole());
     }
 
 
-    /*
-    -
+    /**
+    * @return the size of the current course by streaming the courses par list and counting the amount of elements
     */
     public int getCourseSize() {
         return currentCourse.getPar().size();
@@ -81,7 +81,7 @@ public class Scorecard {
 
 
     /*
-    -
+    * adds one to the current hole number if the player is not on the last hole
     */
     public void nextHole() {
         if (currentHole < throwsList.size() - 1) {
@@ -91,7 +91,7 @@ public class Scorecard {
 
 
     /*
-    -
+    * removes one from the current hole number if the player is not on the first hole
     */
     public void previousHole() {
         if (currentHole > 0) {
@@ -101,7 +101,7 @@ public class Scorecard {
 
 
     /*
-    -
+    * adds one to the current amount of throws the player has made on the current hole
     */
     public void addThrow() {
         throwsList.set(currentHole, getCurrentHoleThrows() + 1);
@@ -109,7 +109,7 @@ public class Scorecard {
 
 
     /*
-    -
+    * removes one from the current amount of throws the player has made on the current hole
     */
     public void removeThrow() {
         if (getCurrentHoleThrows() > 0) {
