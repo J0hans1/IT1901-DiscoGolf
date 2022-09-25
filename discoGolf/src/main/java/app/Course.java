@@ -11,12 +11,11 @@ public class Course {
     private ArrayList<Integer> parValues;
 
     
-    /*
-    - Create a disc golf course
-    - numberOfHoles decides the number of holes in the course
-    - courseName is the name of the course
-    - parForHoles is an array of integers that represents the par value for the hole with number == to its array index
-    */
+    /**
+     * Create a disc golf course
+     * @param courseName - is the name of the course
+     * @param parForHoles - is an array of integers that represents the par value for the hole with number == to its array index
+     */
     public Course(String courseName, ArrayList<Integer> parValues) {
         this.numberOfHoles = parValues.size();
         this.courseName = courseName;
@@ -26,9 +25,9 @@ public class Course {
     }
 
 
-    /*
-    - assigns integers in the array of par values, to the hole with number == to its array index
-    */
+    /**
+     * assigns integers in the array of par values, to the hole with number == to its array index
+     */
     public void assignParsToHoles(){
         for (int i = 0; i < numberOfHoles; i++) {
             setParForHole(i + 1 , parValues.get(i));
@@ -36,52 +35,61 @@ public class Course {
     }
 
 
-    /*
-    - getter for name
-    */
+    
+    /** 
+     * @return String courseName - containing the name of the course
+     */
     public String getCourseName() {
         return courseName;
     }
 
 
-    /*
-    return hole/par values
-    */
-    public HashMap<Integer, Integer> getPar() {
+    
+    /**
+     * @return HashMap<Integer, Integer> parForHoles - contains key-value pairs for hole numbers and par values
+     */
+    public HashMap<Integer, Integer> getPar() { 
         return parForHoles;
     }
 
 
-    /*
-    - links up the hole/par pair
-    */
+    
+    /** 
+     * Links up the hole/par pair
+     * @param hole - the hole number
+     * @param par - the par value
+     */
     public void setParForHole(int hole, int par) {
-        if (hole < 1 || par < 3) {
+        if (hole < 1 || par < 2 || par > 7) {
             throw new IllegalArgumentException("Not a valid hole or par number");
         }
         parForHoles.put(hole, par);
     }
 
 
-    /*
-    - returns the par value at a specific hole/index of the array
-    */
+    /** 
+     * Returns the par value at a specific hole/index of the array
+     * @param hole - the hole number
+     * @return int - the par value assigned to the specific hole
+     */
     public int getParForHole(int hole) {
         return parForHoles.get(hole);
     }
     
-
-    /*
-    - get number of holes at site
-    */
+    
+    /** 
+     * Get number of holes at site
+     * @return int
+     */
     public int getNumberOfHoles() {
         return numberOfHoles;
     }
+    
 
-
-    /*
-    - To string method
-    */
+    /** 
+     * Writes the object on string format
+     * @return String
+     */
     @Override
     public String toString() {
         return getCourseName() + ": " + getNumberOfHoles() + " holes";

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -22,6 +23,7 @@ public class ScorecardTest {
     }
     
     @Test
+    @DisplayName("Test the controller when creating a Scorecard object")
     public void testController() {
         assertEquals("Jakob", scorecard.getNameOfPlayer());
         assertEquals(1, scorecard.getCurrentHole());
@@ -29,6 +31,7 @@ public class ScorecardTest {
     }
 
     @Test
+    @DisplayName("Test nextHole() and previousHole() methods")
     public void testCurrentHole() {
         scorecard.previousHole();
         assertEquals(1, scorecard.getCurrentHole()
@@ -42,11 +45,12 @@ public class ScorecardTest {
             scorecard.previousHole();
         }
         assertEquals(4, scorecard.getCurrentHole()
-        , "The current hole is now 4 (9 - 5)");
+        , "The current hole is now 9-5 = 4");
     }
 
 
     @Test
+    @DisplayName("Test addThrow() and removeThrow() methods")
     public void testHoleThrows() {
         for (int i = 0; i < 3; i++) {
             scorecard.addThrow();
@@ -60,6 +64,7 @@ public class ScorecardTest {
     }
 
     @Test
+    @DisplayName("Test that the correct total score is returned")
     public void testTotalScore() {
         for (int i = 0; i < 4; i++) {
             scorecard.addThrow();
