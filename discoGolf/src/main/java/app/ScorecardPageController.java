@@ -128,6 +128,7 @@ public class ScorecardPageController {
         scorecard.previousHole();
         refreshDisplay();
         totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getTotalScore()));
+        printCurrent();
     }
 
 
