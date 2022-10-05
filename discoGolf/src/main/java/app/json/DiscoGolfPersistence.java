@@ -46,7 +46,7 @@ public class DiscoGolfPersistence {
      */
     public Scorecard readScorecard(Reader reader) throws IOException {
         return mapper.readValue(reader, Scorecard.class);
-      }
+    }
 
     /**
      * 

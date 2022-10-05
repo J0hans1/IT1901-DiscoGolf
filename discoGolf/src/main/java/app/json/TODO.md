@@ -7,4 +7,4 @@
 - [ ] lage et objekt som kan deserialisere Course til json.
 - [ ] lage en klasse som kan håndtere all serialisering og deserialisering av objekter
 
-## Hvordan lage serializer
+## 

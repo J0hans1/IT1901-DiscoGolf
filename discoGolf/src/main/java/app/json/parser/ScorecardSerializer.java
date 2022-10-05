@@ -19,7 +19,9 @@ public class ScorecardSerializer extends JsonSerializer<Scorecard>{
         gen.writeStartObject();
         gen.writeStringField("name", scorecard.getNameOfPlayer());
         gen.writeNumberField("totalScore", scorecard.getTotalScore());
-        gen.writeStringField("courseName", scorecard.getCourseName());
+        gen.writeObjectFieldStart("currentCourse");
+        gen.writeObject(scorecard.getCourse());
+        gen.writeEndObject();
         gen.writeEndObject();
     }
 }
