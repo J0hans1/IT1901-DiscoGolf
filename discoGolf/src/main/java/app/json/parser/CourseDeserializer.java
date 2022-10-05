@@ -7,16 +7,17 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 
-import app.Scorecard;
+import app.Course;
 
-public class ScorecardDeserializer extends JsonDeserializer<Scorecard> {
-    
+public class CourseDeserializer extends JsonDeserializer<Course> {
+
     /**
-     * Deserialize a scorecard from JSON
+     * Deserialize a Course from JSON
      */
     @Override
-    public Scorecard deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JacksonException {
+    public Course deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JacksonException {
         // TODO Auto-generated method stub
         return null;
     }
+    
 }
