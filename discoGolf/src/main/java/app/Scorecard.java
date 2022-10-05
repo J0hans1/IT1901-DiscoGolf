@@ -52,8 +52,14 @@ public class Scorecard {
     public int getCurrentHole() {
         return currentHole;
     }
-    
 
+    /*
+     * @return course of the scorecard
+     */
+    public Course getCourse() {
+        return currentCourse;
+    }
+    
     /*
     * @return the current amount of throws the player has made on the current hole
     */

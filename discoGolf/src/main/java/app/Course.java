@@ -56,6 +56,13 @@ public class Course {
         return courseName;
     }
 
+    /**
+     * @return ArrayList<Integer> parValues - containing the par values for each hole
+     */
+    public ArrayList<Integer> getParValues() {
+        return parValues;
+    }
+
 
     /**
      * @return HashMap<Integer, Integer> parForHoles - contains key-value pairs for hole numbers and par values
