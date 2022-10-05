@@ -16,7 +16,8 @@ public class ScorecardDeserializer extends JsonDeserializer<Scorecard> {
      */
     @Override
     public Scorecard deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JacksonException {
-        // TODO Auto-generated method stub
-        return null;
+        
+        Scorecard scorecard = new Scorecard(null, null);
+        return scorecard;
     }
 }

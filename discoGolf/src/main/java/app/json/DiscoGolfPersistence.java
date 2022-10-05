@@ -52,7 +52,7 @@ public class DiscoGolfPersistence {
      */
     public Scorecard readScorecard(Reader reader) throws IOException {
         return mapper.readValue(reader, Scorecard.class);
-    }
+      }
 
     /**
      * 
@@ -61,6 +61,10 @@ public class DiscoGolfPersistence {
      */
     public void writeScorecard(Scorecard scorecard, Writer writer) throws IOException {
         mapper.writerWithDefaultPrettyPrinter().writeValue(writer, scorecard);;
+    }
+
+    public void writeCourse(Course course, Writer writer) throws IOException {
+        mapper.writerWithDefaultPrettyPrinter().writeValue(writer, course);
     }
 
     /**
@@ -87,6 +91,12 @@ public class DiscoGolfPersistence {
         } 
     }
 
+    public void saveCourse(Course course) throws IOException, URISyntaxException {
+        try (Writer writer = new FileWriter(getPathString(), StandardCharsets.UTF_8)) {
+            writeCourse(course, writer);
+        } 
+    }
+
     public static void main(String[] args) throws IOException, URISyntaxException {
         Course Dragvoll = new Course("Dragvoll", new ArrayList<>(Arrays.asList(3,4,3,4,3,4,3,4,3)));
         Scorecard scorecard = new Scorecard(Dragvoll, "Jakob");
@@ -101,5 +111,6 @@ public class DiscoGolfPersistence {
         parsing.saveScorecard(scorecard);
     }
 }
+
 
 

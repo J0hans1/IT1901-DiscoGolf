@@ -29,7 +29,7 @@ public class Scorecard {
     }
 
 
-    /*
+    /**
     * @return the total amount of throws minus the total of all the pars of each hole 
     */
     public int getTotalScore() {
@@ -38,7 +38,7 @@ public class Scorecard {
     }
 
 
-    /*
+    /**
     * @return the name of course the player is playing on
     */
     public String getCourseName() {
@@ -46,21 +46,21 @@ public class Scorecard {
     }
 
 
-    /*
+    /**
     * @return the current hole number the player is playing on
     */
     public int getCurrentHole() {
         return currentHole;
     }
 
-    /*
+    /**
      * @return course of the scorecard
      */
     public Course getCourse() {
         return currentCourse;
     }
     
-    /*
+    /**
     * @return the current amount of throws the player has made on the current hole
     */
     public int getCurrentHoleThrows() {
@@ -68,7 +68,7 @@ public class Scorecard {
     }
 
 
-    /*
+    /**
     * @return the current par of the current hole
     */
     public int getCurrentHolePar() {
@@ -84,7 +84,7 @@ public class Scorecard {
     }
 
 
-    /*
+    /**
     * adds one to the current hole number if the player is not on the last hole
     */
     public void nextHole() {
@@ -95,7 +95,7 @@ public class Scorecard {
     }
 
 
-    /*
+    /**
     * removes one from the current hole number if the player is not on the first hole
     */
     public void previousHole() {
@@ -105,7 +105,7 @@ public class Scorecard {
         currentHole--;      
     }
 
-    /*
+    /**
     * adds one to the current amount of throws the player has made on the current hole
     */
     public void addThrow() {
@@ -113,7 +113,7 @@ public class Scorecard {
     }
 
 
-    /*
+    /**
     * removes one from the current amount of throws the player has made on the current hole
     */
     public void removeThrow() {
