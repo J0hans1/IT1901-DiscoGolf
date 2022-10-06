@@ -5,5 +5,3 @@ Ulrik,3,Lade
 Ulrik Isd,23,Lade
 Ulrik Isdahl,35,Lade
 
-
-Billy,8,Lade
