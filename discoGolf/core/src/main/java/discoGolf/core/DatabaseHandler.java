@@ -1,4 +1,4 @@
-package core;
+package discoGolf.core;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -44,7 +44,6 @@ public class DatabaseHandler {
 
     /**
     Reads the values of the database.txt file into a array of type List<String[]>
-    @return void
     */
     public void readDatabase() throws URISyntaxException, FileNotFoundException{
         String path = getPath();

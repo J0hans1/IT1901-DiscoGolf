@@ -2,11 +2,11 @@ package ui;
 
 import java.io.IOException;
 
+import discoGolf.core.Course;
+import discoGolf.core.Scorecard;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import core.Scorecard;
-import core.Course;
 
 public class ScorecardPageController {
     
@@ -130,6 +130,7 @@ public class ScorecardPageController {
         scorecard.previousHole();
         refreshDisplay();
         totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getTotalScore()));
+        printCurrent();
     }
 
 

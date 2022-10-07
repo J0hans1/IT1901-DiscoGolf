@@ -1,5 +1,5 @@
 module calc.ui {
-    requires core;
+    requires discoGolf.core;
     requires javafx.controls;
     requires javafx.fxml;
     requires fxutil;

@@ -3,7 +3,7 @@ package ui;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import core.Course;
+import discoGolf.core.Course;
 import fxutil.Listener;
 
 public class AppTest {

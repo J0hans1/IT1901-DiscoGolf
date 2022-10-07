@@ -1,5 +1,5 @@
 module fxutil {
-    requires core;
+    requires discoGolf.core;
     requires javafx.controls;
     requires javafx.fxml;
 
