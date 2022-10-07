@@ -98,8 +98,8 @@ public class DiscoGolfPersistence {
     }
 
     public static void main(String[] args) throws IOException, URISyntaxException {
-        Course Dragvoll = new Course("Dragvoll", new ArrayList<>(Arrays.asList(3,4,3,4,3,4,3,4,3)));
-        Scorecard scorecard = new Scorecard(Dragvoll, "Jakob");
+        Course dragvoll = new Course("Dragvoll", new ArrayList<>(Arrays.asList(3,4,3,4,3,4,3,4,3)));
+        Scorecard scorecard = new Scorecard(dragvoll, "Jakob");
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 3; j++) {
                 scorecard.addThrow();

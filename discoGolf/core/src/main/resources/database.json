@@ -1,4 +1,8 @@
 {
   "name" : "Jakob",
-  "totalScore" : 24
+  "totalScore" : 24,
+  "currentCourse" : {
+    "name" : "Dragvoll",
+    "parValues" : [ 3, 4, 3, 4, 3, 4, 3, 4, 3 ]
+  }
 }
