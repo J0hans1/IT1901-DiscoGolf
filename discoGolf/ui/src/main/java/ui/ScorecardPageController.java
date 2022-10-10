@@ -1,7 +1,5 @@
 package ui;
 
-import java.io.IOException;
-
 import discoGolf.core.Course;
 import discoGolf.core.Scorecard;
 import javafx.fxml.FXML;
@@ -15,7 +13,7 @@ public class ScorecardPageController {
     private boolean hasBeenClicked = false;
 
     @FXML
-    public Label currentCourseLabel, displayNameOfPlayer, currentHole, currentScore, totalScoreLabel, currentHoleParLabel;
+    public Label currentCourseLabel, displayPlayerName, currentHole, currentScore, totalScoreLabel, currentHoleParLabel;
     @FXML
     public Button previousHoleButton, nextHoleButton, submitBtn;
 
@@ -26,12 +24,12 @@ public class ScorecardPageController {
      * set currentCourse?
      * update course label to show name of current course
      * refreshes all labels by running refreshDisplay()
-     * @param nameOfPlayer is a String containing the name of the player, declared at the main page
+     * @param playerName is a String containing the name of the player, declared at the main page
      * @param selectedCourse is the course that we selected at the main page
      */
-    public void getPreviousControllerInfo(String nameOfPlayer, Course selectedCourse) {
-        scorecard = new Scorecard(selectedCourse, nameOfPlayer);                
-        displayNameOfPlayer.setText("Name: " + scorecard.getNameOfPlayer());    
+    public void getPreviousControllerInfo(String playerName, Course selectedCourse) {
+        scorecard = new Scorecard(selectedCourse, playerName);                
+        displayPlayerName.setText("Name: " + scorecard.getPlayerName());    
         this.currentCourse = selectedCourse;                                    
         currentCourseLabel.setText("Course: " + currentCourse.getCourseName());
         refreshDisplay();
@@ -53,7 +51,7 @@ public class ScorecardPageController {
         // if(!hasBeenClicked){
         //     DatabaseHandler database = new DatabaseHandler();
         //     try {
-        //         database.writeToDatabse(scorecard.getNameOfPlayer(), Integer.toString(scorecard.getTotalScore()), scorecard.getCourseName());
+        //         database.writeToDatabse(scorecard.getplayerName(), Integer.toString(scorecard.getTotalScore()), scorecard.getCourseName());
         //     } catch (IOException e) {
         //         System.out.println("Error in writing to database");
         //         e.printStackTrace();

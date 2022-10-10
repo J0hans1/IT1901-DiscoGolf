@@ -20,7 +20,7 @@ import javafx.scene.Node;
 public class MainPageController {
 
     private List<Course> availableCourses = new ArrayList<>();
-    private String nameOfPlayer;
+    private String playerName;
     
     @FXML 
     private Parent root;
@@ -31,7 +31,7 @@ public class MainPageController {
     @FXML
     public Button playButton;
     @FXML
-    public TextField fxmlNameOfPlayer;
+    public TextField playerNameTextField;
     @FXML
     public ComboBox<String> pickCourseMenu;
 
@@ -39,9 +39,9 @@ public class MainPageController {
     /*
     - sets name of the player 
     */
-    public void setNameOfPlayer() {
-        this.nameOfPlayer = fxmlNameOfPlayer.getText();
-    }
+    public void setPlayerName() {
+        this.playerName = playerNameTextField.getText();
+    }   
 
 
     /*
@@ -85,14 +85,14 @@ public class MainPageController {
     -
     */
     public void changeSceneToScorecard(ActionEvent event) {
-        setNameOfPlayer();
+        setPlayerName();
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("Scorecard.fxml"));
             root = fxmlLoader.load();
 
             ScorecardPageController nextController = fxmlLoader.getController();
-            nextController.getPreviousControllerInfo(nameOfPlayer, findSelectedCourse()); //Need to add selectedCourse
+            nextController.getPreviousControllerInfo(playerName, findSelectedCourse()); //Need to add selectedCourse
             stage = (Stage)((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);

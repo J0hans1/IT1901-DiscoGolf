@@ -17,9 +17,10 @@ public class ScorecardSerializer extends JsonSerializer<Scorecard>{
     @Override
     public void serialize(Scorecard scorecard, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         gen.writeStartObject();
-        gen.writeStringField("name", scorecard.getNameOfPlayer());
-        gen.writeNumberField("totalScore", scorecard.getTotalScore());
-        gen.writeObjectField("currentCourse", scorecard.getCourse());
+        gen.writeStringField("playerName", scorecard.getPlayerName());
+        gen.writeNumberField("score", scorecard.getTotalScore());
+        gen.writeObjectField("throwsList", scorecard.getThrowsList());
+        gen.writeObjectField("course", scorecard.getCourse());
         gen.writeEndObject();
     }
 }

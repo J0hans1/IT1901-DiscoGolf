@@ -21,6 +21,7 @@ public class DiscoGolfPersistence {
     
     private ObjectMapper mapper;
 
+
     /**
      * Initializing the ObjectMapper object by calling createMapper()
      */
@@ -52,7 +53,7 @@ public class DiscoGolfPersistence {
      */
     public Scorecard readScorecard(Reader reader) throws IOException {
         return mapper.readValue(reader, Scorecard.class);
-      }
+    }
 
     /**
      * 
@@ -60,16 +61,12 @@ public class DiscoGolfPersistence {
      * @param write
      */
     public void writeScorecard(Scorecard scorecard, Writer writer) throws IOException {
-        mapper.writerWithDefaultPrettyPrinter().writeValue(writer, scorecard);;
-    }
-
-    public void writeCourse(Course course, Writer writer) throws IOException {
-        mapper.writerWithDefaultPrettyPrinter().writeValue(writer, course);
+        mapper.writerWithDefaultPrettyPrinter().writeValue(writer, scorecard);
     }
 
     /**
-    Getter for the file path of the database.txt file
-    @return String representation of the path
+     * Getter for the file path of the database.txt file
+     * @return String representation of the path
     */
     public String getPathString() throws URISyntaxException {
         String path = new File(getClass().getResource("").toURI())
@@ -86,14 +83,10 @@ public class DiscoGolfPersistence {
      * @throws URISyntaxException
      */
     public void saveScorecard(Scorecard scorecard) throws IOException, URISyntaxException {
-        try (Writer writer = new FileWriter(getPathString(), StandardCharsets.UTF_8)) {
+        if (getPathString() == null) {
+            throw new IllegalStateException("no existing filepath");
+        }try (Writer writer = new FileWriter(getPathString(), StandardCharsets.UTF_8)) {
             writeScorecard(scorecard, writer);
-        } 
-    }
-
-    public void saveCourse(Course course) throws IOException, URISyntaxException {
-        try (Writer writer = new FileWriter(getPathString(), StandardCharsets.UTF_8)) {
-            writeCourse(course, writer);
         } 
     }
 

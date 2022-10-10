@@ -17,8 +17,10 @@ public class CourseSerializer extends JsonSerializer<Course> {
     @Override
     public void serialize(Course course, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         gen.writeStartObject();
-        gen.writeStringField("name", course.getCourseName());
+        gen.writeStringField("courseName", course.getCourseName());
+        gen.writeNumberField("numberOfHoles", course.getNumberOfHoles());
         gen.writeObjectField("parValues", course.getParValues());
+        gen.writeObjectField("parForHoles", course.getPar());
         gen.writeEndObject();
     }
 }

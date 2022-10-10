@@ -3,29 +3,35 @@ package discoGolf.core;
 import java.util.ArrayList;
 
 public class Scorecard {
-
     private ArrayList<Integer> throwsList = new ArrayList<>();
     private int currentHole;
-    private String nameOfPlayer;
-    private Course currentCourse;
+    private String playerName;
+    private Course course;
 
     /**
     - constructs a scorecard object that vil be saved in the database
      * @param course is the course the player picked at the main menu
-     * @param nameOfPlayer is the name of the player
+     * @param playerName is the name of the player
      */
-    public Scorecard(Course course, String nameOfPlayer) {
-        this.nameOfPlayer = nameOfPlayer;
-        this.currentCourse = course;
+    public Scorecard(Course course, String playerName) {
+        this.playerName = playerName;
+        this.course = course;
         this.currentHole = 1;
-        throwsList = currentCourse.getPar().values().stream().collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+        throwsList = course.getPar().values().stream().collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
     }
     
     /**
      * @return the name of player which is a attrivute of the scorecard
     */
-    public String getNameOfPlayer() {
-        return nameOfPlayer;
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    /**
+     * @return throwsList - containing the throws of the player at holenumber = index + 1
+     */
+    public ArrayList<Integer> getThrowsList() {
+        return new ArrayList<Integer>(throwsList);
     }
 
 
@@ -33,7 +39,7 @@ public class Scorecard {
     * @return the total amount of throws minus the total of all the pars of each hole 
     */
     public int getTotalScore() {
-        int total = (int) throwsList.stream().mapToInt(Integer::intValue).sum() - (int) currentCourse.getPar().values().stream().mapToInt(Integer::intValue).sum();
+        int total = (int) throwsList.stream().mapToInt(Integer::intValue).sum() - (int) course.getPar().values().stream().mapToInt(Integer::intValue).sum();
         return total;
     }
 
@@ -42,7 +48,7 @@ public class Scorecard {
     * @return the name of course the player is playing on
     */
     public String getCourseName() {
-        return currentCourse.getCourseName();
+        return course.getCourseName();
     }
 
 
@@ -57,7 +63,7 @@ public class Scorecard {
      * @return course of the scorecard
      */
     public Course getCourse() {
-        return currentCourse;
+        return course;
     }
     
     /**
@@ -72,7 +78,7 @@ public class Scorecard {
     * @return the current par of the current hole
     */
     public int getCurrentHolePar() {
-        return currentCourse.getParForHole(getCurrentHole());
+        return course.getParForHole(getCurrentHole());
     }
 
 
@@ -80,7 +86,7 @@ public class Scorecard {
     * @return the size of the current course by streaming the courses par list and counting the amount of elements
     */
     public int getCourseSize() {
-        return currentCourse.getPar().size();
+        return course.getPar().size();
     }
 
 
