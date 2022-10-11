@@ -128,4 +128,12 @@ public class Scorecard {
         }
         throwsList.set(getCurrentHole() - 1, getCurrentHoleThrows() - 1);
     }
+
+    @Override
+    public String toString() {
+        return "Scorecard [throwsList=" + throwsList + ", currentHole=" + currentHole + ", playerName=" + playerName
+                + ", course=" + course + "]";
+    }
+
+    
 }

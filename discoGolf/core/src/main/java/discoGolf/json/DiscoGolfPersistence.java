@@ -1,6 +1,7 @@
 package discoGolf.json;
 
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
@@ -50,9 +51,11 @@ public class DiscoGolfPersistence {
      * @param reader
      * @return
      * @throws IOException
+     * @throws URISyntaxException
      */
-    public Scorecard readScorecard(Reader reader) throws IOException {
-        return mapper.readValue(reader, Scorecard.class);
+    public void readScorecard(Reader reader) throws IOException, URISyntaxException {  
+            Scorecard scorecard = mapper.readValue(reader, Scorecard.class);
+            System.out.println(scorecard);
     }
 
     /**
@@ -85,8 +88,22 @@ public class DiscoGolfPersistence {
     public void saveScorecard(Scorecard scorecard) throws IOException, URISyntaxException {
         if (getPathString() == null) {
             throw new IllegalStateException("no existing filepath");
-        }try (Writer writer = new FileWriter(getPathString(), StandardCharsets.UTF_8)) {
+        } try (Writer writer = new FileWriter(getPathString(), StandardCharsets.UTF_8)) {
             writeScorecard(scorecard, writer);
+        } 
+    }
+
+     /**
+     * Saves a scorecard object in the database.json file
+     * @param scorecard a finished scorcard object
+     * @throws IOException 
+     * @throws URISyntaxException
+     */
+    public void loadScorecard() throws IOException, URISyntaxException {
+        if (getPathString() == null) {
+            throw new IllegalStateException("no existing filepath");
+        } try (Reader reader = new FileReader(getPathString(), StandardCharsets.UTF_8)) {
+            readScorecard(reader);;
         } 
     }
 
@@ -102,6 +119,7 @@ public class DiscoGolfPersistence {
 
         DiscoGolfPersistence parsing = new DiscoGolfPersistence();
         parsing.saveScorecard(scorecard);
+        parsing.loadScorecard();
     }
 }
 
