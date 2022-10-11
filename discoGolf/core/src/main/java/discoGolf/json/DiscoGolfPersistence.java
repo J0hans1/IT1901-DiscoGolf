@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import discoGolf.core.Course;
+import discoGolf.core.Data;
 import discoGolf.core.Scorecard;
 import discoGolf.json.parser.DiscoGolfModule;
 
@@ -67,6 +68,10 @@ public class DiscoGolfPersistence {
         mapper.writerWithDefaultPrettyPrinter().writeValue(writer, scorecard);
     }
 
+    public void writeData (Data data, Writer writer) throws IOException {
+        mapper.writerWithDefaultPrettyPrinter().writeValue(writer, data);
+    }
+
     /**
      * Getter for the file path of the database.txt file
      * @return String representation of the path
@@ -93,21 +98,16 @@ public class DiscoGolfPersistence {
         } 
     }
 
-     /**
-     * Saves a scorecard object in the database.json file
-     * @param scorecard a finished scorcard object
-     * @throws IOException 
-     * @throws URISyntaxException
-     */
-    public void loadScorecard() throws IOException, URISyntaxException {
+    public void saveData(Data data) throws IOException, URISyntaxException {
         if (getPathString() == null) {
             throw new IllegalStateException("no existing filepath");
-        } try (Reader reader = new FileReader(getPathString(), StandardCharsets.UTF_8)) {
-            readScorecard(reader);;
+        }try (Writer writer = new FileWriter(getPathString(), StandardCharsets.UTF_8)) {
+            writeData(data, writer);
         } 
     }
 
     public static void main(String[] args) throws IOException, URISyntaxException {
+        //create object
         Course dragvoll = new Course("Dragvoll", new ArrayList<>(Arrays.asList(3,4,3,4,3,4,3,4,3)));
         Scorecard scorecard = new Scorecard(dragvoll, "Jakob");
         for (int i = 0; i < 8; i++) {
@@ -117,9 +117,22 @@ public class DiscoGolfPersistence {
             scorecard.nextHole();
         }
 
+        Scorecard scorecard2 = new Scorecard(dragvoll, "markus");
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 3; j++) {
+                scorecard2.addThrow();
+            }
+            scorecard2.nextHole();
+        }
+
+
+        Data data = new Data();
+        data.add(scorecard);
+        data.add(scorecard2);
+
+        //save object
         DiscoGolfPersistence parsing = new DiscoGolfPersistence();
-        parsing.saveScorecard(scorecard);
-        parsing.loadScorecard();
+        parsing.saveData(data);
     }
 }
 
