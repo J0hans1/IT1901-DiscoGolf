@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import discoGolf.core.Course;
+import discoGolf.core.Scorecard;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader; 
@@ -78,7 +79,6 @@ public class MainPageController {
         return null;
     }
 
-
     /*
     -
     */
@@ -90,14 +90,17 @@ public class MainPageController {
             root = fxmlLoader.load();
 
             ScorecardPageController nextController = fxmlLoader.getController();
-            nextController.getPreviousControllerInfo(nameOfPlayer, findSelectedCourse()); //Need to add selectedCourse
+
+            System.out.println(findSelectedCourse());
+            Scorecard newScorecard = new Scorecard(findSelectedCourse(), nameOfPlayer);
+            nextController.getPreviousControllerInfo(newScorecard); //Need to add selectedCourse
             stage = (Stage)((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
 
         } catch (IOException e) {
-            System.out.println("Failed to create new Window." + e);
+            System.out.println("Faed to create new Window." + e);
         }
     }
 }
