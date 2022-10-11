@@ -101,14 +101,17 @@ public class Course {
     public int getNumberOfHoles() {
         return numberOfHoles;
     }
-    
 
+    @Override
+    public String toString() {
+        return "Course [numberOfHoles=" + numberOfHoles + ", courseName=" + courseName + ", parForHoles=" + parForHoles
+                + ", parValues=" + parValues + "]";
+    }
+    
     /** 
      * Writes the object on string format
      * @return String
      */
-    @Override
-    public String toString() {
-        return getCourseName() + ": " + getNumberOfHoles() + " holes";
-    }
+
+     
 }
