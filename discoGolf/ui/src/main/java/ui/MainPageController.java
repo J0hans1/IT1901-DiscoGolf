@@ -43,7 +43,6 @@ public class MainPageController {
         this.nameOfPlayer = fxmlNameOfPlayer.getText();
     }
 
-
     /*
     - 
     */
@@ -65,7 +64,6 @@ public class MainPageController {
         pickCourseMenu.getItems().add(Lade.toString());
         pickCourseMenu.getItems().add(Dragvoll.toString());
     }
-
 
     /*
     -
