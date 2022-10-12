@@ -28,7 +28,7 @@ public class ScorecardTest {
     @Test
     @DisplayName("Test the controller when creating a Scorecard object")
     public void testController() {
-        assertEquals("Jakob", scorecard.getNameOfPlayer());
+        assertEquals("Jakob", scorecard.getPlayerName());
         assertEquals(1, scorecard.getCurrentHole());
         assertEquals(0, scorecard.getTotalScore());
     }
