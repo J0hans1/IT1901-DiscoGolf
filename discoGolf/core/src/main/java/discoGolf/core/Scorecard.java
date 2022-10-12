@@ -16,16 +16,13 @@ public class Scorecard {
      * @param course is the course the player picked at the main menu
      * @param playerName is the name of the player
      */
-<<<<<<< discoGolf/core/src/main/java/discoGolf/core/Scorecard.java
-=======
     public Scorecard(Course course, String playerName) {
         System.out.println("SCORECARD");
         validateMainPageCourse(course);
         validateMainPageName(playerName);
 
-        this.nameOfPlayer = playerName;
-        this.currentCourse = course;
->>>>>>> discoGolf/core/src/main/java/discoGolf/core/Scorecard.java
+        this.playerName = playerName;
+        this.course = course;
         this.currentHole = 1;
         throwsList = course.getPar().values().stream().collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
     }
@@ -139,15 +136,6 @@ public class Scorecard {
         throwsList.set(getCurrentHole() - 1, getCurrentHoleThrows() - 1);
     }
 
-<<<<<<< discoGolf/core/src/main/java/discoGolf/core/Scorecard.java
-    @Override
-    public String toString() {
-        return "Scorecard [throwsList=" + throwsList + ", currentHole=" + currentHole + ", playerName=" + playerName
-                + ", course=" + course + "]";
-    }
-
-    
-=======
     /**
      * @param course Course object representing the chosen course in the main page
      * @throws IllegalStateException Throws if no course is selected
@@ -169,5 +157,4 @@ public class Scorecard {
         }
     }
 
->>>>>>> discoGolf/core/src/main/java/discoGolf/core/Scorecard.java
 }
