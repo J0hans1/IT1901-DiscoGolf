@@ -79,5 +79,165 @@
       "parValues" : [ ],
       "parForHoles" : { }
     }
+  }, {
+    "playerName" : "Ulrik",
+    "score" : 0,
+    "throwsList" : [ 3, 4, 5, 4, 3, 5, 3, 5, 4 ],
+    "course" : {
+      "courseName" : "Lade",
+      "numberOfHoles" : 9,
+      "parValues" : [ 3, 4, 5, 4, 3, 5, 3, 5, 4 ],
+      "parForHoles" : {
+        "1" : 3,
+        "2" : 4,
+        "3" : 5,
+        "4" : 4,
+        "5" : 3,
+        "6" : 5,
+        "7" : 3,
+        "8" : 5,
+        "9" : 4
+      }
+    }
+  }, {
+    "playerName" : "Ulrik",
+    "score" : 0,
+    "throwsList" : [ 3, 4, 5, 4, 3, 5, 3, 5, 4 ],
+    "course" : {
+      "courseName" : "Lade",
+      "numberOfHoles" : 9,
+      "parValues" : [ 3, 4, 5, 4, 3, 5, 3, 5, 4 ],
+      "parForHoles" : {
+        "1" : 3,
+        "2" : 4,
+        "3" : 5,
+        "4" : 4,
+        "5" : 3,
+        "6" : 5,
+        "7" : 3,
+        "8" : 5,
+        "9" : 4
+      }
+    }
+  }, {
+    "playerName" : "Ulrik",
+    "score" : 40,
+    "throwsList" : [ 8, 9, 10, 9, 8, 10, 8, 10, 4 ],
+    "course" : {
+      "courseName" : "Lade",
+      "numberOfHoles" : 9,
+      "parValues" : [ 3, 4, 5, 4, 3, 5, 3, 5, 4 ],
+      "parForHoles" : {
+        "1" : 3,
+        "2" : 4,
+        "3" : 5,
+        "4" : 4,
+        "5" : 3,
+        "6" : 5,
+        "7" : 3,
+        "8" : 5,
+        "9" : 4
+      }
+    }
+  }, {
+    "playerName" : "Ulrik",
+    "score" : 40,
+    "throwsList" : [ 8, 9, 10, 9, 8, 10, 8, 10, 4 ],
+    "course" : {
+      "courseName" : "Lade",
+      "numberOfHoles" : 9,
+      "parValues" : [ 3, 4, 5, 4, 3, 5, 3, 5, 4 ],
+      "parForHoles" : {
+        "1" : 3,
+        "2" : 4,
+        "3" : 5,
+        "4" : 4,
+        "5" : 3,
+        "6" : 5,
+        "7" : 3,
+        "8" : 5,
+        "9" : 4
+      }
+    }
+  }, {
+    "playerName" : "Ulrik",
+    "score" : 40,
+    "throwsList" : [ 8, 9, 10, 9, 8, 10, 8, 10, 4 ],
+    "course" : {
+      "courseName" : "Lade",
+      "numberOfHoles" : 9,
+      "parValues" : [ 3, 4, 5, 4, 3, 5, 3, 5, 4 ],
+      "parForHoles" : {
+        "1" : 3,
+        "2" : 4,
+        "3" : 5,
+        "4" : 4,
+        "5" : 3,
+        "6" : 5,
+        "7" : 3,
+        "8" : 5,
+        "9" : 4
+      }
+    }
+  }, {
+    "playerName" : "Ulrik",
+    "score" : 40,
+    "throwsList" : [ 8, 9, 10, 9, 8, 10, 8, 10, 4 ],
+    "course" : {
+      "courseName" : "Lade",
+      "numberOfHoles" : 9,
+      "parValues" : [ 3, 4, 5, 4, 3, 5, 3, 5, 4 ],
+      "parForHoles" : {
+        "1" : 3,
+        "2" : 4,
+        "3" : 5,
+        "4" : 4,
+        "5" : 3,
+        "6" : 5,
+        "7" : 3,
+        "8" : 5,
+        "9" : 4
+      }
+    }
+  }, {
+    "playerName" : "Ulrik",
+    "score" : 40,
+    "throwsList" : [ 8, 9, 10, 9, 8, 10, 8, 10, 4 ],
+    "course" : {
+      "courseName" : "Lade",
+      "numberOfHoles" : 9,
+      "parValues" : [ 3, 4, 5, 4, 3, 5, 3, 5, 4 ],
+      "parForHoles" : {
+        "1" : 3,
+        "2" : 4,
+        "3" : 5,
+        "4" : 4,
+        "5" : 3,
+        "6" : 5,
+        "7" : 3,
+        "8" : 5,
+        "9" : 4
+      }
+    }
+  }, {
+    "playerName" : "Ulrik",
+    "score" : 40,
+    "throwsList" : [ 8, 9, 10, 9, 8, 10, 8, 10, 4 ],
+    "course" : {
+      "courseName" : "Lade",
+      "numberOfHoles" : 9,
+      "parValues" : [ 3, 4, 5, 4, 3, 5, 3, 5, 4 ],
+      "parForHoles" : {
+        "1" : 3,
+        "2" : 4,
+        "3" : 5,
+        "4" : 4,
+        "5" : 3,
+        "6" : 5,
+        "7" : 3,
+        "8" : 5,
+        "9" : 4
+      }
+    }
   } ]
 }

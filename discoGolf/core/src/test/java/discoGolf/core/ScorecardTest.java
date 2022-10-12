@@ -1,6 +1,7 @@
 package discoGolf.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,9 +9,6 @@ import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
-import discoGolf.core.Course;
-import discoGolf.core.Scorecard;
 
 /**
  * TestFX Scorecard class test
@@ -28,42 +26,47 @@ public class ScorecardTest {
     @Test
     @DisplayName("Test the controller when creating a Scorecard object")
     public void testController() {
-        assertEquals("Jakob", scorecard.getNameOfPlayer());
+        assertEquals("Jakob", scorecard.getPlayerName());
         assertEquals(1, scorecard.getCurrentHole());
         assertEquals(0, scorecard.getTotalScore());
     }
 
-    // @Test
-    // @DisplayName("Test nextHole() and previousHole() methods")
-    // public void testCurrentHole() {
-    //     //scorecard.previousHole();
-    //     assertEquals(1, scorecard.getCurrentHole()
-    //     , "Current hole cant go under 1");
-    //     for (int i = 0; i < 10; i++) {
-    //         scorecard.nextHole();
-    //     }
-    //     assertEquals(9, scorecard.getCurrentHole()
-    //     , "Since the number of holes is 9, current hole can't be more than 9");
-    //     for (int i = 0; i < 5; i++) {
-    //         scorecard.previousHole();
-    //     }
-    //     assertEquals(4, scorecard.getCurrentHole()
-    //     , "The current hole is now 9-5 = 4");
-    // }
+    @Test
+    @DisplayName("Test nextHole() and previousHole() methods")
+    public void testCurrentHole() {
+        assertThrows(IllegalStateException.class, () -> {
+            scorecard.previousHole();
+        }, "cannot go to previous hole when current hole number is 1");
+        for (int i = 0; i < 8; i++) {
+            scorecard.nextHole();
+        }
+        assertEquals(9, scorecard.getCurrentHole()
+        , "current hole number is supposed to be 9");
+        assertThrows(IllegalStateException.class, () -> {
+            scorecard.nextHole();
+        }, "cannot go to next hole because it doesnt exist");
+        for (int i = 0; i < 5; i++) {
+            scorecard.previousHole();
+        }
+        assertEquals(4, scorecard.getCurrentHole()
+        , "The current hole is now 9-5 = 4");
+    }
 
 
     @Test
     @DisplayName("Test addThrow() and removeThrow() methods")
     public void testHoleThrows() {
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 2; i++) {
+            scorecard.removeThrow();
+        }
+        assertThrows(IllegalStateException.class, () -> {
+            scorecard.removeThrow();
+        }, "Need at least 1 throw");
+        for (int i = 0; i < 5; i++) {
             scorecard.addThrow();
         }
         assertEquals(6, scorecard.getCurrentHoleThrows()
         , "Throws always start on the hole's par, so here it starts on 3");
-        for (int i = 0; i < 5; i++) {
-            scorecard.removeThrow();
-        }
-        assertEquals(1, scorecard.getCurrentHoleThrows());
     }
 
     @Test

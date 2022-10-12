@@ -1,8 +1,6 @@
 package discoGolf.core;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 
 public class Scorecard {
@@ -10,26 +8,41 @@ public class Scorecard {
     private int currentHole;
     private String playerName;
     private Course course;
+    private int totalScore;
 
     /**
     - constructs a scorecard object that vil be saved in the database
      * @param course is the course the player picked at the main menu
      * @param playerName is the name of the player
      */
-<<<<<<< discoGolf/core/src/main/java/discoGolf/core/Scorecard.java
-=======
     public Scorecard(Course course, String playerName) {
         System.out.println("SCORECARD");
         validateMainPageCourse(course);
         validateMainPageName(playerName);
-
-        this.nameOfPlayer = playerName;
-        this.currentCourse = course;
->>>>>>> discoGolf/core/src/main/java/discoGolf/core/Scorecard.java
+        this.playerName = playerName;
+        this.course = course;
         this.currentHole = 1;
         throwsList = course.getPar().values().stream().collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
     }
+
+     /**
+    - constructs a scorecard object for deserializing a json object
+     * @param course is the course the player picked at the main menu
+     * @param playerName is the name of the player
+     * @param totalScore totalscore for the scorecard
+     * @param throwsList all the thrwos+par for each hole
+     */
+    public Scorecard(Course course, String playerName, int totalScore, ArrayList<Integer> throwsList) {
+        validateMainPageCourse(course);
+        validateMainPageName(playerName);
+        this.playerName = playerName;
+        this.course = course;
+        this.currentHole = course.getNumberOfHoles();
+        this.throwsList = throwsList;
+    }
     
+
+
     /**
      * @return the name of player which is a attrivute of the scorecard
     */
@@ -139,15 +152,6 @@ public class Scorecard {
         throwsList.set(getCurrentHole() - 1, getCurrentHoleThrows() - 1);
     }
 
-<<<<<<< discoGolf/core/src/main/java/discoGolf/core/Scorecard.java
-    @Override
-    public String toString() {
-        return "Scorecard [throwsList=" + throwsList + ", currentHole=" + currentHole + ", playerName=" + playerName
-                + ", course=" + course + "]";
-    }
-
-    
-=======
     /**
      * @param course Course object representing the chosen course in the main page
      * @throws IllegalStateException Throws if no course is selected
@@ -169,5 +173,4 @@ public class Scorecard {
         }
     }
 
->>>>>>> discoGolf/core/src/main/java/discoGolf/core/Scorecard.java
 }

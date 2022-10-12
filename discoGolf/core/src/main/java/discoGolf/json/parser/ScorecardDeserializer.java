@@ -44,7 +44,7 @@ public class ScorecardDeserializer extends JsonDeserializer<Scorecard> {
     Scorecard deserialize(JsonNode node) {
         if (node instanceof ObjectNode objNode) {
             String playerName = ((TextNode) objNode.get("playerName")).asText();
-            // int totalScore = ((IntNode) objNode.get("score")).asInt(); //unused at the moment, will be used next sprint
+            int totalScore = ((IntNode) objNode.get("score")).asInt(); //unused at the moment, will be used next sprint
             
             ArrayList<Integer> throwsList = new ArrayList<>();
             JsonNode throwsListNode = objNode.get("throwsList");
@@ -55,7 +55,7 @@ public class ScorecardDeserializer extends JsonDeserializer<Scorecard> {
             JsonNode courseNode = objNode.get("course");
             Course course = courseDeserializer.deserialize(courseNode);
 
-            return new Scorecard(course, playerName);
+            return new Scorecard(course, playerName, totalScore, throwsList); 
         }
         return null;
     }

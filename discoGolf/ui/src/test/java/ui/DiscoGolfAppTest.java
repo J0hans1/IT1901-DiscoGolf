@@ -22,7 +22,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 
-
 public class DiscoGolfAppTest extends ApplicationTest {
     
     private MainPageController controller;
