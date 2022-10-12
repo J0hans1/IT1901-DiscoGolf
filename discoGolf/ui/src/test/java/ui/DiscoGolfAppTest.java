@@ -2,6 +2,7 @@ package ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -61,12 +62,23 @@ public class DiscoGolfAppTest extends ApplicationTest {
         assertEquals(pickCourseMenu.getItems().get(1), dragvoll.toString());
     }
 
-    @Test 
-    public void testUnsuccessfulPlay(){
-        clickOn("#fxmlNameOfPlayer").write("Bob");
-        WaitForAsyncUtils.waitForFxEvents();
-        clickOn("#playButton");
+    @Test
+    public void testSubmitScenarios(){
+        assertThrows(IllegalStateException.class, ()->{
+            clickOn("#fxmlNameOfPlayer").write("Bob");
+            WaitForAsyncUtils.waitForFxEvents();
+            clickOn("#playButton");
+        });
     }
+
+    // @Test 
+    // public void testUnsuccessfulPlay(){
+    //     clickOn("#fxmlNameOfPlayer").write("Bob");
+    //     WaitForAsyncUtils.waitForFxEvents();
+    //     clickOn("#playButton");
+    // }
+
+
 
     // @Test 
     // public void checkSelectedcCourse(){
