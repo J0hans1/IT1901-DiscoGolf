@@ -21,7 +21,7 @@ import javafx.scene.Node;
 public class MainPageController {
 
     private List<Course> availableCourses = new ArrayList<>();
-    private String nameOfPlayer;
+    private String playerName;
     
     @FXML 
     private Parent root;
@@ -32,7 +32,7 @@ public class MainPageController {
     @FXML
     public Button playButton;
     @FXML
-    public TextField fxmlNameOfPlayer;
+    public TextField playerNameTextField;
     @FXML
     public ComboBox<String> pickCourseMenu;
 
@@ -40,9 +40,9 @@ public class MainPageController {
     /*
     - sets name of the player 
     */
-    public void setNameOfPlayer() {
-        this.nameOfPlayer = fxmlNameOfPlayer.getText();
-    }
+    public void setPlayerName() {
+        this.playerName = playerNameTextField.getText();
+    }   
 
     /*
     - 
@@ -83,17 +83,20 @@ public class MainPageController {
     -
     */
     public void changeSceneToScorecard(ActionEvent event) {
-        setNameOfPlayer();
+        setPlayerName();
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("Scorecard.fxml"));
             root = fxmlLoader.load();
 
             ScorecardPageController nextController = fxmlLoader.getController();
+<<<<<<< discoGolf/ui/src/main/java/ui/MainPageController.java
+=======
 
             System.out.println(findSelectedCourse());
-            Scorecard newScorecard = new Scorecard(findSelectedCourse(), nameOfPlayer);
+            Scorecard newScorecard = new Scorecard(findSelectedCourse(), playerName);
             nextController.getPreviousControllerInfo(newScorecard); //Need to add selectedCourse
+>>>>>>> discoGolf/ui/src/main/java/ui/MainPageController.java
             stage = (Stage)((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
