@@ -12,7 +12,11 @@ public class CourseSerializer extends JsonSerializer<Course> {
     public Course course;
 
     /**
-     * Serialize a course object to JSON format
+     * Serialize a course Java object to JSON format
+     * @param value The course to serialize
+     * @param gen The generator to use
+     * @param serializers The serializer provider
+     * @throws IOException Error when trying to write to the database
      */    
     @Override
     public void serialize(Course course, JsonGenerator gen, SerializerProvider serializers) throws IOException {

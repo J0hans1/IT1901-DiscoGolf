@@ -6,133 +6,104 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
+
 import java.net.URISyntaxException;
+
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
-import discoGolf.core.Course;
 import discoGolf.core.Data;
 import discoGolf.core.Scorecard;
 import discoGolf.json.parser.DiscoGolfModule;
 
 public class DiscoGolfPersistence {
-    
     private ObjectMapper mapper;
 
 
     /**
      * Initializing the ObjectMapper object by calling createMapper()
+     * @see createMapper()
      */
     public DiscoGolfPersistence() {
         this.mapper = createMapper();
     }
 
+
     /**
-     * Create a new ObjectMapper object and register it to the new module DiscoGolfModule
-     * @return the new ObjectMapper object
+     * Create a new ObjectMapper object and adds the DiscoGolfModule to it
+     * This makes it possible to use DiscoGolfModules custom serializers and deserializers with the ObjectMapper
+     * @return The new ObjectMapper object
+     * @see createModule()
      */
     public static ObjectMapper createMapper() {
         return new ObjectMapper().registerModule(createModule());
     }
 
+
     /**
-     * returning a new SimpleModule object that initializes the serializer and deserializers
+     * Returning a new SimpleModule object that initializes the serializer and deserializers
      * @return DiscoGolfModule object
      */
     public static SimpleModule createModule() {
         return new DiscoGolfModule();
     }
 
+
     /**
-     * 
-     * @param reader
-     * @return
-     * @throws IOException
-     * @throws URISyntaxException
+     * Updates the Database.json with the new data (New scorecard submitted by user)
+     * @param Scorecard scorecard - The scorecard that is to be added to the database
+     * @throws IOException Error when trying to write to the database
+     * @throws URISyntaxException Error when trying to parse Java Objects to JSON objects
      */
-    public void readScorecard(Reader reader) throws IOException, URISyntaxException {  
-            Scorecard scorecard = mapper.readValue(reader, Scorecard.class);
-            System.out.println(scorecard);
+    public void sendScorecardToDatabase(Scorecard scorecard) throws IOException, URISyntaxException {
+        Data data = readData();
+        data.add(scorecard);
+        saveData(data);
     }
 
+
     /**
-     * 
-     * @param scorecard
-     * @param write
+     * Writes a data object to the database.json file
+     * @param Data data - The data object that is to be written to the database
+     * @throws IOException Error while writing to the file
+     * @throws URISyntaxException Error translating Java Data object to JSON
      */
-    public void writeScorecard(Scorecard scorecard, Writer writer) throws IOException {
-        mapper.writerWithDefaultPrettyPrinter().writeValue(writer, scorecard);
-    }
-
-    public void writeData (Data data, Writer writer) throws IOException {
-        mapper.writerWithDefaultPrettyPrinter().writeValue(writer, data);
-    }
-
-    /**
-     * Getter for the file path of the database.txt file
-     * @return String representation of the path
-    */
-    public String getPathString() throws URISyntaxException {
-        String path = new File(getClass().getResource("").toURI())
-        .getAbsolutePath()
-        .split("target")[0]; //Obtain a absolute path to the "discoGolf" folder in a way that will work for every user
-        path = path + "src/main/resources/database.json"; //Add the final part of the path
-        return path;
-    }
-
-    /**
-     * Saves a scorecard object in the database.json file
-     * @param scorecard a finished scorcard object
-     * @throws IOException 
-     * @throws URISyntaxException
-     */
-    public void saveScorecard(Scorecard scorecard) throws IOException, URISyntaxException {
-        if (getPathString() == null) {
-            throw new IllegalStateException("no existing filepath");
-        } try (Writer writer = new FileWriter(getPathString(), StandardCharsets.UTF_8)) {
-            writeScorecard(scorecard, writer);
-        } 
-    }
-
-    public void saveData(Data data) throws IOException, URISyntaxException {
+    private void saveData(Data data) throws IOException, URISyntaxException {
         if (getPathString() == null) {
             throw new IllegalStateException("no existing filepath");
         }try (Writer writer = new FileWriter(getPathString(), StandardCharsets.UTF_8)) {
-            writeData(data, writer);
+            mapper.writerWithDefaultPrettyPrinter().writeValue(writer, data);
         } 
     }
 
-    public static void main(String[] args) throws IOException, URISyntaxException {
-        //create object
-        Course dragvoll = new Course("Dragvoll", new ArrayList<>(Arrays.asList(3,4,3,4,3,4,3,4,3)));
-        Scorecard scorecard = new Scorecard(dragvoll, "Jakob");
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 3; j++) {
-                scorecard.addThrow();
-            }
-            scorecard.nextHole();
-        }
 
-        Scorecard scorecard2 = new Scorecard(dragvoll, "markus");
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 3; j++) {
-                scorecard2.addThrow();
-            }
-            scorecard2.nextHole();
-        }
+    /**
+     * Reads the JSON file and returns the Data object at the root of the JSON file
+     * @return Data object containing all registered scorecards
+     * @throws IOException Error while reading the file 
+     * @throws URISyntaxException Parsing the file to Java failed
+     */
+    public Data readData() throws IOException, URISyntaxException {
+        if (getPathString() == null) {
+            throw new IllegalStateException("no existing filepath");
+        }try (Reader reader = new FileReader(getPathString(), StandardCharsets.UTF_8)) {
+            return mapper.readValue(reader, Data.class);
+        } 
+    }
 
 
-        Data data = new Data();
-        data.add(scorecard);
-        data.add(scorecard2);
-
-        //save object
-        DiscoGolfPersistence parsing = new DiscoGolfPersistence();
-        parsing.saveData(data);
+    /**
+     * Getter for the file path of the database.json file
+     * Useful for reading and writing to the file
+     * Finds the path of the application folder, and then adds the path of the database.json file to it
+     * @return String representation of the path to database.json
+     */
+    private String getPathString() throws URISyntaxException {
+        String path = new File(getClass().getResource("").toURI()).getAbsolutePath().split("target")[0];
+        path = path + "src/main/resources/database.json";
+        return path;
     }
 }
 

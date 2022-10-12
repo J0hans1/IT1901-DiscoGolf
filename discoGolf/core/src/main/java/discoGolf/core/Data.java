@@ -20,4 +20,13 @@ public class Data {
     public void add(Scorecard scorecard) {
         data.add(scorecard);
     }
+
+    @Override
+    public String toString() {
+        String contentString = "";
+        for (Scorecard scorecard : data) {
+            contentString += "\n" + scorecard.toString();
+        }
+        return "Data [data=" + contentString + "]";
+    }
 }

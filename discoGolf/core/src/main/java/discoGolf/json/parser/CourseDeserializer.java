@@ -18,7 +18,12 @@ import discoGolf.core.Course;
 public class CourseDeserializer extends JsonDeserializer<Course> {
 
     /**
-     * Deserialize a Course from JSON
+     * Deserialize a Course object from JSON file to java object
+     * @param parser The parser to use
+     * @param context The context to use
+     * @return The deserialized course object
+     * @throws JacksonException Error when trying to use other deserializers or methods from jackson library
+     * @throws IOException Error when trying to read from the database
      */
     @Override
     public Course deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JacksonException {
@@ -26,6 +31,12 @@ public class CourseDeserializer extends JsonDeserializer<Course> {
         return deserialize((JsonNode) node);
     }
 
+    /**
+     * Deserialize a Course object from JSON node to java object
+     * Makes it possible to use this method in other deserializers
+     * @param node The node to deserialize
+     * @return The deserialized Course object
+     */
     Course deserialize(JsonNode node) {
         if (node instanceof ObjectNode objNode) {
             ArrayList<Integer> parValues = new ArrayList<>();
