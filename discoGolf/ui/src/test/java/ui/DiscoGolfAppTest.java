@@ -27,6 +27,7 @@ public class DiscoGolfAppTest extends ApplicationTest {
     private MainPageController controller;
     private ComboBox<String> pickCourseMenu;
     private Course lade;
+    private Course dragvoll;
     /**
      Method for starting the javafx application
      @param stage javafx Stage object
@@ -44,6 +45,7 @@ public class DiscoGolfAppTest extends ApplicationTest {
     public void setUpItems(){
         // Scorecard scorecard = new Scorecard(null, null);
         lade = new Course("Lade",new ArrayList<>(Arrays.asList(3,4,3,4,3,4,3,4,3)));
+        dragvoll = new Course("Dragvoll", new ArrayList<>(Arrays.asList(3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4)));
         pickCourseMenu = lookup("#pickCourseMenu").query();
     }
 
@@ -56,7 +58,7 @@ public class DiscoGolfAppTest extends ApplicationTest {
     @Test
     public void testCourseSelection(){
         assertEquals(pickCourseMenu.getItems().get(0), lade.toString());
-        assertEquals(pickCourseMenu.getItems().get(1), lade.toString());
+        assertEquals(pickCourseMenu.getItems().get(1), dragvoll.toString());
     }
 
     @Test 
