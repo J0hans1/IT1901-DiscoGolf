@@ -1,6 +1,9 @@
 package discoGolf.core;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Pattern;
 
 public class Scorecard {
     private ArrayList<Integer> throwsList = new ArrayList<>();
@@ -13,9 +16,16 @@ public class Scorecard {
      * @param course is the course the player picked at the main menu
      * @param playerName is the name of the player
      */
+<<<<<<< discoGolf/core/src/main/java/discoGolf/core/Scorecard.java
+=======
     public Scorecard(Course course, String playerName) {
-        this.playerName = playerName;
-        this.course = course;
+        System.out.println("SCORECARD");
+        validateMainPageCourse(course);
+        validateMainPageName(playerName);
+
+        this.nameOfPlayer = playerName;
+        this.currentCourse = course;
+>>>>>>> discoGolf/core/src/main/java/discoGolf/core/Scorecard.java
         this.currentHole = 1;
         throwsList = course.getPar().values().stream().collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
     }
@@ -129,6 +139,7 @@ public class Scorecard {
         throwsList.set(getCurrentHole() - 1, getCurrentHoleThrows() - 1);
     }
 
+<<<<<<< discoGolf/core/src/main/java/discoGolf/core/Scorecard.java
     @Override
     public String toString() {
         return "Scorecard [throwsList=" + throwsList + ", currentHole=" + currentHole + ", playerName=" + playerName
@@ -136,4 +147,27 @@ public class Scorecard {
     }
 
     
+=======
+    /**
+     * @param course Course object representing the chosen course in the main page
+     * @throws IllegalStateException Throws if no course is selected
+     */
+    private void validateMainPageCourse(Course course){
+        if (course == null){
+            throw new IllegalStateException("No course selected!");
+        }
+    }
+
+    /**
+     * @param name String value from the value in the input field of the main page
+     * @throws IllegalArgumentException Throws if name doesnt fit the format "name1 name2 (optinal) name3(optinal)..."
+     */
+    private void validateMainPageName(String name){
+        boolean regexCheck = Pattern.matches("[a-zA-Z0-9]\s?(([a-zA-Z0-9]+\s?)?)*", name);
+        if (!regexCheck){
+            throw new IllegalArgumentException("Illegal input to name field");
+        }
+    }
+
+>>>>>>> discoGolf/core/src/main/java/discoGolf/core/Scorecard.java
 }
