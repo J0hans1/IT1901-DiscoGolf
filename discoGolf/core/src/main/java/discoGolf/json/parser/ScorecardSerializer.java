@@ -11,16 +11,19 @@ import discoGolf.core.Scorecard;
 public class ScorecardSerializer extends JsonSerializer<Scorecard>{
 
     /**
-     * Serializes a scorecard object to JSON format
-     * format : { name: "...", totalScore: "...", courseName: "..." }
+     * Serialize a scorecard Java object to JSON format
+     * @param value The scorecard to serialize
+     * @param gen The generator to use
+     * @param serializers The serializer provider
+     * @throws IOException Error when trying to write to the database
      */
     @Override
     public void serialize(Scorecard scorecard, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         gen.writeStartObject();
-        gen.writeStringField("name", scorecard.getNameOfPlayer());
-        gen.writeNumberField("totalScore", scorecard.getTotalScore());
-        /*gen.writeObjectFieldStart("currentCourse");
-        gen.writeObject(scorecard.getCourse());*/
+        gen.writeStringField("playerName", scorecard.getPlayerName());
+        gen.writeNumberField("score", scorecard.getTotalScore());
+        gen.writeObjectField("throwsList", scorecard.getThrowsList());
+        gen.writeObjectField("course", scorecard.getCourse());
         gen.writeEndObject();
     }
 }

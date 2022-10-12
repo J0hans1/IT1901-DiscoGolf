@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import discoGolf.core.Course;
+import discoGolf.core.Data;
 import discoGolf.core.Scorecard;
 
 public class DiscoGolfModule extends SimpleModule {
@@ -21,5 +22,8 @@ public class DiscoGolfModule extends SimpleModule {
         
         addSerializer(Scorecard.class, new ScorecardSerializer());
         addDeserializer(Scorecard.class, new ScorecardDeserializer());
+
+        addSerializer(Data.class, new DataArraySerializer());
+        addDeserializer(Data.class, new DataArrayDeserializer());
     }
 }
