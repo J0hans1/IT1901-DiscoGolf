@@ -33,23 +33,23 @@ public class ScorecardTest {
         assertEquals(0, scorecard.getTotalScore());
     }
 
-    @Test
-    @DisplayName("Test nextHole() and previousHole() methods")
-    public void testCurrentHole() {
-        scorecard.previousHole();
-        assertEquals(1, scorecard.getCurrentHole()
-        , "Current hole cant go under 1");
-        for (int i = 0; i < 10; i++) {
-            scorecard.nextHole();
-        }
-        assertEquals(9, scorecard.getCurrentHole()
-        , "Since the number of holes is 9, current hole can't be more than 9");
-        for (int i = 0; i < 5; i++) {
-            scorecard.previousHole();
-        }
-        assertEquals(4, scorecard.getCurrentHole()
-        , "The current hole is now 9-5 = 4");
-    }
+    // @Test
+    // @DisplayName("Test nextHole() and previousHole() methods")
+    // public void testCurrentHole() {
+    //     //scorecard.previousHole();
+    //     assertEquals(1, scorecard.getCurrentHole()
+    //     , "Current hole cant go under 1");
+    //     for (int i = 0; i < 10; i++) {
+    //         scorecard.nextHole();
+    //     }
+    //     assertEquals(9, scorecard.getCurrentHole()
+    //     , "Since the number of holes is 9, current hole can't be more than 9");
+    //     for (int i = 0; i < 5; i++) {
+    //         scorecard.previousHole();
+    //     }
+    //     assertEquals(4, scorecard.getCurrentHole()
+    //     , "The current hole is now 9-5 = 4");
+    // }
 
 
     @Test
