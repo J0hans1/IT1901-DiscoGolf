@@ -1,4 +1,4 @@
-package core;
+package discoGolf.core;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

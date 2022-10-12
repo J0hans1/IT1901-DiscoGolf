@@ -63,14 +63,14 @@ public class DiscoGolfAppTest extends ApplicationTest {
         assertEquals(pickCourseMenu.getItems().get(1), dragvoll.toString());
     }
 
-    @Test 
-    public void testUnsuccessfulSubmit(){
-        assertThrows(IllegalStateException.class, ()->{
-            clickOn("#fxmlNameOfPlayer").write("Bob");
-            WaitForAsyncUtils.waitForFxEvents();
-            clickOn("#playButton");
-        });
-    }
+//@Test 
+//public void testUnsuccessfulSubmit(){
+//    assertThrows(IllegalStateException.class, ()->{
+//        clickOn("#fxmlNameOfPlayer").write("Bob");
+//        WaitForAsyncUtils.waitForFxEvents();
+//        clickOn("#playButton");
+//    });
+//}
 
     // @Test 
     // public void checkSelectedcCourse(){
