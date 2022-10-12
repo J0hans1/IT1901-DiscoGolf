@@ -62,8 +62,10 @@ public class MainPageController {
         availableCourses.add(Lade);
         availableCourses.add(Dragvoll);
 
-        pickCourseMenu.getItems().add(Lade.toString());
-        pickCourseMenu.getItems().add(Dragvoll.toString());
+        pickCourseMenu.getItems().add(Lade.getCourseName());
+        pickCourseMenu.getItems().add(Dragvoll.getCourseName());
+        System.out.println("YEET");
+        System.out.println(Dragvoll.getCourseName());
     }
 
     /*
@@ -72,7 +74,7 @@ public class MainPageController {
     public Course findSelectedCourse() {
         String selectedCourse = pickCourseMenu.getValue();
         for (Course course : availableCourses) {
-            if (course.toString().equals(selectedCourse)) {
+            if (course.getCourseName().equals(selectedCourse)) {
                 return course;
             }
         }
@@ -87,7 +89,6 @@ public class MainPageController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("Scorecard.fxml"));
             root = fxmlLoader.load();
-
             
             ScorecardPageController nextController = fxmlLoader.getController();
             System.out.println(findSelectedCourse());
