@@ -50,7 +50,7 @@ public class MainPageController {
      * Adds a String to a list of Strings which represents available courses
      * @param String course - a String containing the name of a course
      */
-    public void addCourseToList(String course) { //!Brukes denne?
+    public void addCourseToList(String course) {
         pickCourseMenu.getItems().add(course);
     }
 
