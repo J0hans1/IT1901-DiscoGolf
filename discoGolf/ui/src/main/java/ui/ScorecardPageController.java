@@ -1,7 +1,11 @@
 package ui;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 import discoGolf.core.Course;
 import discoGolf.core.Scorecard;
+import discoGolf.json.DiscoGolfPersistence;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -45,22 +49,20 @@ public class ScorecardPageController {
 
     /**
      * Sends the scorecard data to a DatabaseHandler object
+     * @throws URISyntaxException
+     * @throws IOException
      */
-    public void handleSubmit(){
-        // if(!hasBeenClicked){
-        //     DatabaseHandler database = new DatabaseHandler();
-        //     try {
-        //         database.writeToDatabse(scorecard.getplayerName(), Integer.toString(scorecard.getTotalScore()), scorecard.getCourseName());
-        //     } catch (IOException e) {
-        //         System.out.println("Error in writing to database");
-        //         e.printStackTrace();
-        //     }
-        //     System.out.println("Data saved in database");
-        //     hasBeenClicked = true;
-        // } else{
-        //     System.out.println("This scorecard has already been submitted!");
-        // }
-
+    public void handleSubmit() throws IOException, URISyntaxException{
+        if(hasBeenClicked == false){
+            try {
+                DiscoGolfPersistence db = new DiscoGolfPersistence();
+                db.sendScorecardToDatabase(scorecard);
+                hasBeenClicked = true;
+            } catch (IOException e) {
+                System.out.println("Error: " + e);
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
