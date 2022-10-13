@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
 public class Scorecard {
     private ArrayList<Integer> throwsList = new ArrayList<>();
     private int currentHole;
-    private String playerName;
-    private Course course;
+    private final String playerName;
+    private final Course course;
 
     /**
     - constructs a scorecard object that vil be saved in the database
@@ -102,7 +102,7 @@ public class Scorecard {
     */
     public void nextHole() {
         if (getCurrentHole() == throwsList.size()) {
-            throw new IllegalStateException("Can't go to nextHole because next hole doesn't excist");
+            throw new IllegalStateException("Can't go to nextHole because next hole doesn't exist");
         }
         currentHole++;
     }
