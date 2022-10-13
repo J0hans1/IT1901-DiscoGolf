@@ -20,10 +20,10 @@ public class DatabaseHandler {
     The line consists of the paramaters below, seperated by a comma.
     Format: "name,score,frisbeeCourse"
     @param name Name of the player who registers their scorecard to the database
+
     @param score String representing the score of the player 
     @param frisbeeCourse String name of the course that was played on
-    @return void 
-    */
+     */
     public void writeToDatabse(String name, String score, String frisbeeCourse) throws IOException{
         try {
             String path = getPath(); //file path
@@ -54,9 +54,8 @@ public class DatabaseHandler {
             BufferedReader reader = new BufferedReader(
                 new FileReader(file)
             );
-            List<String[]> data = reader.lines().parallel().map(scorecard -> scorecard.split(",")).toList();
-            
-            this.databaseList = data;
+
+            this.databaseList = reader.lines().parallel().map(scorecard -> scorecard.split(",")).toList();
             reader.close();
         } catch (IOException e) {
             System.out.println("Error in reading the database");
