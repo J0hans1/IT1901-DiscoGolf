@@ -101,17 +101,10 @@ public class DiscoGolfPersistence {
      * @return String representation of the path to database.json
      */
     private String getPathString() throws URISyntaxException {
-        try {
             String path = new File(getClass().getResource("").toURI())  // Get the path of the application folder
             .getAbsolutePath()                                          // Get the absolute path of the application folder
             .split("target")[0];                                        // Remove the target folder from the path and return the path to the application folder
-            path = path + "src/main/resources/database.json";           // appends the database.json file to the path of the application folder
+            path += "src/main/resources/database.json";           // appends the database.json file to the path of the application folder
             return path;                                                // returns the path to the database.json file
-        } catch (Exception e) {
-            throw new URISyntaxException("Error while getting path to database.json", ""); 
-        }
     }
 }
-
-
-
