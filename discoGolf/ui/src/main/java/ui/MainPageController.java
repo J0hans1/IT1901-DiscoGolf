@@ -37,40 +37,42 @@ public class MainPageController {
     public ComboBox<String> pickCourseMenu;
 
 
-    /*
-    - sets name of the player 
-    */
+    /**
+     * Sets the playername variable to the text in the playerNameTextField at the main page
+     * Will be used to create a scorecard object
+     */
     public void setPlayerName() {
         this.playerName = playerNameTextField.getText();
     }   
 
-    /*
-    - 
-    */
-    public void addCourseToList(String course) {
+
+    /**
+     * Adds a String to a list of Strings which represents available courses
+     * @param String course - a String containing the name of a course
+     */
+    public void addCourseToList(String course) { //!Brukes denne?
         pickCourseMenu.getItems().add(course);
     }
 
 
-    /*
-    * initializes template courses (lade and Dragvoll) to be available as a course for the player to choose
+    /**
+     * Initializes the list of available courses and some course objects is added to it
+     * Adds the names of the courses to the pickCourseMenu
      */
     public void initialize() {
         Course Lade = new Course("Lade",new ArrayList<>(Arrays.asList(3,4,3,4,3,4,3,4,3)));
         Course Dragvoll = new Course("Dragvoll", new ArrayList<>(Arrays.asList(3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4)));
-
         availableCourses.add(Lade);
         availableCourses.add(Dragvoll);
-
         pickCourseMenu.getItems().add(Lade.getCourseName());
         pickCourseMenu.getItems().add(Dragvoll.getCourseName());
-        System.out.println("YEET");
-        System.out.println(Dragvoll.getCourseName());
     }
 
-    /*
-    -
-    */
+    /**
+     * Finds the course that is selected in the pickCourseMenu
+     * @return course object which name is selected in the pickCourseMenu
+     * @return null if no course is selected
+     */
     public Course findSelectedCourse() {
         String selectedCourse = pickCourseMenu.getValue();
         for (Course course : availableCourses) {
@@ -81,9 +83,13 @@ public class MainPageController {
         return null;
     }
 
-    /*
-    -
-    */
+
+    /**
+     * Creates a scorecard object with the playername and selected course
+     * Loads the scorecard page
+     * @param event is the event that triggers the change of scenes //? stemmer dette?
+     * @throws IOException if reading the fxml file failed
+     */
     public void changeSceneToScorecard(ActionEvent event) {
         setPlayerName();
         try {
@@ -100,7 +106,7 @@ public class MainPageController {
             stage.show();
 
         } catch (IOException e) {
-            System.out.println("Faed to create new Window." + e);
+            System.out.println("Failed to create new Window." + e);
         }
     }
 }
