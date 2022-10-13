@@ -8,7 +8,6 @@ public class Scorecard {
     private int currentHole;
     private String playerName;
     private Course course;
-    private int totalScore;
 
     /**
     - constructs a scorecard object that vil be saved in the database
@@ -16,7 +15,6 @@ public class Scorecard {
      * @param playerName is the name of the player
      */
     public Scorecard(Course course, String playerName) {
-        System.out.println("SCORECARD");
         validateMainPageCourse(course);
         validateMainPageName(playerName);
         this.playerName = playerName;
@@ -32,7 +30,7 @@ public class Scorecard {
      * @param totalScore totalscore for the scorecard
      * @param throwsList all the thrwos+par for each hole
      */
-    public Scorecard(Course course, String playerName, int totalScore, ArrayList<Integer> throwsList) {
+    public Scorecard(Course course, String playerName, ArrayList<Integer> throwsList) {
         validateMainPageCourse(course);
         validateMainPageName(playerName);
         this.playerName = playerName;

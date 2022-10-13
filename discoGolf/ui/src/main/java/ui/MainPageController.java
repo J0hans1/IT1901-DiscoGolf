@@ -62,8 +62,10 @@ public class MainPageController {
         availableCourses.add(Lade);
         availableCourses.add(Dragvoll);
 
-        pickCourseMenu.getItems().add(Lade.toString());
-        pickCourseMenu.getItems().add(Dragvoll.toString());
+        pickCourseMenu.getItems().add(Lade.getCourseName());
+        pickCourseMenu.getItems().add(Dragvoll.getCourseName());
+        System.out.println("YEET");
+        System.out.println(Dragvoll.getCourseName());
     }
 
     /*
@@ -72,7 +74,7 @@ public class MainPageController {
     public Course findSelectedCourse() {
         String selectedCourse = pickCourseMenu.getValue();
         for (Course course : availableCourses) {
-            if (course.toString().equals(selectedCourse)) {
+            if (course.getCourseName().equals(selectedCourse)) {
                 return course;
             }
         }
@@ -84,19 +86,14 @@ public class MainPageController {
     */
     public void changeSceneToScorecard(ActionEvent event) {
         setPlayerName();
-
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("Scorecard.fxml"));
             root = fxmlLoader.load();
-
+            
             ScorecardPageController nextController = fxmlLoader.getController();
-<<<<<<< discoGolf/ui/src/main/java/ui/MainPageController.java
-=======
-
             System.out.println(findSelectedCourse());
             Scorecard newScorecard = new Scorecard(findSelectedCourse(), playerName);
             nextController.getPreviousControllerInfo(newScorecard); //Need to add selectedCourse
->>>>>>> discoGolf/ui/src/main/java/ui/MainPageController.java
             stage = (Stage)((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);

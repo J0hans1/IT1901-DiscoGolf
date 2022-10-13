@@ -2,7 +2,6 @@ package ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -58,8 +57,8 @@ public class DiscoGolfAppTest extends ApplicationTest {
     
     @Test
     public void testCourseSelection(){
-        assertEquals(pickCourseMenu.getItems().get(0), lade.toString());
-        assertEquals(pickCourseMenu.getItems().get(1), dragvoll.toString());
+        assertEquals(pickCourseMenu.getItems().get(0), lade.getCourseName());
+        assertEquals(pickCourseMenu.getItems().get(1), dragvoll.getCourseName());
     }
 
 //@Test 

@@ -27,7 +27,8 @@ public class ScorecardPageController {
      * @param playerName is a String containing the name of the player, declared at the main page
      * @param selectedCourse is the course that we selected at the main page
      */
-    public void getPreviousControllerInfo(Scorecard scorecard) {;                
+    public void getPreviousControllerInfo(Scorecard newScorecard) {      
+        scorecard = newScorecard;
         displayPlayerName.setText("Name: " + scorecard.getPlayerName());    
         currentCourseLabel.setText("Course: " + scorecard.getCourseName());
         refreshDisplay();
