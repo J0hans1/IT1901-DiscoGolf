@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import discoGolf.core.Course;
+import discoGolf.core.Scorecard;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader; 
@@ -43,7 +44,6 @@ public class MainPageController {
         this.playerName = playerNameTextField.getText();
     }   
 
-
     /*
     - 
     */
@@ -62,10 +62,11 @@ public class MainPageController {
         availableCourses.add(Lade);
         availableCourses.add(Dragvoll);
 
-        pickCourseMenu.getItems().add(Lade.toString());
-        pickCourseMenu.getItems().add(Dragvoll.toString());
+        pickCourseMenu.getItems().add(Lade.getCourseName());
+        pickCourseMenu.getItems().add(Dragvoll.getCourseName());
+        System.out.println("YEET");
+        System.out.println(Dragvoll.getCourseName());
     }
-
 
     /*
     -
@@ -73,33 +74,33 @@ public class MainPageController {
     public Course findSelectedCourse() {
         String selectedCourse = pickCourseMenu.getValue();
         for (Course course : availableCourses) {
-            if (course.toString().equals(selectedCourse)) {
+            if (course.getCourseName().equals(selectedCourse)) {
                 return course;
             }
         }
         return null;
     }
 
-
     /*
     -
     */
     public void changeSceneToScorecard(ActionEvent event) {
         setPlayerName();
-
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("Scorecard.fxml"));
             root = fxmlLoader.load();
-
+            
             ScorecardPageController nextController = fxmlLoader.getController();
-            nextController.getPreviousControllerInfo(playerName, findSelectedCourse()); //Need to add selectedCourse
+            System.out.println(findSelectedCourse());
+            Scorecard newScorecard = new Scorecard(findSelectedCourse(), playerName);
+            nextController.getPreviousControllerInfo(newScorecard); //Need to add selectedCourse
             stage = (Stage)((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
 
         } catch (IOException e) {
-            System.out.println("Failed to create new Window." + e);
+            System.out.println("Faed to create new Window." + e);
         }
     }
 }

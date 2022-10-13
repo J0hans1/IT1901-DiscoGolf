@@ -1,6 +1,9 @@
 package discoGolf.core;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Pattern;
 
 public class Scorecard {
     private ArrayList<Integer> throwsList = new ArrayList<>();
@@ -14,6 +17,10 @@ public class Scorecard {
      * @param playerName is the name of the player
      */
     public Scorecard(Course course, String playerName) {
+        System.out.println("SCORECARD");
+        validateMainPageCourse(course);
+        validateMainPageName(playerName);
+
         this.playerName = playerName;
         this.course = course;
         this.currentHole = 1;
@@ -128,4 +135,26 @@ public class Scorecard {
         }
         throwsList.set(getCurrentHole() - 1, getCurrentHoleThrows() - 1);
     }
+
+    /**
+     * @param course Course object representing the chosen course in the main page
+     * @throws IllegalStateException Throws if no course is selected
+     */
+    private void validateMainPageCourse(Course course){
+        if (course == null){
+            throw new IllegalStateException("No course selected!");
+        }
+    }
+
+    /**
+     * @param name String value from the value in the input field of the main page
+     * @throws IllegalArgumentException Throws if name doesnt fit the format "name1 name2 (optinal) name3(optinal)..."
+     */
+    private void validateMainPageName(String name){
+        boolean regexCheck = Pattern.matches("[a-zA-Z0-9]\s?(([a-zA-Z0-9]+\s?)?)*", name);
+        if (!regexCheck){
+            throw new IllegalArgumentException("Illegal input to name field");
+        }
+    }
+
 }
