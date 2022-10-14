@@ -70,7 +70,7 @@ public class DiscoGolfPersistence {
      * @throws IOException Error while writing to the file
      * @throws URISyntaxException Error translating Java Data object to JSON
      */
-    private void saveData(Data data) throws IOException, URISyntaxException {
+    public void saveData(Data data) throws IOException, URISyntaxException {
         if (getPathString() == null) {
             throw new IllegalStateException("no existing filepath");
         }try (Writer writer = new FileWriter(getPathString(), StandardCharsets.UTF_8)) {
