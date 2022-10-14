@@ -33,14 +33,13 @@ public class Scorecard {
     public Scorecard(Course course, String playerName, ArrayList<Integer> throwsList) {
         validateMainPageCourse(course);
         validateMainPageName(playerName);
+        validateThrowsList(throwsList, course.getParValues());
         this.playerName = playerName;
         this.course = course;
         this.currentHole = course.getNumberOfHoles();
         this.throwsList = throwsList;
     }
     
-
-
     /**
      * @return the name of player which is a attrivute of the scorecard
     */
@@ -55,7 +54,6 @@ public class Scorecard {
         return new ArrayList<Integer>(throwsList);
     }
 
-
     /**
     * @return the total amount of throws minus the total of all the pars of each hole 
     */
@@ -64,14 +62,12 @@ public class Scorecard {
         return total;
     }
 
-
     /**
     * @return the name of course the player is playing on
     */
     public String getCourseName() {
         return course.getCourseName();
     }
-
 
     /**
     * @return the current hole number the player is playing on
@@ -94,7 +90,6 @@ public class Scorecard {
         return throwsList.get(getCurrentHole() - 1);
     }
 
-
     /**
     * @return the current par of the current hole
     */
@@ -102,14 +97,12 @@ public class Scorecard {
         return course.getParForHole(getCurrentHole());
     }
 
-
     /**
     * @return the size of the current course by streaming the courses par list and counting the amount of elements
     */
     public int getCourseSize() {
         return course.getPar().size();
     }
-
 
     /**
     * adds one to the current hole number if the player is not on the last hole
@@ -120,7 +113,6 @@ public class Scorecard {
         }
         currentHole++;
     }
-
 
     /**
     * removes one from the current hole number if the player is not on the first hole
@@ -139,7 +131,6 @@ public class Scorecard {
         throwsList.set(getCurrentHole() - 1, getCurrentHoleThrows() + 1);
     }
 
-
     /**
     * removes one from the current amount of throws the player has made on the current hole
     */
@@ -148,6 +139,20 @@ public class Scorecard {
             throw new IllegalStateException("Cannot have 0 throws");
         }
         throwsList.set(getCurrentHole() - 1, getCurrentHoleThrows() - 1);
+    }
+
+    /**
+     * Validate if throwsList is a valid list
+     * @param throwsList a list with all throws + par on each hole
+     * @param parValues a list with the par values on the course
+     */
+    private void validateThrowsList(ArrayList<Integer> throwsList, ArrayList<Integer> parValues) {
+        if (throwsList.size() != parValues.size()) {
+            throw new IllegalArgumentException("Not a valid throws list length");
+        }
+        if (throwsList.stream().anyMatch(x -> x < 1)) {
+            throw new IllegalArgumentException("Cannot have a hole with less than 1 throw");
+        }
     }
 
     /**
@@ -165,7 +170,7 @@ public class Scorecard {
      * @throws IllegalArgumentException Throws if name doesnt fit the format "name1 name2 (optinal) name3(optinal)..."
      */
     private void validateMainPageName(String name){
-        boolean regexCheck = Pattern.matches("[a-zA-Z0-9]\s?(([a-zA-Z0-9]+\s?)?)*", name);
+        boolean regexCheck = Pattern.matches("[ÆØÅæøåa-zA-Z0-9]\s?(([ÆØÅæøåa-zA-Z0-9]+\s?)?)*", name);
         if (!regexCheck){
             throw new IllegalArgumentException("Illegal input to name field");
         }
