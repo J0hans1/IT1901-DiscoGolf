@@ -8,9 +8,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-/*
-- JavaFX App
-*/
+/**
+ * JavaFX Application file
+ */
 public class DiscoGolfApp extends Application {
 
     @Override

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -23,12 +24,39 @@ public class ScorecardTest {
         scorecard = new Scorecard(course, "Jakob");
     }
     
+    /**
+     * Test constructor 1 by setting course and playerName, and test for invalid input
+     */
     @Test
-    @DisplayName("Test the controller when creating a Scorecard object")
-    public void testController() {
+    public void testConstructor1() {
         assertEquals("Jakob", scorecard.getPlayerName());
         assertEquals(1, scorecard.getCurrentHole());
         assertEquals(0, scorecard.getTotalScore());
+        assertEquals(new ArrayList<>(Arrays.asList(3, 4, 5, 3, 4, 5, 3, 4, 5)), scorecard.getThrowsList());
+        assertThrows(IllegalStateException.class, () -> {
+            new Scorecard(null, "jakob");
+        }, "Need to select a course");
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Scorecard(course, "jakob.?");
+        }, "Name can only contain letters and numbers");
+    }
+
+    /**
+     * Test constructor 2 by setting course, playerName and throwsList, and test for invalid input
+     */
+    @Test
+    public void testConstructor2() {
+        scorecard = new Scorecard(course, "Markus", new ArrayList<>(Arrays.asList(3, 4, 5, 3, 4, 5, 3, 4, 5)));
+        assertEquals("Markus", scorecard.getPlayerName());
+        assertEquals(9, scorecard.getCurrentHole());
+        //assertEquals(, scorecard.getTotalScore());
+        assertEquals(new ArrayList<>(Arrays.asList(3, 4, 5, 3, 4, 5, 3, 4, 5)), scorecard.getThrowsList());
+        assertThrows(IllegalStateException.class, () -> {
+            new Scorecard(null, "jakob");
+        }, "Need to select a course");
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Scorecard(course, "jakob.?");
+        }, "Name can only contain letters and numbers");
     }
 
     @Test

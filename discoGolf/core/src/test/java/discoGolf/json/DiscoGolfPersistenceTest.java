@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -68,7 +69,6 @@ public class DiscoGolfPersistenceTest {
         }
     }
 
-
     /**
      * Save scorecard object with sendScoreCardToDatabase, then reads 
      * the last saved object from data class and compares the two scorecard objects
@@ -85,4 +85,19 @@ public class DiscoGolfPersistenceTest {
             fail(e.getMessage());
         }
     }
+
+    /**
+     * Make sure to delete the scorecard that testSaveAndReadScorecard() writes to 
+     * database.json, so it doesnt write a new scorecard everytime mvn test is runned.
+     * @throws IOException
+     * @throws URISyntaxException
+     */
+    @AfterEach
+    public void deleteAddedObject() throws IOException, URISyntaxException {
+        ArrayList<Scorecard> scorecards = data.getData();
+        scorecards.remove(scorecards.size()-1);
+        data.setData(scorecards);
+        persistence.saveData(data);
+    }
 }
+

@@ -1,7 +1,11 @@
 package ui;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 import discoGolf.core.Course;
 import discoGolf.core.Scorecard;
+import discoGolf.json.DiscoGolfPersistence;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -26,6 +30,7 @@ public class ScorecardPageController {
      * refreshes all labels by running refreshDisplay()
      * @param playerName is a String containing the name of the player, declared at the main page
      * @param selectedCourse is the course that we selected at the main page
+     * @see refreshDisplay()
      */
     public void getPreviousControllerInfo(Scorecard newScorecard) {      
         scorecard = newScorecard;
@@ -33,39 +38,41 @@ public class ScorecardPageController {
         currentCourseLabel.setText("Course: " + scorecard.getCourseName());
         refreshDisplay();
     }
-    
 
     /**
-     * refreshes the content of the display, by changing the labels content, button labels and button visibility
+     * Sends the scorecard data to a DatabaseHandler object
+     * @throws URISyntaxException
+     * @throws IOException
+     */
+    public void handleSubmit() throws IOException, URISyntaxException{
+        if(hasBeenClicked == false){
+            try {
+                DiscoGolfPersistence db = new DiscoGolfPersistence();
+                db.sendScorecardToDatabase(scorecard);
+                hasBeenClicked = true;
+            } catch (IOException e) {
+                System.out.println("Error: " + e);
+                e.printStackTrace();
+            }
+        }
+    }
+
+    
+    /**
+     * Refreshes the content of the display,
+     * by changing the labels content, button labels and button visibility.
+     * @see handleBtnVisibilty()
+     * @see updateInfoDisplay()
      */
     private void refreshDisplay(){
         updateInfoDisplay();
         handleBtnVisibilty();
     }
 
+
     /**
-     * Sends the scorecard data to a DatabaseHandler object
+     * Handles wether the next, previous and submit buttons should be visible or not
      */
-    public void handleSubmit(){
-        // if(!hasBeenClicked){
-        //     DatabaseHandler database = new DatabaseHandler();
-        //     try {
-        //         database.writeToDatabse(scorecard.getplayerName(), Integer.toString(scorecard.getTotalScore()), scorecard.getCourseName());
-        //     } catch (IOException e) {
-        //         System.out.println("Error in writing to database");
-        //         e.printStackTrace();
-        //     }
-        //     System.out.println("Data saved in database");
-        //     hasBeenClicked = true;
-        // } else{
-        //     System.out.println("This scorecard has already been submitted!");
-        // }
-
-    }
-
-    /**
-    * updates button labels at the previous and next hole display
-    */
     private void handleBtnVisibilty(){
         previousHoleButton.setVisible(scorecard.getCurrentHole() != 1);                     
         nextHoleButton.setVisible(scorecard.getCurrentHole() != scorecard.getCourseSize()); 
@@ -74,8 +81,8 @@ public class ScorecardPageController {
 
 
     /**
-    * updates labels at the Hole display (hole number, score, par)
-    */
+     * Updates textlabels and buttonlabels at the Hole display 
+     */
     private void updateInfoDisplay() {
         currentHoleParLabel.setText("Par: " + Integer.toString(scorecard.getCurrentHolePar()));
         previousHoleButton.setText("Prev Hole: " + Integer.toString(scorecard.getCurrentHole() - 1));
@@ -86,9 +93,10 @@ public class ScorecardPageController {
 
 
     /**
-    * add throws/attempts at current hole
-    * refreshes the display
-    */
+     * Adds throws to the current hole in the scorecard object
+     * Refreshes the UI by running refreshDisplay() after the change
+     * @see refreshDisplay()
+     */
     public void addThrow() { 
         scorecard.addThrow();
         refreshDisplay();
@@ -96,9 +104,10 @@ public class ScorecardPageController {
 
 
     /**
-    * removes throws(attempts) at current hole
-    * refreshes the display
-    */
+     * Removes throws at the current hole in the scorecard object
+     * Refreshes the UI by running refreshDisplay() after the change
+     * @see refreshDisplay()
+     */
     public void removeThrow() {
         scorecard.removeThrow();
         refreshDisplay();
@@ -106,11 +115,12 @@ public class ScorecardPageController {
 
 
     /**
-    * Moves to the next hole
-    * update hole number and button labels
-    * resets current throws label to the par for next hole
-    * updates total score
-    */
+     * Moves to the next hole
+     * Refreshes the UI by running refreshDisplay() after the change
+     * Resets current throws label to the par for next hole
+     * Updates total score
+     * @see refreshDisplay()
+     */
     public void nextHole() {
         scorecard.nextHole();
         refreshDisplay();
@@ -119,10 +129,11 @@ public class ScorecardPageController {
 
 
     /**
-    * Moves to the previous hole
-    * updates hole number and button labels
-    * resets current throws label to the number of throws made at previous hole. 
-    */
+     * Moves to the previous hole
+     * Refreshes the UI by running refreshDisplay() after the change
+     * Resets current throws label to the number of throws made at previous hole. 
+     * @see refreshDisplay()
+     */
     public void previousHole() {
         scorecard.previousHole();
         refreshDisplay();
@@ -132,8 +143,9 @@ public class ScorecardPageController {
 
 
     /**
-    * prints current state of the scorecard
-    */
+     * Prints current state of the scorecard
+     * Used for debugging
+     */
     private void printCurrent() {
         System.out.println("Current hole: " + scorecard.getCurrentHole());
         System.out.println("Current Score: " + scorecard.getCurrentHoleThrows()); 

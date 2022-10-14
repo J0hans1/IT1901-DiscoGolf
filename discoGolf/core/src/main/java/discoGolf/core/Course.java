@@ -107,11 +107,4 @@ public class Course {
         return "Course [numberOfHoles=" + numberOfHoles + ", courseName=" + courseName + ", parForHoles=" + parForHoles
                 + ", parValues=" + parValues + "]";
     }
-    
-    /** 
-     * Writes the object on string format
-     * @return String
-     */
-
-     
 }
