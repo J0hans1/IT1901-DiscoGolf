@@ -10,6 +10,9 @@ import java.io.Writer;
 import java.net.URISyntaxException;
 
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
@@ -100,11 +103,14 @@ public class DiscoGolfPersistence {
      * Finds the path of the application folder, and then adds the path of the database.json file to it
      * @return String representation of the path to database.json
      */
-    private String getPathString() throws URISyntaxException {
-            String path = new File(getClass().getResource("").toURI())  // Get the path of the application folder
-            .getAbsolutePath()                                          // Get the absolute path of the application folder
-            .split("target")[0];                                        // Remove the target folder from the path and return the path to the application folder
-            path += "src/main/resources/database.json";           // appends the database.json file to the path of the application folder
-            return path;                                                // returns the path to the database.json file
+    private String getPathString() throws URISyntaxException, IOException {
+        Path p = Paths.get(System.getProperty("user.home") + "\\discoGolf.json");
+        if (!(Files.exists(p))) {
+            File f = new File(p.toString());
+            f.createNewFile();
+            Data data = new Data();
+            saveData(data);
+        } 
+        return p.toString();
     }
 }
