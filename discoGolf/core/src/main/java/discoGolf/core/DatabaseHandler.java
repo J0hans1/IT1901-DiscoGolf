@@ -44,6 +44,7 @@ public class DatabaseHandler {
 
     /**
     Reads the values of the database.txt file into a array of type List<String[]>
+    
     */
     public void readDatabase() throws URISyntaxException, FileNotFoundException{
         String path = getPath();
