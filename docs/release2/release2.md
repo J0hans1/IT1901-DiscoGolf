@@ -1,4 +1,5 @@
 # Release 2
+In this release we switched from a monolithic application structure to a 3-tier application structure. The three tiers consist of an application tier (`disoGolf.core`), a presentation tier (`ui`) and a data tier (`discoGolf.json`). Furthermore we modularized the project as described below. 
 
 ## New features
 
@@ -19,7 +20,7 @@ The code architechture has been improved by following the Maven standard. The co
 This module is not in use yet, but it is a module which will be used later.
 It is a maven prepared module based on further expansion of the application in release 3/4
 
-### UI
+### ui
 
 UI is the module which contains all the JavaFX related code.
 This module contains all the controllers and the DiscoGolfApp.java class.
@@ -32,7 +33,7 @@ This module is the physical representation of the logic layer of the application
 * core.core
 * json
 
-#### json
+### json
 
 This submodule contains all the classes that handle the data-persistence in the application (serializing and deserializing the data, to and from JSON). The module is heavily reliant on the Jackson library. In detail it contains three pairs of serializers and deserializers, which are:
 
@@ -49,11 +50,14 @@ This submodule contains all the classes that are used to represent the data in t
 ## Workflow
 
 This release was heavily affected by major changes in project architecture. This resulted in a significant
-need of logistic planning and structure. The team has decided to use the Kanban board in GitLab (milestones), to improve workflow and structure. We used this tool actively to make sure that we established an overview of which issue was assigned to each team member. has also decided to use the GitLab issue system to create issues for each task. This has resulted in a more structured workflow, and has made it easier to keep track of the project progress.
+need of logistic planning and structure. The team has decided to use the Kanban board in GitLab (milestones), to improve workflow and structure. We used this tool actively to make sure that we established an overview of which issue was assigned to each team member. We also decided to use the GitLab issue system to create issues for each task. This has resulted in a more structured workflow, and has made it easier to keep track of the project progress.
 
 In the middle of the sprint we started linking each issue to its own branch. Every branch resolves a issue and when closed on merge, the issue is resolved. This made sure that our code was always up to date with the issues we were working on, and that the master branch always was stable. On merges we used another teammember as a reviewer to make sure that the code was up to the standards of the team. Isolating each issue in a branch made sure that we could work on multiple issues at the same time, without having to worry about conflicts.
 
+During this sprint we started to implement a 3-part structure in our commit messages. The 3-part structure consists of a short subject line where you briefly describe the commit, a body where you describe the changes that were made and why, and a footer for metadata. This implementation greatly enhanced our repository structure and made it easier to get an overview over the previous commits when that was needed.
+
 The team were more commited to the practice of pair-programming on large issues. This proved to be very effective when issues became complex. This was also a good way to make sure that the team was able to learn from each other, and that everyone was able to contribute to the project.
+ 
 
 ## code quality
 
