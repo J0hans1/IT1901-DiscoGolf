@@ -1,8 +1,6 @@
 package discoGolf.core;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
 
 public class Scorecard {
@@ -156,5 +154,4 @@ public class Scorecard {
             throw new IllegalArgumentException("Illegal input to name field");
         }
     }
-
 }
