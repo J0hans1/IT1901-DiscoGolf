@@ -73,7 +73,7 @@ public class DiscoGolfPersistence {
      * @throws IOException Error while writing to the file
      * @throws URISyntaxException Error translating Java Data object to JSON
      */
-    private void saveData(Data data) throws IOException, URISyntaxException {
+    public void saveData(Data data) throws IOException, URISyntaxException {
         if (getPathString() == null) {
             throw new IllegalStateException("no existing filepath");
         }try (Writer writer = new FileWriter(getPathString(), StandardCharsets.UTF_8)) {
@@ -104,7 +104,7 @@ public class DiscoGolfPersistence {
      * @return String representation of the path to database.json
      */
     private String getPathString() throws URISyntaxException, IOException {
-        Path p = Paths.get(System.getProperty("user.home") + "\\discoGolf.json");
+        Path p = Paths.get(System.getProperty("user.home") + "/discoGolf.json");
         if (!(Files.exists(p))) {
             File f = new File(p.toString());
             f.createNewFile();
