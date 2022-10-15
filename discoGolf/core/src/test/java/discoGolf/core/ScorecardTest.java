@@ -5,10 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -33,12 +31,19 @@ public class ScorecardTest {
         assertEquals(1, scorecard.getCurrentHole());
         assertEquals(0, scorecard.getTotalScore());
         assertEquals(new ArrayList<>(Arrays.asList(3, 4, 5, 3, 4, 5, 3, 4, 5)), scorecard.getThrowsList());
+
         assertThrows(IllegalStateException.class, () -> {
-            new Scorecard(null, "jakob");
+            new Scorecard(null, "Jørn");
         }, "Need to select a course");
         assertThrows(IllegalArgumentException.class, () -> {
-            new Scorecard(course, "jakob.?");
+            new Scorecard(course, "Jørn.?");
         }, "Name can only contain letters and numbers");
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Scorecard(course, "");
+        }, "Name cannot be empty");
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Scorecard(course, "//@");
+        }, "Not a valid name");
     }
 
     /**
@@ -51,16 +56,23 @@ public class ScorecardTest {
         assertEquals(9, scorecard.getCurrentHole());
         //assertEquals(, scorecard.getTotalScore());
         assertEquals(new ArrayList<>(Arrays.asList(3, 4, 5, 3, 4, 5, 3, 4, 5)), scorecard.getThrowsList());
-        assertThrows(IllegalStateException.class, () -> {
-            new Scorecard(null, "jakob");
-        }, "Need to select a course");
+
         assertThrows(IllegalArgumentException.class, () -> {
-            new Scorecard(course, "jakob.?");
-        }, "Name can only contain letters and numbers");
+            new Scorecard(course, "jakob", new ArrayList<>(Arrays.asList(3, 4, 5, 3, 4, 5, 3, 4, 5, 6)));
+        }, "Throws list has not correct length");
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Scorecard(course, "jakob", new ArrayList<>(Arrays.asList(3, 4)));
+        }, "Throws list is too short");
+        assertThrows(IllegalArgumentException.class, () -> {
+            new Scorecard(course, "jakob", new ArrayList<>(Arrays.asList(3, 4, 5, 3, 4, 5, 0, 4, 5)));
+        }, "Cannot have 0 throws on hole 7");
     }
 
+    /**
+     * Test nextHole() and previousHole() methods in scorecard, test that 
+     * you cannot go to previous hole when hole number is 1 or course size
+     */
     @Test
-    @DisplayName("Test nextHole() and previousHole() methods")
     public void testCurrentHole() {
         assertThrows(IllegalStateException.class, () -> {
             scorecard.previousHole();
@@ -68,21 +80,22 @@ public class ScorecardTest {
         for (int i = 0; i < 8; i++) {
             scorecard.nextHole();
         }
-        assertEquals(9, scorecard.getCurrentHole()
-        , "current hole number is supposed to be 9");
+        assertEquals(9, scorecard.getCurrentHole());
         assertThrows(IllegalStateException.class, () -> {
             scorecard.nextHole();
         }, "cannot go to next hole because it doesnt exist");
         for (int i = 0; i < 5; i++) {
             scorecard.previousHole();
         }
-        assertEquals(4, scorecard.getCurrentHole()
-        , "The current hole is now 9-5 = 4");
+        assertEquals(4, scorecard.getCurrentHole());
     }
 
 
+    /**
+     * Test removeThrow() and addThrow() methods, should throw exception when
+     * current throws are 1 and you try to remove throw
+     */
     @Test
-    @DisplayName("Test addThrow() and removeThrow() methods")
     public void testHoleThrows() {
         for (int i = 0; i < 2; i++) {
             scorecard.removeThrow();
@@ -97,18 +110,27 @@ public class ScorecardTest {
         , "Throws always start on the hole's par, so here it starts on 3");
     }
 
+    /**
+     * Test getTotalScore() method, and that the totalscore is correct after
+     * updating the scorecard with throws
+     */
     @Test
-    @DisplayName("Test that the correct total score is returned")
     public void testTotalScore() {
+        assertEquals(0, scorecard.getTotalScore());
         for (int i = 0; i < 4; i++) {
             scorecard.addThrow();
         }
-        assertEquals(4, scorecard.getTotalScore()
-        , "The totalScore is 4, since the person had 4 throws over par");
+        assertEquals(4, scorecard.getTotalScore());
         scorecard.nextHole();
         scorecard.removeThrow();
-        assertEquals(3, scorecard.getTotalScore()
-        , "The totalScore is 3, since the person had a hole with -1 score, 1 under par");
+        assertEquals(3, scorecard.getTotalScore());
+        for (int i = 0; i < 7; i++) {
+            for (int j = 0; j < 5; j++) {
+                scorecard.addThrow();
+            }
+            scorecard.nextHole();
+        }
+        assertEquals(38, scorecard.getTotalScore());
     }
 
 }
