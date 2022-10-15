@@ -5,14 +5,19 @@
 A companion application for discgolfing at the Trondheim local courses; Lade and Dragvoll.
 The repository contains:
 
-- documentation
-- maven and gitpod config files
-- JUNIT test cases for the logic
-- a contract between the members of the application team
-- ReadME within the application directory
-- the discogolf application
-- app logic classes
-- FXML documents and images in resources directory
+- Documentation
+- Pom.xml files for Maven modules
+- Junit5 test cases for the logic
+- TestFX test cases for the GUI
+- A Json module for data persistence with Jackson library
+- A Core module with the logic classes for the application
+- A UI module with the GUI classes for the application: controllers, fxml files and the App class
+- Checkstyle configuration files
+- Spotbugs configuration files
+- Jacoco configuration files
+- A contract between the members of the application team
+- This readme file
+- PlantUML diagram
 
 ## Navigation through the repository
 
@@ -22,8 +27,7 @@ The application exists within the discogolf directory at path:
 
 and the application can be run from the DiscoGolfApp directory at path:
 
-```gr2224/discogolf/src/main/java/app/DiscoGolfApp.java```
+```gr2224/discoGolf/ui/src/main/java/ui/DiscoGolfApp.java```
 
-The data is stored in a .txt file (database.txt) inside the data folder and exists within the path:
-
-```gr2224/discogolf/src/main/data/```
+The data is stored in a .json file (database.json) at the user's home directory:
+```C:/Users/username/database.json```
