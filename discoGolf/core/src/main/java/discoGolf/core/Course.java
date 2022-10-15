@@ -2,6 +2,7 @@ package discoGolf.core;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 public class Course {
     private int numberOfHoles;
@@ -15,10 +16,10 @@ public class Course {
      * @param parForHoles - is an array of integers that represents the par value for the hole with number == to its array index
      */
     public Course(String courseName, ArrayList<Integer> parValues) {
+        validateCourseName(courseName);
+        validateParValuesList(parValues);
         this.courseName = courseName;
-        if (validateParValuesList(parValues)) {
-            this.parValues = parValues;
-        }
+        this.parValues = parValues;
         this.numberOfHoles = this.parValues.size();
         this.parForHoles = new HashMap<>();
         assignParsToHoles();
@@ -29,13 +30,12 @@ public class Course {
      * @param parValues a list of par values which should be between 2 and 7
      * @return true if the input is valid
      */
-    private boolean validateParValuesList(ArrayList<Integer> parValues) {
+    private void validateParValuesList(ArrayList<Integer> parValues) {
         for (Integer par : parValues) {
             if (par < 2 || par > 7) {
                 throw new IllegalArgumentException("Not a valid parValues list");
             }
         }
-        return true;
     }
 
 
@@ -100,6 +100,17 @@ public class Course {
      */
     public int getNumberOfHoles() {
         return numberOfHoles;
+    }
+
+    /**
+     * @param name String value from the value in the input field of the main page
+     * @throws IllegalArgumentException Throws if name doesnt fit the format "name1 name2 (optinal) name3(optinal)..."
+     */
+    private void validateCourseName(String name){
+        boolean regexCheck = Pattern.matches("[ÆØÅæøåa-zA-Z0-9]\s?(([ÆØÅæøåa-zA-Z0-9]+\s?)?)*", name);
+        if (!regexCheck){
+            throw new IllegalArgumentException("Illegal input to name field");
+        }
     }
 
     @Override
