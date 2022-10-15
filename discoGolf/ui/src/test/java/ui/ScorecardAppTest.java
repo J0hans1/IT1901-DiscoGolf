@@ -80,10 +80,9 @@ import javafx.stage.Stage;
 
 public class ScorecardAppTest extends ApplicationTest {
     
-    private MainPageController controller;
-    private ComboBox<String> pickCourseMenu;
     private Course lade;
     private Course dragvoll;
+    private ScorecardPageController controller;
 
     /**
      Method for starting the javafx application
@@ -103,7 +102,6 @@ public class ScorecardAppTest extends ApplicationTest {
         // Scorecard scorecard = new Scorecard(null, null);
         lade = new Course("Lade",new ArrayList<>(Arrays.asList(3,4,3,4,3,4,3,4,3)));
         dragvoll = new Course("Dragvoll", new ArrayList<>(Arrays.asList(3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4)));
-        this.pickCourseMenu = lookup("#pickCourseMenu").query();
     }
 
 //     @Test
@@ -116,6 +114,9 @@ public class ScorecardAppTest extends ApplicationTest {
 //     public void testCourseSelection(){
 //         assertEquals(pickCourseMenu.getItems().get(0), lade.getCourseName());
 //         assertEquals(pickCourseMenu.getItems().get(1), dragvoll.getCourseName());
+
+       
+
 //     }
 
     // @Test 
@@ -127,35 +128,6 @@ public class ScorecardAppTest extends ApplicationTest {
     //     });
     // }
 
-    @Test
-    public void checkSelectedcCourse(){
-        clickOn("#fxmlNameOfPlayer").write("Ulrik");
-        // clickOn(this.pickCourseMenu);
-        // press(KeyCode.DOWN).release(KeyCode.DOWN);
-        // press(KeyCode.ENTER).release(KeyCode.ENTER);
-        
-        // this.pickCourseMenu.setValue("Lade"); ///
-        // System.out.println(this.pickCourseMenu.getValue());
 
-        // TextField x = lookup("fxmlNameOfPlayer").query();
-        // x.setValue("Ulrisch");
-        // System.out.println(x.getValue());
-        
-        
-        // WaitForAsyncUtils.waitForFxEvents();
-        // System.out.println("HER:");
-        // Thread.sleep(1000);
-        // WaitForAsyncUtils.waitForFxEvents();
-        //assertEquals(this.lade.getCourseName(), this.pickCourseMenu.getSelectionModel().isSelected(0));//this.controller.findSelectedCourse().getCourseName());
-        // for (Node child : pickCourseMenu.getChildrenUnmodifiable()) {
-        //     System.out.println(child);
-        // }
-
-        clickOn("#playButton");
-        // System.out.println("VALUE:");
-        // System.out.println(pickCourseMenu.getValue());
-        // assertEquals(2, pickCourseMenu.getItems().size());
-
-    } //isSelected(0)
-
+   
 }
