@@ -14,8 +14,6 @@ The code architechture has been improved by following the Maven standard. The co
 * ui
 * core
 
-### PlantUML diagram
-
 ### fxutil
 
 This module is not in use yet, but it is a module which will be used later.
@@ -64,3 +62,4 @@ For release-2, several libaries were implemented in the project, to ensure good 
 * Checkstyle
 * spotbugs
 * jacoco (code coverage)
+* pipeline
