@@ -16,6 +16,11 @@ The code architechture has been improved by following the Maven standard. The co
 
 ### PlantUML diagram
 
+Class diagram
+
+Sequence diagram
+![Alt](sequenceDiagram.png)
+
 ### fxutil
 
 This module is not in use yet, but it is a module which will be used later.

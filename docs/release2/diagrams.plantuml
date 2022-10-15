@@ -1,0 +1,23 @@
+@startuml Sequence diagram
+
+actor Player
+control MainPageController
+control ScorecardPageController
+participant Scorecard
+participant DiscoGolfPersistence
+database Data
+
+Player -> MainPageController: Write name and choose course
+MainPageController -> ScorecardPageController: changeSceneToScorecard()
+activate Scorecard
+ScorecardPageController -> Scorecard: addThrow()
+Scorecard -> ScorecardPageController: update throws in scorecard
+ScorecardPageController -> Scorecard: nextHole()
+Scorecard -> ScorecardPageController: update hole number and total score
+ScorecardPageController -> DiscoGolfPersistence: handleSubmit()
+activate Data
+DiscoGolfPersistence -> Data: sendScorecardToDatabase(scorecard)
+ScorecardPageController -> MainPageController: user is sent back to main page
+deactivate Scorecard
+
+@endulm
