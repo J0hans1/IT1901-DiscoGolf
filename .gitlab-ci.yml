@@ -69,16 +69,17 @@ test-coverage-minimum:
     variables:
       - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != "master"
 
-# test-coverage-80:
-#   stage: coverage
-#   needs: ["test"]
-#   script: cd discoGolf && mvn verify -Dminimum=0.8
-#   allow_failure: true
-#   only:
-#     - merge_requests
-#   except:
-#     variables:
-#       - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != "master"
+test-coverage-80:
+  stage: coverage
+  needs: ["test"]
+  script: cd discoGolf && mvn verify -Dminimum=0.8 
+  #unsure if -Dminimum=0.8 is functioning correctly
+  allow_failure: true
+  only:
+    - merge_requests
+  except:
+    variables:
+      - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != "master"
 
 checkstyle:
   stage: quality

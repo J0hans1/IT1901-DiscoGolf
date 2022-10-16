@@ -3,23 +3,32 @@ package ui;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
-import discoGolf.core.Course;
 import discoGolf.core.Scorecard;
 import discoGolf.json.DiscoGolfPersistence;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.Node;
 
 public class ScorecardPageController {
     
     private Scorecard scorecard;
-    private Course currentCourse;
-    private boolean hasBeenClicked = false;
 
     @FXML
     public Label currentCourseLabel, displayPlayerName, currentHole, currentScore, totalScoreLabel, currentHoleParLabel;
     @FXML
     public Button previousHoleButton, nextHoleButton, submitBtn;
+    @FXML 
+    private Parent root;
+    @FXML 
+    private Scene scene;
+    @FXML 
+    private Stage stage;
 
     
     /** 
@@ -44,16 +53,20 @@ public class ScorecardPageController {
      * @throws URISyntaxException
      * @throws IOException
      */
-    public void handleSubmit() throws IOException, URISyntaxException{
-        if(hasBeenClicked == false){
-            try {
-                DiscoGolfPersistence db = new DiscoGolfPersistence();
-                db.sendScorecardToDatabase(scorecard);
-                hasBeenClicked = true;
-            } catch (IOException e) {
-                System.out.println("Error: " + e);
-                e.printStackTrace();
-            }
+    public void handleSubmit(ActionEvent event) throws IOException, URISyntaxException{
+        try {
+            DiscoGolfPersistence db = new DiscoGolfPersistence();
+            db.sendScorecardToDatabase(scorecard);
+
+            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("MainPage.fxml"));
+            root = fxmlLoader.load();
+            stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            System.out.println("Error: " + e);
+            e.printStackTrace();
         }
     }
 
@@ -150,4 +163,5 @@ public class ScorecardPageController {
         System.out.println("Current hole: " + scorecard.getCurrentHole());
         System.out.println("Current Score: " + scorecard.getCurrentHoleThrows()); 
     }
+
 }

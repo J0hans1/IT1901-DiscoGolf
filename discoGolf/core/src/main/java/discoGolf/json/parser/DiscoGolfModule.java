@@ -16,13 +16,9 @@ public class DiscoGolfModule extends SimpleModule {
      */
     public DiscoGolfModule() {
         super(NAME, Version.unknownVersion());
-
         addSerializer(Course.class, new CourseSerializer());
-        addDeserializer(Course.class, new CourseDeserializer());
-        
         addSerializer(Scorecard.class, new ScorecardSerializer());
         addDeserializer(Scorecard.class, new ScorecardDeserializer());
-
         addSerializer(Data.class, new DataArraySerializer());
         addDeserializer(Data.class, new DataArrayDeserializer());
     }
