@@ -8,9 +8,10 @@ A companion application for discgolfing at the Trondheim local courses; Lade and
 The repository contains:
 
 - Documentation
+  - [docs](docs) folder directory with a folder for each release
   - A contract between the members of the application team
   - This readme file
-  - PlantUML diagram
+  - [PlantUML](docs/release2/release2.md) diagrams
 - Configuration Files
   - Pom.xml files for Maven modules
   - Checkstyle configuration files
@@ -20,10 +21,11 @@ The repository contains:
   - Junit5 test cases for the logic
   - TestFX test cases for the GUI
 - Several Maven modules
-  - Json module for data persistence with Jackson library
-  - Core module with the logic classes for the application
-  - UI module with the GUI classes for the application: controllers, fxml files and the AppClass for running the application
-  - FXUtil module for future use
+  - [Json](discogolf/core/src/main/java/discoGolf/json/) module for data persistence with Jackson library
+  - [Core](discogolf/core/src/main/java/discoGolf/json/) module with the logic classes for the application
+  - [UI](discogolf/ui/src/main/java/ui/) module with the GUI classes for the application: controllers, fxml files and the AppClass for running the application
+  - [FXUtil](discogolf/fxutil/src/main/java/fxutil/) module for future use
+
 
 ## Navigation through repository content
 
