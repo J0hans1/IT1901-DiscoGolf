@@ -23,6 +23,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+/**
+ * Test class for testing Main page of disco golf app using TestFX
+ * @author Ulrik Isdahl
+ * @version 1.0
+ * @since 2022-10-15
+ */
 public class DiscoGolfAppTest extends ApplicationTest {
 
     private Course lade;

@@ -16,6 +16,12 @@ import discoGolf.core.Course;
 import discoGolf.core.Data;
 import discoGolf.core.Scorecard;
 
+/**
+ * J-unit test for discoGolfModule
+ * @author Jakob Opland
+ * @version 1.0
+ * @since 2022-10-09
+ */
 public class DiscoGolfModuleTest {
     private static ObjectMapper mapper;
 

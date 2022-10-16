@@ -18,6 +18,12 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
+/**
+ * JavaFX controller to display the main page of the JavaFX application
+ * @author Billy Barret and Ulrik Isdahl
+ * @version 1.0
+ * @since 2022-09-21
+ */
 public class MainPageController {
 
     private List<Course> availableCourses = new ArrayList<>();

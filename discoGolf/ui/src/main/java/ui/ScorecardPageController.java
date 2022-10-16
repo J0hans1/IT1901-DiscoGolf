@@ -10,10 +10,15 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+/**
+ * JavaFX controller for displaying the scorecard ui
+ * @author @Billy Barret
+ * @version 1.0
+ * @since 2022-09-21
+ */
 public class ScorecardPageController {
     
     private Scorecard scorecard;
-    private Course currentCourse;
     private boolean hasBeenClicked = false;
 
     @FXML

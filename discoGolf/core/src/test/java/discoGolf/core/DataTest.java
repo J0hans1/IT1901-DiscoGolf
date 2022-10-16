@@ -9,6 +9,12 @@ import java.util.Arrays;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
+/**
+ * J-unit test for Data class
+ * @author Jakob Opland
+ * @version 1.0
+ * @since 2022-10-09
+ */
 public class DataTest {
     private Data data;
 
