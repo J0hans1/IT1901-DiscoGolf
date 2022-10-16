@@ -44,16 +44,4 @@ All maven commands must be run from the ```/discoGolf/``` directory:
 
 - To run the application: ```mvn javafx:run -pl ui```
 - To run the tests: ```mvn test```
-
-## UI design
-
-The UI currently consists of two pages: Main page (before started game) and Scorecard page (during started game). Below is two screenshots which is representative of the current state of the UI.
-
-![Main page](docs/resources/mainPage.png)
-
-![Scorecard page](docs/resources/scorecardPage.png)
-
-## Architecture
-
-Interaction with the application is described in the following diagram:
-(Kjør inn plantUML diagram her)
+- To verify ```mvn verify```
