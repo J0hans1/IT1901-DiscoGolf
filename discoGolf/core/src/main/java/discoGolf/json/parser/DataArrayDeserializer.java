@@ -30,7 +30,7 @@ public class DataArrayDeserializer extends JsonDeserializer<Data>{
         JsonNode node = p.getCodec().readTree(p);
         if (node instanceof ObjectNode objNode) {
             ArrayList<Scorecard> list = new ArrayList<>();
-            ArrayNode jsonList = (ArrayNode) node.get("data");
+            ArrayNode jsonList = (ArrayNode) objNode.get("data");
             for (JsonNode n : jsonList) {
                 Scorecard scorecard = scorecardDeserializer.deserialize(n);
                 list.add(scorecard);

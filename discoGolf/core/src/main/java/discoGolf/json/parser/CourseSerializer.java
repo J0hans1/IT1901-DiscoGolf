@@ -9,7 +9,6 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import discoGolf.core.Course;
 
 public class CourseSerializer extends JsonSerializer<Course> {
-    public Course course;
 
     /**
      * Serialize a course Java object to JSON format
