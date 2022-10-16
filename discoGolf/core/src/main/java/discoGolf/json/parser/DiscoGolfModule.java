@@ -8,7 +8,7 @@ import discoGolf.core.Data;
 import discoGolf.core.Scorecard;
 
 public class DiscoGolfModule extends SimpleModule {
-    
+
     private static final String NAME = "DiscoGolfModule";
 
     /**

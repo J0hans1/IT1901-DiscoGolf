@@ -14,16 +14,18 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import discoGolf.core.Data;
 import discoGolf.core.Scorecard;
 
-public class DataArrayDeserializer extends JsonDeserializer<Data>{
+public class DataArrayDeserializer extends JsonDeserializer<Data> {
     private ScorecardDeserializer scorecardDeserializer = new ScorecardDeserializer();
 
     /**
      * Deserialize a data object from JSON file
-     * @param parser The parser to use
+     * 
+     * @param parser  The parser to use
      * @param context The context to use
      * @return The deserialized data object
-     * @throws JacksonException Error when trying to use other deserializers or methods from jackson library
-     * @throws IOException Error when trying to read from the database
+     * @throws JacksonException Error when trying to use other deserializers or
+     *                          methods from jackson library
+     * @throws IOException      Error when trying to read from the database
      */
     @Override
     public Data deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JacksonException {

@@ -6,16 +6,19 @@ import java.util.regex.Pattern;
 
 public class Course {
     private int numberOfHoles;
-    private String courseName;
+    private final String courseName;
     private HashMap<Integer, Integer> parForHoles;
-    private ArrayList<Integer> parValues;
-    
+    private final ArrayList<Integer> parValues;
+    private final int highestPossibleParValue = 7;
+
     /**
-     * Create a disc golf course
+     * Create a disc golf course.
+     * 
      * @param courseName - is the name of the course
-     * @param parForHoles - is an array of integers that represents the par value for the hole with number == to its array index
+     * @param parValues  - is an array of integers that represents the par value for
+     *                   the hole with number == to its array index
      */
-    public Course(String courseName, ArrayList<Integer> parValues) {
+    public Course(final String courseName, final ArrayList<Integer> parValues) {
         validateCourseName(courseName);
         validateParValuesList(parValues);
         this.courseName = courseName;
@@ -26,30 +29,29 @@ public class Course {
     }
 
     /**
-     * Validates the parValues list and throws IllegalArgumentExeption if not valid
-     * @param parValues a list of par values which should be between 2 and 7
-     * @return true if the input is valid
+     * Validates the parValues list. Throws IllegalArgumentExeption if not valid
+     * 
+     * @param allParValues a list of par values which should be between 2 and 7
      */
-    private void validateParValuesList(ArrayList<Integer> parValues) {
-        for (Integer par : parValues) {
-            if (par < 2 || par > 7) {
-                throw new IllegalArgumentException("Not a valid parValues list");
+    private void validateParValuesList(final ArrayList<Integer> allParValues) {
+        for (Integer par : allParValues) {
+            if (par < 2 || par > highestPossibleParValue) {
+                throw new IllegalArgumentException("Not a valid list");
             }
         }
     }
 
-
     /**
-     * assigns integers in the array of par values, to the hole with number == to its array index
+     * assigns integers in the array of par values, to the hole with number == to.
+     * its array index
      */
-    private void assignParsToHoles(){
+    private void assignParsToHoles() {
         for (int i = 0; i < numberOfHoles; i++) {
-            setParForHole(i + 1 , parValues.get(i));
+            setParForHole(i + 1, parValues.get(i));
         }
     }
 
-
-    /** 
+    /**
      * @return String courseName - containing the name of the course
      */
     public String getCourseName() {
@@ -57,45 +59,47 @@ public class Course {
     }
 
     /**
-     * @return ArrayList<Integer> parValues - containing the par values for each hole
+     * @return ArrayList<Integer> parValues - containing the par values for each
+     *         hole
      */
     public ArrayList<Integer> getParValues() {
         return parValues;
     }
 
-
     /**
-     * @return HashMap<Integer, Integer> parForHoles - contains key-value pairs for hole numbers and par values
+     * @return HashMap<Integer, Integer> parForHoles - contains key-value pairs for
+     *         hole numbers and par values.
      */
-    public HashMap<Integer, Integer> getPar() { 
+    public HashMap<Integer, Integer> getPar() {
         return parForHoles;
     }
 
-    /** 
-     * Links up the hole/par pair
+    /**
+     * Links up the hole/par pair.
+     * 
      * @param hole - the hole number
-     * @param par - the par value
+     * @param par  - the par value
      */
-    public void setParForHole(int hole, int par) {
-        if (hole < 1 || par < 2 || par > 7) {
-            throw new IllegalArgumentException("Not a valid hole or par number");
+    public void setParForHole(final int hole, final int par) {
+        if (hole < 1 || par < 2 || par > highestPossibleParValue) {
+            throw new IllegalArgumentException("Not valid hole or par number");
         }
         parForHoles.put(hole, par);
     }
 
-
-    /** 
-     * Returns the par value at a specific hole/index of the array
+    /**
+     * Returns the par value at a specific hole/index of the array.
+     * 
      * @param hole - the hole number
      * @return int - the par value assigned to the specific hole
      */
-    public int getParForHole(int hole) {
+    public int getParForHole(final int hole) {
         return parForHoles.get(hole);
     }
-    
-    
-    /** 
-     * Get number of holes at site
+
+    /**
+     * Get number of holes at site.
+     * 
      * @return int
      */
     public int getNumberOfHoles() {
@@ -104,17 +108,18 @@ public class Course {
 
     /**
      * @param name String value from the value in the input field of the main page
-     * @throws IllegalArgumentException Throws if name doesnt fit the format "name1 name2 (optinal) name3(optinal)..."
+     * @throws IllegalArgumentException Throws if name doesnt fit the format "name1
+     *                                  name2 (optinal) name3(optinal)..."
      */
-    private void validateCourseName(String name){
+    private void validateCourseName(final String name) {
         boolean regexCheck = Pattern.matches("[ÆØÅæøåa-zA-Z0-9]\s?(([ÆØÅæøåa-zA-Z0-9]+\s?)?)*", name);
-        if (!regexCheck){
+        if (!regexCheck) {
             throw new IllegalArgumentException("Illegal input to name field");
         }
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         return "Course [numberOfHoles=" + numberOfHoles + ", courseName=" + courseName + ", parForHoles=" + parForHoles
                 + ", parValues=" + parValues + "]";
     }

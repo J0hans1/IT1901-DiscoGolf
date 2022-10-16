@@ -2,13 +2,12 @@ package discoGolf.core;
 
 import java.util.ArrayList;
 
-
 public class Data {
     private ArrayList<Scorecard> data;
 
     /**
-     * Object for storing all the scorecards
-     * Its purpose is to be serialized and deserialized to and from JSON
+     * Object for storing all the scorecards Its purpose is to be serialized and
+     * deserialized to and from JSON
      */
     public Data() {
         this.data = new ArrayList<>();
@@ -16,6 +15,7 @@ public class Data {
 
     /**
      * Get the list of scorecards
+     * 
      * @return The list of scorecards
      */
     public ArrayList<Scorecard> getData() {
@@ -24,6 +24,7 @@ public class Data {
 
     /**
      * Set the list of scorecards
+     * 
      * @param data The list of scorecards
      */
     public void setData(ArrayList<Scorecard> data) {
@@ -32,6 +33,7 @@ public class Data {
 
     /**
      * Add a scorecard to the list
+     * 
      * @param scorecard The scorecard to add
      */
     public void add(Scorecard scorecard) {
