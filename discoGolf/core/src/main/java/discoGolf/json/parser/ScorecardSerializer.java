@@ -8,12 +8,13 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 
 import discoGolf.core.Scorecard;
 
-public class ScorecardSerializer extends JsonSerializer<Scorecard>{
+public class ScorecardSerializer extends JsonSerializer<Scorecard> {
 
     /**
      * Serialize a scorecard Java object to JSON format
-     * @param value The scorecard to serialize
-     * @param gen The generator to use
+     * 
+     * @param value       The scorecard to serialize
+     * @param gen         The generator to use
      * @param serializers The serializer provider
      * @throws IOException Error when trying to write to the database
      */
