@@ -40,11 +40,14 @@ public class DatabaseHandler {
             e.printStackTrace();
         }
     }
-    
 
     /**
+<<<<<<< HEAD
+    Reads the values of the database.txt file into aØ array of type List<String[]>
+=======
     Reads the values of the database.txt file into a array of type List<String[]>
     
+>>>>>>> ed81bcaa906a792fdd214c6d0552faa90a0e37ff
     */
     public void readDatabase() throws URISyntaxException, FileNotFoundException{
         String path = getPath();

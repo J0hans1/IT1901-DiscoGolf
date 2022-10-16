@@ -135,5 +135,4 @@ public class ScorecardTest {
         }
         assertEquals(38, scorecard.getTotalScore());
     }
-
 }
