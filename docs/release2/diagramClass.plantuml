@@ -1,6 +1,11 @@
 @startuml class
 
-class Course{
+package "Core.Core" <<rectangle>> #DDDDDD {
+    Data "1"-->"*" Scorecard : stored in
+    Course "1"<--"*" Scorecard : used on
+}
+
+class Course{   
     - int numberOfHoles
     - String courseName
     - HashMap<Integer, Integer> holes
@@ -51,8 +56,5 @@ Class Data {
     + void add()
     + String toString()
 }
-
-Data <-- Scorecard : stored in
-Course <-- Scorecard : used on 
 
 @enduml
