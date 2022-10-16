@@ -17,4 +17,4 @@ A person wants to play a disc golf game in Trondheim with his friends. He doesnt
 * The opportunity to choose a course and start a game
 * Add and remove throws on current hole 
 * Go to next and previous hole 
-* Submit and save your scorecard when the user is on the last hole
+* Submit and save scorecard when the user is on the last hole
