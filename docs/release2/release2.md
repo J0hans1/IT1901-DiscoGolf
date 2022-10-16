@@ -16,10 +16,11 @@ The code architechture has been improved by following the Maven standard. The co
 
 ### PlantUML diagram
 
-Class diagram
-
 Sequence diagram
-![Alt](sequenceDiagram.png)
+![Sequence diagram](diagramSequence.png)
+
+Class diagram
+![A sequence diagram of the core module](diagramClass.png)
 
 ### fxutil
 

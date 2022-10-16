@@ -1,0 +1,58 @@
+@startuml class
+
+class Course{
+    - int numberOfHoles
+    - String courseName
+    - HashMap<Integer, Integer> holes
+    - ArrayList<Integer> parValues
+    --
+    + Course()
+    - boolean validateParValuesList(ArrayList<Integer> parValues)
+    + String getCourseName()
+    + int getNumberOfHoles()
+    + int getParForHole()
+    + String toString()
+    + ArrayList<Integer> getParValues()
+    + HashMap<Integer, Integer> getPar()
+    - void setParValues()
+    - void assignParstoHoles()
+}
+
+Class Scorecard {
+    - int currentHole
+    - String playerName
+    - Course course
+    - ArrayList<Integer> throwsList
+    --
+    + Scorecard()
+    + String getPlayerName()
+    + ArrayList<Integer> getThrowsList()
+    + int getTotalScore()
+    + String getCourseName()
+    + int getCurrentHole()
+    + Course getCourse()
+    + int getCurrentHoleThrows()
+    + int getCurrentHolePar()
+    + int getCourseSize()
+    + void nextHole()
+    + void previousHole()
+    + void addThrow()
+    + void removeThrow()
+    - void validateMainPageCourse()
+    - void validateMainPageName()
+}
+
+Class Data {
+    - ArrayList<Scorecard> scorecards
+    --
+    + Data()
+    + ArrayList<Scorecard> getData()
+    + void setData()
+    + void add()
+    + String toString()
+}
+
+Data <-- Scorecard : stored in
+Course <-- Scorecard : used on 
+
+@enduml

@@ -21,3 +21,12 @@ ScorecardPageController -> MainPageController: user is sent back to main page
 deactivate Scorecard
 
 @endulm
+
+
+@startuml class diagram
+
+class Scorecard
++ int holeNumber
++ int totalScore
+
+@enduml
