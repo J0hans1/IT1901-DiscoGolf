@@ -4,7 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
+/**
+ * The Course class represents a frisbee golf course with int numberOfHoles amount of holes
+ * @author Billy Barret
+ * @version 1.0
+ * @since 2022-09-21
+ */
 public class Course {
+
     private int numberOfHoles;
     private String courseName;
     private HashMap<Integer, Integer> parForHoles;
