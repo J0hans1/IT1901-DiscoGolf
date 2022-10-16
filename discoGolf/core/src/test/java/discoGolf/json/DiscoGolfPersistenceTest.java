@@ -17,6 +17,12 @@ import discoGolf.core.Course;
 import discoGolf.core.Data;
 import discoGolf.core.Scorecard;
 
+/**
+ * J-unit test for persistence of discoGolf app
+ * @author Markus Johansen
+ * @version 1.0
+ * @since 2022-10-08
+ */
 public class DiscoGolfPersistenceTest {
     private Course course;
     private Scorecard scorecard;

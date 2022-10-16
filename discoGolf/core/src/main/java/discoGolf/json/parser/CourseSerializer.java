@@ -8,6 +8,12 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 
 import discoGolf.core.Course;
 
+/**
+ * Writes a Course object to json format
+ * @author Markus Johansen and Jakob Opland
+ * @version 1.0
+ * @since 2022-10-03
+ */
 public class CourseSerializer extends JsonSerializer<Course> {
     public Course course;
 

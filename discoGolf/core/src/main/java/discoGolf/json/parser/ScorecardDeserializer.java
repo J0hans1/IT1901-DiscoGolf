@@ -16,6 +16,12 @@ import com.fasterxml.jackson.databind.node.TextNode;
 import discoGolf.core.Course;
 import discoGolf.core.Scorecard;
 
+/**
+ * Creates a Scorecard object from json data
+ * @author Markus Johansen and Jakob Opland
+ * @version 1.0
+ * @since 2022-10-09 
+ */
 public class ScorecardDeserializer extends JsonDeserializer<Scorecard> {
 
     private CourseDeserializer courseDeserializer = new CourseDeserializer();
