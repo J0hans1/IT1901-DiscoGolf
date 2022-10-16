@@ -14,7 +14,7 @@ import discoGolf.core.Scorecard;
  * @since 2022-10-05
  */
 public class DiscoGolfModule extends SimpleModule {
-    
+
     private static final String NAME = "DiscoGolfModule";
 
     /**
