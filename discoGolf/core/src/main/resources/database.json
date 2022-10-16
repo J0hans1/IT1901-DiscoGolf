@@ -79,5 +79,65 @@
       "parValues" : [ ],
       "parForHoles" : { }
     }
+  }, {
+    "playerName" : "iuip",
+    "score" : 0,
+    "throwsList" : [ 3, 4, 3, 4, 3, 4, 3, 4, 3 ],
+    "course" : {
+      "courseName" : "Lade",
+      "numberOfHoles" : 9,
+      "parValues" : [ 3, 4, 3, 4, 3, 4, 3, 4, 3 ],
+      "parForHoles" : {
+        "1" : 3,
+        "2" : 4,
+        "3" : 3,
+        "4" : 4,
+        "5" : 3,
+        "6" : 4,
+        "7" : 3,
+        "8" : 4,
+        "9" : 3
+      }
+    }
+  }, {
+    "playerName" : "billy",
+    "score" : 0,
+    "throwsList" : [ 3, 4, 3, 4, 3, 4, 3, 4, 3 ],
+    "course" : {
+      "courseName" : "Lade",
+      "numberOfHoles" : 9,
+      "parValues" : [ 3, 4, 3, 4, 3, 4, 3, 4, 3 ],
+      "parForHoles" : {
+        "1" : 3,
+        "2" : 4,
+        "3" : 3,
+        "4" : 4,
+        "5" : 3,
+        "6" : 4,
+        "7" : 3,
+        "8" : 4,
+        "9" : 3
+      }
+    }
+  }, {
+    "playerName" : "dsadasd",
+    "score" : 0,
+    "throwsList" : [ 3, 4, 3, 4, 3, 4, 3, 4, 3 ],
+    "course" : {
+      "courseName" : "Lade",
+      "numberOfHoles" : 9,
+      "parValues" : [ 3, 4, 3, 4, 3, 4, 3, 4, 3 ],
+      "parForHoles" : {
+        "1" : 3,
+        "2" : 4,
+        "3" : 3,
+        "4" : 4,
+        "5" : 3,
+        "6" : 4,
+        "7" : 3,
+        "8" : 4,
+        "9" : 3
+      }
+    }
   } ]
 }

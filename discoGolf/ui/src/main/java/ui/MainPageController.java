@@ -52,7 +52,7 @@ public class MainPageController {
      */
     public void addCourseToList(String course) {
         pickCourseMenu.getItems().add(course);
-    }
+    }   
 
 
     /**
@@ -87,7 +87,7 @@ public class MainPageController {
     /**
      * Creates a scorecard object with the playername and selected course
      * Loads the scorecard page
-     * @param event is the event that triggers the change of scenes //? stemmer dette?
+     * @param event is the event that triggers the change of scenes
      * @throws IOException if reading the fxml file failed
      */
     public void changeSceneToScorecard(ActionEvent event) {

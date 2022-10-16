@@ -154,5 +154,4 @@ public class Scorecard {
             throw new IllegalArgumentException("Illegal input to name field");
         }
     }
-
 }

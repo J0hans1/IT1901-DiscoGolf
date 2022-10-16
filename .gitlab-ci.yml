@@ -1,0 +1,104 @@
+
+default:
+  image: maven
+
+
+stages:          # List of stages for jobs, and their order of execution
+  - build
+  - test
+  - coverage
+  - quality
+  - bugs
+  - distv
+
+validate:       # This job runs in the build stage, which runs first.
+  stage: build
+  script: cd discoGolf && mvn validate
+  allow_failure: false
+  only:
+    - merge_requests
+  except:
+    variables:
+      - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != "master"
+
+compile:
+  stage: build
+  script: cd discoGolf && mvn compile
+  allow_failure: false
+  only:
+    - merge_requests
+  except:
+    variables:
+      - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != "master"
+  artifacts:
+    paths:
+      - discoGolf/core/target/classes/*
+      - discoGolf/localpersistence/target/classes/*
+      - discoGolf/ui/target/classes/*
+    expire_in: 10 minutes
+
+test:
+  stage: test
+  needs: ["compile"]
+  script: cd discoGolf && mvn test
+  allow_failure: false
+  only:
+    - merge_requests
+  except:
+    variables:
+      - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != "master"
+  artifacts:
+    paths:
+      - discoGolf/core/target/surefire-reports/*.xml
+      - discoGolf/localpersistance/target/surefire-reports/*.xml
+      - discoGolf/ui/target/surefire-reports/*.xml
+    reports:
+      junit:
+      - discoGolf/core/target/surefire-reports/*.xml
+      - discoGolf/core/target/surefire-reports/*.xml
+      - discoGolf/core/target/surefire-reports/*.xml
+
+test-coverage-minimum:
+  stage: coverage
+  needs: ["test"]
+  script: cd discoGolf && mvn verify
+  allow_failure: false
+  only:
+    - merge_requests
+  except:
+    variables:
+      - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != "master"
+
+# test-coverage-80:
+#   stage: coverage
+#   needs: ["test"]
+#   script: cd discoGolf && mvn verify -Dminimum=0.8
+#   allow_failure: true
+#   only:
+#     - merge_requests
+#   except:
+#     variables:
+#       - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != "master"
+
+checkstyle:
+  stage: quality
+  needs: ["compile"]
+  script: cd discoGolf && mvn checkstyle:check
+  allow_failure: true
+  only:
+    - merge_requests
+  except:
+    variables:
+      - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != "master"
+
+spotbugs:
+  stage: bugs
+  needs: ["compile"]
+  script: cd discoGolf && mvn install -DnoTestUI=true && mvn spotbugs:check -DnoTestUI=true
+  allow_failure: true
+  only:
+    - merge_requests
+  except:
+    variables:
+      - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != "master"
+
