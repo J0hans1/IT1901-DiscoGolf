@@ -7,6 +7,12 @@ import discoGolf.core.Course;
 import discoGolf.core.Data;
 import discoGolf.core.Scorecard;
 
+/**
+ * Initializes deserializer and serializer objects
+ * @author Markus Johansen and Jakob Opland
+ * @version 1.0
+ * @since 2022-10-05
+ */
 public class DiscoGolfModule extends SimpleModule {
     
     private static final String NAME = "DiscoGolfModule";

@@ -15,6 +15,12 @@ import com.fasterxml.jackson.databind.node.TextNode;
 
 import discoGolf.core.Course;
 
+/**
+ * Transforms a Course object stored in json format to a new Course class instance
+ * @author Markus Johansen and Jakob Opland
+ * @version 1.0
+ * @since 2022-10-02
+ */
 public class CourseDeserializer extends JsonDeserializer<Course> {
 
     /**

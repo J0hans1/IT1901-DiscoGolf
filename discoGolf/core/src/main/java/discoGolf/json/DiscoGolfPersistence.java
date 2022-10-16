@@ -21,9 +21,21 @@ import discoGolf.core.Data;
 import discoGolf.core.Scorecard;
 import discoGolf.json.parser.DiscoGolfModule;
 
+/**
+ * Creates new objectMapper and adds modules to the serializers. Combines all the classes of the parser module to create persistence
+ * @see CourseDeserializer
+ * @see CourseSerializer
+ * @see DataArraySerializer
+ * @see DataArrayDeserializer 
+ * @see DiscoGolfModule
+ * @see ScorecardDeserializer
+ * @see ScorecardSerializer
+ * @author Markus Johansen and Jakob Opland
+ * @version 1.0
+ * @since 2022-10-13
+ */
 public class DiscoGolfPersistence {
     private ObjectMapper mapper;
-
 
     /**
      * Initializing the ObjectMapper object by calling createMapper()
