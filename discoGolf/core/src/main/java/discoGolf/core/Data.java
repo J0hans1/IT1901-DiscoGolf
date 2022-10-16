@@ -2,6 +2,13 @@ package discoGolf.core;
 
 import java.util.ArrayList;
 
+/**
+ * Keeps track of all scorecard objects in the database.
+ * The scorecard objects are stored in the data ArrayList
+ * @author Jakob Opland and Markus Johansen
+ * @version 1.0
+ * @since 2022-10-10
+ */
 public class Data {
     private ArrayList<Scorecard> data;
 

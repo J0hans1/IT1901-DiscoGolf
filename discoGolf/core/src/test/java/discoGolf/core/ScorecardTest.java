@@ -10,7 +10,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * TestFX Scorecard class test
+ * J-unit test for Scorecard class
+ * @author Ulrik Isdahl and Jakob Opland
+ * @version 1.0
+ * @since 2022-09-28
  */
 public class ScorecardTest {
     private Scorecard scorecard;

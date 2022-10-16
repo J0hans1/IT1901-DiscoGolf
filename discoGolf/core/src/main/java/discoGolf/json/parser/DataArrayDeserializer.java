@@ -14,7 +14,13 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import discoGolf.core.Data;
 import discoGolf.core.Scorecard;
 
-public class DataArrayDeserializer extends JsonDeserializer<Data> {
+/**
+ * Collects all data from json file and stores it in a Data object
+ * @author Markus Johansen and Jakob Opland
+ * @version 1.0
+ * @since 2022-10-03
+*/
+public class DataArrayDeserializer extends JsonDeserializer<Data>{
     private ScorecardDeserializer scorecardDeserializer = new ScorecardDeserializer();
 
     /**

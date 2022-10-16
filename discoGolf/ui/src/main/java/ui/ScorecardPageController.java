@@ -15,6 +15,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.Node;
 
+/**
+ * JavaFX controller for displaying the scorecard ui
+ * @author @Billy Barret
+ * @version 1.0
+ * @since 2022-09-21
+ */
 public class ScorecardPageController {
     
     private Scorecard scorecard;

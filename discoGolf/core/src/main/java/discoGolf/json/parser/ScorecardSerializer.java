@@ -8,7 +8,13 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 
 import discoGolf.core.Scorecard;
 
-public class ScorecardSerializer extends JsonSerializer<Scorecard> {
+/**
+ * Writes data from Scorcard object to json format
+ * @author Markus Johansen and Jakob Opland
+ * @version 1.0
+ * @since 2022-10-10
+ */
+public class ScorecardSerializer extends JsonSerializer<Scorecard>{
 
     /**
      * Serialize a scorecard Java object to JSON format

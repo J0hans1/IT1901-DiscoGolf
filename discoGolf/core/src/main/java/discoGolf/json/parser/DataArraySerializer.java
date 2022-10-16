@@ -8,7 +8,13 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 
 import discoGolf.core.Data;
 
-public class DataArraySerializer extends JsonSerializer<Data> {
+/**
+ * Transforms Data object contents to json parsable elements
+ * @author Markus Johansen and Jakob Opland
+ * @version 1.0
+ * @since 2022-10-03
+ */
+public class DataArraySerializer extends JsonSerializer<Data>{
 
     /**
      * Serialize a Data Java object to JSON format

@@ -3,6 +3,13 @@ package discoGolf.core;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
+/**
+ * The states of this class keep track of the current stats of a player on the Course course
+ * @see Course course is used to decide how many holes there are and the par values of those holes in the scorecard
+ * @author Billy Barret and Ulrik Isdahl
+ * @version 1.2
+ * @since 2022-09-18
+ */
 public class Scorecard {
     private ArrayList<Integer> throwsList = new ArrayList<>();
     private int currentHole;
