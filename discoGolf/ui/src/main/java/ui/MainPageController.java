@@ -115,5 +115,28 @@ public class MainPageController {
             System.out.println("Failed to create new Window." + e);
         }
     }
+
+     /**
+     * Creates a scorecard object with the playername and selected course
+     * Loads the Leaderboard page
+     * @param event is the event that triggers the change of scenes
+     * @throws IOException if reading the fxml file failed
+     */
+    public void handleLeaderboardButton(ActionEvent event){
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("Leaderboard.fxml"));
+            root = fxmlLoader.load();
+            
+            LeaderboardPageController nextController = fxmlLoader.getController();
+            nextController.displayLeaderboard();
+            stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException e) {
+            System.out.println("Failed to create new Window." + e);
+        }
+    }
 }
 
