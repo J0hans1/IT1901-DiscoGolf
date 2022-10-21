@@ -17,7 +17,6 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-
 /**
  * JavaFX controller to display the leaderboard page of the JavaFX application
  * @author Ulrik Isdahl and Jakob Oppland
@@ -51,13 +50,9 @@ public class LeaderboardPageController {
     Data data = new Data();
     data = db.readData();
     this.leaderboard = new Leaderboard(data);
+    selectCourseDropdown.getItems().add("Lade");
+    selectCourseDropdown.getItems().add("Dragvoll");
     displayLeaderboard();
-
-    position.setCellValueFactory(new PropertyValueFactory<>("Position"));
-    playerName.setCellValueFactory(new PropertyValueFactory<>("PlayerName"));
-    totalScore.setCellValueFactory(new PropertyValueFactory<>("TotalScore"));
-    //add your data to the table here.
-    leaderboardTableView.setItems(scorecardsModel);
   }
 
   public void displayLeaderboard() {
@@ -68,5 +63,10 @@ public class LeaderboardPageController {
       Scorecard scorecard = chosenCourseList.get(i);
       scorecardsModel.add(new ScorecardsModel(i+1, scorecard.getPlayerName(), scorecard.getTotalScore()));
     }
+    position.setCellValueFactory(new PropertyValueFactory<>("Position"));
+    playerName.setCellValueFactory(new PropertyValueFactory<>("PlayerName"));
+    totalScore.setCellValueFactory(new PropertyValueFactory<>("TotalScore"));
+    leaderboardTableView.setItems(scorecardsModel);
   }
+
 }
