@@ -1,20 +1,17 @@
 package discoGolf.core;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-//import java.util.Comparator;
 import java.util.HashMap;
 
 /**
- * Leadboard class that holds alle the saved Scorecard 
- * objects in sorted order.
+ * Leadboard class that holds alle the saved Scorecard
+ * objects in a hashmap connected to their course, in sorted order. 
  */
 public class Leaderboard {
   private Data dataObject;
   private HashMap<String, ArrayList<Scorecard>> leaderboardForAllCourses;
-
+  
   /**
    * Inizialice leaderboard object by reading Data getData() list
    * @param leaderboardList Data object that contains saved Scorecards
@@ -23,29 +20,30 @@ public class Leaderboard {
     this.dataObject = dataObject;
     this.leaderboardForAllCourses = setLeaderboard();
   }
-
+  
   /**
    * Create a HashMap where each key is a unique courseName saved 
-   * in the database, mapping to an arrayList that holds each Scorecard
+   * in the database. Each key maps to an arrayList that holds each Scorecard
    * connected to that unique course. 
    * @return
    */
   private HashMap<String, ArrayList<Scorecard>> setLeaderboard() {
     HashMap<String, ArrayList<Scorecard>> leaderboardHashMap = new HashMap<>();
-
-    for (Scorecard scorecard : dataObject.getData()) {
+  
+    for (Scorecard scorecard : this.dataObject.getData()) {
       String courseName = scorecard.getCourseName();
       ArrayList<Scorecard> courseLeaderboard = new ArrayList<>();
-
+  
       if (leaderboardHashMap.containsKey(courseName)) {
         courseLeaderboard = leaderboardHashMap.get(courseName);
       } 
       courseLeaderboard.add(scorecard);
+      sortLeaderboardList(courseLeaderboard);
       leaderboardHashMap.put(courseName, courseLeaderboard);
     }
     return leaderboardHashMap;
   }
-
+  
   /**
    * @return leaderboardForAllCourses hashamap containing courseNames
    * as keys, and realated arraylists with scorecard objects as values
@@ -53,7 +51,7 @@ public class Leaderboard {
   public HashMap<String, ArrayList<Scorecard>> getLeaderboardForAllCourses() {
     return leaderboardForAllCourses;
   }
-
+  
   /**
    * 
    * @param courseName the coursesName for a spesific course.
@@ -62,35 +60,35 @@ public class Leaderboard {
    */
   public ArrayList<Scorecard> getLeaderboardForCourse(String courseName) {
     if (!leaderboardForAllCourses.containsKey(courseName)) {
-      throw new IllegalArgumentException("The course does not excist!");
+      throw new IllegalArgumentException("The course name does not exist!");
     }
     return leaderboardForAllCourses.get(courseName);
   }
-
+  
   /**
-   * returns leaderboardList sorted by 
-   * @param leaderboardList
+   * returns scorecardLeaderboard sorted by LeaderboardComparator 
+   * @param scorecardLeaderboard a list containing unsorted Scorecard objects
    */
   private ArrayList<Scorecard> sortLeaderboardList(ArrayList<Scorecard> scorecardLeaderboard) {
-    //return scorecardLeaderboard.sort(null);
+    Collections.sort(scorecardLeaderboard, new LeaderboardComparator());
+    return scorecardLeaderboard;
   }
+  
+  /**
+   * Add scorecard to relevant list in leaderboardForAllCourses based 
+   * on which course the scorecard object contains. Also sort the relevant list.
+   * @param scorecard the new scorecard object
+   */
+  public void updateLeaderboard(Scorecard scorecard) {
+    String courseName = scorecard.getCourseName();
+    ArrayList<Scorecard> courseLeaderboard = new ArrayList<>();
 
-  public static void main(String[] args) {
-      Course course1 = new Course("Lade", new ArrayList<>(Arrays.asList(3, 4, 5, 3, 4, 5, 3, 4, 3)));
-      Scorecard scorecard1 = new Scorecard(course1, "Jakob", new ArrayList<>(Arrays.asList(3, 4, 5, 3, 4, 5, 3, 4, 3)));
-      Scorecard scorecard2 = new Scorecard(course1, "Markus", new ArrayList<>(Arrays.asList(3, 4, 5, 3, 4, 5, 4, 4, 2)));
-      Scorecard scorecard3 = new Scorecard(course1, "Ulrik", new ArrayList<>(Arrays.asList(3, 4, 5, 3, 4, 5, 3, 4, 9)));
-      ArrayList<Scorecard> leaderboard = new ArrayList<>();
-      leaderboard.add(scorecard3);
-      leaderboard.add(scorecard2);
-      leaderboard.add(scorecard1);
-
-      LeaderboardComparator comparator = new LeaderboardComparator();
-      Collections.sort(leaderboard, comparator);
-      for (Scorecard card : leaderboard) {
-        System.out.println(card.getPlayerName());
-        System.out.println(card.getTotalScore());
-      }
+    if (getLeaderboardForAllCourses().containsKey(courseName)) {
+      courseLeaderboard = getLeaderboardForAllCourses().get(courseName);
+    } 
+    courseLeaderboard.add(scorecard);
+    sortLeaderboardList(courseLeaderboard);
+    getLeaderboardForAllCourses().put(courseName, courseLeaderboard);
   }
 
 }
