@@ -128,6 +128,7 @@ public class MainPageController {
             root = fxmlLoader.load();
             
             LeaderboardPageController nextController = fxmlLoader.getController();
+            nextController.displayLeaderboard();
             stage = (Stage)((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
