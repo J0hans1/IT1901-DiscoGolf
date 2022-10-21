@@ -77,8 +77,8 @@ public class Leaderboard {
 
   public static void main(String[] args) {
       Course course1 = new Course("Lade", new ArrayList<>(Arrays.asList(3, 4, 5, 3, 4, 5, 3, 4, 3)));
-      Scorecard scorecard1 = new Scorecard(course1, "Jakob", new ArrayList<>(Arrays.asList(5, 4, 5, 3, 4, 5, 3, 6, 2)));
-      Scorecard scorecard2 = new Scorecard(course1, "Markus", new ArrayList<>(Arrays.asList(3, 4, 5, 3, 4, 5, 3, 4, 4)));
+      Scorecard scorecard1 = new Scorecard(course1, "Jakob", new ArrayList<>(Arrays.asList(3, 4, 5, 3, 4, 5, 3, 4, 3)));
+      Scorecard scorecard2 = new Scorecard(course1, "Markus", new ArrayList<>(Arrays.asList(3, 4, 5, 3, 4, 5, 4, 4, 2)));
       Scorecard scorecard3 = new Scorecard(course1, "Ulrik", new ArrayList<>(Arrays.asList(3, 4, 5, 3, 4, 5, 3, 4, 9)));
       ArrayList<Scorecard> leaderboard = new ArrayList<>();
       leaderboard.add(scorecard3);
