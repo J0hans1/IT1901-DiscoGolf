@@ -45,34 +45,28 @@ public class LeaderboardPageController {
    * @throws IOException
    * @throws URISyntaxException
    */
+  @FXML
   public void initialize() throws IOException, URISyntaxException{    
     DiscoGolfPersistence db = new DiscoGolfPersistence();
     Data data = new Data();
     data = db.readData();
     this.leaderboard = new Leaderboard(data);
-    displayChosenLeadeboard();
+    displayLeaderboard();
 
-    position.setCellValueFactory(new PropertyValueFactory<>("StudentId"));
-    playerName.setCellValueFactory(new PropertyValueFactory<>("FirstName"));
-    totalScore.setCellValueFactory(new PropertyValueFactory<>("LastName"));
+    position.setCellValueFactory(new PropertyValueFactory<>("Position"));
+    playerName.setCellValueFactory(new PropertyValueFactory<>("PlayerName"));
+    totalScore.setCellValueFactory(new PropertyValueFactory<>("TotalScore"));
     //add your data to the table here.
     leaderboardTableView.setItems(scorecardsModel);
   }
 
-  public void displayChosenLeadeboard() {
+  public void displayLeaderboard() {
     String chosenCourse = selectCourseDropdown.getValue();
     ArrayList<Scorecard> chosenCourseList = leaderboard.getLeaderboardForCourse(chosenCourse);
  
     for (int i = 0; i < chosenCourseList.size(); i++) {
       Scorecard scorecard = chosenCourseList.get(i);
-      scorecardsModel.add(new ScorecardsModel(i, scorecard.getPlayerName(), scorecard.getTotalScore()));
+      scorecardsModel.add(new ScorecardsModel(i+1, scorecard.getPlayerName(), scorecard.getTotalScore()));
     }
   }
-
-
-
-
-
-
-
 }
