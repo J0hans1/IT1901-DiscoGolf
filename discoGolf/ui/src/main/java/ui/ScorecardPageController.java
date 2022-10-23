@@ -60,10 +60,25 @@ public class ScorecardPageController {
      * @throws IOException
      */
     public void handleSubmit(ActionEvent event) throws IOException, URISyntaxException{
-        try {
-            DiscoGolfPersistence db = new DiscoGolfPersistence();
-            db.sendScorecardToDatabase(scorecard);
+        DiscoGolfPersistence db = new DiscoGolfPersistence();
+        db.sendScorecardToDatabase(scorecard);
+        goBackToMainPage(event);
+    }
 
+    /**
+     * 
+     */
+    @FXML
+    public void cancelGame(ActionEvent event) {
+        goBackToMainPage(event);
+    }
+
+    /**
+     * 
+     * @param event
+     */
+    private void goBackToMainPage(ActionEvent event) {
+        try {
             FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("MainPage.fxml"));
             root = fxmlLoader.load();
             stage = (Stage)((Node) event.getSource()).getScene().getWindow();
@@ -76,7 +91,6 @@ public class ScorecardPageController {
         }
     }
 
-    
     /**
      * Refreshes the content of the display,
      * by changing the labels content, button labels and button visibility.
@@ -102,6 +116,7 @@ public class ScorecardPageController {
     /**
      * Updates textlabels and buttonlabels at the Hole display 
      */
+
     private void updateInfoDisplay() {
         currentHoleParLabel.setText("Par: " + Integer.toString(scorecard.getCurrentHolePar()));
         previousHoleButton.setText("Prev Hole: " + Integer.toString(scorecard.getCurrentHole() - 1));
@@ -159,7 +174,6 @@ public class ScorecardPageController {
         totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getTotalScore()));
         printCurrent();
     }
-
 
     /**
      * Prints current state of the scorecard
