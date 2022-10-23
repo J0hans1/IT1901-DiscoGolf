@@ -97,8 +97,7 @@ public class ScorecardAppTest extends ApplicationTest{
         assertNotNull(lookup(totalScore.toString())); //Check that there is a element with the value 'totalScore' in the page
     }
 
-
-    /* THIS TEST IS NOT FUNCTIONAL IN GITPOD
+    
     @Test
     @DisplayName("Test that the submitbutton is available after the end of the Lade course is reached")
     public void findSubmitButtonLadeCourse(){
@@ -106,8 +105,7 @@ public class ScorecardAppTest extends ApplicationTest{
         Button submitBtn = lookup("Submit").query();
         WaitForAsyncUtils.waitForFxEvents();
         assertNotNull(submitBtn);
-    }
-    */    
+    } 
     
     /**
      * Updates the display of the scorecardController such that the values in the scorecard are presented on the page
