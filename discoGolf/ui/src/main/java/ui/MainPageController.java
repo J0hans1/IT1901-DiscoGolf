@@ -74,6 +74,10 @@ public class MainPageController {
         availableCourses.add(Dragvoll);
         pickCourseMenu.getItems().add(Lade.getCourseName());
         pickCourseMenu.getItems().add(Dragvoll.getCourseName());
+
+        pickCourseMenu.setOnAction((ActionEvent e) -> {
+            pickCourseMenu.setStyle("-fx-border-width: 0");
+        });
     }
 
     /**
@@ -101,21 +105,31 @@ public class MainPageController {
     @FXML
     public void changeSceneToScorecard(ActionEvent event) {
         setPlayerName();
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("Scorecard.fxml"));
-            root = fxmlLoader.load();
-            
-            ScorecardPageController nextController = fxmlLoader.getController();
-            System.out.println(findSelectedCourse());
-            Scorecard newScorecard = new Scorecard(findSelectedCourse(), playerName);
-            nextController.getPreviousControllerInfo(newScorecard); //Need to add selectedCourse
-            stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-
-        } catch (IOException e) {
-            System.out.println("Failed to create new Window." + e);
+        if(playerName == ""){
+            playerNameTextField.setStyle("-fx-border-color: red; -fx-border-width: 2");
+            playerNameTextField.setPromptText("Please write a valid name ");
+            System.out.println(playerName);
+        }
+        else if (findSelectedCourse() == null){
+            pickCourseMenu.setStyle("-fx-border-color: red; -fx-border-width: 2");
+            pickCourseMenu.setPromptText("Please select a course ");
+        } else {
+            try {
+                FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("Scorecard.fxml"));
+                root = fxmlLoader.load();
+                
+                ScorecardPageController nextController = fxmlLoader.getController();
+                System.out.println(findSelectedCourse());
+                Scorecard newScorecard = new Scorecard(findSelectedCourse(), playerName);
+                nextController.getPreviousControllerInfo(newScorecard); //Need to add selectedCourse
+                stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+                scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+    
+            } catch (IOException e) {
+                System.out.println("Failed to create new Window." + e);
+            }
         }
     }
 
