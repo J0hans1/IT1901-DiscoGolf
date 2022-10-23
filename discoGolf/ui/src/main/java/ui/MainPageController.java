@@ -66,6 +66,7 @@ public class MainPageController {
      * Initializes the list of available courses and some course objects is added to it
      * Adds the names of the courses to the pickCourseMenu
      */
+    @FXML
     public void initialize() {
         Course Lade = new Course("Lade",new ArrayList<>(Arrays.asList(3,4,3,4,3,4,3,4,3)));
         Course Dragvoll = new Course("Dragvoll", new ArrayList<>(Arrays.asList(3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4)));
@@ -97,6 +98,7 @@ public class MainPageController {
      * @param event is the event that triggers the change of scenes
      * @throws IOException if reading the fxml file failed
      */
+    @FXML
     public void changeSceneToScorecard(ActionEvent event) {
         setPlayerName();
         try {
@@ -118,12 +120,12 @@ public class MainPageController {
     }
 
      /**
-     * Creates a scorecard object with the playername and selected course
-     * Loads the Leaderboard page
+     * Loads the Leaderboard page 
      * @param event is the event that triggers the change of scenes
      * @throws URISyntaxException
      * @throws IOException if reading the fxml file failed
      */
+    @FXML
     public void handleLeaderboardButton(ActionEvent event) throws URISyntaxException{
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("Leaderboard.fxml"));
