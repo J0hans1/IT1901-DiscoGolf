@@ -1,0 +1,40 @@
+
+
+/* color the column text*/
+.table-column{
+    -fx-text-fill: "white";
+    -fx-alignment: center;
+    -fx-padding: 10;
+    -fx-font-size: 20;
+  }
+  
+  /** color the column header text */
+  .table-view .column-header .label {
+    -fx-text-fill: "white";
+    -fx-font-size: 20;
+  }
+  
+  
+  /** add slight dividers between headers */
+  .table-view .column-header {
+    -fx-border-color: white;
+    -fx-border-width: .1
+  }
+  
+  /** color the scroll bar background and thumb */
+  .table-view .scroll-bar {
+    -fx-background-color: white;
+  }
+  .table-view .scroll-bar .thumb {
+    -fx-background-color: blue;
+  }
+
+  .button{
+    -fx-text-fill: white;
+  }
+  
+  
+  
+
+
+

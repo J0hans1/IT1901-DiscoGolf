@@ -1,6 +1,7 @@
 package ui;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -65,6 +66,7 @@ public class MainPageController {
      * Initializes the list of available courses and some course objects is added to it
      * Adds the names of the courses to the pickCourseMenu
      */
+    @FXML
     public void initialize() {
         Course Lade = new Course("Lade",new ArrayList<>(Arrays.asList(3,4,3,4,3,4,3,4,3)));
         Course Dragvoll = new Course("Dragvoll", new ArrayList<>(Arrays.asList(3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4,3,4)));
@@ -96,6 +98,7 @@ public class MainPageController {
      * @param event is the event that triggers the change of scenes
      * @throws IOException if reading the fxml file failed
      */
+    @FXML
     public void changeSceneToScorecard(ActionEvent event) {
         setPlayerName();
         try {
@@ -111,6 +114,26 @@ public class MainPageController {
             stage.setScene(scene);
             stage.show();
 
+        } catch (IOException e) {
+            System.out.println("Failed to create new Window." + e);
+        }
+    }
+
+     /**
+     * Loads the Leaderboard page 
+     * @param event is the event that triggers the change of scenes
+     * @throws URISyntaxException
+     * @throws IOException if reading the fxml file failed
+     */
+    @FXML
+    public void handleLeaderboardButton(ActionEvent event) throws URISyntaxException{
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("Leaderboard.fxml"));
+            root = fxmlLoader.load();
+            stage = (Stage)((Node) event.getSource()).getScene().getWindow();
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
         } catch (IOException e) {
             System.out.println("Failed to create new Window." + e);
         }

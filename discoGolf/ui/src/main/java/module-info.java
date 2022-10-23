@@ -4,5 +4,5 @@ module calc.ui {
     requires javafx.fxml;
     requires fxutil;
 
-    opens ui to javafx.graphics, javafx.fxml;
+    opens ui to javafx.graphics, javafx.fxml, javafx.base;
 }
