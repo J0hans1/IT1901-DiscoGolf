@@ -118,6 +118,8 @@ public class DiscoGolfPersistence {
     private String getPathString() throws URISyntaxException, IOException {
         Path p = Paths.get(System.getProperty("user.home") + "/discoGolf.json");
         if (!(Files.exists(p))) {
+            File f = new File(p.toString());
+            f.createNewFile();
             Data data = new Data();
             saveData(data);
         } 

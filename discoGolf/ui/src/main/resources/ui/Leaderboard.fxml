@@ -7,17 +7,17 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="843.0" style="-fx-background-color: #3D3D3D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.LeaderboardPageController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="843.0" style="-fx-background-color: #3D3D3D;" stylesheets="@style/leaderboard.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.LeaderboardPageController">
    <children>
       <TableView fx:id="leaderboardTableView" layoutX="122.0" layoutY="136.0" prefHeight="289.0" style="-fx-background-color: #3D3D3D #3D3D3D;">
         <columns>
-          <TableColumn fx:id="positionColumn" prefWidth="200.0" style="-fx-background-color: #3D3D3D;" text="Position" />
-          <TableColumn fx:id="nameColumn" prefWidth="200.0" style="-fx-background-color: #3D3D3D;" text="Name" />
-            <TableColumn fx:id="totalScoreColumn" prefWidth="200.0" style="-fx-background-color: #3D3D3D;" text="Total Score" />
+          <TableColumn fx:id="position" prefWidth="200.0" style="-fx-background-color: #3D3D3D;" text="Position" />
+          <TableColumn fx:id="playerName" prefWidth="200.0" style="-fx-background-color: #3D3D3D;" text="Name" />
+          <TableColumn fx:id="totalScore" prefWidth="200.0" style="-fx-background-color: #3D3D3D;" text="Total Score" />
         </columns>
       </TableView>
       <Text fill="WHITE" layoutX="315.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 40;" text="Leaderboard" textAlignment="CENTER" />
-      <Button fx:id="homeButton" layoutX="125.0" layoutY="46.0" mnemonicParsing="false" prefWidth="100.0" text="Home" />
-      <ComboBox fx:id="selectCourseDropdown" layoutX="572.0" layoutY="46.0" prefWidth="150.0" />
+      <Button fx:id="homeButton" layoutX="125.0" layoutY="46.0" mnemonicParsing="false" onAction="#handleHomeButton" prefWidth="100.0" style="-fx-background-color: #0A84FF;" text="Home" />
+      <ComboBox fx:id="selectCourseDropdown" layoutX="572.0" layoutY="46.0" onAction="#displayLeaderboard" prefWidth="150.0" value="Lade" />
    </children>
 </Pane>
