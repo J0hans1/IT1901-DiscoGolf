@@ -17,7 +17,7 @@
         </columns>
       </TableView>
       <Text fill="WHITE" layoutX="315.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 40;" text="Leaderboard" textAlignment="CENTER" />
-      <Button fx:id="homeButton" layoutX="125.0" layoutY="46.0" mnemonicParsing="false" prefWidth="100.0" style="-fx-background-color: #0A84FF;" text="Home" />
-      <ComboBox fx:id="selectCourseDropdown" layoutX="572.0" layoutY="46.0" prefWidth="150.0" value="Lade" />
+      <Button fx:id="homeButton" layoutX="125.0" layoutY="46.0" mnemonicParsing="false" prefWidth="100.0" text="Home" onAction="#handleHomeButton"/>
+      <ComboBox fx:id="selectCourseDropdown" layoutX="572.0" layoutY="46.0" onAction="#displayLeaderboard" prefWidth="150.0" value="Lade" />
    </children>
 </Pane>

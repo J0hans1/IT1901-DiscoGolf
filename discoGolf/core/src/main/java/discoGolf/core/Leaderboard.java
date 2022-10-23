@@ -53,14 +53,12 @@ public class Leaderboard {
   }
   
   /**
-   * 
    * @param courseName the coursesName for a spesific course.
    * @return the leaderboard for the unique course name.
-   * @throws IllegalArgumentException if the courseName key doesnt excist in the hashmap.
    */
   public ArrayList<Scorecard> getLeaderboardForCourse(String courseName) {
     if (!leaderboardForAllCourses.containsKey(courseName)) {
-      throw new IllegalArgumentException("The course name does not exist!");
+      return new ArrayList<>();
     }
     return leaderboardForAllCourses.get(courseName);
   }
