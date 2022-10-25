@@ -103,6 +103,9 @@ public class MainPageController {
         return null;
     }
 
+    /**
+     * Displays the scorecardFeedback pane for 2.5 seconds before making it invisible
+     */
     public void displayScorecardFeedback(){
         Platform.runLater(()->{
             scorecardFeedback.setVisible(true);
@@ -125,15 +128,14 @@ public class MainPageController {
      * Loads the scorecard page
      * @param event is the event that triggers the change of scenes
      * @throws IOException if reading the fxml file failed
+     * @throws IllegalStateException if no course is selected
+     * @throws IllegalArgumentException if playerName is invalid
      */
     @FXML
     public void handleScorecardButton(ActionEvent event) {
         setPlayerName();
-        if(playerName == ""){
-            playerNameTextField.setStyle("-fx-border-color: red; -fx-border-width: 2");
-            playerNameTextField.setPromptText("Please write a valid name ");
-        }
-        else if (findSelectedCourse() == null){
+
+        if (findSelectedCourse() == null){
             pickCourseMenu.setStyle("-fx-border-color: red; -fx-border-width: 2");
             pickCourseMenu.setPromptText("Please select a course ");
         } else {
@@ -148,10 +150,15 @@ public class MainPageController {
                 scene = new Scene(root);
                 stage.setScene(scene);
                 stage.show();
-    
+                
             } catch (IOException e) {
                 System.out.println("Failed to create new Window." + e);
+            } catch (IllegalArgumentException e){
+                playerNameTextField.setStyle("-fx-border-color: red; -fx-border-width: 2");
+                playerNameTextField.setText("");
+                playerNameTextField.setPromptText("Please write a valid name ");
             }
+             
         }
     }
 
