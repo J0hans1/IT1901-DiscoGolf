@@ -8,7 +8,11 @@ import java.util.List;
 
 import discoGolf.core.Course;
 import discoGolf.core.Scorecard;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader; 
 import javafx.scene.Parent;
@@ -16,7 +20,9 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javafx.scene.Node;
 
 /**
@@ -42,6 +48,8 @@ public class MainPageController {
     public TextField playerNameTextField;
     @FXML
     public ComboBox<String> pickCourseMenu;
+    @FXML 
+    public Pane scorecardFeedback;
 
 
     /**
@@ -95,6 +103,22 @@ public class MainPageController {
         return null;
     }
 
+    public void displayScorecardFeedback(){
+        Platform.runLater(()->{
+            scorecardFeedback.setVisible(true);
+        });
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2.5), new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+                scorecardFeedback.setVisible(false);
+            }
+            
+        }));
+        timeline.setCycleCount(1);
+        timeline.play();
+    }
+
 
     /**
      * Creates a scorecard object with the playername and selected course
@@ -103,12 +127,11 @@ public class MainPageController {
      * @throws IOException if reading the fxml file failed
      */
     @FXML
-    public void changeSceneToScorecard(ActionEvent event) {
+    public void handleScorecardButton(ActionEvent event) {
         setPlayerName();
         if(playerName == ""){
             playerNameTextField.setStyle("-fx-border-color: red; -fx-border-width: 2");
             playerNameTextField.setPromptText("Please write a valid name ");
-            System.out.println(playerName);
         }
         else if (findSelectedCourse() == null){
             pickCourseMenu.setStyle("-fx-border-color: red; -fx-border-width: 2");
@@ -119,7 +142,6 @@ public class MainPageController {
                 root = fxmlLoader.load();
                 
                 ScorecardPageController nextController = fxmlLoader.getController();
-                System.out.println(findSelectedCourse());
                 Scorecard newScorecard = new Scorecard(findSelectedCourse(), playerName);
                 nextController.getPreviousControllerInfo(newScorecard); //Need to add selectedCourse
                 stage = (Stage)((Node) event.getSource()).getScene().getWindow();

@@ -66,6 +66,8 @@ public class ScorecardPageController {
 
             FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("MainPage.fxml"));
             root = fxmlLoader.load();
+            MainPageController mainPageController = fxmlLoader.getController();
+            mainPageController.displayScorecardFeedback();
             stage = (Stage)((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
