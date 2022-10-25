@@ -5,9 +5,10 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="843.0" style="-fx-background-color: #3D3D3D;" stylesheets="@style/leaderboard.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.LeaderboardPageController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="843.0" style="-fx-background-color: #3D3D3D;" stylesheets="@style/leaderboard.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.LeaderboardPageController">
    <children>
       <TableView fx:id="leaderboardTableView" layoutX="122.0" layoutY="136.0" prefHeight="289.0" style="-fx-background-color: #3D3D3D #3D3D3D;">
         <columns>
@@ -16,6 +17,11 @@
           <TableColumn fx:id="totalScore" prefWidth="200.0" style="-fx-background-color: #3D3D3D;" text="Total Score" />
         </columns>
       </TableView>
+      <Text fx:id="noCourseFeedback" fill="WHITE" layoutX="284.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 20;" text="No games recorded on this course" textAlignment="CENTER" visible="false">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Text>
       <Text fill="WHITE" layoutX="315.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-size: 40;" text="Leaderboard" textAlignment="CENTER" />
       <Button fx:id="homeButton" layoutX="125.0" layoutY="46.0" mnemonicParsing="false" onAction="#handleHomeButton" prefWidth="100.0" style="-fx-background-color: #0A84FF;" text="Home" />
       <ComboBox fx:id="selectCourseDropdown" layoutX="572.0" layoutY="46.0" onAction="#displayLeaderboard" prefWidth="150.0" value="Lade" />

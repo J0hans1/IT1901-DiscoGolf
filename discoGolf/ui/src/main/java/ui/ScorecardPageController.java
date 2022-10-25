@@ -28,7 +28,7 @@ public class ScorecardPageController {
     @FXML
     public Label currentCourseLabel, displayPlayerName, currentHole, currentScore, totalScoreLabel, currentHoleParLabel;
     @FXML
-    public Button previousHoleButton, nextHoleButton, submitBtn;
+    public Button previousHoleButton, nextHoleButton, submitBtn, removeThrowButton;
     @FXML 
     private Parent root;
     @FXML 
@@ -81,6 +81,8 @@ public class ScorecardPageController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("MainPage.fxml"));
             root = fxmlLoader.load();
+            MainPageController mainPageController = fxmlLoader.getController();
+            mainPageController.displayScorecardFeedback();
             stage = (Stage)((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -110,6 +112,7 @@ public class ScorecardPageController {
         previousHoleButton.setVisible(scorecard.getCurrentHole() != 1);                     
         nextHoleButton.setVisible(scorecard.getCurrentHole() != scorecard.getCourseSize()); 
         submitBtn.setVisible(scorecard.getCurrentHole() == scorecard.getCourseSize());
+        removeThrowButton.setDisable(scorecard.getCurrentHoleThrows() == 1);
     }
 
 

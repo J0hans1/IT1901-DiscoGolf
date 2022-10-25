@@ -7,10 +7,11 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="843.0" style="-fx-background-color: #3D3D3D;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.MainPageController">
    <children>
-      <Button id="playButton" layoutX="350.0" layoutY="386.0" mnemonicParsing="false" onAction="#changeSceneToScorecard" prefHeight="39.0" prefWidth="144.0" style="-fx-background-color: #0A84FF;" text="Play" textFill="WHITE">
+      <Button id="playButton" layoutX="350.0" layoutY="386.0" mnemonicParsing="false" onAction="#handleScorecardButton" prefHeight="39.0" prefWidth="144.0" style="-fx-background-color: #0A84FF;" text="Play" textFill="WHITE">
          <font>
             <Font size="16.0" />
          </font>
@@ -19,13 +20,22 @@
       <ComboBox fx:id="pickCourseMenu" layoutX="230.0" layoutY="316.0" prefHeight="25.0" prefWidth="371.0" promptText="pick your course" />
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="330.0" layoutY="67.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@LOGO.png"/>
+            <Image url="@LOGO.png" />
          </image>
       </ImageView>
       <Button id="leaderboardButton" fx:id="leaderboardButton" layoutX="650.0" layoutY="28.0" mnemonicParsing="false" onAction="#handleLeaderboardButton" prefHeight="25.0" prefWidth="144.0" style="-fx-background-color: #0A84FF;" text="Leaderboard" textFill="WHITE">
          <font>
-            <Font size="16.0"/>
+            <Font size="16.0" />
          </font>
       </Button>
+      <Pane fx:id="scorecardFeedback" layoutX="307.0" layoutY="94.0" prefHeight="80.0" prefWidth="238.0" style="-fx-background-color: grey; visibility: false; -fx-border-color: #2ecf0a; -fx-border-width: 2;">
+         <children>
+            <Text layoutX="26.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: black;" text="Game saved to leaderboard!">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
    </children>
 </Pane>
