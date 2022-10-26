@@ -193,4 +193,16 @@ public class Scorecard {
             throw new IllegalArgumentException("Illegal input to name field");
         }
     }
+
+    /**
+     * @return a string representation of the scorecard scores on each whole
+     */
+    @Override
+    public String toString() {
+        String scorecard = "";
+        for (int i = 0; i < throwsList.size(); i++) {
+            scorecard += "Hole " + (i + 1) + ": " + throwsList.get(i) + " throws, ";
+        }
+        return scorecard;
+    }
 }
