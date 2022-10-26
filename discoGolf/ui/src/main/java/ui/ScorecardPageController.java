@@ -24,6 +24,7 @@ import javafx.scene.Node;
 public class ScorecardPageController {
     
     private Scorecard scorecard;
+    DataAccess access = new DataAccess();
 
     @FXML
     public Label currentCourseLabel, displayPlayerName, currentHole, currentScore, totalScoreLabel, currentHoleParLabel;
@@ -61,9 +62,7 @@ public class ScorecardPageController {
      */
     public void handleSubmit(ActionEvent event) throws IOException, URISyntaxException{
         try {
-            DiscoGolfPersistence db = new DiscoGolfPersistence();
-            db.sendScorecardToDatabase(scorecard);
-
+            access.RequestPostingScorecard(scorecard);
             FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("MainPage.fxml"));
             root = fxmlLoader.load();
             stage = (Stage)((Node) event.getSource()).getScene().getWindow();

@@ -19,7 +19,7 @@
         </dependency>
 
         <!--Get the fxutil module-->
-         <dependency>
+        <dependency>
             <groupId>it1901</groupId>
             <artifactId>modules-util</artifactId> 
             <version>0.0.1-SNAPSHOT</version>

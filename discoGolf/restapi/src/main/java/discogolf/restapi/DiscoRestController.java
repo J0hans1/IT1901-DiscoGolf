@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,8 +38,19 @@ public class DiscoRestController {
      * @throws URISyntaxException
      * @throws IOException
      */
-    @PostMapping(value = "/post")
+    @PostMapping(value = "/post1")
     public void submit() throws IOException, URISyntaxException {
         service.post();
+    }
+
+    /**
+     * Posts a scorecard to the database.
+     * @param scorecard the scorecard to be posted.
+     * @throws URISyntaxException
+     * @throws IOException
+     */
+    @RequestMapping(value = "/post2/{scorecard}/")
+    public void submit(@PathVariable Scorecard scorecard) throws IOException, URISyntaxException {
+        service.post(scorecard);
     }
 }

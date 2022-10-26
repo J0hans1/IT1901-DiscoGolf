@@ -32,13 +32,21 @@ public class DiscoRestService {
      * @throws URISyntaxException
      * @throws IOException
      */
+    public void post(Scorecard s) throws IOException, URISyntaxException {
+        persistence.sendScorecardToDatabase(s);
+    }
+
+    /**
+     * posts a scorecard to the database.
+     * @param scorecard the scorecard to be posted.
+     * @throws URISyntaxException
+     * @throws IOException
+     */
     public void post() throws IOException, URISyntaxException {
         ArrayList<Integer> pars = new ArrayList<>();
         pars.add(3);
         Course course = new Course("Skjeberg Golfklubb", pars);
         Scorecard s = new Scorecard(course, "William Iversen");
-
-        //denne funksjonen funker, men vi må klare å ta inn et argument
         persistence.sendScorecardToDatabase(s);
     }
 }
