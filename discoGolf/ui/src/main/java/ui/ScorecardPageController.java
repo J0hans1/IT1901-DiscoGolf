@@ -109,7 +109,9 @@ public class ScorecardPageController {
     private void handleBtnVisibilty(){
         previousHoleButton.setVisible(scorecard.getCurrentHole() != 1);                     
         nextHoleButton.setVisible(scorecard.getCurrentHole() != scorecard.getCourseSize()); 
-        submitBtn.setVisible(scorecard.getCurrentHole() == scorecard.getCourseSize());
+        submitBtn.setVisible(scorecard.getCurrentHole() + 1 == scorecard.getCourseSize());
+        System.out.println(scorecard.getCurrentHole());
+        System.out.println(scorecard.getCourseSize());
     }
 
 
@@ -132,7 +134,7 @@ public class ScorecardPageController {
      * @see refreshDisplay()
      */
     public void addThrow() { 
-        scorecard.addThrow();
+        scorecard.getCurrentHoleInstance().addThrow();
         refreshDisplay();
     }
 
@@ -143,7 +145,7 @@ public class ScorecardPageController {
      * @see refreshDisplay()
      */
     public void removeThrow() {
-        scorecard.removeThrow();
+        scorecard.getCurrentHoleInstance().removeThrow();
         refreshDisplay();
     }
 

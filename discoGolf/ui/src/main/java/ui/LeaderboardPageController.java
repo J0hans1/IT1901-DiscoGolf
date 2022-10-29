@@ -6,7 +6,8 @@ import java.util.ArrayList;
 
 import discoGolf.core.Data;
 import discoGolf.core.Leaderboard;
-import discoGolf.core.Scorecard;
+import discoGolf.core.ScorecardDAO;
+import discoGolf.core.ScorecardInterface;
 import discoGolf.json.DiscoGolfPersistence;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -75,10 +76,10 @@ public class LeaderboardPageController {
   public void displayLeaderboard() {
     ObservableList<ScorecardsModel> scorecardsModel = FXCollections.observableArrayList();
     String chosenCourse = selectCourseDropdown.getValue();
-    ArrayList<Scorecard> chosenCourseList = leaderboard.getLeaderboardForCourse(chosenCourse);
+    ArrayList<ScorecardInterface> chosenCourseList = leaderboard.getLeaderboardForCourse(chosenCourse);
 
     for (int i = 0; i < chosenCourseList.size(); i++) {
-      Scorecard scorecard = chosenCourseList.get(i);
+      ScorecardInterface scorecard = chosenCourseList.get(i);
       scorecardsModel.add(new ScorecardsModel(i+1, scorecard.getPlayerName(), scorecard.getTotalScore()));
     }
     position.setCellValueFactory(new PropertyValueFactory<>("Position"));
