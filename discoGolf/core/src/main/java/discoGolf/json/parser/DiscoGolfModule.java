@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import discoGolf.core.Course;
 import discoGolf.core.Data;
 import discoGolf.core.Scorecard;
+import discoGolf.core.ScorecardDAO;
 
 /**
  * Initializes deserializer and serializer objects
@@ -24,7 +25,7 @@ public class DiscoGolfModule extends SimpleModule {
         super(NAME, Version.unknownVersion());
         addSerializer(Course.class, new CourseSerializer());
         addSerializer(Scorecard.class, new ScorecardSerializer());
-        addDeserializer(Scorecard.class, new ScorecardDeserializer());
+        addDeserializer(ScorecardDAO.class, new ScorecardDeserializer());
         addSerializer(Data.class, new DataArraySerializer());
         addDeserializer(Data.class, new DataArrayDeserializer());
     }

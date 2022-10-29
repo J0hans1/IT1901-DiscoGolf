@@ -3,8 +3,8 @@ package discoGolf.core;
 public class ScorecardDAO implements ScorecardInterface {
   private final String playerName;
   private final Course course;
-  private int bestHole;
-  private int totalScore;
+  private final int bestHole;
+  private final int totalScore;
 
   /**
      * - constructs a scorecard object for deserializing a json object

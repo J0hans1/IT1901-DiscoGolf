@@ -10,7 +10,7 @@ import java.util.HashMap;
  */
 public class Leaderboard {
   private Data dataObject;
-  private HashMap<String, ArrayList<Scorecard>> leaderboardForAllCourses;
+  private HashMap<String, ArrayList<ScorecardInterface>> leaderboardForAllCourses;
   
   /**
    * Inizialice leaderboard object by reading Data getData() list
@@ -27,12 +27,12 @@ public class Leaderboard {
    * connected to that unique course. 
    * @return
    */
-  private HashMap<String, ArrayList<Scorecard>> setLeaderboard() {
-    HashMap<String, ArrayList<Scorecard>> leaderboardHashMap = new HashMap<>();
+  private HashMap<String, ArrayList<ScorecardInterface>> setLeaderboard() {
+    HashMap<String, ArrayList<ScorecardInterface>> leaderboardHashMap = new HashMap<>();
   
-    for (Scorecard scorecard : this.dataObject.getData()) {
+    for (ScorecardInterface scorecard : this.dataObject.getData()) {
       String courseName = scorecard.getCourseName();
-      ArrayList<Scorecard> courseLeaderboard = new ArrayList<>();
+      ArrayList<ScorecardInterface> courseLeaderboard = new ArrayList<>();
   
       if (leaderboardHashMap.containsKey(courseName)) {
         courseLeaderboard = leaderboardHashMap.get(courseName);
@@ -48,7 +48,7 @@ public class Leaderboard {
    * @return leaderboardForAllCourses hashamap containing courseNames
    * as keys, and realated arraylists with scorecard objects as values
    */
-  public HashMap<String, ArrayList<Scorecard>> getLeaderboardForAllCourses() {
+  public HashMap<String, ArrayList<ScorecardInterface>> getLeaderboardForAllCourses() {
     return leaderboardForAllCourses;
   }
   
@@ -56,7 +56,7 @@ public class Leaderboard {
    * @param courseName the coursesName for a spesific course.
    * @return the leaderboard for the unique course name.
    */
-  public ArrayList<Scorecard> getLeaderboardForCourse(String courseName) {
+  public ArrayList<ScorecardInterface> getLeaderboardForCourse(String courseName) {
     if (!leaderboardForAllCourses.containsKey(courseName)) {
       return new ArrayList<>();
     }
@@ -67,7 +67,7 @@ public class Leaderboard {
    * returns scorecardLeaderboard sorted by LeaderboardComparator 
    * @param scorecardLeaderboard a list containing unsorted Scorecard objects
    */
-  private ArrayList<Scorecard> sortLeaderboardList(ArrayList<Scorecard> scorecardLeaderboard) {
+  private ArrayList<ScorecardInterface> sortLeaderboardList(ArrayList<ScorecardInterface> scorecardLeaderboard) {
     Collections.sort(scorecardLeaderboard, new LeaderboardComparator());
     return scorecardLeaderboard;
   }
@@ -77,9 +77,9 @@ public class Leaderboard {
    * on which course the scorecard object contains. Also sort the relevant list.
    * @param scorecard the new scorecard object
    */
-  public void updateLeaderboard(Scorecard scorecard) {
+  public void updateLeaderboard(ScorecardInterface scorecard) {
     String courseName = scorecard.getCourseName();
-    ArrayList<Scorecard> courseLeaderboard = new ArrayList<>();
+    ArrayList<ScorecardInterface> courseLeaderboard = new ArrayList<>();
 
     if (getLeaderboardForAllCourses().containsKey(courseName)) {
       courseLeaderboard = getLeaderboardForAllCourses().get(courseName);

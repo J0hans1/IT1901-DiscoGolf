@@ -30,5 +30,4 @@ public class DataArraySerializer extends JsonSerializer<Data>{
         gen.writeObjectField("data", value.getData());
         gen.writeEndObject();
     }
-
 }

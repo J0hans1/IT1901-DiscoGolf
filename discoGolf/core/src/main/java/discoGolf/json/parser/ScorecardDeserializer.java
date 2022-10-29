@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 
 import discoGolf.core.Course;
-import discoGolf.core.Scorecard;
+import discoGolf.core.ScorecardDAO;
 
 /**
  * Creates a Scorecard object from json data
@@ -22,7 +22,7 @@ import discoGolf.core.Scorecard;
  * @version 1.0
  * @since 2022-10-09 
  */
-public class ScorecardDeserializer extends JsonDeserializer<Scorecard> {
+public class ScorecardDeserializer extends JsonDeserializer<ScorecardDAO> {
 
     private CourseDeserializer courseDeserializer = new CourseDeserializer();
 
@@ -37,7 +37,7 @@ public class ScorecardDeserializer extends JsonDeserializer<Scorecard> {
      * @throws IOException      Error when trying to read from the database
      */
     @Override
-    public Scorecard deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JacksonException {
+    public ScorecardDAO deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JacksonException {
         TreeNode node = p.getCodec().readTree(p);
         return deserialize((JsonNode) node);
     }
@@ -49,20 +49,14 @@ public class ScorecardDeserializer extends JsonDeserializer<Scorecard> {
      * @param node The node to deserialize
      * @see DataArrayDeserializer
      */
-    Scorecard deserialize(JsonNode node) {
+    ScorecardDAO deserialize(JsonNode node) {
         if (node instanceof ObjectNode objNode) {
             String playerName = ((TextNode) objNode.get("playerName")).asText();
-
-            ArrayList<Integer> throwsList = new ArrayList<>();
-            JsonNode throwsListNode = objNode.get("throwsList");
-            for (JsonNode parValue : ((ArrayNode) throwsListNode)) {
-                throwsList.add(parValue.asInt());
-            }
-
+            int totalScore = objNode.get("bestHole").intValue();
+            int bestHole = objNode.get("bestHole").intValue();
             JsonNode courseNode = objNode.get("course");
             Course course = courseDeserializer.deserialize(courseNode);
-
-            return new Scorecard(course, playerName, throwsList);
+            return new ScorecardDAO(course, playerName, totalScore, bestHole);
         }
         return null;
     }

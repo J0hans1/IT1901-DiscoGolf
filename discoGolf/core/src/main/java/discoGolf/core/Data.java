@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * @since 2022-10-10
  */
 public class Data {
-    private ArrayList<Scorecard> data;
+    private ArrayList<ScorecardInterface> data;
 
     /**
      * Object for storing all the scorecards Its purpose is to be serialized and
@@ -22,19 +22,17 @@ public class Data {
 
     /**
      * Get the list of scorecards
-     * 
      * @return The list of scorecards
      */
-    public ArrayList<Scorecard> getData() {
+    public ArrayList<ScorecardInterface> getData() {
         return new ArrayList<>(data);
     }
 
     /**
      * Set the list of scorecards
-     * 
      * @param data The list of scorecards
      */
-    public void setData(ArrayList<Scorecard> data) {
+    public void setData(ArrayList<ScorecardInterface> data) {
         this.data = data;
     }
 
@@ -43,14 +41,14 @@ public class Data {
      * 
      * @param scorecard The scorecard to add
      */
-    public void add(Scorecard scorecard) {
+    public void add(ScorecardInterface scorecard) {
         data.add(scorecard);
     }
 
     @Override
     public String toString() {
         String contentString = "";
-        for (Scorecard scorecard : data) {
+        for (ScorecardInterface scorecard : data) {
             contentString += "\n" + scorecard.toString();
         }
         return "Data [data=" + contentString + "]";
