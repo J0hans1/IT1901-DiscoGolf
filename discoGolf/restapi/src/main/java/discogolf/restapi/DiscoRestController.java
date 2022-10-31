@@ -8,8 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.http.HttpStatus;
+
+
 
 import discoGolf.core.Scorecard;
 
@@ -49,8 +55,21 @@ public class DiscoRestController {
      * @throws URISyntaxException
      * @throws IOException
      */
-    @RequestMapping(value = "/post2/{scorecard}/")
-    public void submit(@PathVariable Scorecard scorecard) throws IOException, URISyntaxException {
-        service.post(scorecard);
+    @RequestMapping(value = "/post2")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void submit(@RequestBody Scorecard scorecard) throws IOException, URISyntaxException {
+        try {
+            service.post(scorecard);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Error: " + e.getMessage());
+            System.out.println("yeet");
+        }
     }
+
+    @RequestMapping(value = "/test", method = RequestMethod.POST)
+    public String test(@RequestBody Scorecard s) {
+        return "Hello " + s.getPlayerName();
+    }
+
 }

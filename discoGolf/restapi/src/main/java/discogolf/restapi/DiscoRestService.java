@@ -45,8 +45,8 @@ public class DiscoRestService {
     public void post() throws IOException, URISyntaxException {
         ArrayList<Integer> pars = new ArrayList<>();
         pars.add(3);
-        Course course = new Course("Skjeberg Golfklubb", pars);
-        Scorecard s = new Scorecard(course, "William Iversen");
+        Course course = new Course("øya Golfklubb", pars);
+        Scorecard s = new Scorecard(course, "Ulrik Iversen");
         persistence.sendScorecardToDatabase(s);
     }
 }

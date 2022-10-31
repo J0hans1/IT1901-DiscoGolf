@@ -16,6 +16,11 @@ public class Scorecard {
     private final String playerName;
     private final Course course;
 
+    public Scorecard() {
+        this.playerName = "Player";
+        this.course = new Course(playerName, throwsList);
+    }
+
     /**
      * - constructs a scorecard object that vil be saved in the database
      * 

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import discoGolf.core.Scorecard;
-import discoGolf.json.DiscoGolfPersistence;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,7 +23,7 @@ import javafx.scene.Node;
 public class ScorecardPageController {
     
     private Scorecard scorecard;
-    DataAccess access = new DataAccess();
+    private DataAccess access = new DataAccess();
 
     @FXML
     public Label currentCourseLabel, displayPlayerName, currentHole, currentScore, totalScoreLabel, currentHoleParLabel;

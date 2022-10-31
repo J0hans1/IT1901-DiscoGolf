@@ -14,26 +14,21 @@ import discoGolf.json.DiscoGolfPersistence;
 // import org.apache.http.HttpException;
 
 /**
- * Class for accessing the database.
- * Represents the access layer of the application.
+ * Transforms Data object contents to json parsable elements
+ * @author Markus Johansen, Billy Barret og Ulrik Isdahl
+ * @version 1.0
+ * @since 2022-10-03
  */
 public class DataAccess {
   String baseURL = "http://localhost:8080";
   DiscoGolfPersistence persistence = new DiscoGolfPersistence();
 
-  /**
-   * Forms an HTTP request that will post a scorecard to the database, via the restAPI
-   * @param scorecard the scorecard to be posted. 
-   * @throws IOException
-   */
-  public String RequestPostingScorecard(Scorecard scorecard) throws IOException {
+  public String postDefaultScorecard(){
     String responseBody = "";
-    String scorecardString = persistence.scorecardToJson(scorecard);
-
     try {
       // Create a request
       HttpRequest request = HttpRequest.newBuilder()
-      .uri(new URI(baseURL + "/post2/" + scorecardString))
+      .uri(new URI(baseURL + "/post1"))
       .POST(BodyPublishers.ofString(""))
       .build();
 
@@ -46,9 +41,34 @@ public class DataAccess {
       responseBody = response.body();
     } catch (Exception e) {
       e.printStackTrace();
-      // throw new HttpException("Error posting scorecard");
     }
     return responseBody;
+  }
+
+
+  /**
+   * Forms an HTTP request that will post a scorecard to the database, via the restAPI
+   * @param scorecard the scorecard to be posted. 
+   * @throws IOException
+   */
+  public void RequestPostingScorecard(Scorecard scorecard) throws IOException {
+    String scorecardString = persistence.scorecardToJson(scorecard);
+
+    try {
+      // Create a request 
+      HttpClient client = HttpClient.newHttpClient();
+      HttpRequest request = HttpRequest.newBuilder()
+      .uri(URI.create(baseURL + "/post2"))
+      .header("Content-type", "application/json")
+      .POST(BodyPublishers.ofString(scorecardString))
+      .build();
+
+      //send the request and get the response
+      client.send(request, HttpResponse.BodyHandlers.ofString());
+      } catch (Exception e) {
+      e.printStackTrace();
+      // throw new HttpException("Error posting scorecard");
+    }
   }
 
   /**
