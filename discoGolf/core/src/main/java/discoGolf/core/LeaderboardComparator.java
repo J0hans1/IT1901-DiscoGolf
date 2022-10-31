@@ -2,6 +2,13 @@ package discoGolf.core;
 
 import java.util.Comparator;
 
+/**
+ * LeadboardComparator that sort two ScorecardInterface objects
+ * based on total score, then best hole and finally name. 
+ * @author @Jakob Opland and @Ulrik Isdahl
+ * @version 1.0
+ * @since 2022-10-12
+ */
 public class LeaderboardComparator implements Comparator<ScorecardInterface> {
 
   /**

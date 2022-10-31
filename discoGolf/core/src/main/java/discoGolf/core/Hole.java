@@ -10,35 +10,48 @@ public class Hole {
   private int par;
   private int holeThrows;
   
+  /**
+   * Constructor validating par input and setting both field to this value.
+   * @param par the par value for the hole
+   */
   public Hole(int par) {
+    validatePar(par);
     this.par = par;
     this.holeThrows = par;
   }
 
-  public Hole(int par, int holeThrows) {
-    this.par = par;
-    this.holeThrows = holeThrows;
-  }
-
+  /**
+   * @return the par value for the hole
+   */
   public int getPar() {
     return par;
   }
     
+  /**
+   * @return total throws for this hole
+   */
   public int getHoleThrows() {
     return holeThrows;
   }
 
   /**
-     * adds one to the current amount of throws the player has made on the current
-     * hole
+   * @return the hole score which is total throws - par
+   */
+  public int getHoleScore() {
+    return getHoleThrows() - getPar();
+  }
+
+  /**
+     * adds one to the current amount of throws the player 
+     * has made on the hole.
   */
   public void addThrow() {
     this.holeThrows += 1;
   }
 
   /**
-  * removes one from the current amount of throws the player has made on the
-  * current hole
+  * removes one from the current amount of throws the 
+  * has made on the hole.
   */
   public void removeThrow() {
     if (getHoleThrows() == 1) {
@@ -47,8 +60,14 @@ public class Hole {
     this.holeThrows -= 1;
   }
 
-  public int getHoleScore() {
-    return getHoleThrows() - getPar();
+  /**
+     * @param int par value for the hole
+     * @throws IllegalStateException Throws if par value is not valid
+     */
+    private void validatePar(int par) {
+      if (par < 2 || par > 7) {
+          throw new IllegalArgumentException("Not a valid par value");
+      }
   }
-
+  
 }

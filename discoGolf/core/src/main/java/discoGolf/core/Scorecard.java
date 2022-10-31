@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 /**
  * The states of this class keep track of the current stats of a player on the Course course
  * @see Course course is used to decide how many holes there are and the par values of those holes in the scorecard
- * @author Billy Barret and Ulrik Isdahl
+ * @author Billy Barret, Ulrik Isdahl and @Jakob Opland
  * @version 1.2
  * @since 2022-09-18
  */
@@ -16,7 +16,6 @@ public class Scorecard implements ScorecardInterface {
 
     /**
      * - constructs a scorecard object that vil be saved in the database
-     * 
      * @param course     is the course the player picked at the main menu
      * @param playerName is the name of the player
      */
@@ -28,87 +27,101 @@ public class Scorecard implements ScorecardInterface {
         this.currentHoleNumber = 1;
     }
 
+    /**
+     * @return player name for the scorecard
+     */
     @Override
     public String getPlayerName() {
         return playerName;
     }
 
+    /**
+     * @return Course object for the scorecard
+     */
     @Override
     public Course getCourse() {
         return course;
     }
 
+    /**
+     * @return Course name for course in the scorecard
+     */
     @Override
     public String getCourseName() {
         return course.getCourseName();
     }
 
+    /**
+     * @return the total score for the scorecard by adding all the holes score together.
+     */
     @Override
     public int getTotalScore() {
         return course.getCourseHoles().stream().mapToInt(hole -> hole.getHoleScore()).sum();
     }
 
+    /**
+     * @return the best individual hole score for the scorecard
+     */
     @Override
     public int getBestHoleScore() {
         return this.getCourse().getCourseHoles().stream().mapToInt(p ->  p.getHoleScore()).min().getAsInt();
     }
 
     /**
-     * @return the current hole number the player is playing on
+     * @return the current hole object the player is playing on.
      */
     public Hole getCurrentHoleInstance() {
         return course.getHole(currentHoleNumber);
     }
 
     /**
-     * @return the current hole number the player is playing on
+     * @return the current hole number the player is playing on.
      */
     public int getCurrentHole() {
         return currentHoleNumber;
     }
 
     /**
-     * @return the current amount of throws the player has made on the current hole
+     * @return the current amount of throws the player has made on the current hole.
      */
     public int getCurrentHoleThrows() {
         return getCurrentHoleInstance().getHoleThrows();
     }
 
     /**
-     * @return the current par of the current hole
+     * @return the par of the current hole
      */
     public int getCurrentHolePar() {
         return getCurrentHoleInstance().getPar();
     }
     
     /**
-     * @return the size of the current course by streaming the courses par list and
-     *         counting the amount of elements
+     * @return the size of the current course by getting the 
+     * numberOfHoles field from course.
      */
     public int getCourseSize() {
         return course.getNumberOfHoles();
     }
 
     /**
-     * adds one to the current hole number if the player is not on the last hole
+     * adds one to the current hole number if the player is not on the last hole.
+     * @throws IllegalArgumentException if the player is at the last hole
      */
     public void nextHole() {
         if (getCurrentHole() == getCourseSize()) {
             throw new IllegalStateException("Can't go to nextHole because next hole doesn't exist");
         }
-        //currentHole = course.getCourseHoles().get(getCurrentHoleNumber());
         currentHoleNumber++;
     }
 
     /**
-     * removes one from the current hole number 
-     * if the player is not on the first hole
+     * removes one from the current hole number if the player is not on the first hole.
+     * @throws IllegalArgumentException if the player is at the first hole
      */
     public void previousHole() {
         if (getCurrentHole() == 1) {
             throw new IllegalStateException("Cannot go to a negative hole number");
         }
-        //currentHole = course.getCourseHoles().get(getCurrentHoleNumber() - 1);
         currentHoleNumber--;
     }
 

@@ -6,7 +6,10 @@ import java.util.HashMap;
 
 /**
  * Leadboard class that holds alle the saved Scorecard
- * objects in a hashmap connected to their course, in sorted order. 
+ * objects in a hashmap connected to their course, in sorted order.
+ * @author @Jakob Opland and @Ulrik Isdahl
+ * @version 1.0
+ * @since 2022-10-12
  */
 public class Leaderboard {
   private Data dataObject;
@@ -25,7 +28,7 @@ public class Leaderboard {
    * Create a HashMap where each key is a unique courseName saved 
    * in the database. Each key maps to an arrayList that holds each Scorecard
    * connected to that unique course. 
-   * @return
+   * @return Hashmap with all saved scorecards
    */
   private HashMap<String, ArrayList<ScorecardInterface>> setLeaderboard() {
     HashMap<String, ArrayList<ScorecardInterface>> leaderboardHashMap = new HashMap<>();
@@ -64,7 +67,7 @@ public class Leaderboard {
   }
   
   /**
-   * returns scorecardLeaderboard sorted by LeaderboardComparator 
+   * @return scorecardLeaderboard sorted by LeaderboardComparator 
    * @param scorecardLeaderboard a list containing unsorted Scorecard objects
    */
   private ArrayList<ScorecardInterface> sortLeaderboardList(ArrayList<ScorecardInterface> scorecardLeaderboard) {
