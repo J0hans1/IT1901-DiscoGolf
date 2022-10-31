@@ -112,6 +112,11 @@ public class DiscoGolfPersistence {
         return mapper.writeValueAsString(scorecard);
     }
 
+    //return a data object from a json string
+    public Data jsonToData(String jsonString) throws IOException {
+        return mapper.readValue(jsonString, Data.class);
+    }
+
 
     /**
      * Getter for the file path of the database.json file

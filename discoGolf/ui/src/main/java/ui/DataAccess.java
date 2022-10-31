@@ -1,11 +1,13 @@
 package ui;
 
+import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpRequest.BodyPublishers;
 
+import discoGolf.core.Data;
 import discoGolf.core.Scorecard;
 import discoGolf.json.DiscoGolfPersistence;
 
@@ -22,8 +24,9 @@ public class DataAccess {
   /**
    * Forms an HTTP request that will post a scorecard to the database, via the restAPI
    * @param scorecard the scorecard to be posted. 
+   * @throws IOException
    */
-  public String RequestPostingScorecard(Scorecard scorecard) {
+  public String RequestPostingScorecard(Scorecard scorecard) throws IOException {
     String responseBody = "";
     String scorecardString = persistence.scorecardToJson(scorecard);
 
@@ -45,7 +48,7 @@ public class DataAccess {
       e.printStackTrace();
       // throw new HttpException("Error posting scorecard");
     }
-    return response.body();
+    return responseBody;
   }
 
   /**
