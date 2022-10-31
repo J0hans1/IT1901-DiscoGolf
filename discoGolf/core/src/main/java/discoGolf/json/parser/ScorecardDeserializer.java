@@ -1,15 +1,12 @@
 package discoGolf.json.parser;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import com.fasterxml.jackson.core.JacksonException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.TreeNode;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 
@@ -52,7 +49,7 @@ public class ScorecardDeserializer extends JsonDeserializer<ScorecardDAO> {
     ScorecardDAO deserialize(JsonNode node) {
         if (node instanceof ObjectNode objNode) {
             String playerName = ((TextNode) objNode.get("playerName")).asText();
-            int totalScore = objNode.get("bestHole").intValue();
+            int totalScore = objNode.get("score").intValue();
             int bestHole = objNode.get("bestHole").intValue();
             JsonNode courseNode = objNode.get("course");
             Course course = courseDeserializer.deserialize(courseNode);

@@ -12,7 +12,6 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import discoGolf.core.Data;
-import discoGolf.core.Scorecard;
 import discoGolf.core.ScorecardDAO;
 import discoGolf.core.ScorecardInterface;
 
