@@ -4,20 +4,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Pattern;
 
+
 /**
  * The Course class represents a frisbee golf course with int numberOfHoles amount of holes
- * @author Billy Barret
+ * @author Billy Barret and Ulrik Isdahl
  * @version 1.0
  * @since 2022-09-21
  */
 public class Course {
 
     private int numberOfHoles;
-    private final String courseName;
+    private String courseName;
     private HashMap<Integer, Integer> parForHoles;
-    private final ArrayList<Integer> parValues;
-    private final int highestPossibleParValue = 7;
+    private ArrayList<Integer> parValues;
+    private int highestPossibleParValue = 7;
 
+    
     /**
      * Create a disc golf course.
      * 
@@ -33,6 +35,13 @@ public class Course {
         this.numberOfHoles = this.parValues.size();
         this.parForHoles = new HashMap<>();
         assignParsToHoles();
+    }
+    
+    /**
+     * Empty course constructor used by jacoco for deserialization
+     */
+    public Course(){
+        
     }
 
     /**
@@ -58,6 +67,31 @@ public class Course {
         }
     }
 
+    /**
+     * Sets a ArrayList of all the par values to the holes
+     * @param parValues An ArrayList of Integers
+     */
+    public void setParValues(ArrayList<Integer> parValues) {
+        this.parValues = parValues;
+        this.numberOfHoles = this.parValues.size();
+    }
+
+    /**
+     * Sets the name of the course
+     * @param courseName name of course
+     */
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    /**
+     * Initialize the hashmap where key is the hole number and value is the par value 
+     * @param parForHoles
+     */
+    public void setParForHoles(HashMap<Integer, Integer> parForHoles) {
+        this.parForHoles = parForHoles;
+    }
+    
     /**
      * @return String courseName - containing the name of the course
      */
