@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import discoGolf.core.Scorecard;
+import discoGolf.json.DiscoGolfPersistence;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,7 +29,7 @@ public class ScorecardPageController {
     @FXML
     public Label currentCourseLabel, displayPlayerName, currentHole, currentScore, totalScoreLabel, currentHoleParLabel;
     @FXML
-    public Button previousHoleButton, nextHoleButton, submitBtn;
+    public Button previousHoleButton, nextHoleButton, submitBtn, removeThrowButton;
     @FXML 
     private Parent root;
     @FXML 
@@ -60,10 +61,27 @@ public class ScorecardPageController {
      * @throws IOException
      */
     public void handleSubmit(ActionEvent event) throws IOException, URISyntaxException{
+        DiscoGolfPersistence db = new DiscoGolfPersistence();
+        db.sendScorecardToDatabase(scorecard);
+        goBackToMainPage(event);
+    }
+    /**
+     * 
+     */
+    @FXML
+    public void cancelGame(ActionEvent event) {
+        goBackToMainPage(event);
+    }
+    /**
+     * 
+     * @param event
+     */
+    private void goBackToMainPage(ActionEvent event) {
         try {
-            access.RequestPostingScorecard(scorecard);
             FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("MainPage.fxml"));
             root = fxmlLoader.load();
+            MainPageController mainPageController = fxmlLoader.getController();
+            mainPageController.displayScorecardFeedback();
             stage = (Stage)((Node) event.getSource()).getScene().getWindow();
             scene = new Scene(root);
             stage.setScene(scene);
@@ -74,7 +92,6 @@ public class ScorecardPageController {
         }
     }
 
-    
     /**
      * Refreshes the content of the display,
      * by changing the labels content, button labels and button visibility.
@@ -94,12 +111,14 @@ public class ScorecardPageController {
         previousHoleButton.setVisible(scorecard.getCurrentHole() != 1);                     
         nextHoleButton.setVisible(scorecard.getCurrentHole() != scorecard.getCourseSize()); 
         submitBtn.setVisible(scorecard.getCurrentHole() == scorecard.getCourseSize());
+        removeThrowButton.setDisable(scorecard.getCurrentHoleThrows() == 1);
     }
 
 
     /**
      * Updates textlabels and buttonlabels at the Hole display 
      */
+
     private void updateInfoDisplay() {
         currentHoleParLabel.setText("Par: " + Integer.toString(scorecard.getCurrentHolePar()));
         previousHoleButton.setText("Prev Hole: " + Integer.toString(scorecard.getCurrentHole() - 1));
@@ -157,7 +176,6 @@ public class ScorecardPageController {
         totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getTotalScore()));
         printCurrent();
     }
-
 
     /**
      * Prints current state of the scorecard
