@@ -8,10 +8,10 @@ package discoGolf.core;
  * @since 2022-10-29
  */
 public class ScorecardDAO implements ScorecardInterface {
-  private final String playerName;
-  private final Course course;
-  private final int bestHole;
-  private final int totalScore;
+  private String playerName;
+  private Course course;
+  private int bestHole;
+  private int totalScore;
 
   /**
    * - constructs a scorecard object for deserializing a json object
@@ -26,6 +26,10 @@ public class ScorecardDAO implements ScorecardInterface {
     this.course = course;
     this.totalScore = totalScore;
     this.bestHole = bestHole;
+  }
+
+  public ScorecardDAO() {
+
   }
 
   /**

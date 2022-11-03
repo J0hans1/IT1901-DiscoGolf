@@ -20,6 +20,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -46,10 +47,12 @@ public class LeaderboardPageController {
   @FXML 
   private TableColumn<ScorecardsModel, String> playerName;  
   @FXML
+  private Text noCourseFeedback;
+  @FXML
   public Button homeButton;
   @FXML
   public ComboBox<String> selectCourseDropdown;
-
+  
   /**
    * Initialize page by reading data saved and creating a new Leaderboard object.
    * Add the two different courses Lade and Dragvoll. Display the Lade leaderboard 
@@ -78,6 +81,11 @@ public class LeaderboardPageController {
     String chosenCourse = selectCourseDropdown.getValue();
     ArrayList<ScorecardInterface> chosenCourseList = leaderboard.getLeaderboardForCourse(chosenCourse);
 
+    noCourseFeedback.visibleProperty().set(false);
+    if (chosenCourseList.isEmpty()) {
+      noCourseFeedback.visibleProperty().set(true);
+    }
+
     for (int i = 0; i < chosenCourseList.size(); i++) {
       ScorecardInterface scorecard = chosenCourseList.get(i);
       scorecardsModel.add(new ScorecardsModel(i+1, scorecard.getPlayerName(), scorecard.getTotalScore()));
@@ -95,7 +103,7 @@ public class LeaderboardPageController {
      * @throws IOException if reading the fxml file failed
      */
   @FXML
-  public void handleHomeButton(ActionEvent event) throws URISyntaxException{
+  public void handleHomeButton(ActionEvent event) throws URISyntaxException {
     try {
         FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("MainPage.fxml"));
         root = fxmlLoader.load();
@@ -106,5 +114,5 @@ public class LeaderboardPageController {
     } catch (IOException e) {
         System.out.println("Failed to create new Window." + e);
     }
-}
+  }
 }

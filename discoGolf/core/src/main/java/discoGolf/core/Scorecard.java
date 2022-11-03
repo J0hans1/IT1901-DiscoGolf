@@ -11,8 +11,13 @@ import java.util.regex.Pattern;
  */
 public class Scorecard implements ScorecardInterface {
     private int currentHoleNumber; 
-    private final String playerName;
-    private final Course course;
+    private String playerName;
+    private Course course;
+
+    public Scorecard() {
+        //this.playerName = "Player";
+        //this.course = new Course();
+    }
 
     /**
      * - constructs a scorecard object that vil be saved in the database
@@ -145,5 +150,17 @@ public class Scorecard implements ScorecardInterface {
         if (!regexCheck) {
             throw new IllegalArgumentException("Illegal input to name field");
         }
+    }
+
+    /**
+     * @return a string representation of the scorecard scores on each whole
+     */
+    @Override
+    public String toString() {
+        String scorecard = "";
+        for (int i = 0; i < course.getNumberOfHoles(); i++) {
+            scorecard += "Hole " + (i + 1) + ": " + course.getCourseHoles().get(i).getHoleThrows() + " throws, ";
+        }
+        return scorecard;
     }
 }

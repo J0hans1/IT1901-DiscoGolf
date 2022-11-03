@@ -6,15 +6,15 @@ import java.util.stream.Collectors;
 
 /**
  * The Course class represents a frisbee golf course with int numberOfHoles amount of holes
- * @author @Billy Barret and @Jakob Opland
+ * @author Billy Barret and Ulrik Isdahl
  * @version 1.0
  * @since 2022-09-21
  */
 public class Course {
 
     private int numberOfHoles;
-    private final String courseName;
-    private final ArrayList<Hole> courseHoles;
+    private String courseName;
+    private ArrayList<Hole> courseHoles;
 
     /**
      * Create a disc golf course by validating courseName and parValues,
@@ -34,6 +34,12 @@ public class Course {
     }
     
     /**
+     * Empty course constructor used by jacoco for deserialization
+     */
+    public Course(){
+    }
+
+    /**
      * @return String courseName - containing the name of the course
      */
     public String getCourseName() {
@@ -44,9 +50,24 @@ public class Course {
      * @return ArrayList<Hole> courseHoles - containing all the Hole objects in the course.
      */
     public ArrayList<Hole> getCourseHoles() {
-        return courseHoles;
+        return courseHoles; 
     }
 
+
+   
+
+   
+    
+    /**
+     * Sets the name of the course
+     * @param courseName name of course
+     */
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+
+    
     /**
      * Get number of holes at site. 
      * @return int
@@ -55,7 +76,7 @@ public class Course {
         return numberOfHoles;
     }
 
-     /**
+    /**
      * @return ArrayList<Integer> parValues - containing the par values for each hole.
      */
     public ArrayList<Integer> getParValues() {

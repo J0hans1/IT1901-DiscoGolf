@@ -93,7 +93,6 @@ public class DiscoGolfPersistence {
         } 
     }
 
-
     /**
      * Reads the JSON file and returns the Data object at the root of the JSON file
      * @return Data object containing all registered scorecards
@@ -106,6 +105,16 @@ public class DiscoGolfPersistence {
         }try (Reader reader = new FileReader(getPathString(), StandardCharsets.UTF_8)) {
             return mapper.readValue(reader, Data.class);
         } 
+    }
+
+    //return a scorecard object as a json string
+    public String scorecardToJson(ScorecardInterface scorecard) throws IOException {
+        return mapper.writeValueAsString(scorecard);
+    }
+
+    //return a data object from a json string
+    public Data jsonToData(String jsonString) throws IOException {
+        return mapper.readValue(jsonString, Data.class);
     }
 
 
