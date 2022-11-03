@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import discoGolf.core.Scorecard;
+import discoGolf.json.DiscoGolfPersistence;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -61,7 +62,29 @@ public class ScorecardPageController {
      */
     public void handleSubmit(ActionEvent event) throws IOException, URISyntaxException{
         try {
-            access.RequestPostingScorecard(scorecard);
+        access.RequestPostingScorecard(scorecard);
+        DiscoGolfPersistence db = new DiscoGolfPersistence();
+        db.sendScorecardToDatabase(scorecard);
+        goBackToMainPage(event);
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+    }
+
+    /**
+     * 
+     */
+    @FXML
+    public void cancelGame(ActionEvent event) {
+        goBackToMainPage(event);
+    }
+
+    /**
+     * 
+     * @param event
+     */
+    private void goBackToMainPage(ActionEvent event) {
+        try {
             FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("MainPage.fxml"));
             root = fxmlLoader.load();
             MainPageController mainPageController = fxmlLoader.getController();
