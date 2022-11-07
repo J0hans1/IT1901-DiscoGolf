@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
 
+import discoGolf.core.Data;
 import discoGolf.core.ScorecardInterface;
 
 @RestController
@@ -31,8 +32,10 @@ public class DiscoRestController {
      * @throws IOException
      */
     @GetMapping("/get")
-    public ArrayList<ScorecardInterface> data() throws IOException, URISyntaxException {
-        return service.data();
+    public Data data() throws IOException, URISyntaxException {
+        Data data = new Data();
+        data.setData(service.data());
+        return data;
     }
 
    ///**

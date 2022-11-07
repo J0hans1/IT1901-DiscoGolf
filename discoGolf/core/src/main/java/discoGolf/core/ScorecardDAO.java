@@ -60,7 +60,7 @@ public class ScorecardDAO implements ScorecardInterface {
    * @return the total score for the scorecard object
    */
   @Override
-  public int getTotalScore() {
+  public int getScore() {
     return totalScore;
   }
 
@@ -68,7 +68,7 @@ public class ScorecardDAO implements ScorecardInterface {
    * @return the best individual hole score in the scorecard
    */
   @Override
-  public int getBestHoleScore() {
+  public int getBestHole() {
     return bestHole;
   }
   

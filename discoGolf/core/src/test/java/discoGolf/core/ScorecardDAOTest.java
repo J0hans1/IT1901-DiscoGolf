@@ -30,8 +30,8 @@ public class ScorecardDAOTest {
     @Test
     public void testConstructor() {
         assertEquals("Maren", scorecard.getPlayerName());
-        assertEquals(10, scorecard.getTotalScore());
-        assertEquals(1, scorecard.getBestHoleScore());
+        assertEquals(10, scorecard.getScore());
+        assertEquals(1, scorecard.getBestHole());
         assertEquals("Lade", scorecard.getCourseName());
         assertEquals(9, scorecard.getCourse().getNumberOfHoles());
     }

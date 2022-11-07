@@ -32,7 +32,7 @@ public class ScorecardTest {
     public void testConstructor() {
         assertEquals("Jakob", scorecard.getPlayerName());
         assertEquals(1, scorecard.getCurrentHole());
-        assertEquals(0, scorecard.getTotalScore());
+        assertEquals(0, scorecard.getScore());
         assertThrows(IllegalStateException.class, () -> {
             new Scorecard(null, "Jørn");
         }, "Need a valoid course object");
@@ -75,13 +75,13 @@ public class ScorecardTest {
      */
     @Test
     public void testGetBestHoleScore() {
-       assertEquals(0, scorecard.getBestHoleScore());
+       assertEquals(0, scorecard.getBestHole());
        scorecard.nextHole();
        scorecard.getCurrentHoleInstance().removeThrow();
-       assertEquals(-1, scorecard.getBestHoleScore());
+       assertEquals(-1, scorecard.getBestHole());
        scorecard.getCurrentHoleInstance().removeThrow();
        scorecard.getCurrentHoleInstance().removeThrow();
-       assertEquals(-3, scorecard.getBestHoleScore());
+       assertEquals(-3, scorecard.getBestHole());
     }
 
     /**
@@ -90,20 +90,20 @@ public class ScorecardTest {
     */
     @Test
     public void testGetTotalScore() {
-       assertEquals(0, scorecard.getTotalScore());
+       assertEquals(0, scorecard.getScore());
        for (int i = 0; i < 4; i++) {
            scorecard.getCurrentHoleInstance().addThrow();
        }
-       assertEquals(4, scorecard.getTotalScore());
+       assertEquals(4, scorecard.getScore());
        scorecard.nextHole();
        scorecard.getCurrentHoleInstance().removeThrow();
-       assertEquals(3, scorecard.getTotalScore());
+       assertEquals(3, scorecard.getScore());
        for (int i = 0; i < 7; i++) {
            for (int j = 0; j < 5; j++) {
                scorecard.getCurrentHoleInstance().addThrow();
            }
            scorecard.nextHole();
        }
-       assertEquals(38, scorecard.getTotalScore());
+       assertEquals(38, scorecard.getScore());
     }
 }

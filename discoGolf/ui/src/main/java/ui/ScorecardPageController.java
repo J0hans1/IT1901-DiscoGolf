@@ -167,7 +167,7 @@ public class ScorecardPageController {
     public void nextHole() {
         scorecard.nextHole();
         refreshDisplay();
-        totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getTotalScore())); 
+        totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getScore())); 
     }
 
 
@@ -180,7 +180,7 @@ public class ScorecardPageController {
     public void previousHole() {
         scorecard.previousHole();
         refreshDisplay();
-        totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getTotalScore()));
+        totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getScore()));
         printCurrent();
     }
 

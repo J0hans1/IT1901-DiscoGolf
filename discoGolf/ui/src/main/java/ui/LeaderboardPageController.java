@@ -88,7 +88,7 @@ public class LeaderboardPageController {
 
     for (int i = 0; i < chosenCourseList.size(); i++) {
       ScorecardInterface scorecard = chosenCourseList.get(i);
-      scorecardsModel.add(new ScorecardsModel(i+1, scorecard.getPlayerName(), scorecard.getTotalScore()));
+      scorecardsModel.add(new ScorecardsModel(i+1, scorecard.getPlayerName(), scorecard.getScore()));
     }
     position.setCellValueFactory(new PropertyValueFactory<>("Position"));
     playerName.setCellValueFactory(new PropertyValueFactory<>("PlayerName"));

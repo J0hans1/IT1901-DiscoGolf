@@ -86,8 +86,8 @@ public class DiscoGolfModuleTest {
             Data data = mapper.readValue(dataInJsonFormat, Data.class);
             ScorecardInterface scorecardRead = data.getData().get(0);
             assertEquals("Jakob", scorecardRead.getPlayerName());
-            assertEquals(17, scorecardRead.getTotalScore());
-            assertEquals(0, scorecardRead.getBestHoleScore());
+            assertEquals(17, scorecardRead.getScore());
+            assertEquals(0, scorecardRead.getBestHole());
             assertEquals("Dragvoll", scorecardRead.getCourse().getCourseName());
             assertEquals(new ArrayList<>(Arrays.asList(3, 4, 3, 4, 3, 4, 3, 4, 3)), scorecardRead.getCourse().getParValues());
         } catch (JsonProcessingException e) {
@@ -107,8 +107,8 @@ public class DiscoGolfModuleTest {
             Data data = mapper.readValue(json, Data.class);
             ScorecardInterface scorecardRead = data.getData().get(0);
             assertEquals("Jakob", scorecardRead.getPlayerName());
-            assertEquals(17, scorecardRead.getTotalScore());
-            assertEquals(0, scorecardRead.getBestHoleScore());
+            assertEquals(17, scorecardRead.getScore());
+            assertEquals(0, scorecardRead.getBestHole());
             assertEquals("Dragvoll", scorecardRead.getCourse().getCourseName());
             assertEquals(new ArrayList<>(Arrays.asList(3, 4, 3, 4, 3, 4, 3, 4, 3)), scorecardRead.getCourse().getParValues());
         } catch (JsonProcessingException e) {
