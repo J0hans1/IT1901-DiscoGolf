@@ -92,7 +92,7 @@ public class ScorecardAppTest extends ApplicationTest{
         WaitForAsyncUtils.waitForFxEvents();
         assertNotNull(lookup(courseName));
         
-        Integer totalScore = this.scorecard.getTotalScore();
+        Integer totalScore = this.scorecard.getScore();
         WaitForAsyncUtils.waitForFxEvents();
         assertNotNull(lookup(totalScore.toString())); //Check that there is a element with the value 'totalScore' in the page
     }

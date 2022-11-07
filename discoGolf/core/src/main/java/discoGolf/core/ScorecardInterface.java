@@ -15,8 +15,8 @@ public interface ScorecardInterface {
 
     public String getCourseName();
     
-    public int getTotalScore(); 
+    public int getScore(); 
 
-    public int getBestHoleScore();
+    public int getBestHole();
 
 }

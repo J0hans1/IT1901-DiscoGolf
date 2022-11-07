@@ -27,8 +27,8 @@ public class ScorecardSerializer extends JsonSerializer<ScorecardInterface>{
     public void serialize(ScorecardInterface scorecard, JsonGenerator gen, SerializerProvider serializers) throws IOException {
         gen.writeStartObject();
         gen.writeStringField("playerName", scorecard.getPlayerName());
-        gen.writeNumberField("score", scorecard.getTotalScore());
-        gen.writeNumberField("bestHole", scorecard.getBestHoleScore());
+        gen.writeNumberField("score", scorecard.getScore());
+        gen.writeNumberField("bestHole", scorecard.getBestHole());
         gen.writeObjectField("course", scorecard.getCourse());
         gen.writeEndObject();
     }

@@ -90,6 +90,7 @@ public class DataAccess {
       .send(request, HttpResponse.BodyHandlers.ofString());
 
       // Parse the response body into a Data object
+      System.out.println(response.body());
       data = persistence.jsonToData(response.body());
     } catch (Exception e) {
       e.printStackTrace();
@@ -97,4 +98,13 @@ public class DataAccess {
     }
     return data;
   }
+
+  public static void main(String[] args) {
+    DataAccess da = new DataAccess();
+    System.out.println(da.fetchDatabase());
+  }
+
 }
+
+
+

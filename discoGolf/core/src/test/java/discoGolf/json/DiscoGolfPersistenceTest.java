@@ -51,8 +51,8 @@ public class DiscoGolfPersistenceTest {
      */
     private void compareScorecardObjects(ScorecardInterface card1, ScorecardInterface card2) {
         assertEquals(card1.getPlayerName(), card2.getPlayerName());
-        assertEquals(card1.getTotalScore(), card2.getTotalScore());
-        assertEquals(card1.getBestHoleScore(), card2.getBestHoleScore());
+        assertEquals(card1.getScore(), card2.getScore());
+        assertEquals(card1.getBestHole(), card2.getBestHole());
         assertEquals(card1.getCourse().getCourseName(), card2.getCourse().getCourseName());
 
         Iterator<Hole> courseHoles1 = card1.getCourse().getCourseHoles().iterator();

@@ -60,7 +60,7 @@ public class Scorecard implements ScorecardInterface {
      * @return the total score for the scorecard by adding all the holes score together.
      */
     @Override
-    public int getTotalScore() {
+    public int getScore() {
         return course.getCourseHoles().stream().mapToInt(hole -> hole.getHoleScore()).sum();
     }
 
@@ -68,7 +68,7 @@ public class Scorecard implements ScorecardInterface {
      * @return the best individual hole score for the scorecard
      */
     @Override
-    public int getBestHoleScore() {
+    public int getBestHole() {
         return this.getCourse().getCourseHoles().stream().mapToInt(p ->  p.getHoleScore()).min().getAsInt();
     }
 

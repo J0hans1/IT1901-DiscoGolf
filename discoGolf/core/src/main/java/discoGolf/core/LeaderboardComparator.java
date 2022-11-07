@@ -17,12 +17,12 @@ public class LeaderboardComparator implements Comparator<ScorecardInterface> {
    */
   @Override
   public int compare(ScorecardInterface card1, ScorecardInterface card2) {
-    if (card1.getTotalScore() == card2.getTotalScore()) {
-      if (card1.getBestHoleScore() == card2.getBestHoleScore()) {
+    if (card1.getScore() == card2.getScore()) {
+      if (card1.getBestHole() == card2.getBestHole()) {
         return card1.getPlayerName().compareTo(card2.getPlayerName());
       }
-      return card1.getBestHoleScore() - card2.getBestHoleScore();
+      return card1.getBestHole() - card2.getBestHole();
     }
-    return card1.getTotalScore() - card2.getTotalScore();
+    return card1.getScore() - card2.getScore();
   }
 }
