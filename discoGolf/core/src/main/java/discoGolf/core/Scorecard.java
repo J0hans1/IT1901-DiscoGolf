@@ -1,29 +1,26 @@
 package discoGolf.core;
 
-import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 /**
  * The states of this class keep track of the current stats of a player on the Course course
  * @see Course course is used to decide how many holes there are and the par values of those holes in the scorecard
- * @author Billy Barret and Ulrik Isdahl
+ * @author Billy Barret, Ulrik Isdahl and @Jakob Opland
  * @version 1.2
  * @since 2022-09-18
  */
-public class Scorecard {
-    private ArrayList<Integer> throwsList = new ArrayList<>();
-    private int currentHole;
-    private final String playerName;
-    private final Course course;
+public class Scorecard implements ScorecardInterface {
+    private int currentHoleNumber; 
+    private String playerName;
+    private Course course;
 
     public Scorecard() {
-        this.playerName = "Player";
-        this.course = new Course(playerName, throwsList);
+        //this.playerName = "Player";
+        //this.course = new Course();
     }
 
     /**
      * - constructs a scorecard object that vil be saved in the database
-     * 
      * @param course     is the course the player picked at the main menu
      * @param playerName is the name of the player
      */
@@ -32,149 +29,105 @@ public class Scorecard {
         validateMainPageName(playerName);
         this.playerName = playerName;
         this.course = course;
-        this.currentHole = 1;
-        throwsList = course.getPar().values().stream().collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
+        this.currentHoleNumber = 1;
     }
 
     /**
-     * - constructs a scorecard object for deserializing a json object
-     * 
-     * @param course     is the course the player picked at the main menu
-     * @param playerName is the name of the player
-     * @param totalScore totalscore for the scorecard
-     * @param throwsList all the thrwos+par for each hole
+     * @return player name for the scorecard
      */
-    public Scorecard(Course course, String playerName, ArrayList<Integer> throwsList) {
-        validateMainPageCourse(course);
-        validateMainPageName(playerName);
-        validateThrowsList(throwsList, course.getParValues());
-        this.playerName = playerName;
-        this.course = course;
-        this.currentHole = course.getNumberOfHoles();
-        this.throwsList = throwsList;
-    }
-
-    /**
-     * @return the name of player which is a attrivute of the scorecard
-     */
+    @Override
     public String getPlayerName() {
         return playerName;
     }
 
     /**
-     * @return throwsList - containing the throws of the player at holenumber =
-     *         index + 1
+     * @return Course object for the scorecard
      */
-    public ArrayList<Integer> getThrowsList() {
-        return new ArrayList<Integer>(throwsList);
-    }
-
-    /**
-     * @return the total amount of throws minus the total of all the pars of each
-     *         hole
-     */
-    public int getTotalScore() {
-        int total = (int) throwsList.stream().mapToInt(Integer::intValue).sum()
-                - (int) course.getPar().values().stream().mapToInt(Integer::intValue).sum();
-        return total;
-    }
-
-    /**
-     * @return the name of course the player is playing on
-     */
-    public String getCourseName() {
-        return course.getCourseName();
-    }
-
-    /**
-     * @return the current hole number the player is playing on
-     */
-    public int getCurrentHole() {
-        return currentHole;
-    }
-
-    /**
-     * @return course of the scorecard
-     */
+    @Override
     public Course getCourse() {
         return course;
     }
 
     /**
-     * @return the current amount of throws the player has made on the current hole
+     * @return Course name for course in the scorecard
+     */
+    @Override
+    public String getCourseName() {
+        return course.getCourseName();
+    }
+
+    /**
+     * @return the total score for the scorecard by adding all the holes score together.
+     */
+    @Override
+    public int getTotalScore() {
+        return course.getCourseHoles().stream().mapToInt(hole -> hole.getHoleScore()).sum();
+    }
+
+    /**
+     * @return the best individual hole score for the scorecard
+     */
+    @Override
+    public int getBestHoleScore() {
+        return this.getCourse().getCourseHoles().stream().mapToInt(p ->  p.getHoleScore()).min().getAsInt();
+    }
+
+    /**
+     * @return the current hole object the player is playing on.
+     */
+    public Hole getCurrentHoleInstance() {
+        return course.getHole(currentHoleNumber);
+    }
+
+    /**
+     * @return the current hole number the player is playing on.
+     */
+    public int getCurrentHole() {
+        return currentHoleNumber;
+    }
+
+    /**
+     * @return the current amount of throws the player has made on the current hole.
      */
     public int getCurrentHoleThrows() {
-        return throwsList.get(getCurrentHole() - 1);
+        return getCurrentHoleInstance().getHoleThrows();
     }
 
     /**
-     * @return the current par of the current hole
+     * @return the par of the current hole
      */
     public int getCurrentHolePar() {
-        return course.getParForHole(getCurrentHole());
+        return getCurrentHoleInstance().getPar();
     }
-
+    
     /**
-     * @return the size of the current course by streaming the courses par list and
-     *         counting the amount of elements
+     * @return the size of the current course by getting the 
+     * numberOfHoles field from course.
      */
     public int getCourseSize() {
-        return course.getPar().size();
+        return course.getNumberOfHoles();
     }
 
     /**
-     * adds one to the current hole number if the player is not on the last hole
+     * adds one to the current hole number if the player is not on the last hole.
+     * @throws IllegalArgumentException if the player is at the last hole
      */
     public void nextHole() {
-        if (getCurrentHole() == throwsList.size()) {
+        if (getCurrentHole() == getCourseSize()) {
             throw new IllegalStateException("Can't go to nextHole because next hole doesn't exist");
         }
-        currentHole++;
+        currentHoleNumber++;
     }
 
     /**
-     * removes one from the current hole number if the player is not on the first
-     * hole
+     * removes one from the current hole number if the player is not on the first hole.
+     * @throws IllegalArgumentException if the player is at the first hole
      */
     public void previousHole() {
         if (getCurrentHole() == 1) {
             throw new IllegalStateException("Cannot go to a negative hole number");
         }
-        currentHole--;
-    }
-
-    /**
-     * adds one to the current amount of throws the player has made on the current
-     * hole
-     */
-    public void addThrow() {
-        throwsList.set(getCurrentHole() - 1, getCurrentHoleThrows() + 1);
-    }
-
-    /**
-     * removes one from the current amount of throws the player has made on the
-     * current hole
-     */
-    public void removeThrow() {
-        if (getCurrentHoleThrows() == 1) {
-            throw new IllegalStateException("Cannot have 0 throws");
-        }
-        throwsList.set(getCurrentHole() - 1, getCurrentHoleThrows() - 1);
-    }
-
-    /**
-     * Validate if throwsList is a valid list
-     * 
-     * @param throwsList a list with all throws + par on each hole
-     * @param parValues  a list with the par values on the course
-     */
-    private void validateThrowsList(ArrayList<Integer> throwsList, ArrayList<Integer> parValues) {
-        if (throwsList.size() != parValues.size()) {
-            throw new IllegalArgumentException("Not a valid throws list length");
-        }
-        if (throwsList.stream().anyMatch(x -> x < 1)) {
-            throw new IllegalArgumentException("Cannot have a hole with less than 1 throw");
-        }
+        currentHoleNumber--;
     }
 
     /**
@@ -205,8 +158,8 @@ public class Scorecard {
     @Override
     public String toString() {
         String scorecard = "";
-        for (int i = 0; i < throwsList.size(); i++) {
-            scorecard += "Hole " + (i + 1) + ": " + throwsList.get(i) + " throws, ";
+        for (int i = 0; i < course.getNumberOfHoles(); i++) {
+            scorecard += "Hole " + (i + 1) + ": " + course.getCourseHoles().get(i).getHoleThrows() + " throws, ";
         }
         return scorecard;
     }

@@ -30,7 +30,6 @@ public class CourseSerializer extends JsonSerializer<Course> {
         gen.writeStringField("courseName", course.getCourseName());
         gen.writeNumberField("numberOfHoles", course.getNumberOfHoles());
         gen.writeObjectField("parValues", course.getParValues());
-        gen.writeObjectField("parForHoles", course.getPar());
         gen.writeEndObject();
     }
 }

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
 
-import discoGolf.core.Scorecard;
+import discoGolf.core.ScorecardInterface;
 
 @RestController
 public class DiscoRestController {
@@ -31,20 +31,20 @@ public class DiscoRestController {
      * @throws IOException
      */
     @GetMapping("/get")
-    public ArrayList<Scorecard> data() throws IOException, URISyntaxException {
+    public ArrayList<ScorecardInterface> data() throws IOException, URISyntaxException {
         return service.data();
     }
 
-    /**
-     * Posts a scorecard to the database.
-     * @param scorecard the scorecard to be posted.
-     * @throws URISyntaxException
-     * @throws IOException
-     */
-    @PostMapping(value = "/post1")
-    public void submit() throws IOException, URISyntaxException {
-        service.post();
-    }
+   ///**
+   // * Posts a scorecard to the database.
+   // * @param scorecard the scorecard to be posted.
+   // * @throws URISyntaxException
+   // * @throws IOException
+   // */
+   //@PostMapping(value = "/post1")
+   //public void submit() throws IOException, URISyntaxException {
+   //    service.post();
+   //}
 
     /**
      * Posts a scorecard to the database.
@@ -54,12 +54,12 @@ public class DiscoRestController {
      */
     @RequestMapping(value = "/post2")
     @ResponseStatus(HttpStatus.CREATED)
-    public void submit(@RequestBody Scorecard scorecard) throws IOException, URISyntaxException {
+    public void submit(@RequestBody ScorecardInterface scorecard) throws IOException, URISyntaxException {
         service.post(scorecard);
     }
 
     @RequestMapping(value = "/test", method = RequestMethod.POST)
-    public String test(@RequestBody Scorecard s) {
+    public String test(@RequestBody ScorecardInterface s) {
         return "Hello " + s.getPlayerName();
     }
 

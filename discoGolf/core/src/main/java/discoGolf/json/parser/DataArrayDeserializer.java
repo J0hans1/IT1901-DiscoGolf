@@ -12,7 +12,8 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import discoGolf.core.Data;
-import discoGolf.core.Scorecard;
+import discoGolf.core.ScorecardDAO;
+import discoGolf.core.ScorecardInterface;
 
 /**
  * Collects all data from json file and stores it in a Data object
@@ -37,10 +38,10 @@ public class DataArrayDeserializer extends JsonDeserializer<Data>{
     public Data deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JacksonException {
         JsonNode node = p.getCodec().readTree(p);
         if (node instanceof ObjectNode objNode) {
-            ArrayList<Scorecard> list = new ArrayList<>();
+            ArrayList<ScorecardInterface> list = new ArrayList<>();
             ArrayNode jsonList = (ArrayNode) objNode.get("data");
             for (JsonNode n : jsonList) {
-                Scorecard scorecard = scorecardDeserializer.deserialize(n);
+                ScorecardDAO scorecard = scorecardDeserializer.deserialize(n);
                 list.add(scorecard);
             }
             Data data = new Data();

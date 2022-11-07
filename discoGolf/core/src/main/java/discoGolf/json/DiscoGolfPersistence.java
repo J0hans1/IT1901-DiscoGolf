@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import discoGolf.core.Data;
-import discoGolf.core.Scorecard;
+import discoGolf.core.ScorecardInterface;
 import discoGolf.json.parser.DiscoGolfModule;
 
 /**
@@ -72,7 +72,7 @@ public class DiscoGolfPersistence {
      * @throws IOException Error when trying to write to the database
      * @throws URISyntaxException Error when trying to parse Java Objects to JSON objects
      */
-    public void sendScorecardToDatabase(Scorecard scorecard) throws IOException, URISyntaxException {
+    public void sendScorecardToDatabase(ScorecardInterface scorecard) throws IOException, URISyntaxException {
         Data data = readData();
         data.add(scorecard);
         saveData(data);
@@ -108,7 +108,7 @@ public class DiscoGolfPersistence {
     }
 
     //return a scorecard object as a json string
-    public String scorecardToJson(Scorecard scorecard) throws IOException {
+    public String scorecardToJson(ScorecardInterface scorecard) throws IOException {
         return mapper.writeValueAsString(scorecard);
     }
 

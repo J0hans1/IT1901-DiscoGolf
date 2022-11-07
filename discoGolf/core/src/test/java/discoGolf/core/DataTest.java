@@ -28,10 +28,10 @@ public class DataTest {
      */
     @Test
     public void testSetData() {
-        ArrayList<Scorecard> scorecardList = new ArrayList<>();
+        ArrayList<ScorecardInterface> scorecardList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             Course course = new Course("Lade", new ArrayList<>(Arrays.asList(3, 4, 6, 7, 5)));
-            Scorecard scorecard = new Scorecard(course, "Billy");
+            ScorecardDAO scorecard = new ScorecardDAO(course, "Billy", 5, -1);
             scorecardList.add(scorecard);
         }
         assertEquals(new ArrayList<>(), data.getData());
@@ -46,7 +46,7 @@ public class DataTest {
     public void testAddData() {
         assertEquals(new ArrayList<>(), data.getData());
         Course course = new Course("Lade", new ArrayList<>(Arrays.asList(5, 2, 6, 7, 3)));
-        Scorecard scorecard = new Scorecard(course, "Arne");
+        ScorecardDAO scorecard = new ScorecardDAO(course, "Arne", 30, 0);
         data.add(scorecard);
         assertEquals(scorecard, data.getData().get(0));
     }

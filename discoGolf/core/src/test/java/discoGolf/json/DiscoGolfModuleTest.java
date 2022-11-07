@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import discoGolf.core.Course;
 import discoGolf.core.Data;
 import discoGolf.core.Scorecard;
+import discoGolf.core.ScorecardInterface;
 
 /**
  * J-unit test for discoGolfModule
@@ -35,22 +36,11 @@ public class DiscoGolfModuleTest {
             "data" : [{
                 "playerName" : "Jakob",
                 "score" : 17,
-                "throwsList" : [ 8, 5, 6, 4, 6, 6, 3, 6, 4 ],
+                "bestHole" : 0,
                 "course" : {
                   "courseName" : "Dragvoll",
                   "numberOfHoles" : 9,
-                  "parValues" : [ 3, 4, 3, 4, 3, 4, 3, 4, 3 ],
-                  "parForHoles" : {
-                    "1" : 3,
-                    "2" : 4,
-                    "3" : 3,
-                    "4" : 4,
-                    "5" : 3,
-                    "6" : 4,
-                    "7" : 3,
-                    "8" : 4,
-                    "9" : 3
-                  }
+                  "parValues" : [ 3, 4, 3, 4, 3, 4, 3, 4, 3 ]
                 }
             }]
         }
@@ -62,9 +52,11 @@ public class DiscoGolfModuleTest {
      */
     private Data createDataObject() {
         ArrayList<Integer> parValues = new ArrayList<>(Arrays.asList(3, 4, 3, 4, 3, 4, 3, 4, 3));
-        ArrayList<Integer> throwsList = new ArrayList<>(Arrays.asList(8, 5, 6, 4, 6, 6, 3, 6, 4));
         Course course = new Course("Dragvoll", parValues);
-        Scorecard scorecard = new Scorecard(course, "Jakob", throwsList);
+        Scorecard scorecard = new Scorecard(course, "Jakob");
+        for (int i = 0; i < 17 ; i++) {
+            scorecard.getCurrentHoleInstance().addThrow();
+        }
         Data data = new Data();
         data.add(scorecard);
         return data;
@@ -92,10 +84,10 @@ public class DiscoGolfModuleTest {
     public void testDeserializers() {
         try {
             Data data = mapper.readValue(dataInJsonFormat, Data.class);
-            Scorecard scorecardRead = data.getData().get(0);
+            ScorecardInterface scorecardRead = data.getData().get(0);
             assertEquals("Jakob", scorecardRead.getPlayerName());
             assertEquals(17, scorecardRead.getTotalScore());
-            assertEquals(new ArrayList<>(Arrays.asList(8, 5, 6, 4, 6, 6, 3, 6, 4)), scorecardRead.getThrowsList());
+            assertEquals(0, scorecardRead.getBestHoleScore());
             assertEquals("Dragvoll", scorecardRead.getCourse().getCourseName());
             assertEquals(new ArrayList<>(Arrays.asList(3, 4, 3, 4, 3, 4, 3, 4, 3)), scorecardRead.getCourse().getParValues());
         } catch (JsonProcessingException e) {
@@ -113,10 +105,10 @@ public class DiscoGolfModuleTest {
         try {
             String json = mapper.writeValueAsString(createDataObject());
             Data data = mapper.readValue(json, Data.class);
-            Scorecard scorecardRead = data.getData().get(0);
+            ScorecardInterface scorecardRead = data.getData().get(0);
             assertEquals("Jakob", scorecardRead.getPlayerName());
             assertEquals(17, scorecardRead.getTotalScore());
-            assertEquals(new ArrayList<>(Arrays.asList(8, 5, 6, 4, 6, 6, 3, 6, 4)), scorecardRead.getThrowsList());
+            assertEquals(0, scorecardRead.getBestHoleScore());
             assertEquals("Dragvoll", scorecardRead.getCourse().getCourseName());
             assertEquals(new ArrayList<>(Arrays.asList(3, 4, 3, 4, 3, 4, 3, 4, 3)), scorecardRead.getCourse().getParValues());
         } catch (JsonProcessingException e) {

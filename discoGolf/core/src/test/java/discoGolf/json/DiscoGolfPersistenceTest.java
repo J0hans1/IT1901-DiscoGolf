@@ -15,7 +15,9 @@ import org.junit.jupiter.api.Test;
 
 import discoGolf.core.Course;
 import discoGolf.core.Data;
+import discoGolf.core.Hole;
 import discoGolf.core.Scorecard;
+import discoGolf.core.ScorecardInterface;
 
 /**
  * J-unit test for persistence of discoGolf app
@@ -36,7 +38,7 @@ public class DiscoGolfPersistenceTest {
         scorecard = new Scorecard(course, "Ulrik");
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 5; j++) {
-                scorecard.addThrow();
+                scorecard.getCurrentHoleInstance().addThrow();
             }
             scorecard.nextHole();
         }
@@ -47,46 +49,33 @@ public class DiscoGolfPersistenceTest {
      * @param card1 scorecard object 1 
      * @param card2 scorecard ibject 2
      */
-    private void compareScorecardObjects(Scorecard card1, Scorecard card2) {
+    private void compareScorecardObjects(ScorecardInterface card1, ScorecardInterface card2) {
         assertEquals(card1.getPlayerName(), card2.getPlayerName());
         assertEquals(card1.getTotalScore(), card2.getTotalScore());
+        assertEquals(card1.getBestHoleScore(), card2.getBestHoleScore());
+        assertEquals(card1.getCourse().getCourseName(), card2.getCourse().getCourseName());
 
-        Iterator<Integer> throwsList1 = card1.getThrowsList().iterator();
-        Iterator<Integer> throwsList2 = card2.getThrowsList().iterator();
-        while(throwsList1.hasNext()) {
-            assertEquals(throwsList1.next(), throwsList2.next());
+        Iterator<Hole> courseHoles1 = card1.getCourse().getCourseHoles().iterator();
+        Iterator<Hole> courseHoles2 = card2.getCourse().getCourseHoles().iterator();
+        while(courseHoles1.hasNext()) {
+            assertEquals(courseHoles1.next().getPar(), courseHoles2.next().getPar());
         }
 
-        compareCourseObjects(card1.getCourse(), card2.getCourse());
+  
     }
 
-    /**
-     * compare two course objects to see if they are equal
-     * @param course1 course object 1
-     * @param course2 course object 2
-     */
-    private void compareCourseObjects(Course course1, Course course2) {
-        assertEquals(course1.getCourseName(), course2.getCourseName());
-
-        Iterator<Integer> parValues1 = course1.getParValues().iterator();
-        Iterator<Integer> parValues2 = course2.getParValues().iterator();
-        while(parValues1.hasNext()) {
-            assertEquals(parValues1.next(), parValues2.next());
-        }
-    }
 
     /**
      * Save scorecard object with sendScoreCardToDatabase, then reads 
      * the last saved object from data class and compares the two scorecard objects
      * @throws URISyntaxException
      */
-
     @Test 
     public void testSaveAndReadScorecard() throws URISyntaxException {
         try {
             persistence.sendScorecardToDatabase(scorecard);
             data = persistence.readData();
-            Scorecard scorecard2 = data.getData().get(data.getData().size()-1);
+            ScorecardInterface scorecard2 = data.getData().get(data.getData().size()-1);
             compareScorecardObjects(scorecard, scorecard2);
         } catch (IOException e) {
             fail(e.getMessage());
@@ -101,7 +90,7 @@ public class DiscoGolfPersistenceTest {
      */
     @AfterEach
     public void deleteAddedObject() throws IOException, URISyntaxException {
-        ArrayList<Scorecard> scorecards = data.getData();
+        ArrayList<ScorecardInterface> scorecards = data.getData();
         scorecards.remove(scorecards.size()-1);
         data.setData(scorecards);
         persistence.saveData(data);

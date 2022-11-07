@@ -141,7 +141,7 @@ public class ScorecardPageController {
      * @see refreshDisplay()
      */
     public void addThrow() { 
-        scorecard.addThrow();
+        scorecard.getCurrentHoleInstance().addThrow();
         refreshDisplay();
     }
 
@@ -152,7 +152,7 @@ public class ScorecardPageController {
      * @see refreshDisplay()
      */
     public void removeThrow() {
-        scorecard.removeThrow();
+        scorecard.getCurrentHoleInstance().removeThrow();
         refreshDisplay();
     }
 
