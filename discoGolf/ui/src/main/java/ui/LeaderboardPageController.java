@@ -6,9 +6,7 @@ import java.util.ArrayList;
 
 import discoGolf.core.Data;
 import discoGolf.core.Leaderboard;
-import discoGolf.core.ScorecardDAO;
 import discoGolf.core.ScorecardInterface;
-import discoGolf.json.DiscoGolfPersistence;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -62,9 +60,8 @@ public class LeaderboardPageController {
    */
   @FXML
   public void initialize() throws IOException, URISyntaxException{    
-    DiscoGolfPersistence db = new DiscoGolfPersistence();
-    Data data = new Data();
-    data = db.readData();
+    DataAccess db = new DataAccess();
+    Data data = db.fetchDatabase();
     this.leaderboard = new Leaderboard(data);
     selectCourseDropdown.getItems().add("Lade");
     selectCourseDropdown.getItems().add("Dragvoll");
