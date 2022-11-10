@@ -53,21 +53,15 @@ public class Course {
         return courseHoles; 
     }
 
-
-   
-
-   
-    
     /**
      * Sets the name of the course
      * @param courseName name of course
      */
     public void setCourseName(String courseName) {
+        validateCourseName(courseName);
         this.courseName = courseName;
     }
 
-
-    
     /**
      * Get number of holes at site. 
      * @return int
@@ -111,19 +105,6 @@ public class Course {
         return courseHoles.get(holeNumber-1);
     }
 
-  ///**
-  // * Returns the holeNumber for a specific Hole object in the array.
-  // * @param hole - the hole object
-  // * @return int - the hole number/index the hole has in the course
-  // * @throws IllegalArgumentException if the hole object is not in the course
-  // */
-  //public int getHoleNumber(Hole hole) {
-  //    if (!courseHoles.contains(hole)) {
-  //        throw new IllegalArgumentException("The hole does not excist in the course");
-  //    }
-  //    return courseHoles.indexOf(hole) + 1;
-  //}
-
     /**
      * @param name String value from the value in the input field of the main page
      * @throws IllegalArgumentException Throws if name doesnt fit the format "name1
@@ -150,10 +131,5 @@ public class Course {
                 throw new IllegalArgumentException("Not a valid list");
             }
         }
-    }
-
-    @Override
-    public final String toString() {
-        return "Course [numberOfHoles=" + numberOfHoles + ", courseName=" + courseName +  " ]";
     }
 }

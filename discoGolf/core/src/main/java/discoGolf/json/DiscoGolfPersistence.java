@@ -124,7 +124,7 @@ public class DiscoGolfPersistence {
      * Finds the path of the application folder, and then adds the path of the database.json file to it
      * @return String representation of the path to database.json
      */
-    private String getPathString() throws URISyntaxException, IOException {
+    public String getPathString() throws URISyntaxException, IOException {
         Path p = Paths.get(System.getProperty("user.home") + "/discoGolf.json");
         if (!(Files.exists(p))) {
             File f = new File(p.toString());
