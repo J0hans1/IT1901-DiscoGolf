@@ -49,6 +49,9 @@ public class CourseTest {
             course = new Course("Lade", new ArrayList<>(Arrays.asList(8)));
         }, "8 is not a valid par number");
         assertThrows(IllegalArgumentException.class, () -> {
+            course = new Course("Lade", new ArrayList<>(Arrays.asList()));
+        }, "The parValues list cannot be empty");
+        assertThrows(IllegalArgumentException.class, () -> {
             course = new Course("?Q:..", new ArrayList<>(Arrays.asList(8)));
         }, "Not a valid course name");
     }
@@ -74,7 +77,6 @@ public class CourseTest {
         return listsIsEqual;
     }
     
-
     /**
      * Test set a new Hole in the course.
      */
@@ -86,6 +88,23 @@ public class CourseTest {
         assertThrows(IllegalArgumentException.class, () -> {
             course.setHole(new Hole(3), 0);
         }, "0 is not a valid holeNumber");
+    }
+
+    /**
+     * Test set coursename and test for invalid inputs
+     */
+    @Test
+    public void testSetCourseName() {
+        course.setCourseName("Lade");
+        assertEquals("Lade", course.getCourseName());
+        course.setCourseName("Gløshaugen123");
+        assertEquals("Gløshaugen123", course.getCourseName());
+        assertThrows(IllegalArgumentException.class, () -> {
+            course = new Course("", new ArrayList<>(Arrays.asList(8)));
+        }, "Not a valid course name");
+        assertThrows(IllegalArgumentException.class, () -> {
+            course = new Course("Gløs??", new ArrayList<>(Arrays.asList(8)));
+        }, "Not a valid course name");
     }
 
     /**
@@ -101,6 +120,5 @@ public class CourseTest {
             course.getHole(5);
         }, "The hole number is not valid");
     }
-
 }
 

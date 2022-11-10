@@ -7,8 +7,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * J-unit test for Scorecard class
- * @author Jakob Opland
+ * J-unit test for Leaderboard class
+ * @author Jakob Opland and Markus Johansen
  * @version 1.0
  * @since 2022-10-31
  */

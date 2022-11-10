@@ -33,6 +33,9 @@ public class ScorecardTest {
         assertEquals("Jakob", scorecard.getPlayerName());
         assertEquals(1, scorecard.getCurrentHole());
         assertEquals(0, scorecard.getScore());
+        assertEquals(3, scorecard.getCurrentHolePar());
+        assertEquals(3, scorecard.getCurrentHoleThrows());
+        assertEquals("Lade", scorecard.getCourseName());
         assertThrows(IllegalStateException.class, () -> {
             new Scorecard(null, "Jørn");
         }, "Need a valoid course object");
