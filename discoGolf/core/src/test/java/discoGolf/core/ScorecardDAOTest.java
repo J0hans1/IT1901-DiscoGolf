@@ -8,7 +8,7 @@ import java.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 /**
- * J-unit test for Scorecard class
+ * J-unit test for ScorecardDAO class
  * @author Jakob Opland
  * @version 1.0
  * @since 2022-10-31

@@ -2,14 +2,18 @@ package discoGolf.json;
 
 import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -77,6 +81,80 @@ public class DiscoGolfPersistenceTest {
             data = persistence.readData();
             ScorecardInterface scorecard2 = data.getData().get(data.getData().size()-1);
             compareScorecardObjects(scorecard, scorecard2);
+            deleteAddedObject();
+        } catch (IOException e) {
+            fail(e.getMessage());
+        }
+    }
+
+    /**
+     * Send jsonString into JsonToData and test that data object is correct
+     * @throws URISyntaxException
+     * @throws IOException
+     */
+    @Test 
+    public void testJsonToData() throws URISyntaxException {
+        try {
+            data = persistence.jsonToData(
+            """
+                {"data":[{"playerName":"Mari","course":{"numberOfHoles":9,"courseName":"Lade",
+                "courseHoles":[{"par":3,"holeThrows":3,"holeScore":0},{"par":4,"holeThrows":4,"holeScore":0},{"par":3,"holeThrows":3,"holeScore":0},
+                {"par":4,"holeThrows":4,"holeScore":0},{"par":3,"holeThrows":3,"holeScore":0},{"par":4,"holeThrows":4,"holeScore":0},
+                {"par":3,"holeThrows":3,"holeScore":0},{"par":4,"holeThrows":4,"holeScore":0},{"par":3,"holeThrows":3,"holeScore":0}]
+                ,"parValues":[3,4,3,4,3,4,3,4,3]},"bestHole":-2,"courseName":"Lade","score":4},{"playerName":"Fredrik","course":
+                {"numberOfHoles":9,"courseName":"Lade","courseHoles":[{"par":3,"holeThrows":3,"holeScore":0},{"par":4,"holeThrows":4,
+                "holeScore":0},{"par":3,"holeThrows":3,"holeScore":0},{"par":4,"holeThrows":4,"holeScore":0},{"par":3,"holeThrows":3,
+                "holeScore":0},{"par":4,"holeThrows":4,"holeScore":0},{"par":3,"holeThrows":3,"holeScore":0},{"par":4,"holeThrows":4,
+                "holeScore":0},{"par":3,"holeThrows":3,"holeScore":0}],"parValues":[3,4,3,4,3,4,3,4,3]},"bestHole":-2,"courseName":"Lade","score":2}]}
+            """);
+            ArrayList<ScorecardInterface> dataList = data.getData();
+            assertEquals("Mari", dataList.get(0).getPlayerName());
+            assertEquals(4, dataList.get(0).getScore());
+            assertEquals(-2, dataList.get(0).getBestHole());
+            assertEquals("Fredrik", dataList.get(1).getPlayerName());
+            assertEquals(2, dataList.get(1).getScore());
+            assertEquals(-2, dataList.get(1).getBestHole());
+        } catch (IOException e) {
+            fail(e.getMessage());
+        }
+    }
+    
+    /**
+     * Test that scorecardToJson returns the correct string of the scorecard
+     * @throws URISyntaxException
+     * @throws IOException
+     */
+    @Test 
+    public void testScorecardToJson() {
+        try {
+            String expString ="""
+                {"playerName":"Ulrik","score":40,"bestHole":0,"course":{"courseName":"Lade","numberOfHoles":9,"parValues":[3,4,5,4,3,5,3,5,4]}}""";
+            assertEquals(expString, persistence.scorecardToJson(scorecard));
+        } catch (IOException e) {
+            fail(e.getMessage());
+        }
+    }
+
+    /**
+     * Test the method getPathString creates a new file if it does not
+     * excist, also check that it returns correct path
+     * @throws URISyntaxException
+     * @throws IOException
+     */
+    @Test 
+    public void testSetPathString() throws URISyntaxException  {
+        try {
+            Path expPath = Paths.get(System.getProperty("user.home") + "/discoGolf.json");
+            assertEquals(expPath.toString(), persistence.getPathString());
+            Files.delete(expPath);
+            persistence.sendScorecardToDatabase(scorecard);
+            assertTrue(Files.exists(expPath));
+            data = persistence.readData();
+            Files.delete(expPath);
+            assertFalse(Files.exists(expPath));
+            persistence.saveData(data);
+            assertTrue(Files.exists(expPath));
+            deleteAddedObject();
         } catch (IOException e) {
             fail(e.getMessage());
         }
@@ -88,8 +166,7 @@ public class DiscoGolfPersistenceTest {
      * @throws IOException
      * @throws URISyntaxException
      */
-    @AfterEach
-    public void deleteAddedObject() throws IOException, URISyntaxException {
+    private void deleteAddedObject() throws IOException, URISyntaxException {
         ArrayList<ScorecardInterface> scorecards = data.getData();
         scorecards.remove(scorecards.size()-1);
         data.setData(scorecards);

@@ -17,10 +17,12 @@ import org.junit.jupiter.api.BeforeEach;
  */
 public class DataTest {
     private Data data;
+    private Course course;
 
     @BeforeEach
     public void setUp() {
         data = new Data();
+        course = new Course("Lade", new ArrayList<>(Arrays.asList(3, 4, 6, 7, 5)));
     }
 
     /**
@@ -30,8 +32,7 @@ public class DataTest {
     public void testSetData() {
         ArrayList<ScorecardInterface> scorecardList = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            Course course = new Course("Lade", new ArrayList<>(Arrays.asList(3, 4, 6, 7, 5)));
-            ScorecardDAO scorecard = new ScorecardDAO(course, "Billy", 5, -1);
+            ScorecardDAO scorecard = new ScorecardDAO(course, "Billy", i, i-1);
             scorecardList.add(scorecard);
         }
         assertEquals(new ArrayList<>(), data.getData());
@@ -45,7 +46,6 @@ public class DataTest {
     @Test 
     public void testAddData() {
         assertEquals(new ArrayList<>(), data.getData());
-        Course course = new Course("Lade", new ArrayList<>(Arrays.asList(5, 2, 6, 7, 3)));
         ScorecardDAO scorecard = new ScorecardDAO(course, "Arne", 30, 0);
         data.add(scorecard);
         assertEquals(scorecard, data.getData().get(0));

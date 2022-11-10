@@ -44,13 +44,4 @@ public class Data {
     public void add(ScorecardInterface scorecard) {
         data.add(scorecard);
     }
-
-    @Override
-    public String toString() {
-        String contentString = "";
-        for (ScorecardInterface scorecard : data) {
-            contentString += "\n" + scorecard.toString();
-        }
-        return "Data [data=" + contentString + "]";
-    }
 }
