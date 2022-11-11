@@ -65,6 +65,10 @@ public class DiscoGolfPersistence {
         return new DiscoGolfModule();
     }
 
+    public ObjectMapper getMapper() {
+        return mapper;
+    }
+
 
     /**
      * Updates the Database.json with the new data (New scorecard submitted by user)
@@ -124,7 +128,7 @@ public class DiscoGolfPersistence {
      * Finds the path of the application folder, and then adds the path of the database.json file to it
      * @return String representation of the path to database.json
      */
-    public String getPathString() throws URISyntaxException, IOException {
+    private String getPathString() throws URISyntaxException, IOException {
         Path p = Paths.get(System.getProperty("user.home") + "/discoGolf.json");
         if (!(Files.exists(p))) {
             File f = new File(p.toString());

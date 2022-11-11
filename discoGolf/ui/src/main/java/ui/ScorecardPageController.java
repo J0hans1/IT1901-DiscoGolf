@@ -63,8 +63,8 @@ public class ScorecardPageController {
     public void handleSubmit(ActionEvent event) throws IOException, URISyntaxException{
         try {
         access.RequestPostingScorecard(scorecard);
-        DiscoGolfPersistence db = new DiscoGolfPersistence();
-        db.sendScorecardToDatabase(scorecard);
+        // DiscoGolfPersistence db = new DiscoGolfPersistence();
+        // db.sendScorecardToDatabase(scorecard);
         goBackToMainPage(event);
         } catch (Exception e) {
             System.out.println("Error: " + e);

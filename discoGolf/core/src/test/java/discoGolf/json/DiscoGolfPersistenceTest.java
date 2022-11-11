@@ -141,23 +141,23 @@ public class DiscoGolfPersistenceTest {
      * @throws URISyntaxException
      * @throws IOException
      */
-    @Test 
-    public void testSetPathString() throws URISyntaxException  {
-        try {
-            Path expPath = Paths.get(System.getProperty("user.home") + "/discoGolf.json");
-            assertEquals(expPath.toString(), persistence.getPathString());
-            persistence.sendScorecardToDatabase(scorecard);
-            assertTrue(Files.exists(expPath));
-            data = persistence.readData();
-            Files.delete(expPath);
-            assertFalse(Files.exists(expPath));
-            persistence.saveData(data);
-            assertTrue(Files.exists(expPath));
-            deleteAddedObject();
-        } catch (IOException e) {
-            fail(e.getMessage());
-        }
-    }
+    // @Test 
+    // public void testSetPathString() throws URISyntaxException  {
+    //     try {
+    //         Path expPath = Paths.get(System.getProperty("user.home") + "/discoGolf.json");
+    //         assertEquals(expPath.toString(), persistence.getPathString());
+    //         persistence.sendScorecardToDatabase(scorecard);
+    //         assertTrue(Files.exists(expPath));
+    //         data = persistence.readData();
+    //         Files.delete(expPath);
+    //         assertFalse(Files.exists(expPath));
+    //         persistence.saveData(data);
+    //         assertTrue(Files.exists(expPath));
+    //         deleteAddedObject();
+    //     } catch (IOException e) {
+    //         fail(e.getMessage());
+    //     }
+    // }
 
     /**
      * Make sure to delete the scorecard that testSaveAndReadScorecard() writes to 

@@ -20,16 +20,18 @@ import discoGolf.json.DiscoGolfPersistence;
  * @since 2022-10-03
  */
 public class DataAccess {
-  String baseURL = "http://localhost:8080";
-  DiscoGolfPersistence persistence = new DiscoGolfPersistence();
+  private static final String baseURL = "http://localhost:8080";
+  private static final DiscoGolfPersistence persistence = new DiscoGolfPersistence();
+  private static final String addScorecardURL = baseURL + "/add-scorecard";
+  private static final String getAllURL = baseURL + "/data";
 
   public String postDefaultScorecard(){
     String responseBody = "";
     try {
       // Create a request
       HttpRequest request = HttpRequest.newBuilder()
-      .uri(new URI(baseURL + "/post1"))
-      .POST(BodyPublishers.ofString(""))
+      .uri(new URI(addScorecardURL))
+      .PUT(BodyPublishers.ofString(""))
       .build();
 
       // Send the request and get the response
@@ -48,7 +50,7 @@ public class DataAccess {
 
   /**
    * Forms an HTTP request that will post a scorecard to the database, via the restAPI
-   * @param scorecard the scorecard to be posted. 
+   * @param scorecard the scorecard to be posted.  TODO: modify to post in comment
    * @throws IOException
    */
   public void RequestPostingScorecard(Scorecard scorecard) throws IOException {
@@ -58,9 +60,9 @@ public class DataAccess {
       // Create a request 
       HttpClient client = HttpClient.newHttpClient();
       HttpRequest request = HttpRequest.newBuilder()
-      .uri(URI.create(baseURL + "/post2"))
+      .uri(URI.create(addScorecardURL))
       .header("Content-type", "application/json")
-      .POST(BodyPublishers.ofString(scorecardString))
+      .PUT(BodyPublishers.ofString(scorecardString))
       .build();
 
       //send the request and get the response
@@ -80,7 +82,7 @@ public class DataAccess {
     try {
       // Create a request
       HttpRequest request = HttpRequest.newBuilder()
-      .uri(new URI(baseURL + "/get"))
+      .uri(new URI(getAllURL))
       .GET()
       .build();
 
@@ -90,7 +92,6 @@ public class DataAccess {
       .send(request, HttpResponse.BodyHandlers.ofString());
 
       // Parse the response body into a Data object
-      System.out.println(response.body());
       data = persistence.jsonToData(response.body());
     } catch (Exception e) {
       e.printStackTrace();

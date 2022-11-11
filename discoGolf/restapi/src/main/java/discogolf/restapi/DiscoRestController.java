@@ -2,14 +2,11 @@ package discogolf.restapi;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.http.HttpStatus;
@@ -20,6 +17,8 @@ import discoGolf.core.ScorecardInterface;
 @RestController
 public class DiscoRestController {
 
+    private static final String getAllURL = "/data";
+    private static final String addScorecardURL = "/add-scorecard";
     /**
      * Connects the RestserverService to the RestserverController.
      */
@@ -31,7 +30,7 @@ public class DiscoRestController {
      * @throws URISyntaxException
      * @throws IOException
      */
-    @GetMapping("/get")
+    @GetMapping(getAllURL)
     public Data data() throws IOException, URISyntaxException {
         Data data = new Data();
         data.setData(service.data());
@@ -55,15 +54,10 @@ public class DiscoRestController {
      * @throws URISyntaxException
      * @throws IOException
      */
-    @RequestMapping(value = "/post2")
+    @PutMapping(value = addScorecardURL)
     @ResponseStatus(HttpStatus.CREATED)
     public void submit(@RequestBody ScorecardInterface scorecard) throws IOException, URISyntaxException {
         service.post(scorecard);
-    }
-
-    @RequestMapping(value = "/test", method = RequestMethod.POST)
-    public String test(@RequestBody ScorecardInterface s) {
-        return "Hello " + s.getPlayerName();
     }
 
 }
