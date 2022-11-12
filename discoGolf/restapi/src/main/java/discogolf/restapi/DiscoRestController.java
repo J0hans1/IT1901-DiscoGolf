@@ -32,9 +32,7 @@ public class DiscoRestController {
      */
     @GetMapping(getAllURL)
     public Data data() throws IOException, URISyntaxException {
-        Data data = new Data();
-        data.setData(service.data());
-        return data;
+        return service.data();
     }
 
    ///**
