@@ -6,6 +6,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 import discoGolf.core.Course;
+import discoGolf.core.Data;
 import discoGolf.core.ScorecardInterface;
 import discoGolf.json.DiscoGolfPersistence;
 
@@ -22,8 +23,8 @@ public class DiscoRestService {
      * @throws URISyntaxException
      * @throws IOException
      */
-    public ArrayList<ScorecardInterface> data() throws IOException, URISyntaxException {
-        return persistence.readData().getData();
+    public Data data() throws IOException, URISyntaxException {
+        return persistence.readData();
     }
 
     /**
