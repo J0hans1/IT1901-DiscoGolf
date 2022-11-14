@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
+import discoGolf.core.Data;
 import discoGolf.core.ScorecardInterface;
 import discoGolf.json.DiscoGolfPersistence;
 
@@ -26,8 +27,8 @@ public class DiscoRestService {
      * @throws URISyntaxException if the URI is not valid.
      * @throws IOException if JSON/JAVA conversion fails.
      */
-    public ArrayList<ScorecardInterface> data() throws IOException, URISyntaxException {
-        return persistence.readData().getData();
+    public Data data() throws IOException, URISyntaxException {
+        return persistence.readData();
     }
 
     /**
