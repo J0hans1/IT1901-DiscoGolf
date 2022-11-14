@@ -9,7 +9,7 @@ import discoGolf.core.ScorecardDAO;
 import discoGolf.core.ScorecardInterface;
 
 /**
- * Initializes deserializer and serializer objects
+ * Initializes deserializer and serializer objects for DiscoGolf application
  * @author Markus Johansen and Jakob Opland
  * @version 1.0
  * @since 2022-10-05

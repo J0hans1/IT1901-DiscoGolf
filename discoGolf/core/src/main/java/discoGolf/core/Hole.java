@@ -2,7 +2,7 @@ package discoGolf.core;
 
 /**
  * Hole class storing data information for a hole
- * @author @Jakob Opland
+ * @author Jakob Opland and Markus Johansen
  * @version 1.0
  * @since 2022-10-25
  */
@@ -42,18 +42,18 @@ public class Hole {
   }
 
   /**
-     * adds one to the current amount of throws the player 
-     * has made on the hole.
-  */
+   * adds one to the current amount of throws the player 
+   * has made on the hole.
+   */
   public void addThrow() {
     this.holeThrows += 1;
   }
 
   /**
-  * removes one from the current amount of throws the 
-  * has made on the hole.
-  */
-  public void removeThrow() {
+   * removes one from the current amount of throws the player has made at the hole.
+   * @throws IllegalStateException if the amount of throws currently is 1
+   */
+  public void removeThrow() throws IllegalStateException {
     if (getHoleThrows() == 1) {
       throw new IllegalStateException("Cannot have 0 throws");
     }
@@ -61,10 +61,10 @@ public class Hole {
   }
 
   /**
-     * @param int par value for the hole
-     * @throws IllegalStateException Throws if par value is not valid
-     */
-    private void validatePar(int par) {
+   * @param int par value for the hole
+   * @throws IllegalArgumentException if par value is not in range 2-7
+   */
+    private void validatePar(int par) throws IllegalArgumentException {
       if (par < 2 || par > 7) {
           throw new IllegalArgumentException("Not a valid par value");
       }

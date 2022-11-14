@@ -14,7 +14,7 @@ import discoGolf.core.Course;
 import discoGolf.core.ScorecardDAO;
 
 /**
- * Creates a Scorecard object from json data
+ * Creates a Scorecard.java object from json data
  * @author Markus Johansen and Jakob Opland
  * @version 1.0
  * @since 2022-10-09 
@@ -25,12 +25,10 @@ public class ScorecardDeserializer extends JsonDeserializer<ScorecardDAO> {
 
     /**
      * Deserialize a scorecard from JSON
-     * 
      * @param parser  The parser to use
      * @param context The context to use
      * @return The deserialized scorecard
-     * @throws JacksonException Error when trying to use other deserializers or
-     *                          methods from jackson library
+     * @throws JacksonException Error when trying to use other deserializers or methods from jackson library
      * @throws IOException      Error when trying to read from the database
      */
     @Override
@@ -40,9 +38,8 @@ public class ScorecardDeserializer extends JsonDeserializer<ScorecardDAO> {
     }
 
     /**
-     * Deserialize a scorecard from a JSON node Makes it possible to use this
+     * Deserialize a scorecard from a JSON node Makes it possible to use this.
      * deserializer in other deserializers (DataArrayDeserializer)
-     * 
      * @param node The node to deserialize
      * @see DataArrayDeserializer
      */

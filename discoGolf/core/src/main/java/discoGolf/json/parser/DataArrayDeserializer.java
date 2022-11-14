@@ -16,7 +16,7 @@ import discoGolf.core.ScorecardDAO;
 import discoGolf.core.ScorecardInterface;
 
 /**
- * Collects all data from json file and stores it in a Data object
+ * Collects all data from json file and stores it in a Data.java object
  * @author Markus Johansen and Jakob Opland
  * @version 1.0
  * @since 2022-10-03
@@ -25,8 +25,7 @@ public class DataArrayDeserializer extends JsonDeserializer<Data>{
     private ScorecardDeserializer scorecardDeserializer = new ScorecardDeserializer();
 
     /**
-     * Deserialize a data object from JSON file
-     * 
+     * Deserialize a data object from JSON file.
      * @param parser  The parser to use
      * @param context The context to use
      * @return The deserialized data object
