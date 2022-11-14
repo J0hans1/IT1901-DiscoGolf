@@ -4,21 +4,39 @@ actor Player
 control MainPageController
 control ScorecardPageController
 participant Scorecard
+participant Course
+participant Hole
+participant DataAccess
+control DiscoRestController
+participant DiscoRestServie
 participant DiscoGolfPersistence
-database Data
+dataBase Database
 
 Player -> MainPageController: Write name and choose course
 MainPageController -> ScorecardPageController: changeSceneToScorecard()
 activate Scorecard
-ScorecardPageController -> Scorecard: addThrow()
-Scorecard -> ScorecardPageController: update throws in scorecard
+activate Course
+activate Hole
+
+ScorecardPageController -> Scorecard: getCourse()
+Scorecard -> Course: getHole(currentHoleNumber)
+Course -> Hole: AddThrow() 
+Hole -> Hole: update throws in Hole class
 ScorecardPageController -> Scorecard: nextHole()
-Scorecard -> ScorecardPageController: update hole number and total score
-ScorecardPageController -> DiscoGolfPersistence: handleSubmit()
-activate Data
-DiscoGolfPersistence -> Data: sendScorecardToDatabase(scorecard)
-ScorecardPageController -> MainPageController: user is sent back to main page
+Scorecard -> ScorecardPageController: Update current hole and total score
+activate DataAccess
+ScorecardPageController -> DataAccess: handleSubmit()
+DataAccess -> DiscoRestController: RequestPostingScorecard(scorecard)
+activate DiscoRestServie
+DiscoRestController -> DiscoRestServie: submit(scorecard)
+activate DiscoGolfPersistence
+DiscoRestServie -> DiscoGolfPersistence: addScorecard(scorecard)
+DiscoGolfPersistence -> Database: sendScorecardToDatabase(scorecard)
+ScorecardPageController -> MainPageController: Player is sent back to main page
+MainPageController -> Player: Player sees feedback for saved game
 deactivate Scorecard
+deactivate Course
+deactivate Hole
 
 @endulm
 
