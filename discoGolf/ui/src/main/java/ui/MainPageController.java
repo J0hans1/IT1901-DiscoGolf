@@ -32,10 +32,9 @@ import javafx.scene.Node;
  * @since 2022-09-21
  */
 public class MainPageController {
-
     private List<Course> availableCourses = new ArrayList<>();
     private String playerName;
-    
+
     @FXML 
     private Parent root;
     @FXML 
@@ -63,7 +62,7 @@ public class MainPageController {
 
     /**
      * Adds a String to a list of Strings which represents available courses
-     * @param String course - a String containing the name of a course
+     * @param course - a String containing the name of a course
      */
     public void addCourseToList(String course) {
         pickCourseMenu.getItems().add(course);
@@ -163,11 +162,11 @@ public class MainPageController {
     }
 
      /**
-     * Loads the Leaderboard page 
-     * @param event is the event that triggers the change of scenes
-     * @throws URISyntaxException
-     * @throws IOException if reading the fxml file failed
-     */
+      * Loads the Leaderboard page 
+      * @param event is the event that triggers the change of scenes
+      * @throws URISyntaxException if there is an error occuring while loading the leaderboard.fxml file
+      * @throws IOException if reading the fxml file failed
+      */
     @FXML
     public void handleLeaderboardButton(ActionEvent event) throws URISyntaxException{
         try {

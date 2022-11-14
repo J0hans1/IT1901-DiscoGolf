@@ -33,7 +33,7 @@ public class Course {
     }
     
     /**
-     * Empty course constructor used by jacoco for deserialization
+     * Empty course constructor used by Jackson for deserialization
      */
     public Course(){
     

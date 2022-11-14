@@ -14,10 +14,6 @@ public class Scorecard implements ScorecardInterface {
     private String playerName;
     private Course course;
 
-    public Scorecard() {
-
-    }
-
     /**
      * constructs a scorecard object that vil be saved in the database
      * @param course     is the course the player picked at the main menu
@@ -29,6 +25,13 @@ public class Scorecard implements ScorecardInterface {
         this.playerName = playerName;
         this.course = course;
         this.currentHoleNumber = 1;
+    }
+
+    /**
+     * empty construtor used by jackson for deserializing purposes
+     */
+    public Scorecard() {
+
     }
 
     /**

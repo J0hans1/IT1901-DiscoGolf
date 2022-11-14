@@ -27,6 +27,9 @@ public class ScorecardDAO implements ScorecardInterface {
     this.bestHole = bestHole;
   }
 
+  /**
+   * empty constructor used by jackson for deserializing purposes
+   */
   public ScorecardDAO() {
 
   }

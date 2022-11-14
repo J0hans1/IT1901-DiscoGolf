@@ -5,50 +5,40 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 
-import discoGolf.core.Course;
 import discoGolf.core.ScorecardInterface;
 import discoGolf.json.DiscoGolfPersistence;
 
+/**
+ * The DiscoRestService class is the Service for the RestAPI.
+ * It is responsible for performing the requests from the client and manipulating the database.
+ * @author Markus Johansen and Billy Barret
+ * @version 1.0
+ * @since 2022-10-13
+ * @see DiscoRestController
+ */
 @Service
 public class DiscoRestService {
-    /**
-     * lets the RestserverController manipulate and access the database.
-     */
     private DiscoGolfPersistence persistence = new DiscoGolfPersistence();
 
     /**
-     * returns all scorecards in the database.
+     * returns all scorecards in the database as an arrayList, by reading the database file.
      * @return all scorecards in the database.
-     * @throws URISyntaxException
-     * @throws IOException
+     * @throws URISyntaxException if the URI is not valid.
+     * @throws IOException if JSON/JAVA conversion fails.
      */
     public ArrayList<ScorecardInterface> data() throws IOException, URISyntaxException {
         return persistence.readData().getData();
     }
 
     /**
-     * posts a scorecard to the database.
-     * @param scorecard the scorecard to be posted.
-     * @throws URISyntaxException
-     * @throws IOException
+     * Posts a scorecard to the database.
+     * @param s the scorecard to be posted.
+     * @throws URISyntaxException if the URI is not valid.
+     * @throws IOException if JSON/JAVA conversion fails.
      */
     public void post(ScorecardInterface s) throws IOException, URISyntaxException {
         persistence.sendScorecardToDatabase(s);
     }
-
-  ///**
-  // * posts a scorecard to the database.
-  // * @param scorecard the scorecard to be posted.
-  // * @throws URISyntaxException
-  // * @throws IOException
-  // */
-  //public void post() throws IOException, URISyntaxException {
-  //    ArrayList<Integer> pars = new ArrayList<>();
-  //    pars.add(3);
-  //    Course course = new Course("øya Golfklubb", pars);
-  //    Scorecard s = new Scorecard(course, "Ulrik Iversen");
-  //    persistence.sendScorecardToDatabase(s);
-  //}
 }
 
 

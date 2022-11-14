@@ -11,10 +11,9 @@ import discoGolf.core.Data;
 import discoGolf.core.Scorecard;
 import discoGolf.json.DiscoGolfPersistence;
 
-// import org.apache.http.HttpException;
-
 /**
- * Transforms Data object contents to json parsable elements
+ * Is the ClientSide access to the RestAPI.
+ * It is responsible for sending requests to the RestAPI and receiving responses.
  * @author Markus Johansen, Billy Barret og Ulrik Isdahl
  * @version 1.0
  * @since 2022-10-03
@@ -25,33 +24,10 @@ public class DataAccess {
   private static final String addScorecardURL = baseURL + "/add-scorecard";
   private static final String getAllURL = baseURL + "/data";
 
-  public String postDefaultScorecard(){
-    String responseBody = "";
-    try {
-      // Create a request
-      HttpRequest request = HttpRequest.newBuilder()
-      .uri(new URI(addScorecardURL))
-      .PUT(BodyPublishers.ofString(""))
-      .build();
-
-      // Send the request and get the response
-      final HttpResponse<String> response = HttpClient.newBuilder()
-      .build()
-      .send(request, HttpResponse.BodyHandlers.ofString());
-
-      // save the response body as a string
-      responseBody = response.body();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return responseBody;
-  }
-
-
   /**
-   * Forms an HTTP request that will post a scorecard to the database, via the restAPI
-   * @param scorecard the scorecard to be posted.  TODO: modify to post in comment
-   * @throws IOException
+   * Sends an HTTP-POST request that will post a scorecard to the database, via the restAPI
+   * @param scorecard the scorecard to be posted.
+   * @throws IOException if conversion from Java to JSON fails.
    */
   public void RequestPostingScorecard(Scorecard scorecard) throws IOException {
     String scorecardString = persistence.scorecardToJson(scorecard);
@@ -68,16 +44,18 @@ public class DataAccess {
       //send the request and get the response
       client.send(request, HttpResponse.BodyHandlers.ofString());
       } catch (Exception e) {
-      e.printStackTrace();
-      // throw new HttpException("Error posting scorecard");
+        e.printStackTrace();
+        //TODO: handle exception
     }
   }
 
+
   /**
-   * Forms an HTTP request that will get all scorecards from the database, via the restAPI
-   * @return all scorecards in the database.
+   * Forms an HTTP-GET request that will get all scorecards from the database, via the restAPI
+   * @return Data object containing all scorecards in the database.
+   * @throws IOException if conversion from JSON to Java fails.
    */
-  public Data fetchDatabase(){
+  public Data fetchDatabase() throws IOException {
     Data data = new Data();
     try {
       // Create a request
@@ -95,16 +73,10 @@ public class DataAccess {
       data = persistence.jsonToData(response.body());
     } catch (Exception e) {
       e.printStackTrace();
-      // throw new HttpException("Error fetching database");
+      //TODO: handle exception
     }
     return data;
   }
-
-  public static void main(String[] args) {
-    DataAccess da = new DataAccess();
-    System.out.println(da.fetchDatabase());
-  }
-
 }
 
 
