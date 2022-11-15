@@ -1,0 +1,42 @@
+@startuml package diagram
+
+component fxui {
+    package discogolf.ui #DDDDDD
+}
+
+component restapi {
+    package discogolf.restapi #DDDDDD
+}
+
+component core {
+    package discogolf.core #DDDDDD
+    package discogolf.json #DDDDDD
+    package discogolf.json.parser #DDDDDD
+}
+
+component javafx {
+    component javafx.controls
+    component javafx.fxml
+}
+
+component org.testfx 
+
+component spring.boot.web
+
+component spring.boot
+
+component com.fasterxml.jackson
+
+
+discogolf.ui ..> core
+discogolf.ui ..> javafx
+discogolf.ui ..> org.testfx
+discogolf.restapi ..> core
+discogolf.restapi ..> spring.boot.web
+discogolf.restapi ..> spring.boot
+discogolf.json ..> discogolf.json.parser
+discogolf.json.parser ..> com.fasterxml.jackson
+
+
+
+@enduml
