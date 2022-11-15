@@ -1,6 +1,7 @@
 package discoGolf.core;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Keeps track of all scorecard objects in the database.
@@ -43,5 +44,24 @@ public class Data {
      */
     public void add(ScorecardInterface scorecard) {
         data.add(scorecard);
+    }
+
+    /**
+     * Remove a scorecard from the list TODO: Modify javadoc
+     * 
+     * @param scorecard The scorecard to remove
+     */
+
+    public void removeScorecardWithName(String name) {
+        for (ScorecardInterface scorecard : data) {
+            if (scorecard.getPlayerName().equals(name)) {
+                data.remove(scorecard);
+                break;
+            }
+        }
+    }
+
+    public Iterator<ScorecardInterface> iterator() {
+        return data.iterator();
     }
 }

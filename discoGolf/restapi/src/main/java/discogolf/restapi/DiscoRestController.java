@@ -17,8 +17,8 @@ import discoGolf.core.ScorecardInterface;
 @RestController
 public class DiscoRestController {
 
-    private static final String getAllURL = "/data";
-    private static final String addScorecardURL = "/add-scorecard";
+    static final String getAllURL = "/data";
+    static final String addScorecardURL = "/add-scorecard";
     /**
      * Connects the RestserverService to the RestserverController.
      */
