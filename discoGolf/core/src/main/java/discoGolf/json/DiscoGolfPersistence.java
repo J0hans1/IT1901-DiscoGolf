@@ -53,7 +53,7 @@ public class DiscoGolfPersistence {
      * @see createModule()
      */
     public static ObjectMapper createMapper() {
-        return new ObjectMapper().registerModule(createModule());
+      return new ObjectMapper().registerModule(createModule());
     }
 
 
@@ -119,6 +119,13 @@ public class DiscoGolfPersistence {
     //return a data object from a json string
     public Data jsonToData(String jsonString) throws IOException {
         return mapper.readValue(jsonString, Data.class);
+    }
+
+    //remove object from the database
+    public void removeScorecardwithName(String name) throws IOException, URISyntaxException {
+        Data data = readData();
+        data.removeScorecardWithName(name);
+        saveData(data);
     }
 
 
