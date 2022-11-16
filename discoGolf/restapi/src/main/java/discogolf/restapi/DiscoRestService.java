@@ -23,7 +23,7 @@ public class DiscoRestService {
      * @throws URISyntaxException
      * @throws IOException
      */
-    public Data data() throws IOException, URISyntaxException {
+    public Data fetch() throws IOException, URISyntaxException {
         return persistence.readData();
     }
 
@@ -33,23 +33,9 @@ public class DiscoRestService {
      * @throws URISyntaxException
      * @throws IOException
      */
-    public void post(ScorecardInterface s) throws IOException, URISyntaxException {
+    public void save(ScorecardInterface s) throws IOException, URISyntaxException {
         persistence.sendScorecardToDatabase(s);
     }
-
-  ///**
-  // * posts a scorecard to the database.
-  // * @param scorecard the scorecard to be posted.
-  // * @throws URISyntaxException
-  // * @throws IOException
-  // */
-  //public void post() throws IOException, URISyntaxException {
-  //    ArrayList<Integer> pars = new ArrayList<>();
-  //    pars.add(3);
-  //    Course course = new Course("øya Golfklubb", pars);
-  //    Scorecard s = new Scorecard(course, "Ulrik Iversen");
-  //    persistence.sendScorecardToDatabase(s);
-  //}
 }
 
 

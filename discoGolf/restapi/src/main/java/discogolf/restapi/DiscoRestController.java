@@ -24,6 +24,7 @@ public class DiscoRestController {
      */
     @Autowired
     private DiscoRestService service;
+
     /**
      * Creates a new RestserverController object.
      * @return All scorecards in the database.
@@ -31,31 +32,21 @@ public class DiscoRestController {
      * @throws IOException
      */
     @GetMapping(getAllURL)
-    public Data data() throws IOException, URISyntaxException {
-        return service.data();
+    public Data fetch() throws IOException, URISyntaxException {
+        return service.fetch();
     }
-
-   ///**
-   // * Posts a scorecard to the database.
-   // * @param scorecard the scorecard to be posted.
-   // * @throws URISyntaxException
-   // * @throws IOException
-   // */
-   //@PostMapping(value = "/post1")
-   //public void submit() throws IOException, URISyntaxException {
-   //    service.post();
-   //}
 
     /**
      * Posts a scorecard to the database.
      * @param scorecard the scorecard to be posted.
+     * @return true if the scorecard was posted successfully.
      * @throws URISyntaxException
      * @throws IOException
      */
     @PutMapping(value = addScorecardURL)
     @ResponseStatus(HttpStatus.CREATED)
-    public void submit(@RequestBody ScorecardInterface scorecard) throws IOException, URISyntaxException {
-        service.post(scorecard);
+    public boolean save(@RequestBody ScorecardInterface scorecard) throws IOException, URISyntaxException {
+        service.save(scorecard);
+        return true;
     }
-
 }
