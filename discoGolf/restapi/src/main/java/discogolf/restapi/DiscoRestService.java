@@ -2,6 +2,7 @@ package discogolf.restapi;
 
 import org.springframework.stereotype.Service;
 
+
 import java.io.IOException;
 import java.net.URISyntaxException;
 
@@ -24,7 +25,12 @@ public class DiscoRestService {
      * @throws URISyntaxException
      * @throws IOException
      */
-    public Data getData(boolean isTest) throws IOException, URISyntaxException {
+    public Data getData(boolean isTestboolean isTest) throws IOException, URISyntaxException {
+        if (isTest) {
+            persistence = new DiscoGolfPersistence(TemporaryDatabasePath);
+            return persistence.readData();
+        }
+        persistence = new DiscoGolfPersistence();
         if (isTest) {
             persistence = new DiscoGolfPersistence(TemporaryDatabasePath);
             return persistence.readData();
