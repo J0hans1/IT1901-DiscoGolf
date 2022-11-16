@@ -20,45 +20,22 @@ import discoGolf.json.DiscoGolfPersistence;
  * @since 2022-10-03
  */
 public class DataAccess {
-  private static final String baseURL = "http://localhost:8080";
   private static final DiscoGolfPersistence persistence = new DiscoGolfPersistence();
+  private static final String baseURL = "http://localhost:8080";
   private static final String addScorecardURL = baseURL + "/add-scorecard";
   private static final String getAllURL = baseURL + "/data";
-
-  public String postDefaultScorecard(){
-    String responseBody = "";
-    try {
-      // Create a request
-      HttpRequest request = HttpRequest.newBuilder()
-      .uri(new URI(addScorecardURL))
-      .PUT(BodyPublishers.ofString(""))
-      .build();
-
-      // Send the request and get the response
-      final HttpResponse<String> response = HttpClient.newBuilder()
-      .build()
-      .send(request, HttpResponse.BodyHandlers.ofString());
-
-      // save the response body as a string
-      responseBody = response.body();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    return responseBody;
-  }
-
 
   /**
    * Forms an HTTP request that will post a scorecard to the database, via the restAPI
    * @param scorecard the scorecard to be posted.  TODO: modify to post in comment
    * @throws IOException
    */
-  public void RequestPostingScorecard(Scorecard scorecard) throws IOException {
+  public String RequestPostingScorecard(Scorecard scorecard) throws IOException {
     String scorecardString = persistence.scorecardToJson(scorecard);
+    String responseString = "";
 
     try {
       // Create a request 
-      HttpClient client = HttpClient.newHttpClient();
       HttpRequest request = HttpRequest.newBuilder()
       .uri(URI.create(addScorecardURL))
       .header("Content-type", "application/json")
@@ -66,11 +43,16 @@ public class DataAccess {
       .build();
 
       //send the request and get the response
-      client.send(request, HttpResponse.BodyHandlers.ofString());
-      } catch (Exception e) {
-      e.printStackTrace();
-      // throw new HttpException("Error posting scorecard");
+      final HttpResponse<String> response = HttpClient.newBuilder()
+      .build()
+      .send(request, HttpResponse.BodyHandlers.ofString());
+
+      //save the response body in a string
+      responseString = "\n\nResponse: " + response.body() + "\n\n";
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+    return responseString;
   }
 
   /**
@@ -95,7 +77,6 @@ public class DataAccess {
       data = persistence.jsonToData(response.body());
     } catch (Exception e) {
       e.printStackTrace();
-      // throw new HttpException("Error fetching database");
     }
     return data;
   }
@@ -104,8 +85,4 @@ public class DataAccess {
     DataAccess da = new DataAccess();
     System.out.println(da.fetchDatabase());
   }
-
 }
-
-
-
