@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,6 +20,9 @@ public class DiscoRestController {
 
     static final String getAllURL = "/data";
     static final String addScorecardURL = "/add-scorecard";
+    static final String deleteDatabaseURL = "/delete-database";
+    static final String getAllURLTest = "/test" + getAllURL;
+    static final String addScorecardURLTest = "/test" + addScorecardURL;
     /**
      * Connects the RestserverService to the RestserverController.
      */
@@ -32,7 +36,18 @@ public class DiscoRestController {
      */
     @GetMapping(getAllURL)
     public Data data() throws IOException, URISyntaxException {
-        return service.data();
+        return service.data(false);
+    }
+
+        /**
+     * Creates a new RestserverController object.
+     * @return All scorecards in the database.
+     * @throws URISyntaxException
+     * @throws IOException
+     */
+    @GetMapping(getAllURLTest)
+    public Data dataTest() throws IOException, URISyntaxException {
+        return service.data(true);
     }
 
    ///**
@@ -52,10 +67,28 @@ public class DiscoRestController {
      * @throws URISyntaxException
      * @throws IOException
      */
-    @PutMapping(value = addScorecardURL)
+    @PutMapping(addScorecardURL)
     @ResponseStatus(HttpStatus.CREATED)
     public void submit(@RequestBody ScorecardInterface scorecard) throws IOException, URISyntaxException {
-        service.post(scorecard);
+        service.addScorecard(scorecard, false);
+    }
+
+    /**
+     * Posts a scorecard to the database.
+     * @param scorecard the scorecard to be posted.
+     * @throws URISyntaxException
+     * @throws IOException
+     */
+    @PutMapping(addScorecardURLTest)
+    @ResponseStatus(HttpStatus.CREATED)
+    public void submitTest(@RequestBody ScorecardInterface scorecard) throws IOException, URISyntaxException {
+        service.addScorecard(scorecard, true);
+    }
+
+    @DeleteMapping(deleteDatabaseURL)
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteDatabase() throws IOException, URISyntaxException {
+        service.deleteDatabase();
     }
 
 }
