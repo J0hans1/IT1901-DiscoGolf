@@ -26,6 +26,7 @@ The repository contains:
   - [UI](discogolf/ui/src/main/java/ui/) module with the GUI classes for the application: controllers, fxml files and the AppClass for running the application
   - [FXUtil](discogolf/fxutil/src/main/java/fxutil/) module for future use
 
+A full description of the project architecture can be found in the [release 3](docs/release3/release3.md) documentation
 
 ## Navigation through repository content
 
@@ -53,3 +54,19 @@ All maven commands must be run from the ```/discoGolf/``` directory:
 
 1. Navigate into the restapi directory ```cd restapi```
 2. Type ```./mvnw spring-boot:run``` to start the server
+
+
+## How to convert to executable 
+
+Navigate into the ui directory :
+```powershell
+cd ui
+```
+Compile the project to make sure all dependancies are packaged properly:
+```powershell
+mvn clean install
+```
+Convert the project into an executable:
+```powershell
+mvn clean compile javafx:jlink jpackage:jpackage
+```

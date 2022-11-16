@@ -8,9 +8,9 @@ This release we have implemented the following features:
 * Cancel button for canceling a started game. When clicked, the user is taken back to the main page, and the game is discarded.
 * New feedback to users when trying to start a game with either an invalid player name or not a selected course.
 * Added constraints when the throw count for a hole is 1, the red "minus" button is then disabled.
-* New restApi module that uses rest API to save games on an external server....?
+* New restApi module that uses a rest API to save games to a database. 
 
-## Project architecture and modularisation
+## Project architecture and modularisation 
 
 The code architecture has been improved by following the Maven standard. The code is now split into more modules, which are all located in the discoGolf directory. The modules are:
 
@@ -58,7 +58,7 @@ Multiple of these classes were added this sprint for both supporting new feature
 
 ### RestApi
 
-The restApi module contains....?
+The restApi module sets up an API with the help of a spring boot server. The API allows the server to recieve requests made over HTTP such that it can communicate with the DataAccess object (located in ui). When requests are sent via the API the server will decide precicely what happens based on the URL of the request, but the response will always consist of the server interacting with the database via the DiscoGolfPersistance class in core.json. 
 
 ## Workflow
 
@@ -95,7 +95,7 @@ We used the board feature in gitlab to divide the issues into four categories. B
 
 ### Branches
 
-In sprint 3 we used the issues in gitlab to create branches. This way, all the branches were named with the issue number at beginning, followed by the issue header. When creating sub-issues we created sub-branches out of the main-issue branch. When a branch was done, the responsible person for the issue created a merge request for merging the branch into dev. In sprint 3, we decided to create a new dev branch that we treated as the main branch for this sprint. This way, we made sure we did not ruin anything in the master branch and that it worked at all times.
+In sprint 3 we used the issues in gitlab to create branches. This way, all the branches were named with the issuenumber at beginning, followed by the issue header. When creating sub-issues we created sub-branches out of the main-issue branch. When a branch was done, the responsible person for the issue created a merge request for mergin the branch into dev. In sprint 3, we decided to create a new dev branch that we treated as the main branch for this sprint. This allows the master branch to be stable and bug free at all times, such that we would always have a production ready version of the project. 
 
 ### Commits
 
@@ -112,6 +112,9 @@ For release-3, several libraries are used to ensure good code quality for the pr
 * Jacoco (jacoco-maven-plugin) to ensure good test coverage for the code, where usually over 80% is a good aim.
 
 ## Tests
+
+Each module has its own tests. For the core module we used J-Unit. We used TestFX combined with J-unit to test the controllers in ui. In the restapi module we used SpringBootTest to be able to run and send requests to the server. 
+We set a test coverage goal of 90% with jacoco. This would ensure that we got a reasonable coverage over all of the tests. 
 
 ## PlantUML diagrams
 
