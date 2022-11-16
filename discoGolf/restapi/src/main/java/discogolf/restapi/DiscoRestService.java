@@ -25,7 +25,7 @@ public class DiscoRestService {
      * @throws URISyntaxException
      * @throws IOException
      */
-    public Data getData(boolean isTestboolean isTest) throws IOException, URISyntaxException {
+    public Data getData(boolean isTest) throws IOException, URISyntaxException {
         if (isTest) {
             persistence = new DiscoGolfPersistence(TemporaryDatabasePath);
             return persistence.readData();
