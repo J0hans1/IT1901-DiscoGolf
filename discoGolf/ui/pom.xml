@@ -25,13 +25,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!--Get the fxutil module-->
-        <dependency>
-            <groupId>it1901</groupId>
-            <artifactId>modules-util</artifactId> 
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
         <!-- javafx -->
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -162,7 +155,7 @@
                     <appVersion>1.0.0</appVersion>
                     <vendor>it1901</vendor>
                     <destination>target/dist</destination>
-                    <module>modules-ui/ui.DiscoGolfApp</module>
+                    <module>discoGolf.ui/ui.DiscoGolfApp</module>
                     <runtimeImage>target/discogolf</runtimeImage>
                     <javaOptions>
                         <option>-Dfile.encoding=UTF-8</option>

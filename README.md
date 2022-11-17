@@ -24,7 +24,6 @@ The repository contains:
   - [Json](discogolf/core/src/main/java/discoGolf/json/) module for data persistence with Jackson library
   - [Core](discogolf/core/src/main/java/discoGolf/json/) module with the logic classes for the application
   - [UI](discogolf/ui/src/main/java/ui/) module with the GUI classes for the application: controllers, fxml files and the AppClass for running the application
-  - [FXUtil](discogolf/fxutil/src/main/java/fxutil/) module for future use
 
 A full description of the project architecture can be found in the [release 3](docs/release3/release3.md) documentation
 
