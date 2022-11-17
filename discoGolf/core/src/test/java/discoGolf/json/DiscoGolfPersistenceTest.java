@@ -34,10 +34,12 @@ public class DiscoGolfPersistenceTest {
     private Scorecard scorecard;
     private Data data;
     private DiscoGolfPersistence persistence;
+    private DiscoGolfPersistence persistenceTest;
 
     @BeforeEach
     public void setUp() {
         persistence = new DiscoGolfPersistence();
+        persistenceTest = new DiscoGolfPersistence("/Test.json");
         course = new Course("Lade", new ArrayList<>(Arrays.asList(3,4,5,4,3,5,3,5,4)));
         scorecard = new Scorecard(course, "Ulrik");
         for (int i = 0; i < 8; i++) {
@@ -88,25 +90,24 @@ public class DiscoGolfPersistenceTest {
     }
 
     /**
-     * Send jsonString into JsonToData and test that data object is correct
+     * Send jsonString into JsonToData and test that data object is correct,
+     * Send the data object into DataToJson and test that the string returned is correct.
+     * The two strings sent into JsonToData and the one returned from DataToJson should not 
+     * be equal, since some information are deleted in the serialize process.
      * @throws URISyntaxException
      * @throws IOException
      */
     @Test 
-    public void testJsonToData() throws URISyntaxException {
+    public void testJsonToDataAndDataToJson() throws URISyntaxException {
+        String dataString = """
+            {"data":[{"playerName":"Mari","course":{"numberOfHoles":9,"courseName":"Lade",
+            "courseHoles":[{"par":3,"holeThrows":3,"holeScore":0},{"par":4,"holeThrows":4,"holeScore":0}]
+            ,"parValues":[3,4]},"bestHole":-2,"courseName":"Lade","score":4},{"playerName":"Fredrik","course":
+            {"numberOfHoles":9,"courseName":"Lade","courseHoles":[{"par":3,"holeThrows":3,"holeScore":0},{"par":4,"holeThrows":4,
+            "holeScore":0}],"parValues":[3,4]},"bestHole":-2,"courseName":"Lade","score":2}]}
+            """;
         try {
-            data = persistence.jsonToData(
-            """
-                {"data":[{"playerName":"Mari","course":{"numberOfHoles":9,"courseName":"Lade",
-                "courseHoles":[{"par":3,"holeThrows":3,"holeScore":0},{"par":4,"holeThrows":4,"holeScore":0},{"par":3,"holeThrows":3,"holeScore":0},
-                {"par":4,"holeThrows":4,"holeScore":0},{"par":3,"holeThrows":3,"holeScore":0},{"par":4,"holeThrows":4,"holeScore":0},
-                {"par":3,"holeThrows":3,"holeScore":0},{"par":4,"holeThrows":4,"holeScore":0},{"par":3,"holeThrows":3,"holeScore":0}]
-                ,"parValues":[3,4,3,4,3,4,3,4,3]},"bestHole":-2,"courseName":"Lade","score":4},{"playerName":"Fredrik","course":
-                {"numberOfHoles":9,"courseName":"Lade","courseHoles":[{"par":3,"holeThrows":3,"holeScore":0},{"par":4,"holeThrows":4,
-                "holeScore":0},{"par":3,"holeThrows":3,"holeScore":0},{"par":4,"holeThrows":4,"holeScore":0},{"par":3,"holeThrows":3,
-                "holeScore":0},{"par":4,"holeThrows":4,"holeScore":0},{"par":3,"holeThrows":3,"holeScore":0},{"par":4,"holeThrows":4,
-                "holeScore":0},{"par":3,"holeThrows":3,"holeScore":0}],"parValues":[3,4,3,4,3,4,3,4,3]},"bestHole":-2,"courseName":"Lade","score":2}]}
-            """);
+            data = persistence.jsonToData(dataString);
             ArrayList<ScorecardInterface> dataList = data.getData();
             assertEquals("Mari", dataList.get(0).getPlayerName());
             assertEquals(4, dataList.get(0).getScore());
@@ -114,6 +115,9 @@ public class DiscoGolfPersistenceTest {
             assertEquals("Fredrik", dataList.get(1).getPlayerName());
             assertEquals(2, dataList.get(1).getScore());
             assertEquals(-2, dataList.get(1).getBestHole());
+            String newDataString = """
+                {"data":[{"playerName":"Mari","score":4,"bestHole":-2,"course":{"courseName":"Lade","numberOfHoles":2,"parValues":[3,4]}},{"playerName":"Fredrik","score":2,"bestHole":-2,"course":{"courseName":"Lade","numberOfHoles":2,"parValues":[3,4]}}]}""";
+            assertEquals(newDataString, persistence.dataToJson(data));
         } catch (IOException e) {
             fail(e.getMessage());
         }
@@ -135,29 +139,45 @@ public class DiscoGolfPersistenceTest {
         }
     }
 
+
     /**
      * Test the method getPathString creates a new file if it does not
      * excist, also check that it returns correct path
      * @throws URISyntaxException
      * @throws IOException
      */
-    // @Test 
-    // public void testSetPathString() throws URISyntaxException  {
-    //     try {
-    //         Path expPath = Paths.get(System.getProperty("user.home") + "/discoGolf.json");
-    //         assertEquals(expPath.toString(), persistence.getPathString());
-    //         persistence.sendScorecardToDatabase(scorecard);
-    //         assertTrue(Files.exists(expPath));
-    //         data = persistence.readData();
-    //         Files.delete(expPath);
-    //         assertFalse(Files.exists(expPath));
-    //         persistence.saveData(data);
-    //         assertTrue(Files.exists(expPath));
-    //         deleteAddedObject();
-    //     } catch (IOException e) {
-    //         fail(e.getMessage());
-    //     }
-    // }
+    @Test 
+    public void testGetPathString() throws URISyntaxException  {
+        try {
+            Path expectedPath = Paths.get(System.getProperty("user.home") + "/discoGolf.json");
+            Path newPath = Paths.get(System.getProperty("user.home") + "/Test.json");
+            assertEquals(expectedPath.toString(), persistence.getPathString());
+            assertFalse(Files.exists(newPath));
+            assertEquals(newPath.toString(), persistenceTest.getPathString());
+            assertTrue(Files.exists(newPath));
+            persistenceTest.deleteDatabase();
+        } catch (IOException e) {
+            fail(e.getMessage());
+        }
+    }
+
+    /**
+     * Test that file is deleted when deleteDatabase() is called
+     * @throws URISyntaxException
+     * @throws IOException
+     */
+    @Test 
+    public void testDeleteDatabase() throws URISyntaxException  {
+        try {
+            Path expectedPath = Paths.get(System.getProperty("user.home") + "/Test.json");
+            persistenceTest.sendScorecardToDatabase(scorecard);
+            assertTrue(Files.exists(expectedPath));
+            persistenceTest.deleteDatabase();
+            assertFalse(Files.exists(expectedPath));
+        } catch (IOException e) {
+            fail(e.getMessage());
+        }
+    }
 
     /**
      * Make sure to delete the scorecard that testSaveAndReadScorecard() writes to 
