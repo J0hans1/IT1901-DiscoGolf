@@ -36,6 +36,7 @@ import discoGolf.json.parser.DiscoGolfModule;
  */
 public class DiscoGolfPersistence {
     private ObjectMapper mapper;
+    private String path = System.getProperty("user.home") + "/discoGolf.json";
 
     /**
      * Initializing the ObjectMapper object by calling createMapper()
@@ -45,6 +46,14 @@ public class DiscoGolfPersistence {
         this.mapper = createMapper();
     }
 
+    /**
+     * Creates a new ObjectMapper object and adds the modules to the serializers
+     * @see createMapper()
+     */
+    public DiscoGolfPersistence(String path) {
+        this.path = System.getProperty("user.home") + path;
+        this.mapper = createMapper();
+    }
 
     /**
      * Create a new ObjectMapper object and adds the DiscoGolfModule to it
@@ -116,6 +125,11 @@ public class DiscoGolfPersistence {
         return mapper.writeValueAsString(scorecard);
     }
 
+    //return a data object as a json string
+    public String dataToJson(Data data) throws IOException {
+        return mapper.writeValueAsString(data);
+    }
+
     //return a data object from a json string
     public Data jsonToData(String jsonString) throws IOException {
         return mapper.readValue(jsonString, Data.class);
@@ -128,6 +142,12 @@ public class DiscoGolfPersistence {
         saveData(data);
     }
 
+    //remove file from the database
+    public void deleteDatabase() throws IOException, URISyntaxException {
+        File file = new File(getPathString());
+        file.delete();
+    }
+
 
     /**
      * Getter for the file path of the database.json file
@@ -136,7 +156,7 @@ public class DiscoGolfPersistence {
      * @return String representation of the path to database.json
      */
     private String getPathString() throws URISyntaxException, IOException {
-        Path p = Paths.get(System.getProperty("user.home") + "/discoGolf.json");
+        Path p = Paths.get(path);
         if (!(Files.exists(p))) {
             File f = new File(p.toString());
             f.createNewFile();
@@ -145,4 +165,5 @@ public class DiscoGolfPersistence {
         } 
         return p.toString();
     }
+
 }

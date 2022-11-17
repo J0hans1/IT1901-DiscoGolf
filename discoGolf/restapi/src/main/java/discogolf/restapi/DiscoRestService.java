@@ -1,11 +1,11 @@
 package discogolf.restapi;
 
 import org.springframework.stereotype.Service;
+
+
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 
-import discoGolf.core.Course;
 import discoGolf.core.Data;
 import discoGolf.core.ScorecardInterface;
 import discoGolf.json.DiscoGolfPersistence;
@@ -15,7 +15,9 @@ public class DiscoRestService {
     /**
      * lets the RestserverController manipulate and access the database.
      */
-    private DiscoGolfPersistence persistence = new DiscoGolfPersistence();
+    private DiscoGolfPersistence persistence;
+
+    private static final String TemporaryDatabasePath = "/discoGolfTest.json";
 
     /**
      * returns all scorecards in the database.
@@ -23,7 +25,17 @@ public class DiscoRestService {
      * @throws URISyntaxException
      * @throws IOException
      */
-    public Data fetch() throws IOException, URISyntaxException {
+    public Data getData(boolean isTest) throws IOException, URISyntaxException {
+        if (isTest) {
+            persistence = new DiscoGolfPersistence(TemporaryDatabasePath);
+            return persistence.readData();
+        }
+        persistence = new DiscoGolfPersistence();
+        if (isTest) {
+            persistence = new DiscoGolfPersistence(TemporaryDatabasePath);
+            return persistence.readData();
+        }
+        persistence = new DiscoGolfPersistence();
         return persistence.readData();
     }
 
@@ -33,8 +45,19 @@ public class DiscoRestService {
      * @throws URISyntaxException
      * @throws IOException
      */
-    public void save(ScorecardInterface s) throws IOException, URISyntaxException {
-        persistence.sendScorecardToDatabase(s);
+    public void addScorecard(ScorecardInterface s, boolean isTest) throws IOException, URISyntaxException {
+        if (isTest) {
+            persistence = new DiscoGolfPersistence(TemporaryDatabasePath);
+            persistence.sendScorecardToDatabase(s);
+        } else {
+            persistence = new DiscoGolfPersistence();
+            persistence.sendScorecardToDatabase(s);
+        }
+    }
+
+    public void deleteDatabase() throws IOException, URISyntaxException {
+        persistence = new DiscoGolfPersistence(TemporaryDatabasePath);
+        persistence.deleteDatabase();
     }
 }
 
