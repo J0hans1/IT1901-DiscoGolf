@@ -18,8 +18,15 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock-jre8</artifactId>
+            <version>2.35.0</version>
+            <scope>test</scope>
+        </dependency>
+
         <!--Get the fxutil module-->
-         <dependency>
+        <dependency>
             <groupId>it1901</groupId>
             <artifactId>modules-util</artifactId> 
             <version>0.0.1-SNAPSHOT</version>
@@ -127,7 +134,7 @@
         		<artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <argLine>
-                    --add-opens calc.ui/ui=ALL-UNNAMED --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
+                    --add-opens discoGolf.ui/ui=ALL-UNNAMED --add-exports javafx.graphics/com.sun.javafx.application=ALL-UNNAMED
                     </argLine>
                 </configuration>
 	        </plugin>
@@ -140,7 +147,26 @@
                 <!-- Usage: mvn javafx:run -->
                 <configuration>
                     <!-- syntax: module-name/full-app-class-name -->
-                    <mainClass>calc.ui/ui.DiscoGolfApp</mainClass> <!--IMPORTANT FOR RUNNING WITH MAVEN-->
+                    <mainClass>discoGolf.ui/ui.DiscoGolfApp</mainClass> <!--IMPORTANT FOR RUNNING WITH MAVEN-->
+                    <launcher>discogolf</launcher>
+                    <jlinkImageName>discogolf</jlinkImageName>
+                    <jlinkZipName>discogolf</jlinkZipName>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.panteleyev</groupId>
+                <artifactId>jpackage-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <configuration>
+                    <name>discoGolf</name>
+                    <appVersion>1.0.0</appVersion>
+                    <vendor>it1901</vendor>
+                    <destination>target/dist</destination>
+                    <module>modules-ui/ui.DiscoGolfApp</module>
+                    <runtimeImage>target/discogolf</runtimeImage>
+                    <javaOptions>
+                        <option>-Dfile.encoding=UTF-8</option>
+                    </javaOptions>
                 </configuration>
             </plugin>
             <plugin>

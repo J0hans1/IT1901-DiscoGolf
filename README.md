@@ -9,7 +9,7 @@ The repository contains:
 
 - Documentation
   - [docs](docs) folder directory with a folder for each release
-  - A contract between the members of the application team
+  - A [contract](Kontrakt.md) between the members of the application team
   - This readme file
   - [PlantUML](docs/release2/release2.md) diagrams
 - Configuration Files
@@ -26,6 +26,7 @@ The repository contains:
   - [UI](discogolf/ui/src/main/java/ui/) module with the GUI classes for the application: controllers, fxml files and the AppClass for running the application
   - [FXUtil](discogolf/fxutil/src/main/java/fxutil/) module for future use
 
+A full description of the project architecture can be found in the [release 3](docs/release3/release3.md) documentation
 
 ## Navigation through repository content
 
@@ -47,3 +48,25 @@ All maven commands must be run from the ```/discoGolf/``` directory:
 - To run the application: ```mvn javafx:run -pl ui```
 - To run the tests: ```mvn test```
 - To verify ```mvn verify```
+- To compile project from scratch ```mvn clean install```
+
+## How to run the server
+
+1. Navigate into the restapi directory ```cd restapi```
+2. Type ```./mvnw spring-boot:run``` to start the server
+
+
+## How to convert to executable 
+
+Navigate into the ui directory :
+```powershell
+cd ui
+```
+Compile the project to make sure all dependancies are packaged properly:
+```powershell
+mvn clean install
+```
+Convert the project into an executable:
+```powershell
+mvn clean compile javafx:jlink jpackage:jpackage
+```
