@@ -1,183 +1,183 @@
 package ui;
 
-import java.io.IOException;
-import java.net.URISyntaxException;
-
 import discoGolf.core.Scorecard;
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.Node;
+import javafx.stage.Stage;
+
 
 /**
- * JavaFX controller for displaying the scorecard ui
+ * JavaFX controller for displaying the scorecard ui.
+ *
  * @author @Billy Barret
  * @version 1.0
  * @since 2022-09-21
  */
 public class ScorecardPageController {
-    
-    private Scorecard scorecard;
-    private DataAccess access = new DataAccess();
 
-    @FXML
-    public Label currentCourseLabel, displayPlayerName, currentHole, currentScore, totalScoreLabel, currentHoleParLabel;
-    @FXML
-    public Button previousHoleButton, nextHoleButton, submitBtn, removeThrowButton;
-    @FXML 
-    private Parent root;
-    @FXML 
-    private Scene scene;
-    @FXML 
-    private Stage stage;
+  private Scorecard scorecard;
+  private DataAccess access = new DataAccess();
 
-    
-    /** 
-     * create a scorecard object for current play
-     * updates the name label to the name of the player
-     * set currentCourse?
-     * update course label to show name of current course
-     * refreshes all labels by running refreshDisplay()
-     * @param playerName is a String containing the name of the player, declared at the main page
-     * @param selectedCourse is the course that we selected at the main page
-     * @see refreshDisplay()
-     */
-    public void getPreviousControllerInfo(Scorecard newScorecard) {      
-        scorecard = newScorecard;
-        displayPlayerName.setText("Name: " + scorecard.getPlayerName());    
-        currentCourseLabel.setText("Course: " + scorecard.getCourseName());
-        refreshDisplay();
+  @FXML
+  public Label currentCourseLabel;
+  @FXML
+  public Label displayPlayerName;
+  @FXML
+  public Label currentHole;
+  @FXML
+  public Label currentScore;
+  @FXML
+  public Label totalScoreLabel;
+  @FXML
+  public Label currentHoleParLabel;
+  @FXML
+  public Button previousHoleButton;
+  @FXML
+  public Button nextHoleButton;
+  @FXML
+  public Button submitBtn;
+  @FXML
+  public Button removeThrowButton;
+  @FXML
+  private Parent root;
+  @FXML
+  private Scene scene;
+  @FXML
+  private Stage stage;
+
+  /**
+   * create a scorecard object for current play.
+   * refreshes all labels by running refreshDisplay().
+   *
+   * @param newScorecard the scorecard object to be used for the current play
+   */
+  public void getPreviousControllerInfo(Scorecard newScorecard) {
+    scorecard = newScorecard;
+    displayPlayerName.setText("Name: " + scorecard.getPlayerName());
+    currentCourseLabel.setText("Course: " + scorecard.getCourseName());
+    refreshDisplay();
+  }
+
+  /**
+   * Sends the scorecard data to the database via the DataAccess class.
+   *
+   * @param event the event that triggers the the method
+   * @throws IOException if conversion from scorecard.java to .json fails
+   */
+  public void handleSubmit(ActionEvent event) throws IOException {
+    try {
+      System.out.println(access.requestPostingScorecard(scorecard));
+      goBackToMainPage(event, false);
+    } catch (Exception e) {
+      System.out.println("Error: " + e);
     }
+  }
 
-    /**
-     * Sends the scorecard data to a DatabaseHandler object
-     * @throws URISyntaxException
-     * @throws IOException
-     */
-    public void handleSubmit(ActionEvent event) throws IOException, URISyntaxException{
-        try {
-            System.out.println(access.RequestPostingScorecard(scorecard));
-            goBackToMainPage(event, false);
-        } catch (Exception e) {
-            System.out.println("Error: " + e);
-        }
+  /**
+   * Cancel a started scorecard and go back to the main page.
+   *
+   * @param event the event that triggers the the method
+   */
+  @FXML
+  public void handleCancel(ActionEvent event) {
+    goBackToMainPage(event, true);
+  }
+
+  /**
+   * Takes user to the main page.
+   *
+   * @param event the event that triggers the the method
+   */
+  private void goBackToMainPage(ActionEvent event, boolean isCancel) {
+    try {
+      FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("MainPage.fxml"));
+      root = fxmlLoader.load();
+      if (!isCancel) {
+        MainPageController mainPageController = fxmlLoader.getController();
+        mainPageController.displayScorecardFeedback();
+      }
+      stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+      scene = new Scene(root);
+      stage.setScene(scene);
+      stage.show();
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+  }
 
-    /**
-     * 
-     */
-    @FXML
-    public void handleCancel(ActionEvent event) {
-        goBackToMainPage(event, true);
-    }
+  /**
+   * Refreshes the content of the display.
+   * Changes the labels content, button-labels and button visibility.
+   */
+  private void refreshDisplay() {
+    updateInfoDisplay();
+    handleBtnVisibilty();
+  }
 
-    /**
-     * 
-     * @param event
-     */
-    private void goBackToMainPage(ActionEvent event, boolean cancel) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("MainPage.fxml"));
-            root = fxmlLoader.load();
-            if (!cancel) {
-                MainPageController mainPageController = fxmlLoader.getController();
-                mainPageController.displayScorecardFeedback();
-            }
-            stage = (Stage)((Node) event.getSource()).getScene().getWindow();
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            System.out.println("Error: " + e);
-            e.printStackTrace();
-        }
-    }
+  /**
+   * Handles wether the next, previous and submit buttons should be visible or not.
+   */
+  private void handleBtnVisibilty() {
+    previousHoleButton.setVisible(scorecard.getCurrentHole() != 1);
+    nextHoleButton.setVisible(scorecard.getCurrentHole() != scorecard.getCourseSize());
+    submitBtn.setVisible(scorecard.getCurrentHole() == scorecard.getCourseSize());
+    removeThrowButton.setDisable(scorecard.getCurrentHoleThrows() == 1);
+  }
 
-    /**
-     * Refreshes the content of the display,
-     * by changing the labels content, button labels and button visibility.
-     * @see handleBtnVisibilty()
-     * @see updateInfoDisplay()
-     */
-    private void refreshDisplay(){
-        updateInfoDisplay();
-        handleBtnVisibilty();
-    }
+  /**
+   * Updates textlabels and buttonlabels at the Hole display.
+   */
+  private void updateInfoDisplay() {
+    currentHoleParLabel.setText("Par: " + Integer.toString(scorecard.getCurrentHolePar()));
+    previousHoleButton.setText("Prev Hole: " + Integer.toString(scorecard.getCurrentHole() - 1));
+    nextHoleButton.setText("Next Hole: " + Integer.toString(scorecard.getCurrentHole() + 1));
+    currentHole.setText("Current Hole: " + Integer.toString(scorecard.getCurrentHole()) + "/" + Integer.toString(scorecard.getCourseSize()));
+    currentScore.setText(Integer.toString(scorecard.getCurrentHoleThrows()));
+  }
 
+  /**
+   * Adds throws to the current hole.
+   * Refreshes the UI by.
+   * running refreshDisplay() after the change.
+   */
+  public void addThrow() {
+    scorecard.getCurrentHoleInstance().addThrow();
+    refreshDisplay();
+  }
 
-    /**
-     * Handles wether the next, previous and submit buttons should be visible or not
-     */
-    private void handleBtnVisibilty(){
-        previousHoleButton.setVisible(scorecard.getCurrentHole() != 1);                     
-        nextHoleButton.setVisible(scorecard.getCurrentHole() != scorecard.getCourseSize()); 
-        submitBtn.setVisible(scorecard.getCurrentHole() == scorecard.getCourseSize());
-        removeThrowButton.setDisable(scorecard.getCurrentHoleThrows() == 1);
-    }
+  /**
+   * Removes throws at the current hole.
+   * Refreshes the UI by running refreshDisplay() after the change.
+   */
+  public void removeThrow() {
+    scorecard.getCurrentHoleInstance().removeThrow();
+    refreshDisplay();
+  }
 
+  /**
+   * Moves to the next hole.
+   * Refreshes the UI by running refreshDisplay().
+   */
+  public void nextHole() {
+    scorecard.nextHole();
+    refreshDisplay();
+    totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getScore()));
+  }
 
-    /**
-     * Updates textlabels and buttonlabels at the Hole display 
-     */
-    private void updateInfoDisplay() {
-        currentHoleParLabel.setText("Par: " + Integer.toString(scorecard.getCurrentHolePar()));
-        previousHoleButton.setText("Prev Hole: " + Integer.toString(scorecard.getCurrentHole() - 1));
-        nextHoleButton.setText("Next Hole: " + Integer.toString(scorecard.getCurrentHole() + 1));
-        currentHole.setText("Current Hole: " + Integer.toString(scorecard.getCurrentHole()) + "/" + Integer.toString(scorecard.getCourseSize()));
-        currentScore.setText(Integer.toString(scorecard.getCurrentHoleThrows()));
-    }
-
-
-    /**
-     * Adds throws to the current hole in the scorecard object
-     * Refreshes the UI by running refreshDisplay() after the change
-     * @see refreshDisplay()
-     */
-    public void addThrow() { 
-        scorecard.getCurrentHoleInstance().addThrow();
-        refreshDisplay();
-    }
-
-
-    /**
-     * Removes throws at the current hole in the scorecard object
-     * Refreshes the UI by running refreshDisplay() after the change
-     * @see refreshDisplay()
-     */
-    public void removeThrow() {
-        scorecard.getCurrentHoleInstance().removeThrow();
-        refreshDisplay();
-    }
-
-
-    /**
-     * Moves to the next hole
-     * Refreshes the UI by running refreshDisplay() after the change
-     * Resets current throws label to the par for next hole
-     * Updates total score
-     * @see refreshDisplay()
-     */
-    public void nextHole() {
-        scorecard.nextHole();
-        refreshDisplay();
-        totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getScore())); 
-    }
-
-
-    /**
-     * Moves to the previous hole
-     * Refreshes the UI by running refreshDisplay() after the change
-     * Resets current throws label to the number of throws made at previous hole. 
-     * @see refreshDisplay()
-     */
-    public void previousHole() {
-        scorecard.previousHole();
-        refreshDisplay();
-        totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getScore()));
-    }
+  /**
+   * Moves to the previous hole.
+   * Refreshes the UI by running refreshDisplay().
+   */
+  public void previousHole() {
+    scorecard.previousHole();
+    refreshDisplay();
+    totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getScore()));
+  }
 }
