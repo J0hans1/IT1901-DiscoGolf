@@ -82,7 +82,7 @@ public class DataAccess {
     return data;
   }
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws IOException {
     DataAccess da = new DataAccess();
     System.out.println(da.fetchDatabase());
   }

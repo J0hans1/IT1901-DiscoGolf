@@ -146,12 +146,6 @@ public class DiscoGolfPersistence {
         file.delete();
     }
 
-    //remove file from the database
-    public void deleteDatabase() throws IOException, URISyntaxException {
-        File file = new File(getPathString());
-        file.delete();
-    }
-
 
     /**
      * Getter for the file path of the database.json file
