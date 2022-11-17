@@ -1,8 +1,11 @@
 package discoGolf.core;
 
 /**
- * The states of this class keep track of a saved scorecard with only the necessary values for the database
- * @see Course course is used to decide how many holes there are and the par values of those holes in the scorecard
+ * The states of this class keep track of a saved scorecard with only the necessary values for the
+ * database.
+ *
+ * @see Course course is used to decide how many holes there are and the par values of those holes
+ *      in the scorecard.
  * @author Jakob Opland
  * @version 1.2
  * @since 2022-10-29
@@ -14,11 +17,12 @@ public class ScorecardDAO implements ScorecardInterface {
   private int totalScore;
 
   /**
-   * constructs a scorecard object for deserializing a json object
-   * @param course     is the course the player picked at the main menu
-   * @param playerName is the name of the player
-   * @param totalScore totalscore for the scorecard
-   * @param throwsList all the thrwos+par for each hole
+   * constructs a scorecard object for deserializing a json object.
+   *
+   * @param course is the course the player picked at the main menu.
+   * @param playerName is the name of the player.
+   * @param totalScore totalscore for the scorecard.
+   * @param bestHole best hole for scorecard.
    */
   public ScorecardDAO(Course course, String playerName, int totalScore, int bestHole) {
     this.playerName = playerName;
@@ -28,14 +32,16 @@ public class ScorecardDAO implements ScorecardInterface {
   }
 
   /**
-   * empty constructor used by jackson for deserializing purposes
+   * empty constructor used by jackson for deserializing purposes.
    */
   public ScorecardDAO() {
 
   }
 
   /**
-   * @return the player name for the scorecard
+   * the player name connectec to the scoreacard.
+   *
+   * @return the player name for the scorecard.
    */
   @Override
   public String getPlayerName() {
@@ -43,7 +49,9 @@ public class ScorecardDAO implements ScorecardInterface {
   }
 
   /**
-   * @return the Course object for the scorecard
+   * the course connected to the course.
+   *
+   * @return the Course object for the scorecard.
    */
   @Override
   public Course getCourse() {
@@ -51,7 +59,9 @@ public class ScorecardDAO implements ScorecardInterface {
   }
 
   /**
-   * @return the course name for the Course in the scorecard
+   * the name for the course belonging to the scorecard.
+   *
+   * @return the course name.
    */
   @Override
   public String getCourseName() {
@@ -59,7 +69,9 @@ public class ScorecardDAO implements ScorecardInterface {
   }
 
   /**
-   * @return the total score for the scorecard object
+   * the total score for all holes combined.
+   *
+   * @return the total score for the scorecard object.
    */
   @Override
   public int getScore() {
@@ -67,11 +79,13 @@ public class ScorecardDAO implements ScorecardInterface {
   }
 
   /**
-   * @return the best individual hole score in the scorecard
+   * best Hole is the best individual score on the scorecard.
+   *
+   * @return the best hole score.
    */
   @Override
   public int getBestHole() {
     return bestHole;
   }
-  
+
 }
