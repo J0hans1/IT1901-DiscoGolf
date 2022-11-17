@@ -1,19 +1,15 @@
 package ui;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import javafx.scene.input.KeyCode;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.lang.IllegalArgumentException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.Rule;
 import org.testfx.framework.junit5.ApplicationTest;
-import org.testfx.util.WaitForAsyncUtils;
 import discoGolf.core.Course;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,24 +17,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
-import javafx.scene.text.Text;
 import java.io.IOException;
-import com.github.tomakehurst.wiremock.WireMockServer;
-import com.github.tomakehurst.wiremock.client.WireMock;
-import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
-import com.github.tomakehurst.wiremock.junit.WireMockRule;
 import discoGolf.core.Course;
-import discoGolf.core.Data;
-import discoGolf.core.Scorecard;
-import discoGolf.json.DiscoGolfPersistence;
-import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
-import static com.github.tomakehurst.wiremock.client.WireMock.get;
-import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
-import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
 
 /**
  * Test class for testing leaderboard page of disco golf app using TestFX
@@ -54,7 +36,7 @@ public class LeaderboardUITest extends ApplicationTest {
   @FXML
   private LeaderboardPageController leaderboardController;
   @FXML
-  private ComboBox selectCourseDropdown;
+  private ComboBox<String> selectCourseDropdown;
   @FXML
   private Button homeButton;
   
@@ -98,10 +80,10 @@ public class LeaderboardUITest extends ApplicationTest {
    */
   @Test
   public void testGetData() throws IOException {
-    TableView tw = lookup("#leaderboardTableView").query();
+    TableView<ScorecardsModel> tw = lookup("#leaderboardTableView").query();
     assertEquals(5, tw.getItems().size());
   }
-
+ 
   /**
    * There should be five rows of scorecards in the dragvoll leaderboard
    */
@@ -110,7 +92,7 @@ public class LeaderboardUITest extends ApplicationTest {
     clickOn("#selectCourseDropdown");
     type(KeyCode.DOWN);
     type(KeyCode.ENTER);
-    TableView tw = lookup("#leaderboardTableView").query();
+    TableView<ScorecardsModel> tw = lookup("#leaderboardTableView").query();
     assertEquals(5, tw.getItems().size());
   }
 

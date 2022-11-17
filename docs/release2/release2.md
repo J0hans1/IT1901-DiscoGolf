@@ -1,5 +1,6 @@
 # Release 2
-In this release we switched from a monolithic application structure to a 3-tier application structure. The three tiers consist of an application tier (`disoGolf.core`), a presentation tier (`ui`) and a data tier (`discoGolf.json`). Furthermore we modularized the project as described below. 
+
+In this release we switched from a monolithic application structure to a 3-tier application structure. The three tiers consist of an application tier (`disoGolf.core`), a presentation tier (`ui`) and a data tier (`discoGolf.json`). Furthermore we modularized the project as described below.
 
 ## New features
 
@@ -50,8 +51,9 @@ This submodule contains all the classes that handle the data-persistence in the 
 These serializers are loaded into a Disco Golf module which is used to add the (de)serializers to the ObjectMapper. The main class of this module is Discogolf persistence.java, which is used to load and save the data from the database. This class together with its methods handle all interaction with the database.json file.
 
 ### Persistence File format
+
 As we were working towards this release, we aimed to be considerate towards future implementations on the project. One of which we had in mind was a Leaderboard that would display an overview of all scorecard instances. For our JSON object we decided it should contain an array of "data" that holds a list of scorecard objects. By having all scorecard objects in the "data" array, we hope it will simplify the removal and insertion of new scorecard objects. Even though it perhaps may not be relevant for the current release, we still decided to store throwsList, parValues and parForHoles. In doing so we aim to maintain the "open, closed principles" in order to further extend the application without modifying the current logic structures. For the current release we also chose to store the JSON object in user.home (Desktop) in order to make sure the database is persistant through multiple sessions.
- 
+
 #### core.core
 
 This submodule contains all the classes that are used to represent the data in the application. It contains the central logic in the application. The classes are: Course.java, Scorecard.java and Data.java. Data.java was added as a supporting class to the application, to make it easier to handle the data in the database. The class is used to store the scorecard in the database.json file as a list. There is only one Data.java object in the database.json file, and it is located at root level.

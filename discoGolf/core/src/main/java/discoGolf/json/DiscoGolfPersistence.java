@@ -55,7 +55,6 @@ public class DiscoGolfPersistence {
     return new ObjectMapper().registerModule(createModule());
   }
 
-
   /**
    * Returning a new SimpleModule object that initializes the serializer and deserializers.
    *
@@ -88,7 +87,6 @@ public class DiscoGolfPersistence {
     data.add(scorecard);
     saveData(data);
   }
-
 
   /**
    * Writes a data object to the database.json file.
@@ -127,17 +125,34 @@ public class DiscoGolfPersistence {
     return mapper.writeValueAsString(scorecard);
   }
 
-  // return a data object as a json string.
+  /**
+   * translate data object to Json.
+   *
+   * @param data
+   * @return json string.
+   * @throws IOException
+   */
   public String dataToJson(Data data) throws IOException {
     return mapper.writeValueAsString(data);
   }
 
-  // return a data object from a json string.
+  /**
+   * translate json string to data object.
+   *
+   * @param jsonString
+   * @return data object.
+   * @throws IOException
+   */
   public Data jsonToData(String jsonString) throws IOException {
     return mapper.readValue(jsonString, Data.class);
   }
 
-  // remove file from the database.
+  /**
+   * delete file based on path string
+   *
+   * @throws IOException
+   * @throws URISyntaxException
+   */
   public void deleteDatabase() throws IOException, URISyntaxException {
     File file = new File(getPathString());
     file.delete();
@@ -162,5 +177,5 @@ public class DiscoGolfPersistence {
     }
     return p.toString();
   }
-
+  
 }

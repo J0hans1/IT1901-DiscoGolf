@@ -83,9 +83,10 @@ public class LeaderboardPageController {
     ArrayList<ScorecardInterface> chosenCourseList = leaderboard
         .getLeaderboardForCourse(chosenCourse);
 
-    noCourseFeedback.visibleProperty().set(false);
     if (chosenCourseList.isEmpty()) {
       noCourseFeedback.visibleProperty().set(true);
+    } else {
+      noCourseFeedback.visibleProperty().set(false);
     }
 
     for (int i = 0; i < chosenCourseList.size(); i++) {

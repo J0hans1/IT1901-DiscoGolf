@@ -1,5 +1,6 @@
 package discoGolf.core;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
 /**
@@ -10,7 +11,7 @@ import java.util.Comparator;
  * @version 1.0
  * @since 2022-10-12
  */
-public class LeaderboardComparator implements Comparator<ScorecardInterface> {
+public class LeaderboardComparator implements Comparator<ScorecardInterface>, Serializable {
 
   /**
    * Method comparing two Scorecard objects. The method first compare based on total score, then

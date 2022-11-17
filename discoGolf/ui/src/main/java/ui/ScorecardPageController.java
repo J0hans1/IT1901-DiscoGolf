@@ -74,7 +74,7 @@ public class ScorecardPageController {
   public void handleSubmit(ActionEvent event) throws IOException {
     try {
       System.out.println(access.requestPostingScorecard(scorecard));
-      goBackToMainPage(event);
+      goBackToMainPage(event, false);
     } catch (Exception e) {
       System.out.println("Error: " + e);
     }
@@ -86,8 +86,8 @@ public class ScorecardPageController {
    * @param event the event that triggers the the method
    */
   @FXML
-  public void cancelGame(ActionEvent event) {
-    goBackToMainPage(event);
+  public void handleCancel(ActionEvent event) {
+    goBackToMainPage(event, true);
   }
 
   /**
@@ -95,12 +95,14 @@ public class ScorecardPageController {
    *
    * @param event the event that triggers the the method
    */
-  private void goBackToMainPage(ActionEvent event) {
+  private void goBackToMainPage(ActionEvent event, boolean isCancel) {
     try {
       FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("MainPage.fxml"));
       root = fxmlLoader.load();
-      MainPageController mainPageController = fxmlLoader.getController();
-      mainPageController.displayScorecardFeedback();
+      if (!isCancel) {
+        MainPageController mainPageController = fxmlLoader.getController();
+        mainPageController.displayScorecardFeedback();
+      }
       stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
       scene = new Scene(root);
       stage.setScene(scene);
@@ -136,7 +138,7 @@ public class ScorecardPageController {
     currentHoleParLabel.setText("Par: " + Integer.toString(scorecard.getCurrentHolePar()));
     previousHoleButton.setText("Prev Hole: " + Integer.toString(scorecard.getCurrentHole() - 1));
     nextHoleButton.setText("Next Hole: " + Integer.toString(scorecard.getCurrentHole() + 1));
-    currentHole.setText("Current Hole: " + Integer.toString(scorecard.getCurrentHole()));
+    currentHole.setText("Current Hole: " + Integer.toString(scorecard.getCurrentHole()) + "/" + Integer.toString(scorecard.getCourseSize()));
     currentScore.setText(Integer.toString(scorecard.getCurrentHoleThrows()));
   }
 
@@ -177,14 +179,5 @@ public class ScorecardPageController {
     scorecard.previousHole();
     refreshDisplay();
     totalScoreLabel.setText("Total Score: " + Integer.toString(scorecard.getScore()));
-    printCurrent();
-  }
-
-  /**
-   * Prints current state of the scorecard Used for debugging.
-   */
-  private void printCurrent() {
-    System.out.println("Current hole: " + scorecard.getCurrentHole());
-    System.out.println("Current Score: " + scorecard.getCurrentHoleThrows());
   }
 }
