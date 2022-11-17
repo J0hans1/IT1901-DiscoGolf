@@ -8,13 +8,15 @@ package discoGolf.core;
  *      in the scorecard.
  * @author Jakob Opland
  * @version 1.2
+ * @see Course course is used to decide how many holes there are and the par
+ *      values of those holes in the scorecard
  * @since 2022-10-29
  */
 public class ScorecardDAO implements ScorecardInterface {
-  private String playerName;
-  private Course course;
-  private int bestHole;
-  private int totalScore;
+    private String playerName;
+    private Course course;
+    private int bestHole;
+    private int totalScore;
 
   /**
    * constructs a scorecard object for deserializing a json object.
@@ -36,7 +38,7 @@ public class ScorecardDAO implements ScorecardInterface {
    */
   public ScorecardDAO() {
 
-  }
+    }
 
   /**
    * the player name connectec to the scoreacard.

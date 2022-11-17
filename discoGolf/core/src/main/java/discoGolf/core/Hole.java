@@ -1,7 +1,7 @@
 package discoGolf.core;
 
 /**
- * Hole class storing data information for a hole .
+ * Hole class storing data information for a hole.
  *
  * @author Jakob Opland and Markus Johansen.
  * @version 1.0
@@ -65,7 +65,6 @@ public class Hole {
     if (getHoleThrows() == 1) {
       throw new IllegalStateException("Cannot have 0 throws");
     }
-    this.holeThrows -= 1;
   }
 
   /**
@@ -79,5 +78,4 @@ public class Hole {
       throw new IllegalArgumentException("Not a valid par value");
     }
   }
-
 }
