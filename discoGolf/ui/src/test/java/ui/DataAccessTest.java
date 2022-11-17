@@ -23,54 +23,46 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-
+/**
+ * Tests for the DataAccess class
+ * @author Ulrik Isdahl and Billy Barret
+ * @version 1.0
+ * @since 2022-11-09
+ */
 public class DataAccessTest {
 
-    private WireMockConfiguration config;
-    private WireMockServer wireMockServer;
-  
+    private TestServer server;  
     private DataAccess dataAccess;
 
   
+    /**
+     * Start the mock server and stub the expected response
+     */
     @BeforeEach
     public void setUp() throws IOException {
-        config = WireMockConfiguration.wireMockConfig().port(8080);
-        wireMockServer = new WireMockServer(config.portNumber());
-        wireMockServer.start();
-        WireMock.configureFor("localhost", config.portNumber());
-        dataAccess = new DataAccess();
-    }    
+        this.server = new TestServer();
+        this.server.setup();
+        this.dataAccess = new DataAccess();
+    }
 
+    /**
+     * Check the corresponding names of the first five elements in the database
+     */
     @Test
     public void testGetData() throws IOException {
-        DiscoGolfPersistence persistence = new DiscoGolfPersistence();
-        Data responseData = new Data();
-        //create 5 different scorecard objects with different player names all added to data object
-        for (int i = 0; i < 5; i++) {
-            Scorecard scorecard = new Scorecard(
-                new Course("Lade", 
-                new ArrayList<>(Arrays.asList(3,4,5,4,3,5,3,5,4))), 
-                "Ulrik" + i
-            );
-
-            responseData.add(scorecard);
-        }
-        stubFor(get(urlEqualTo("/data"))
-                .willReturn(aResponse()
-                        .withStatus(200)
-                        .withHeader("Content-Type", "application/json")
-                        .withBody(persistence.dataToJson(responseData))));
         Data fetchedData = dataAccess.fetchDatabase();
-        System.out.println(persistence.dataToJson(responseData));
-        assertEquals(5, fetchedData.getData().size());
+        assertEquals(10, fetchedData.getData().size());
         for (int i = 0; i < 5; i++) {
             assertEquals("Ulrik" + i, fetchedData.getData().get(i).getPlayerName());
         }
     }
 
+    /**
+     * Stops the mock server from running after each test
+     */
     @AfterEach
     public void stopWireMockServer() {
-      wireMockServer.stop();
+      server.closeServer();
     }
   
 }
