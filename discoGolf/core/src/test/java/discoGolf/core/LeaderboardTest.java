@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -32,15 +31,13 @@ public class LeaderboardTest {
         course1 = new Course("Lade", new ArrayList<>(Arrays.asList(3, 4, 5, 3)));
         course2 = new Course("Gløshaugen", new ArrayList<>(Arrays.asList(5, 4, 5, 3, 6, 3)));
         ArrayList<ScorecardInterface> dataList = new ArrayList<>();
-        dataList.add(new ScorecardDAO(course1, "Lars", 13, 1));
-        dataList.add(new ScorecardDAO(course1, "Ane", 18, 2));
-        dataList.add(new ScorecardDAO(course1, "Arne", 18, 2));
-        dataList.add(new ScorecardDAO(course1, "Maren", 13, -1));
-        dataList.add(new ScorecardDAO(course2, "Oskar", 23, 3));
-        dataList.add(new ScorecardDAO(course2, "Kari", 15, 1));
-        dataList.add(new ScorecardDAO(course2, "Karin", 15, 0));
-        dataList.add(new ScorecardDAO(course2, "Kai", 15, 0));
-        dataList.add(new ScorecardDAO(course2, "Nora", 23, 2));
+        ArrayList<String> names = new ArrayList<>(Arrays.asList("Lars", "Ane", "Arne", "Maren", "Oskar", "Kari", "Karin", "Kai", "Nora"));
+        ArrayList<Integer> totalScores = new ArrayList<>(Arrays.asList(13, 18, 18, 13, 23, 15, 15, 15, 23));
+        ArrayList<Integer> bestHoles = new ArrayList<>(Arrays.asList(1, -1, -1, -1, 3, 4, 0, 0, 2));
+        for (int i = 0; i < names.size(); i++) {
+            dataList.add(new ScorecardDAO(course1, names.get(i), totalScores.get(i), bestHoles.get(i)));
+            dataList.add(new ScorecardDAO(course2, names.get(i), totalScores.get(i), bestHoles.get(i)));
+        }
         data.setData(dataList);
         leaderboard = new Leaderboard(data);
     }
@@ -51,19 +48,18 @@ public class LeaderboardTest {
     */
     @Test
     public void testSetLeaderboard() {
-        HashMap<String, ArrayList<ScorecardInterface>> leaderboards = leaderboard.getLeaderboardForAllCourses();
-        assertEquals(4, leaderboards.get("Lade").size());
-        assertEquals("Maren", leaderboards.get("Lade").get(0).getPlayerName());
-        assertEquals("Lars", leaderboards.get("Lade").get(1).getPlayerName());
-        assertEquals("Ane", leaderboards.get("Lade").get(2).getPlayerName());
-        assertEquals("Arne", leaderboards.get("Lade").get(3).getPlayerName());
-
-        assertEquals(5, leaderboards.get("Gløshaugen").size());
-        assertEquals("Kai", leaderboards.get("Gløshaugen").get(0).getPlayerName());
-        assertEquals("Karin", leaderboards.get("Gløshaugen").get(1).getPlayerName());
-        assertEquals("Kari", leaderboards.get("Gløshaugen").get(2).getPlayerName());
-        assertEquals("Nora", leaderboards.get("Gløshaugen").get(3).getPlayerName());
-        assertEquals("Oskar", leaderboards.get("Gløshaugen").get(4).getPlayerName());
+        ArrayList<ScorecardInterface> leaderboardsCourse1 = leaderboard.getLeaderboardForCourse("Lade");
+        ArrayList<String> namesSorted = new ArrayList<>(Arrays.asList("Maren", "Lars", "Kai", "Karin", "Kari", "Ane", "Arne", "Nora", "Oskar"));
+        ArrayList<Integer> totalScoresSorted = new ArrayList<>(Arrays.asList(13, 13, 15, 15, 15, 18, 18, 23, 23));
+        ArrayList<Integer> bestHolesSorted = new ArrayList<>(Arrays.asList(-1, 1, 0, 0, 4, -1, -1, 2, 3));
+        
+        for (int i = 0; i < namesSorted.size(); i++) {
+            int expectedScore = totalScoresSorted.get(i);
+            int expectedBestHole = bestHolesSorted.get(i);
+            assertEquals(namesSorted.get(i), leaderboardsCourse1.get(i).getPlayerName());
+            assertEquals(expectedScore, leaderboardsCourse1.get(i).getScore());
+            assertEquals(expectedBestHole, leaderboardsCourse1.get(i).getBestHole());
+        }
     }
 
     /**
@@ -73,11 +69,11 @@ public class LeaderboardTest {
     */
     @Test
     public void testGetLeaderboardForCourse() {
-        ArrayList<ScorecardInterface> leaderboard1 = leaderboard.getLeaderboardForAllCourses().get("Lade");
-        assertEquals(4, leaderboard1.size());
+        ArrayList<ScorecardInterface> leaderboard1 = leaderboard.getLeaderboardForCourse("Lade");
+        assertEquals(9, leaderboard1.size());
         assertTrue(leaderboard1.stream().allMatch(p -> p.getCourseName().equals("Lade")));
-        ArrayList<ScorecardInterface> leaderboard2 = leaderboard.getLeaderboardForAllCourses().get("Gløshaugen");
-        assertEquals(5, leaderboard2.size());
+        ArrayList<ScorecardInterface> leaderboard2 = leaderboard.getLeaderboardForCourse("Gløshaugen");
+        assertEquals(9, leaderboard2.size());
         assertTrue(leaderboard2.stream().allMatch(p -> p.getCourseName().equals("Gløshaugen")));
         assertEquals(new ArrayList<>(Arrays.asList()), leaderboard.getLeaderboardForCourse("Dragvoll"));
     }
@@ -89,13 +85,13 @@ public class LeaderboardTest {
     @Test
     public void testUpdateLeaderboard() {
       
-      leaderboard.updateLeaderboard(new ScorecardDAO(course1, "Lars", 12, 1));
-      assertEquals(5, leaderboard.getLeaderboardForCourse("Lade").size());
-      assertEquals("Lars", leaderboard.getLeaderboardForCourse("Lade").get(0).getPlayerName());
+      leaderboard.updateLeaderboard(new ScorecardDAO(course1, "Jakob", 12, 1));
+      assertEquals(10, leaderboard.getLeaderboardForCourse("Lade").size());
+      assertEquals("Jakob", leaderboard.getLeaderboardForCourse("Lade").get(0).getPlayerName());
       
-      leaderboard.updateLeaderboard(new ScorecardDAO(course2, "Jakob", 15, -1));
-      assertEquals(6, leaderboard.getLeaderboardForCourse("Gløshaugen").size());
-      assertEquals("Jakob", leaderboard.getLeaderboardForCourse("Gløshaugen").get(0).getPlayerName());
+      leaderboard.updateLeaderboard(new ScorecardDAO(course2, "Bob", 13, 2));
+      assertEquals(10, leaderboard.getLeaderboardForCourse("Gløshaugen").size());
+      assertEquals("Bob", leaderboard.getLeaderboardForCourse("Gløshaugen").get(2).getPlayerName());
       
       Course newCourse = new Course("NewCourse", new ArrayList<>(Arrays.asList(3)));
       leaderboard.updateLeaderboard(new ScorecardDAO(newCourse, "Lars", 13, 1));

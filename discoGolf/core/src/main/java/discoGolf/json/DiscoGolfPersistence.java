@@ -99,9 +99,7 @@ public class DiscoGolfPersistence {
      * @throws URISyntaxException Error translating Java Data object to JSON
      */
     public void saveData(Data data) throws IOException, URISyntaxException {
-        if (getPathString() == null) {
-            throw new IllegalStateException("no existing filepath");
-        }try (Writer writer = new FileWriter(getPathString(), StandardCharsets.UTF_8)) {
+        try (Writer writer = new FileWriter(getPathString(), StandardCharsets.UTF_8)) {
             mapper.writerWithDefaultPrettyPrinter().writeValue(writer, data);
         } 
     }
@@ -113,9 +111,7 @@ public class DiscoGolfPersistence {
      * @throws URISyntaxException Parsing the file to Java failed
      */
     public Data readData() throws IOException, URISyntaxException {
-        if (getPathString() == null) {
-            throw new IllegalStateException("no existing filepath");
-        }try (Reader reader = new FileReader(getPathString(), StandardCharsets.UTF_8)) {
+        try (Reader reader = new FileReader(getPathString(), StandardCharsets.UTF_8)) {
             return mapper.readValue(reader, Data.class);
         } 
     }
@@ -135,11 +131,10 @@ public class DiscoGolfPersistence {
         return mapper.readValue(jsonString, Data.class);
     }
 
-    //remove object from the database
-    public void removeScorecardwithName(String name) throws IOException, URISyntaxException {
-        Data data = readData();
-        data.removeScorecardWithName(name);
-        saveData(data);
+    //remove file from the database
+    public void deleteDatabase() throws IOException, URISyntaxException {
+        File file = new File(getPathString());
+        file.delete();
     }
 
     //remove file from the database
@@ -155,7 +150,7 @@ public class DiscoGolfPersistence {
      * Finds the path of the application folder, and then adds the path of the database.json file to it
      * @return String representation of the path to database.json
      */
-    private String getPathString() throws URISyntaxException, IOException {
+    public String getPathString() throws URISyntaxException, IOException {
         Path p = Paths.get(path);
         if (!(Files.exists(p))) {
             File f = new File(p.toString());

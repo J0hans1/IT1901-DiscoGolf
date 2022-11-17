@@ -28,14 +28,9 @@ public class DiscoRestService {
     public Data getData(boolean isTest) throws IOException, URISyntaxException {
         if (isTest) {
             persistence = new DiscoGolfPersistence(TemporaryDatabasePath);
-            return persistence.readData();
+        } else {
+            persistence = new DiscoGolfPersistence();
         }
-        persistence = new DiscoGolfPersistence();
-        if (isTest) {
-            persistence = new DiscoGolfPersistence(TemporaryDatabasePath);
-            return persistence.readData();
-        }
-        persistence = new DiscoGolfPersistence();
         return persistence.readData();
     }
 
@@ -48,11 +43,10 @@ public class DiscoRestService {
     public void addScorecard(ScorecardInterface s, boolean isTest) throws IOException, URISyntaxException {
         if (isTest) {
             persistence = new DiscoGolfPersistence(TemporaryDatabasePath);
-            persistence.sendScorecardToDatabase(s);
         } else {
             persistence = new DiscoGolfPersistence();
-            persistence.sendScorecardToDatabase(s);
         }
+        persistence.sendScorecardToDatabase(s);
     }
 
     public void deleteDatabase() throws IOException, URISyntaxException {
