@@ -1,10 +1,7 @@
 package ui;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
-
 import discoGolf.core.Scorecard;
-import discoGolf.json.DiscoGolfPersistence;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,12 +37,8 @@ public class ScorecardPageController {
     
     /** 
      * create a scorecard object for current play
-     * updates the name label to the name of the player
-     * set currentCourse?
-     * update course label to show name of current course
      * refreshes all labels by running refreshDisplay()
-     * @param playerName is a String containing the name of the player, declared at the main page
-     * @param selectedCourse is the course that we selected at the main page
+     * @param newScorecard the scorecard object to be used for the current play
      * @see refreshDisplay()
      */
     public void getPreviousControllerInfo(Scorecard newScorecard) {      
@@ -56,11 +49,11 @@ public class ScorecardPageController {
     }
 
     /**
-     * Sends the scorecard data to a DatabaseHandler object
-     * @throws URISyntaxException
-     * @throws IOException
+     * Sends the scorecard data to the database via the DataAccess class and then RestAPI
+     * @param event the event that triggers the the method
+     * @throws IOException if conversion from scorecard.java to .json fails
      */
-    public void handleSubmit(ActionEvent event) throws IOException, URISyntaxException{
+    public void handleSubmit(ActionEvent event) throws IOException {
         try {
             System.out.println(access.RequestPostingScorecard(scorecard));
             goBackToMainPage(event);
@@ -70,7 +63,8 @@ public class ScorecardPageController {
     }
 
     /**
-     * 
+     * cancel a started scorecard and go back to the main page
+     * @param event the event that triggers the the method
      */
     @FXML
     public void cancelGame(ActionEvent event) {
@@ -78,8 +72,8 @@ public class ScorecardPageController {
     }
 
     /**
-     * 
-     * @param event
+     * Takes user to the main page
+     * @param event the event that triggers the the method
      */
     private void goBackToMainPage(ActionEvent event) {
         try {
@@ -92,7 +86,6 @@ public class ScorecardPageController {
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            System.out.println("Error: " + e);
             e.printStackTrace();
         }
     }
@@ -190,5 +183,4 @@ public class ScorecardPageController {
         System.out.println("Current hole: " + scorecard.getCurrentHole());
         System.out.println("Current Score: " + scorecard.getCurrentHoleThrows()); 
     }
-
 }

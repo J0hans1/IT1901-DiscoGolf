@@ -74,6 +74,10 @@ public class DiscoGolfPersistence {
         return new DiscoGolfModule();
     }
 
+    /**
+     * returns the ObjectMapper object for a DiscoGolfPersistence object
+     * @return The ObjectMapper object
+     */
     public ObjectMapper getMapper() {
         return mapper;
     }
@@ -81,7 +85,7 @@ public class DiscoGolfPersistence {
 
     /**
      * Updates the Database.json with the new data (New scorecard submitted by user)
-     * @param Scorecard scorecard - The scorecard that is to be added to the database
+     * @param scorecard  - The scorecard that is to be added to the database
      * @throws IOException Error when trying to write to the database
      * @throws URISyntaxException Error when trying to parse Java Objects to JSON objects
      */
@@ -94,7 +98,7 @@ public class DiscoGolfPersistence {
 
     /**
      * Writes a data object to the database.json file
-     * @param Data data - The data object that is to be written to the database
+     * @param data - The data object that is to be written to the database
      * @throws IOException Error while writing to the file
      * @throws URISyntaxException Error translating Java Data object to JSON
      */
@@ -116,7 +120,12 @@ public class DiscoGolfPersistence {
         } 
     }
 
-    //return a scorecard object as a json string
+    /**
+     * Translates a scorecard object to a json format string, and returns it
+     * @param scorecard - the scorecard that is to be converted to json format.
+     * @return Json format String
+     * @throws IOException Error while converting from .java to .json
+     */
     public String scorecardToJson(ScorecardInterface scorecard) throws IOException {
         return mapper.writeValueAsString(scorecard);
     }
@@ -149,6 +158,8 @@ public class DiscoGolfPersistence {
      * Useful for reading and writing to the file
      * Finds the path of the application folder, and then adds the path of the database.json file to it
      * @return String representation of the path to database.json
+     * @throws URISyntaxException Error while parsing the path to the database.json file
+     * @throws IOException Error while reading or writing the file
      */
     public String getPathString() throws URISyntaxException, IOException {
         Path p = Paths.get(path);

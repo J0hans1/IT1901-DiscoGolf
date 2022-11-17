@@ -1,60 +1,114 @@
 @startuml class
 
-package "Core.Core" <<rectangle>> #DDDDDD {
-    Data "1"-->"*" Scorecard : stored in
+package "Core.Core" <<folder>> #DDDDDD {
+    Data "1"-->"*" ScorecardInterface : stores
     Course "1"<--"*" Scorecard : used on
+    Course "1"-->"*" Hole : consists of
+    Leaderboard "1"-->"1" Data : built from
+    Leaderboard "1"-->"1" LeaderboardComparator : uses
+    class ScorecardDAO
+    interface ScorecardInterface
 }
 
-class Course{   
-    - int numberOfHoles
-    - String courseName
-    - HashMap<Integer, Integer> holes
-    - ArrayList<Integer> parValues
+class Hole{
+    - int par
+    - int holeThrows
     --
-    + Course()
-    - boolean validateParValuesList(ArrayList<Integer> parValues)
-    + String getCourseName()
-    + int getNumberOfHoles()
-    + int getParForHole()
-    + String toString()
-    + ArrayList<Integer> getParValues()
-    + HashMap<Integer, Integer> getPar()
-    - void setParValues()
-    - void assignParstoHoles()
+    + Hole()
+    + int getPar()
+    + int getHoleThrows()
+    + void addThrow()
+    + void removeThrow()
+    - void validatePar()
 }
 
-Class Scorecard {
-    - int currentHole
+class Leaderboard{
+    - Data dataObject
+    - HashMap<String, ArrayList<ScorecardInterface>> leaderboardForAllCourses
+    --
+    - HashMap<String, ArrayList<ScorecardInterface>> setLeaderboard()
+    + HashMap<String, ArrayList<ScorecardInterface>> getLeaderboardForAllCourses()
+    + ArrayList<ScorecardInterface> getLeaderboardForCourse()
+    - ArrayList<ScorecardInterface> sortLeaderboardList()
+    + void updateLeaderboard()
+}
+
+class LeaderboardComparator implements Comparator{
+    + int compare()
+}
+
+interface Comparator<ScorecardInterface>{
+    + int compare()
+}
+
+class ScorecardDAO implements ScorecardInterface{
     - String playerName
     - Course course
-    - ArrayList<Integer> throwsList
+    - int bestHole
+    - int getTotalScore
+    --
+    + ScorecardDAO()
+    + String getPlayerName()
+    + Course getCourse()
+    + String getCourseName()
+    + int getScore()
+    + int getBestHole()
+}
+
+interface ScorecardInterface {
+    + String getPlayerName()
+    + Course getCourse()
+    + String getCourseName()
+    + int getScore()
+    + int getBestHole()
+}
+
+Class Scorecard implements ScorecardInterface {
+    - int currentHoleNumber
+    - String playerName
+    - Course course
     --
     + Scorecard()
     + String getPlayerName()
-    + ArrayList<Integer> getThrowsList()
-    + int getTotalScore()
-    + String getCourseName()
-    + int getCurrentHole()
     + Course getCourse()
+    + String getCourseName()
+    + int getScore()
+    + int getBestHole()
+    + Hole getCurrentHoleInstance()
+    + int getCurrentHole()
     + int getCurrentHoleThrows()
     + int getCurrentHolePar()
     + int getCourseSize()
     + void nextHole()
     + void previousHole()
-    + void addThrow()
-    + void removeThrow()
     - void validateMainPageCourse()
-    - void validateMainPageName()
+    - void validateMainPagePlayer()
+}
+
+class Course{   
+    - int numberOfHoles
+    - String courseName
+    - ArrayList<Hole> courseHoles
+    --
+    + Course()
+    + String getCourseName()
+    + ArrayList<Hole> getCourseHoles()
+    + void setCourseName
+    + int getNumberOfHoles()
+    + ArrayList<Integer> getParValues()
+    + void setHole()
+    + Hole getHole()
+    - void validateCourseName()
+    - void validateParValuesList()
 }
 
 Class Data {
-    - ArrayList<Scorecard> scorecards
+    - ArrayList<ScorecardInterface> scorecards
     --
     + Data()
-    + ArrayList<Scorecard> getData()
+    + ArrayList<ScorecardInterface> getData()
     + void setData()
     + void add()
-    + String toString()
 }
 
 @enduml

@@ -14,8 +14,7 @@ public class ScorecardDAO implements ScorecardInterface {
   private int totalScore;
 
   /**
-   * - constructs a scorecard object for deserializing a json object
-   * 
+   * constructs a scorecard object for deserializing a json object
    * @param course     is the course the player picked at the main menu
    * @param playerName is the name of the player
    * @param totalScore totalscore for the scorecard
@@ -28,6 +27,9 @@ public class ScorecardDAO implements ScorecardInterface {
     this.bestHole = bestHole;
   }
 
+  /**
+   * empty constructor used by jackson for deserializing purposes
+   */
   public ScorecardDAO() {
 
   }

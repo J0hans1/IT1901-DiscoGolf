@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import discoGolf.core.Course;
 
 /**
- * Writes a Course object to json format
+ * Converts a Course.java object to .json format
  * @author Markus Johansen and Jakob Opland
  * @version 1.0
  * @since 2022-10-03
@@ -17,8 +17,7 @@ import discoGolf.core.Course;
 public class CourseSerializer extends JsonSerializer<Course> {
 
     /**
-     * Serialize a course Java object to JSON format
-     * 
+     * Serialize a course Java object to JSON format.
      * @param value       The course to serialize
      * @param gen         The generator to use
      * @param serializers The serializer provider

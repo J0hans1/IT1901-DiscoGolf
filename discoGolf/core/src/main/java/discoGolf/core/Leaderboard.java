@@ -16,7 +16,7 @@ public class Leaderboard {
   private HashMap<String, ArrayList<ScorecardInterface>> leaderboardForAllCourses;
   
   /**
-   * Inizialice leaderboard object by reading Data getData() list
+   * Initialize leaderboard object by reading Data getData() list
    * @param leaderboardList Data object that contains saved Scorecards
    */
   public Leaderboard(Data dataObject) {
@@ -48,14 +48,14 @@ public class Leaderboard {
   }
   
   /**
-   * @return leaderboardForAllCourses hashamap containing courseNames
-   * as keys, and realated arraylists with scorecard objects as values
+   * @return leaderboardForAllCourses hashamap containing courseNames as keys, and realated arraylists with scorecard objects as values
    */
   public HashMap<String, ArrayList<ScorecardInterface>> getLeaderboardForAllCourses() {
     return leaderboardForAllCourses;
   }
   
   /**
+   * Returns a sorted ArrayList of Scorecard objects connected to a courseName
    * @param courseName the coursesName for a spesific course.
    * @return the leaderboard for the unique course name.
    */
@@ -67,8 +67,9 @@ public class Leaderboard {
   }
   
   /**
-   * @return scorecardLeaderboard sorted by LeaderboardComparator 
+   * Sorts a list of Scorecard objects by using the LeaderboardComparator
    * @param scorecardLeaderboard a list containing unsorted Scorecard objects
+   * @return scorecardLeaderboard sorted by LeaderboardComparator 
    */
   private ArrayList<ScorecardInterface> sortLeaderboardList(ArrayList<ScorecardInterface> scorecardLeaderboard) {
     Collections.sort(scorecardLeaderboard, new LeaderboardComparator());
@@ -91,5 +92,4 @@ public class Leaderboard {
     sortLeaderboardList(courseLeaderboard);
     getLeaderboardForAllCourses().put(courseName, courseLeaderboard);
   }
-
 }

@@ -15,6 +15,15 @@ import org.springframework.http.HttpStatus;
 import discoGolf.core.Data;
 import discoGolf.core.ScorecardInterface;
 
+/**
+ * The DiscoRestController class is the RestController for the RestAPI.
+ * It is responsible for handling the requests from the client.
+ * @author Markus Johansen and Billy Barret
+ * @version 1.0
+ * @since 2022-10-13
+ * @see DiscoRestService
+ * @see DiscoRestApplication
+ */
 @RestController
 public class DiscoRestController {
 
@@ -30,10 +39,10 @@ public class DiscoRestController {
     private DiscoRestService service;
 
     /**
-     * Creates a new RestserverController object.
-     * @return All scorecards in the database.
-     * @throws URISyntaxException
-     * @throws IOException
+     * Get all scorecards from the database as a Data object
+     * @return Data object containing scorecards.
+     * @throws URISyntaxException If the URI is not valid
+     * @throws IOException If JSON/JAVA conversion fails
      */
     @GetMapping(getAllURL)
     public Data getData() throws IOException, URISyntaxException {

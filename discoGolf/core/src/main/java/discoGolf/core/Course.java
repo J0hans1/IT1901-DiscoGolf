@@ -20,8 +20,7 @@ public class Course {
      * Create a disc golf course by validating courseName and parValues,
      * also initialize courseHoles by creating Hole object with belonging par value.
      * @param courseName - is the name of the course
-     * @param parValues  - is an array of integers that represents the par value for
-     *                   the hole with number == to its array index
+     * @param parValues  - is an array of integers that represents the par value for the hole with number == to its array index
      */
     public Course(String courseName, ArrayList<Integer> parValues) {
         validateCourseName(courseName);
@@ -34,9 +33,10 @@ public class Course {
     }
     
     /**
-     * Empty course constructor used by jacoco for deserialization
+     * Empty course constructor used by Jackson for deserialization
      */
     public Course(){
+    
     }
 
     /**
@@ -62,9 +62,8 @@ public class Course {
         this.courseName = courseName;
     }
 
-    /**
-     * Get number of holes at site. 
-     * @return int
+    /** 
+     * @return int number of holes at course
      */
     public int getNumberOfHoles() {
         return numberOfHoles;
@@ -85,7 +84,7 @@ public class Course {
      * @param holeNumber  - the hole number
      * @throws IllegalArgumentException if the hole number does not excist
      */
-    public void setHole(Hole hole, int holeNumber) {
+    public void setHole(Hole hole, int holeNumber) throws IllegalArgumentException {
         if (courseHoles.size() < holeNumber || holeNumber < 1) {
             throw new IllegalArgumentException("The hole does not excist");
         }
@@ -98,7 +97,7 @@ public class Course {
      * @return Hole - the Hole instance at the specific holeNumber
      * @throws IllegalArgumentException if the holeNumber does not excist
      */
-    public Hole getHole(int holeNumber) {
+    public Hole getHole(int holeNumber) throws IllegalArgumentException {
         if (courseHoles.size() < holeNumber || holeNumber < 1) {
             throw new IllegalArgumentException("The course does not have that many holes");
         }
@@ -106,11 +105,11 @@ public class Course {
     }
 
     /**
+     * Validates the course name
      * @param name String value from the value in the input field of the main page
-     * @throws IllegalArgumentException Throws if name doesnt fit the format "name1
-     *                                  name2 (optinal) name3(optinal)..."
+     * @throws IllegalArgumentException Throws if name doesnt fit the format "name1 name2 (optinal) name3(optinal)..."
      */
-    private void validateCourseName(final String name) {
+    private void validateCourseName(final String name) throws IllegalArgumentException {
         boolean regexCheck = Pattern.matches("[ÆØÅæøåa-zA-Z0-9]\s?(([ÆØÅæøåa-zA-Z0-9]+\s?)?)*", name);
         if (!regexCheck) {
             throw new IllegalArgumentException("Illegal input to name field");
@@ -120,9 +119,9 @@ public class Course {
     /**
      * Validates the parValues list. Throws IllegalArgumentExeption if not valid
      * @param allParValues a list of par values which should be between 2 and 7
-     * and not empty
+     * @throws IllegalArgumentException if the list is empty or contains values outside the range 2-7 and not empty
      */
-    private void validateParValuesList(final ArrayList<Integer> allParValues) {
+    private void validateParValuesList(final ArrayList<Integer> allParValues) throws IllegalArgumentException {
         if (allParValues.isEmpty()) {
             throw new IllegalArgumentException("Not a valid list");
         }

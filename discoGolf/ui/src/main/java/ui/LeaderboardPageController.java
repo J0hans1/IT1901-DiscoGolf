@@ -96,7 +96,7 @@ public class LeaderboardPageController {
   /**
      * Loads the Main page
      * @param event is the event that triggers the change of scenes
-     * @throws URISyntaxException
+     * @throws URISyntaxException if there is an error fetching MainPage.fxml
      * @throws IOException if reading the fxml file failed
      */
   @FXML

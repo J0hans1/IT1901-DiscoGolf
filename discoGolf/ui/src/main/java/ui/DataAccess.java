@@ -11,10 +11,9 @@ import discoGolf.core.Data;
 import discoGolf.core.Scorecard;
 import discoGolf.json.DiscoGolfPersistence;
 
-// import org.apache.http.HttpException;
-
 /**
- * Transforms Data object contents to json parsable elements
+ * Is the ClientSide access to the RestAPI.
+ * It is responsible for sending requests to the RestAPI and receiving responses.
  * @author Markus Johansen, Billy Barret og Ulrik Isdahl
  * @version 1.0
  * @since 2022-10-03
@@ -26,9 +25,9 @@ public class DataAccess {
   private static final String getAllURL = baseURL + "/data";
 
   /**
-   * Forms an HTTP request that will post a scorecard to the database, via the restAPI
-   * @param scorecard the scorecard to be posted.  TODO: modify to post in comment
-   * @throws IOException
+   * Sends an HTTP-POST request that will post a scorecard to the database, via the restAPI
+   * @param scorecard the scorecard to be posted.
+   * @throws IOException if conversion from Java to JSON fails.
    */
   public String RequestPostingScorecard(Scorecard scorecard) throws IOException {
     String scorecardString = persistence.scorecardToJson(scorecard);
@@ -55,11 +54,13 @@ public class DataAccess {
     return responseString;
   }
 
+
   /**
-   * Forms an HTTP request that will get all scorecards from the database, via the restAPI
-   * @return all scorecards in the database.
+   * Forms an HTTP-GET request that will get all scorecards from the database, via the restAPI
+   * @return Data object containing all scorecards in the database.
+   * @throws IOException if conversion from JSON to Java fails.
    */
-  public Data fetchDatabase(){
+  public Data fetchDatabase() throws IOException {
     Data data = new Data();
     try {
       // Create a request

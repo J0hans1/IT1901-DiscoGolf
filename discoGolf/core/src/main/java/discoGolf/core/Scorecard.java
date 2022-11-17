@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 /**
  * The states of this class keep track of the current stats of a player on the Course course
  * @see Course course is used to decide how many holes there are and the par values of those holes in the scorecard
- * @author Billy Barret, Ulrik Isdahl and @Jakob Opland
+ * @author Billy Barret, Ulrik Isdahl, Jakob Opland and Markus Johansen
  * @version 1.2
  * @since 2022-09-18
  */
@@ -14,13 +14,8 @@ public class Scorecard implements ScorecardInterface {
     private String playerName;
     private Course course;
 
-    public Scorecard() {
-        //this.playerName = "Player";
-        //this.course = new Course();
-    }
-
     /**
-     * - constructs a scorecard object that vil be saved in the database
+     * constructs a scorecard object that vil be saved in the database
      * @param course     is the course the player picked at the main menu
      * @param playerName is the name of the player
      */
@@ -30,6 +25,13 @@ public class Scorecard implements ScorecardInterface {
         this.playerName = playerName;
         this.course = course;
         this.currentHoleNumber = 1;
+    }
+
+    /**
+     * empty construtor used by jackson for deserializing purposes
+     */
+    public Scorecard() {
+
     }
 
     /**
@@ -101,8 +103,7 @@ public class Scorecard implements ScorecardInterface {
     }
     
     /**
-     * @return the size of the current course by getting the 
-     * numberOfHoles field from course.
+     * @return the size of the current course by getting the numberOfHoles field from course.
      */
     public int getCourseSize() {
         return course.getNumberOfHoles();
@@ -112,7 +113,7 @@ public class Scorecard implements ScorecardInterface {
      * adds one to the current hole number if the player is not on the last hole.
      * @throws IllegalArgumentException if the player is at the last hole
      */
-    public void nextHole() {
+    public void nextHole() throws IllegalArgumentException {
         if (getCurrentHole() == getCourseSize()) {
             throw new IllegalStateException("Can't go to nextHole because next hole doesn't exist");
         }
@@ -123,7 +124,7 @@ public class Scorecard implements ScorecardInterface {
      * removes one from the current hole number if the player is not on the first hole.
      * @throws IllegalArgumentException if the player is at the first hole
      */
-    public void previousHole() {
+    public void previousHole() throws IllegalArgumentException{
         if (getCurrentHole() == 1) {
             throw new IllegalStateException("Cannot go to a negative hole number");
         }
@@ -131,21 +132,22 @@ public class Scorecard implements ScorecardInterface {
     }
 
     /**
+     * Validates the course object selected by the user at the main menu.SSS
      * @param course Course object representing the chosen course in the main page
      * @throws IllegalStateException Throws if no course is selected
      */
-    private void validateMainPageCourse(Course course) {
+    private void validateMainPageCourse(Course course) throws IllegalStateException {
         if (course == null) {
             throw new IllegalStateException("No course selected!");
         }
     }
 
     /**
+     * Validates the name of the player inputed at the main menu.
      * @param name String value from the value in the input field of the main page
-     * @throws IllegalArgumentException Throws if name doesnt fit the format "name1
-     *                                  name2 (optinal) name3(optinal)..."
+     * @throws IllegalArgumentException Throws if name doesnt fit the format "name1 name2 (optinal) name3(optinal)..."
      */
-    private void validateMainPageName(String name) {
+    private void validateMainPageName(String name) throws IllegalArgumentException {
         boolean regexCheck = Pattern.matches("[ÆØÅæøåa-zA-Z0-9]\s?(([ÆØÅæøåa-zA-Z0-9]+\s?)?)*", name);
         if (!regexCheck) {
             throw new IllegalArgumentException("Illegal input to name field");

@@ -37,7 +37,6 @@ public class Data {
 
     /**
      * Add a scorecard to the list
-     * 
      * @param scorecard The scorecard to add
      */
     public void add(ScorecardInterface scorecard) {
