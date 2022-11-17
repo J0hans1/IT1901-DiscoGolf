@@ -160,7 +160,6 @@
     <modules>
         <module>core</module>
         <module>ui</module>
-        <module>fxutil</module>
         <module>restapi</module>
     </modules>
 </project>

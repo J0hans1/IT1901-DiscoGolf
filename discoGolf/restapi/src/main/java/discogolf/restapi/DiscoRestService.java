@@ -3,9 +3,7 @@ package discogolf.restapi;
 import org.springframework.stereotype.Service;
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 
-import discoGolf.core.Course;
 import discoGolf.core.Data;
 import discoGolf.core.ScorecardInterface;
 import discoGolf.json.DiscoGolfPersistence;

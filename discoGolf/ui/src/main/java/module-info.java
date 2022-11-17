@@ -1,4 +1,4 @@
-module calc.ui {
+module discoGolf.ui {
     requires discoGolf.core;
     requires javafx.controls;
     requires javafx.fxml;

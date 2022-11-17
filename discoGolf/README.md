@@ -4,7 +4,7 @@ We have created an app for people who plays disc golf in Trondheim. Disc golf is
 The app will contain a HOME screen where you can either start a game, which leads you to the SCOARECARD screen. From the homescreen you can also click on "leaderboard" button, which leads you to he LEADERBOARD screen. This screen contains a leaderboard over the top 50 best games played on the app. 
 
 The app designed in Figma:
-![My Image](readmeImg/figmaScreenshot.png)
+![My Image](recourses/figmaScreenshot.png)
 
 User story
 # User Stories 
