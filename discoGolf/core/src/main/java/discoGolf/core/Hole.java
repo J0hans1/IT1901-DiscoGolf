@@ -65,6 +65,7 @@ public class Hole {
     if (getHoleThrows() == 1) {
       throw new IllegalStateException("Cannot have 0 throws");
     }
+    this.holeThrows -= 1;
   }
 
   /**

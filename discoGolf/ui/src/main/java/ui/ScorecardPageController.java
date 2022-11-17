@@ -73,7 +73,7 @@ public class ScorecardPageController {
    */
   public void handleSubmit(ActionEvent event) throws IOException {
     try {
-      System.out.println(access.RequestPostingScorecard(scorecard));
+      System.out.println(access.requestPostingScorecard(scorecard));
       goBackToMainPage(event);
     } catch (Exception e) {
       System.out.println("Error: " + e);
