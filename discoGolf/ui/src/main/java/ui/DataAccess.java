@@ -81,9 +81,4 @@ public class DataAccess {
     }
     return data;
   }
-
-  public static void main(String[] args) {
-    DataAccess da = new DataAccess();
-    System.out.println(da.fetchDatabase());
-  }
 }
