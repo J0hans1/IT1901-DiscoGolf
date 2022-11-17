@@ -18,6 +18,13 @@
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock-jre8</artifactId>
+            <version>2.35.0</version>
+            <scope>test</scope>
+        </dependency>
+
         <!--Get the fxutil module-->
         <dependency>
             <groupId>it1901</groupId>
@@ -141,6 +148,25 @@
                 <configuration>
                     <!-- syntax: module-name/full-app-class-name -->
                     <mainClass>calc.ui/ui.DiscoGolfApp</mainClass> <!--IMPORTANT FOR RUNNING WITH MAVEN-->
+                    <launcher>discogolf</launcher>
+                    <jlinkImageName>discogolf</jlinkImageName>
+                    <jlinkZipName>discogolf</jlinkZipName>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.panteleyev</groupId>
+                <artifactId>jpackage-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <configuration>
+                    <name>discoGolf</name>
+                    <appVersion>1.0.0</appVersion>
+                    <vendor>it1901</vendor>
+                    <destination>target/dist</destination>
+                    <module>calc.ui/ui.DiscoGolfApp</module>
+                    <runtimeImage>target/discogolf</runtimeImage>
+                    <javaOptions>
+                        <option>-Dfile.encoding=UTF-8</option>
+                    </javaOptions>
                 </configuration>
             </plugin>
             <plugin>

@@ -1,9 +1,10 @@
 package discogolf.restapi;
 
 import org.springframework.stereotype.Service;
+
+
 import java.io.IOException;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 
 import discoGolf.core.Data;
 import discoGolf.core.ScorecardInterface;
@@ -19,7 +20,12 @@ import discoGolf.json.DiscoGolfPersistence;
  */
 @Service
 public class DiscoRestService {
-    private DiscoGolfPersistence persistence = new DiscoGolfPersistence();
+    /**
+     * lets the RestserverController manipulate and access the database.
+     */
+    private DiscoGolfPersistence persistence;
+
+    private static final String TemporaryDatabasePath = "/discoGolfTest.json";
 
     /**
      * returns all scorecards in the database as an arrayList, by reading the database file.
@@ -27,7 +33,12 @@ public class DiscoRestService {
      * @throws URISyntaxException if the URI is not valid.
      * @throws IOException if JSON/JAVA conversion fails.
      */
-    public Data data() throws IOException, URISyntaxException {
+    public Data getData(boolean isTest) throws IOException, URISyntaxException {
+        if (isTest) {
+            persistence = new DiscoGolfPersistence(TemporaryDatabasePath);
+        } else {
+            persistence = new DiscoGolfPersistence();
+        }
         return persistence.readData();
     }
 
@@ -37,8 +48,18 @@ public class DiscoRestService {
      * @throws URISyntaxException if the URI is not valid.
      * @throws IOException if JSON/JAVA conversion fails.
      */
-    public void post(ScorecardInterface s) throws IOException, URISyntaxException {
+    public void addScorecard(ScorecardInterface s, boolean isTest) throws IOException, URISyntaxException {
+        if (isTest) {
+            persistence = new DiscoGolfPersistence(TemporaryDatabasePath);
+        } else {
+            persistence = new DiscoGolfPersistence();
+        }
         persistence.sendScorecardToDatabase(s);
+    }
+
+    public void deleteDatabase() throws IOException, URISyntaxException {
+        persistence = new DiscoGolfPersistence(TemporaryDatabasePath);
+        persistence.deleteDatabase();
     }
 }
 

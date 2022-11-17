@@ -36,6 +36,7 @@ import discoGolf.json.parser.DiscoGolfModule;
  */
 public class DiscoGolfPersistence {
     private ObjectMapper mapper;
+    private String path = System.getProperty("user.home") + "/discoGolf.json";
 
     /**
      * Initializing the ObjectMapper object by calling createMapper()
@@ -45,6 +46,14 @@ public class DiscoGolfPersistence {
         this.mapper = createMapper();
     }
 
+    /**
+     * Creates a new ObjectMapper object and adds the modules to the serializers
+     * @see createMapper()
+     */
+    public DiscoGolfPersistence(String path) {
+        this.path = System.getProperty("user.home") + path;
+        this.mapper = createMapper();
+    }
 
     /**
      * Create a new ObjectMapper object and adds the DiscoGolfModule to it
@@ -53,7 +62,7 @@ public class DiscoGolfPersistence {
      * @see createModule()
      */
     public static ObjectMapper createMapper() {
-        return new ObjectMapper().registerModule(createModule());
+      return new ObjectMapper().registerModule(createModule());
     }
 
 
@@ -94,9 +103,7 @@ public class DiscoGolfPersistence {
      * @throws URISyntaxException Error translating Java Data object to JSON
      */
     public void saveData(Data data) throws IOException, URISyntaxException {
-        if (getPathString() == null) {
-            throw new IllegalStateException("no existing filepath");
-        }try (Writer writer = new FileWriter(getPathString(), StandardCharsets.UTF_8)) {
+        try (Writer writer = new FileWriter(getPathString(), StandardCharsets.UTF_8)) {
             mapper.writerWithDefaultPrettyPrinter().writeValue(writer, data);
         } 
     }
@@ -108,9 +115,7 @@ public class DiscoGolfPersistence {
      * @throws URISyntaxException Parsing the file to Java failed
      */
     public Data readData() throws IOException, URISyntaxException {
-        if (getPathString() == null) {
-            throw new IllegalStateException("no existing filepath");
-        }try (Reader reader = new FileReader(getPathString(), StandardCharsets.UTF_8)) {
+        try (Reader reader = new FileReader(getPathString(), StandardCharsets.UTF_8)) {
             return mapper.readValue(reader, Data.class);
         } 
     }
@@ -125,15 +130,26 @@ public class DiscoGolfPersistence {
         return mapper.writeValueAsString(scorecard);
     }
 
+    //return a data object as a json string
+    public String dataToJson(Data data) throws IOException {
+        return mapper.writeValueAsString(data);
+    }
 
-    /**
-     * Creates a Data object from a JSON format String, and returns it
-     * @param jsonString - The JSON string that is to be converted to a Java object
-     * @return Data object
-     * @throws IOException Error while converting from .json to .java
-     */
+    //return a data object from a json string
     public Data jsonToData(String jsonString) throws IOException {
         return mapper.readValue(jsonString, Data.class);
+    }
+
+    //remove file from the database
+    public void deleteDatabase() throws IOException, URISyntaxException {
+        File file = new File(getPathString());
+        file.delete();
+    }
+
+    //remove file from the database
+    public void deleteDatabase() throws IOException, URISyntaxException {
+        File file = new File(getPathString());
+        file.delete();
     }
 
 
@@ -145,8 +161,8 @@ public class DiscoGolfPersistence {
      * @throws URISyntaxException Error while parsing the path to the database.json file
      * @throws IOException Error while reading or writing the file
      */
-    private String getPathString() throws URISyntaxException, IOException {
-        Path p = Paths.get(System.getProperty("user.home") + "/discoGolf.json");
+    public String getPathString() throws URISyntaxException, IOException {
+        Path p = Paths.get(path);
         if (!(Files.exists(p))) {
             File f = new File(p.toString());
             f.createNewFile();
@@ -155,4 +171,5 @@ public class DiscoGolfPersistence {
         } 
         return p.toString();
     }
+
 }

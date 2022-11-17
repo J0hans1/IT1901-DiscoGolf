@@ -55,7 +55,7 @@ public class ScorecardPageController {
      */
     public void handleSubmit(ActionEvent event) throws IOException {
         try {
-            access.RequestPostingScorecard(scorecard);
+            System.out.println(access.RequestPostingScorecard(scorecard));
             goBackToMainPage(event);
         } catch (Exception e) {
             System.out.println("Error: " + e);
